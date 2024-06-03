@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Page } from '../types/page';
 import { pages } from '../Pages';
-import { styled } from '@mui/material';
+import { Stack, Typography, styled } from '@mui/material';
 
 export interface NavigationProps {
   authLevel: number;
@@ -33,8 +33,15 @@ export function Navigation({ authLevel }: NavigationProps) {
         (page: Page) =>
           page.isMenu &&
           page.permissionLevel <= authLevel && (
-            <NavLink className="nav-link" to={page.to}>
-              {page.label}
+            <NavLink
+              className="nav-link"
+              to={page.to}
+              style={{ textDecoration: 'none' }}
+            >
+              <Stack direction="column" alignItems="center">
+                {page.icon && page.icon({})}
+                <Typography>{page.label}</Typography>
+              </Stack>
             </NavLink>
           )
       )}

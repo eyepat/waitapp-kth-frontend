@@ -9,21 +9,24 @@ export const pages: Page[] = [
   {
     to: '/health-data',
     permissionLevel: 0,
-    label: () => Svg({ src: healthdataicon }), // Health data icon is an image and not svg :(
+    label: 'Hälsodata',
+    icon: () => Svg({ src: healthdataicon }), // Health data icon is an image and not svg :(
     isMenu: true,
     component: HealthData,
   },
   {
     to: '/',
     permissionLevel: 0,
-    label: HomeIcon,
+    label: 'Hem',
+    icon: HomeIcon,
     isMenu: true,
     component: Home,
   },
   {
     to: '/sprint',
     permissionLevel: 0,
-    label: SprintIcon,
+    label: 'Sprint',
+    icon: SprintIcon,
     isMenu: true,
     component: Sprint,
   },
