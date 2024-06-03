@@ -50,7 +50,6 @@ export default function Login() {
   };
 
   const StyledInput = styled(Input)({
-    width: '60%',
     margin: 'auto',
     borderRadius: '1rem',
     border: '1px solid #ccc',
@@ -86,7 +85,7 @@ export default function Login() {
         </Typography>
       </Stack>
       <div style={{ padding: '2vh' }}></div>
-      <Stack direction="column" spacing={2}>
+      <Stack direction="column" spacing={2} alignItems="center">
         <Stack
           direction="column"
           spacing={1}
@@ -118,11 +117,13 @@ export default function Login() {
             inputRef={passwordRef}
           ></StyledInput>
         </Stack>
-        <Button>{t('log-in')}</Button>
+        <Button variant="contained" sx={{ width: '60%' }}>
+          {t('log-in')}
+        </Button>
       </Stack>
-      <Divider />
+      <Divider sx={{ mt: '5vh' }} />
       <Stack direction="column">
-        <Button>{t('or-register-here')}</Button>
+        <Button sx={{ mt: '1vh' }}>{t('or-register-here')}</Button>
       </Stack>
     </Stack>
   );
