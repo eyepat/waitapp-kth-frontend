@@ -1,5 +1,10 @@
 {
   "health-data": "Healthdata",
   "home": "Home",
-  "sprint": "Sprint"
+  "sprint": "Sprint",
+  "login": "Login",
+  "log-in": "Login",
+  "username": "Username",
+  "password": "Password",
+  "or-register-here": "Or register here"
 }

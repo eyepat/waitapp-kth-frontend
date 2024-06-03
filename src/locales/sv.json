@@ -1,5 +1,10 @@
 {
   "health-data": "Hälsodata",
   "home": "Hem",
-  "sprint": "Sprint"
+  "sprint": "Sprint",
+  "login": "Inloggning",
+  "log-in": "Logga in",
+  "username": "Användarnamn",
+  "password": "Lösenord",
+  "or-register-here": "Eller registrera här"
 }

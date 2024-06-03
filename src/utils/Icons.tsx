@@ -1,9 +1,11 @@
 export function Svg({
   src,
+  style = undefined,
 }: {
   src: React.ImgHTMLAttributes<HTMLImageElement>['src'];
+  style?: React.HTMLAttributes<HTMLImageElement>['style'] | undefined;
 }) {
-  return <img src={src} color="inherit" />;
+  return <img src={src} color="inherit" style={style} />;
 }
 
 export function HealthDataIcon() {
