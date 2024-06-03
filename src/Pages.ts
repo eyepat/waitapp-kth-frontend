@@ -2,15 +2,14 @@ import HealthData from './pages/health-data/HealthData';
 import Home from './pages/home/Home';
 import Sprint from './pages/sprint/Sprint';
 import { Page } from './types/page';
-import { HomeIcon, SprintIcon, Svg } from './utils/Icons';
-import healthdataicon from './assets/navigation/health-data.svg';
+import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
 
 export const pages: Page[] = [
   {
     to: '/health-data',
     permissionLevel: 0,
     label: 'Hälsodata',
-    icon: () => Svg({ src: healthdataicon }), // Health data icon is an image and not svg :(
+    icon: HealthDataIcon,
     isMenu: true,
     component: HealthData,
   },
