@@ -8,4 +8,6 @@ export type Page = {
   icon?: FC;
   isMenu: boolean;
   component: FC | null;
+  showBottomNav?: boolean;
+  showHeader?: boolean;
 };

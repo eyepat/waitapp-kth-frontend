@@ -2,6 +2,8 @@ import { Routes as RRoutes, Route } from 'react-router-dom';
 import { pages } from '../Pages';
 import { Page } from '../types/page';
 import NotFound from '../pages/NotFound';
+import Header from '../components/Header';
+import { Navigation } from '../components/Navigation';
 
 export interface RoutesProps {
   authLevel: number;
@@ -16,7 +18,13 @@ export function Routes({ authLevel }: RoutesProps) {
           page.permissionLevel <= authLevel && (
             <Route
               path={page.path ? page.path : page.to}
-              Component={page.component}
+              Component={() => (
+                <>
+                  {page.showHeader && <Header />}
+                  {page.component && <page.component />}
+                  {page.showBottomNav && <Navigation authLevel={authLevel} />}
+                </>
+              )}
             />
           )
       )}
