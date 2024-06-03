@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+:root {
+  --theme-light: light;
+  --foreground-color-light: #fefefe;
+  --background-color-light: #333;
+
+  --theme-dark: dark;
+  --foreground-color-dark: var(--background-color-light);
+  --background-color-dark: var(--foreground-color-light);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='light'] {
+  --theme: var(--theme-light);
+  --background-color: var(--background-color-light);
+  --foreground-color: var(--foreground-color-light);
+}
+
+[data-theme='dark'] {
+  --theme: var(--theme-dark);
+  --background-color: var(--background-color-dark);
+  --foreground-color: var(--foreground-color-dark);
+}
+
+body {
+  color-scheme: var(--theme);
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  padding: 0;
+  margin: 0;
+}
