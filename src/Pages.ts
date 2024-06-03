@@ -8,7 +8,7 @@ export const pages: Page[] = [
   {
     to: '/health-data',
     permissionLevel: 0,
-    label: 'Hälsodata',
+    label: 'health-data',
     icon: HealthDataIcon,
     isMenu: true,
     component: HealthData,
@@ -16,7 +16,7 @@ export const pages: Page[] = [
   {
     to: '/',
     permissionLevel: 0,
-    label: 'Hem',
+    label: 'home',
     icon: HomeIcon,
     isMenu: true,
     component: Home,
@@ -24,7 +24,7 @@ export const pages: Page[] = [
   {
     to: '/sprint',
     permissionLevel: 0,
-    label: 'Sprint',
+    label: 'sprint',
     icon: SprintIcon,
     isMenu: true,
     component: Sprint,
