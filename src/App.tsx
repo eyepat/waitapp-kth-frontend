@@ -1,6 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './auth/Routes';
-import { Navigation } from './components/Navigation';
 import { LanguageProvider } from './contexts/LanguageContext';
 
 export default function App() {
@@ -8,7 +7,6 @@ export default function App() {
     <BrowserRouter>
       <LanguageProvider>
         <Routes authLevel={9} />
-        <Navigation authLevel={9} />
       </LanguageProvider>
     </BrowserRouter>
   );

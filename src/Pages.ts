@@ -12,6 +12,8 @@ export const pages: Page[] = [
     icon: HealthDataIcon,
     isMenu: true,
     component: HealthData,
+    showHeader: true,
+    showBottomNav: true,
   },
   {
     to: '/',
@@ -20,6 +22,8 @@ export const pages: Page[] = [
     icon: HomeIcon,
     isMenu: true,
     component: Home,
+    showHeader: true,
+    showBottomNav: true,
   },
   {
     to: '/sprint',
@@ -28,5 +32,7 @@ export const pages: Page[] = [
     icon: SprintIcon,
     isMenu: true,
     component: Sprint,
+    showHeader: true,
+    showBottomNav: true,
   },
 ];
