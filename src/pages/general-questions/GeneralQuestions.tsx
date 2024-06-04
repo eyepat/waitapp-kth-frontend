@@ -1,7 +1,6 @@
 import {
   Button,
   FormControl,
-  Input,
   InputLabel,
   MenuItem,
   OutlinedInput,
@@ -25,7 +24,13 @@ export default function GeneralQuestions() {
     setSelectedGender(event.target.value);
   };
   return (
-    <Stack direction="column" alignItems="start" padding="0 8vw 0 8vw">
+    <Stack
+      direction="column"
+      alignItems="start"
+      padding="0 8vw 0 8vw"
+      maxWidth="1000px"
+      margin="auto"
+    >
       <Typography variant="h5" marginBottom="1rem" alignSelf="center">
         {t('questions-about-you')}
       </Typography>
