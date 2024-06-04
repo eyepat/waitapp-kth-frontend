@@ -82,11 +82,12 @@ export default function Register() {
         display: 'flex',
         flexDirection: 'column',
         height: '80%',
-        width: '90%',
-        margin: 'auto',
         mt: '10vh',
         alignItems: 'center',
       }}
+      padding="0 8vw 0 8vw"
+      maxWidth="1000px"
+      margin="auto"
     >
       <Stack
         direction="column"
