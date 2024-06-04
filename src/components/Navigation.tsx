@@ -22,7 +22,8 @@ export function Navigation({ authLevel }: NavigationProps) {
     minHeight: '8vh',
     backgroundColor: 'white',
     zIndex: '1000',
-    'nav-link': {
+    color: 'black',
+    '.nav-link': {
       color: 'inherit',
     },
     '.active': {
@@ -41,7 +42,11 @@ export function Navigation({ authLevel }: NavigationProps) {
               to={page.to}
               style={{ textDecoration: 'none' }}
             >
-              <Stack direction="column" alignItems="center">
+              <Stack
+                direction="column"
+                alignItems="center"
+                sx={{ color: 'inherit' }}
+              >
                 {page.icon && page.icon({})}
                 {page.label && <Typography>{t(page.label)}</Typography>}
               </Stack>
