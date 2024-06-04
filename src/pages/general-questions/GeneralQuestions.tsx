@@ -9,7 +9,7 @@ import {
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
-import { ErrorOutline } from '@mui/icons-material';
+import { InfoOutlined } from '@mui/icons-material';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
@@ -72,7 +72,7 @@ export default function GeneralQuestions() {
               {'5. ' + t('waist-mesurement')}
             </Typography>
             <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
-              <ErrorOutline />
+              <InfoOutlined />
             </Button>
           </Stack>
           <DatePicker
@@ -90,7 +90,7 @@ export default function GeneralQuestions() {
               {'6. ' + t('resting-pulse')}
             </Typography>
             <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
-              <ErrorOutline />
+              <InfoOutlined />
             </Button>
           </Stack>
           <DatePicker
@@ -105,7 +105,7 @@ export default function GeneralQuestions() {
               {'7. ' + t('blood-pressure')}
             </Typography>
             <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
-              <ErrorOutline />
+              <InfoOutlined />
             </Button>
           </Stack>
           <DatePicker
