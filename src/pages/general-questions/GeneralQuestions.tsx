@@ -1,6 +1,10 @@
 import {
   Button,
+  FormControl,
+  Input,
+  InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   SelectChangeEvent,
   Stack,
@@ -29,18 +33,20 @@ export default function GeneralQuestions() {
         {t('general-questions')}
       </Typography>
       <Typography fontWeight="bold">{'1. ' + t('gender')}</Typography>
-      <Select
-        value={selectedGender ? selectedGender : t('select-gender')}
-        onChange={handleGenderChange}
-        fullWidth={true}
-        placeholder={t('select-gender')}
-        title={t('select-gender')}
-        label={t('select-gender')}
-      >
-        <MenuItem value="male">{t('male')}</MenuItem>
-        <MenuItem value="female">{t('female')}</MenuItem>
-        <MenuItem value="non-binary">{t('non-binary')}</MenuItem>
-      </Select>
+      <FormControl fullWidth>
+        <InputLabel>{t('select-gender')}</InputLabel>
+        <Select
+          value={selectedGender}
+          onChange={handleGenderChange}
+          fullWidth={true}
+          title={t('select-gender')}
+          label={t('select-gender')}
+        >
+          <MenuItem value="male">{t('male')}</MenuItem>
+          <MenuItem value="female">{t('female')}</MenuItem>
+          <MenuItem value="non-binary">{t('non-binary')}</MenuItem>
+        </Select>
+      </FormControl>
       <Typography fontWeight="bold">{'2. ' + t('birth-year')}</Typography>
       <DatePicker
         sx={{ width: '100%' }}
@@ -50,18 +56,20 @@ export default function GeneralQuestions() {
       <Stack direction="row" spacing={3}>
         <Stack direction="column">
           <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
-          <DatePicker
+          <OutlinedInput
             sx={{ width: '100%' }}
             label={t('select-length')}
-            views={['year']}
+            placeholder="..."
+            endAdornment={'cm'}
           />
         </Stack>
         <Stack direction="column">
           <Typography fontWeight="bold">{'4. ' + t('weight')}</Typography>
-          <DatePicker
+          <OutlinedInput
             sx={{ width: '100%' }}
             label={t('select-weight')}
-            views={['year']}
+            placeholder="..."
+            endAdornment={'kg'}
           />
         </Stack>
       </Stack>
@@ -75,10 +83,11 @@ export default function GeneralQuestions() {
               <InfoOutlined />
             </Button>
           </Stack>
-          <DatePicker
+          <OutlinedInput
             sx={{ width: '100%' }}
             label={t('select-waist-mesurement')}
-            views={['year']}
+            placeholder="..."
+            endAdornment={'cm'}
           />
         </Stack>
         <div style={{ width: '50%' }}></div>
@@ -93,10 +102,11 @@ export default function GeneralQuestions() {
               <InfoOutlined />
             </Button>
           </Stack>
-          <DatePicker
+          <OutlinedInput
             sx={{ width: '100%' }}
             label={t('select-resting-pulse')}
-            views={['year']}
+            placeholder="..."
+            endAdornment={'bpm'}
           />
         </Stack>
         <Stack direction="column" width="50%">
@@ -108,10 +118,11 @@ export default function GeneralQuestions() {
               <InfoOutlined />
             </Button>
           </Stack>
-          <DatePicker
+          <OutlinedInput
             sx={{ width: '100%' }}
             label={t('select-blood-pressure')}
-            views={['year']}
+            placeholder="..."
+            endAdornment={'mm/hg'}
           />
         </Stack>
       </Stack>
