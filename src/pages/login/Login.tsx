@@ -100,53 +100,75 @@ export default function Login() {
       <Stack direction="column" spacing={2} alignItems="center">
         <Stack
           direction="column"
-          spacing={3}
           justifyContent="center"
           alignItems="center"
+          spacing={2}
+          sx={{ width: '60%', display: 'flex' }} // Set the width to 60% and make it a flex container
         >
           <StyledInput
             placeholder={t('username')}
             startAdornment={<PersonOutline sx={{ color: '#00A3E0' }} />}
             disableUnderline={true}
             endAdornment={
-              usernameValid !== false ? (
-                <CheckCircle
-                  sx={
-                    usernameValid
-                      ? { color: 'green' }
-                      : { display: 'none', paddingLeft: '24px' }
-                  }
-                />
-              ) : (
-                <Error sx={{ color: 'red' }} />
-              )
+              <div
+                style={{
+                  minWidth: '24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {usernameValid !== false ? (
+                  <CheckCircle
+                    sx={
+                      usernameValid
+                        ? { color: 'green' }
+                        : { visibility: 'hidden' }
+                    }
+                  />
+                ) : (
+                  <Error sx={{ color: 'red' }} />
+                )}
+              </div>
             }
             onBlur={checkUsername}
             defaultValue={username}
             inputMode="text"
             type="username"
+            sx={{ width: '100%' }} // Set the width to 100%
           ></StyledInput>
+
           <StyledInput
             placeholder={t('password')}
             startAdornment={<LockOutlined sx={{ color: '#00A3E0' }} />}
             disableUnderline={true}
             endAdornment={
-              passwordValid !== false ? (
-                <CheckCircle
-                  sx={
-                    passwordValid
-                      ? { color: 'green' }
-                      : { display: 'none', minWidth: '24px' }
-                  }
-                />
-              ) : (
-                <Error sx={{ color: 'red' }} />
-              )
+              <div
+                style={{
+                  minWidth: '24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {passwordValid !== false ? (
+                  <CheckCircle
+                    sx={
+                      passwordValid
+                        ? { color: 'green' }
+                        : { visibility: 'hidden' }
+                    }
+                  />
+                ) : (
+                  <Error sx={{ color: 'red' }} />
+                )}
+              </div>
             }
             onBlur={checkPassword}
             defaultValue={password}
             inputMode="text"
             type="password"
+            sx={{ width: '100%' }} // Set the width to 100%
           ></StyledInput>
         </Stack>
         <Button
