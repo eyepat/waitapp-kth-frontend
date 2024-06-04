@@ -9,55 +9,67 @@ import {
 import { Svg } from '../../utils/Icons';
 import ki from '../../assets/logo/ki.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { CheckCircle, LockOutlined, PersonOutline } from '@mui/icons-material';
-import { useEffect, useRef, useState } from 'react';
+import {
+  CheckCircle,
+  Error,
+  LockOutlined,
+  PersonOutline,
+} from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Login() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { authLevel, setAuth } = useAuth();
+
+  useEffect(() => {
+    if (authLevel > 0) {
+      navigate('/');
+    }
+  }, [authLevel]);
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [usernameValid, setUsernameValid] = useState<boolean | null>(null);
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
-  const usernameRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (usernameRef.current && document.activeElement !== usernameRef.current) {
-      usernameRef.current.focus();
-    }
-  }, [usernameRef]);
-
-  useEffect(() => {
-    if (passwordRef.current && document.activeElement !== passwordRef.current) {
-      passwordRef.current.focus();
-    }
-  }, [passwordRef]);
 
   const checkUsername = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const value = e.target.value;
-    //setUsername(value);
+    setUsername(value);
     setUsernameValid(value.length > 0 ? true : null);
   };
   const checkPassword = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const value = e.target.value;
-    //setPassword(value);
+    setPassword(value);
     setPasswordValid(value.length > 0 ? true : null);
+  };
+  const tempLoginDemo = () => {
+    if (!usernameValid || !passwordValid) {
+      alert('Invalid login credentials, demo text here');
+      return;
+    }
+    setAuth(1);
+    //navigate('/'); Handled in the useEffect above
   };
 
   const StyledInput = styled(Input)({
     margin: 'auto',
     borderRadius: '1rem',
-    border: '1px solid #ccc',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 2px 1rem rgba(0, 0, 0, 0.4)',
+    padding: '0.2rem',
     '& .MuiInputBase-input': {
       paddingLeft: '1rem',
+      width: '75%',
     },
+    transition: 'width 0.5s',
   });
+
   return (
     <Stack
       sx={{
@@ -88,42 +100,73 @@ export default function Login() {
       <Stack direction="column" spacing={2} alignItems="center">
         <Stack
           direction="column"
-          spacing={1}
+          spacing={3}
           justifyContent="center"
           alignItems="center"
         >
           <StyledInput
             placeholder={t('username')}
-            startAdornment={<PersonOutline />}
+            startAdornment={<PersonOutline sx={{ color: '#00A3E0' }} />}
             disableUnderline={true}
             endAdornment={
-              <CheckCircle
-                sx={usernameValid ? undefined : { display: 'none' }}
-              />
+              usernameValid !== false ? (
+                <CheckCircle
+                  sx={
+                    usernameValid
+                      ? { color: 'green' }
+                      : { display: 'none', paddingLeft: '24px' }
+                  }
+                />
+              ) : (
+                <Error sx={{ color: 'red' }} />
+              )
             }
-            onChange={(e) => checkUsername(e)}
-            inputRef={usernameRef}
+            onBlur={checkUsername}
+            defaultValue={username}
+            inputMode="text"
+            type="username"
           ></StyledInput>
           <StyledInput
             placeholder={t('password')}
-            startAdornment={<LockOutlined />}
+            startAdornment={<LockOutlined sx={{ color: '#00A3E0' }} />}
             disableUnderline={true}
             endAdornment={
-              <CheckCircle
-                sx={passwordValid ? undefined : { display: 'none' }}
-              />
+              passwordValid !== false ? (
+                <CheckCircle
+                  sx={
+                    passwordValid
+                      ? { color: 'green' }
+                      : { display: 'none', minWidth: '24px' }
+                  }
+                />
+              ) : (
+                <Error sx={{ color: 'red' }} />
+              )
             }
-            onChange={checkPassword}
-            inputRef={passwordRef}
+            onBlur={checkPassword}
+            defaultValue={password}
+            inputMode="text"
+            type="password"
           ></StyledInput>
         </Stack>
-        <Button variant="contained" sx={{ width: '60%' }}>
+        <Button
+          variant="contained"
+          sx={{ width: '60%', padding: '0.5rem' }}
+          onClick={tempLoginDemo}
+        >
           {t('log-in')}
         </Button>
       </Stack>
-      <Divider sx={{ mt: '5vh' }} />
+      <Divider color="black" sx={{ mt: '5vh' }} />
       <Stack direction="column">
-        <Button sx={{ mt: '1vh' }}>{t('or-register-here')}</Button>
+        <Button
+          sx={{ mt: '1vh' }}
+          onClick={() => {
+            alert('not implemented');
+          }}
+        >
+          <Typography>{t('or-register-here')}</Typography>
+        </Button>
       </Stack>
     </Stack>
   );

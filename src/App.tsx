@@ -1,12 +1,15 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './auth/Routes';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 export default function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        <Routes authLevel={9} />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </LanguageProvider>
     </BrowserRouter>
   );

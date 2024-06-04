@@ -8,7 +8,7 @@ import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
 export const pages: Page[] = [
   {
     to: '/health-data',
-    permissionLevel: 0,
+    permissionLevel: 1,
     label: 'health-data',
     icon: HealthDataIcon,
     isMenu: true,
@@ -18,7 +18,7 @@ export const pages: Page[] = [
   },
   {
     to: '/',
-    permissionLevel: 0,
+    permissionLevel: 1,
     label: 'home',
     icon: HomeIcon,
     isMenu: true,
@@ -28,7 +28,7 @@ export const pages: Page[] = [
   },
   {
     to: '/sprint',
-    permissionLevel: 0,
+    permissionLevel: 1,
     label: 'sprint',
     icon: SprintIcon,
     isMenu: true,
