@@ -41,5 +41,6 @@
   "blood-pressure": "Blodtryck",
   "select-blood-pressure": "Skriv in blodtryck",
   "ablation": "Ablation",
-  "select-ablation-date": "Välj ablation datum"
+  "select-ablation-date": "Välj ablation datum",
+  "settings": "Inställningar"
 }
