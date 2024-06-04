@@ -85,21 +85,19 @@ export default function Register() {
         width: '90%',
         margin: 'auto',
         mt: '10vh',
-        alignItems: 'center',
+        alignItems: 'flex-start',
       }}
     >
       <Stack
         direction="column"
         spacing={1}
         justifyContent="center"
-        alignItems="center"
+        alignItems="flex-start"
       >
-        <Typography align="center" variant="h4" sx={{ color: '#00A3E0' }}>
+        <Typography variant="h4" sx={{ color: '#00A3E0' }}>
           {t('register-account')}
         </Typography>
-        <Typography align="center" variant="subtitle1">
-          {t('input-details')}
-        </Typography>
+        <Typography variant="subtitle1">{t('input-details')}</Typography>
       </Stack>
       <Stack
         direction="column"
@@ -165,7 +163,7 @@ export default function Register() {
           sx={{ width: '100%' }}
         />
       </Stack>
-      <div style={{ padding: '2vh' }}></div> {/* Added gap */}
+      <div style={{ padding: '2vh' }}></div>
       <Button
         variant="contained"
         sx={{

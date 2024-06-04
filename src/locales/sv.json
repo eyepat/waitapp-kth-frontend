@@ -16,9 +16,8 @@
   "input-details": "Vänligen ange dina uppgifter",
   "input-email": "Ange din e-postaddress",
   "password-input": "Ditt lösenord",
-  "repeat-password": "Upprera lösenord",
+  "confirm-password": "Upprera lösenord",
   "next": "Nästa",
   "have-account": "Redan har ett konto?",
-  "login": "Logga in",
   "your-email": "Din e-postaddress"
 }
