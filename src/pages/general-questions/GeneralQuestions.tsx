@@ -56,21 +56,25 @@ export default function GeneralQuestions() {
       <Stack direction="row" spacing={3}>
         <Stack direction="column">
           <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
-          <OutlinedInput
-            sx={{ width: '100%' }}
-            label={t('select-length')}
-            placeholder="..."
-            endAdornment={'cm'}
-          />
+          <FormControl fullWidth>
+            <InputLabel>{t('select-length')}</InputLabel>
+            <OutlinedInput
+              label={t('select-length')}
+              placeholder="..."
+              endAdornment={'cm'}
+            />
+          </FormControl>
         </Stack>
         <Stack direction="column">
           <Typography fontWeight="bold">{'4. ' + t('weight')}</Typography>
-          <OutlinedInput
-            sx={{ width: '100%' }}
-            label={t('select-weight')}
-            placeholder="..."
-            endAdornment={'kg'}
-          />
+          <FormControl fullWidth>
+            <InputLabel>{t('select-weight')}</InputLabel>
+            <OutlinedInput
+              label={t('select-weight')}
+              placeholder="..."
+              endAdornment={'kg'}
+            />
+          </FormControl>
         </Stack>
       </Stack>
       <Stack direction="row" spacing={3} width="100%">
@@ -83,12 +87,14 @@ export default function GeneralQuestions() {
               <InfoOutlined />
             </Button>
           </Stack>
-          <OutlinedInput
-            sx={{ width: '100%' }}
-            label={t('select-waist-mesurement')}
-            placeholder="..."
-            endAdornment={'cm'}
-          />
+          <FormControl fullWidth>
+            <InputLabel>{t('select-waist-measurement')}</InputLabel>
+            <OutlinedInput
+              label={t('select-waist-measurement')}
+              placeholder="..."
+              endAdornment={'cm'}
+            />
+          </FormControl>
         </Stack>
         <div style={{ width: '50%' }}></div>
       </Stack>
@@ -102,12 +108,14 @@ export default function GeneralQuestions() {
               <InfoOutlined />
             </Button>
           </Stack>
-          <OutlinedInput
-            sx={{ width: '100%' }}
-            label={t('select-resting-pulse')}
-            placeholder="..."
-            endAdornment={'bpm'}
-          />
+          <FormControl fullWidth>
+            <InputLabel>{t('select-resting-pulse')}</InputLabel>
+            <OutlinedInput
+              label={t('select-resting-pulse')}
+              placeholder="..."
+              endAdornment={'bpm'}
+            />
+          </FormControl>
         </Stack>
         <Stack direction="column" width="50%">
           <Stack direction="row" justifyContent="space-between">
@@ -118,12 +126,14 @@ export default function GeneralQuestions() {
               <InfoOutlined />
             </Button>
           </Stack>
-          <OutlinedInput
-            sx={{ width: '100%' }}
-            label={t('select-blood-pressure')}
-            placeholder="..."
-            endAdornment={'mm/hg'}
-          />
+          <FormControl fullWidth>
+            <InputLabel>{t('select-blood-pressure')}</InputLabel>
+            <OutlinedInput
+              label={t('select-blood-pressure')}
+              placeholder="..."
+              endAdornment={'mm/hg'}
+            />
+          </FormControl>
         </Stack>
       </Stack>
       <div style={{ marginTop: '4vh', marginBottom: '4vh', width: '100%' }}>
