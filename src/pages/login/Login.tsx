@@ -103,7 +103,7 @@ export default function Login() {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ width: '60%', display: 'flex' }} // Set the width to 60% and make it a flex container
+          sx={{ width: '60%', display: 'flex' }}
         >
           <StyledInput
             placeholder={t('username')}
@@ -135,7 +135,7 @@ export default function Login() {
             defaultValue={username}
             inputMode="text"
             type="username"
-            sx={{ width: '100%' }} // Set the width to 100%
+            sx={{ width: '100%' }}
           ></StyledInput>
 
           <StyledInput
@@ -168,7 +168,7 @@ export default function Login() {
             defaultValue={password}
             inputMode="text"
             type="password"
-            sx={{ width: '100%' }} // Set the width to 100%
+            sx={{ width: '100%' }}
           ></StyledInput>
         </Stack>
         <Button
