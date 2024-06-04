@@ -60,7 +60,7 @@ export default function Register() {
       alert('Invalid registration details, please correct the errors.');
       return;
     }
-    // Handle registration logic here
+
     navigate('/general-questions');
   };
 
@@ -85,7 +85,7 @@ export default function Register() {
         width: '90%',
         margin: 'auto',
         mt: '10vh',
-        alignItems: 'center', // Center items horizontally
+        alignItems: 'center',
       }}
     >
       <Stack
@@ -161,7 +161,7 @@ export default function Register() {
           padding: '0.75rem',
           backgroundColor: '#0A74DA',
           color: 'white',
-          mt: 3, // Increased margin between inputs and button
+          mt: 3,
         }}
         onClick={handleRegister}
       >
