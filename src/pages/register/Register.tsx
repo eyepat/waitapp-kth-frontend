@@ -61,7 +61,7 @@ export default function Register() {
       return;
     }
     // Handle registration logic here
-    navigate('/login');
+    navigate('/general-questions');
   };
 
   const StyledInput = styled(Input)({
