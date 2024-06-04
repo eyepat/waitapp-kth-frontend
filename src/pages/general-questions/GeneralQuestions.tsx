@@ -53,8 +53,8 @@ export default function GeneralQuestions() {
         label={t('select-birth-year')}
         views={['year']}
       />
-      <Stack direction="row" spacing={3}>
-        <Stack direction="column">
+      <Stack direction="row" spacing={3} width="100%">
+        <Stack direction="column" width="100%">
           <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
           <FormControl fullWidth>
             <InputLabel>{t('select-length')}</InputLabel>
@@ -65,7 +65,7 @@ export default function GeneralQuestions() {
             />
           </FormControl>
         </Stack>
-        <Stack direction="column">
+        <Stack direction="column" width="100%">
           <Typography fontWeight="bold">{'4. ' + t('weight')}</Typography>
           <FormControl fullWidth>
             <InputLabel>{t('select-weight')}</InputLabel>
