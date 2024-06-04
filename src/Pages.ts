@@ -1,3 +1,4 @@
+import GeneralQuestions from './pages/general-questions/GeneralQuestions';
 import HealthData from './pages/health-data/HealthData';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
@@ -50,5 +51,13 @@ export const pages: Page[] = [
     label: 'register',
     isMenu: false,
     component: Register,
+  },
+  {
+    to: '/general-questions',
+    permissionLevel: 0,
+    label: 'general-questions',
+    isMenu: false,
+    component: GeneralQuestions,
+    showHeader: true,
   },
 ];
