@@ -6,5 +6,10 @@
   "log-in": "Login",
   "username": "Username",
   "password": "Password",
-  "or-register-here": "Or register here"
+  "or-register-here": "Or register here",
+  "days-left": "DAYS LEFT",
+  "weight-unit": "kilogram",
+  "steps": "steps",
+  "pulse": "resting pulse",
+  "latest-result": "Latest results"
 }

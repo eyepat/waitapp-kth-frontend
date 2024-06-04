@@ -6,5 +6,10 @@
   "log-in": "Logga in",
   "username": "Användarnamn",
   "password": "Lösenord",
-  "or-register-here": "Eller registrera här"
+  "or-register-here": "Eller registrera här",
+  "days-left": "DAGAR KVAR",
+  "weight-unit": "kilogram",
+  "steps": "steg",
+  "pulse": "vilopuls",
+  "latest-result": "Senaste resultat"
 }
