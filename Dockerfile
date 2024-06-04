@@ -1,9 +1,6 @@
 # Frontend Builder
 FROM node:latest AS frontend-builder
 
-ENV KEYCLOAK_URL="{{__KEYCLOAK_URL__}}"
-ENV KEYCLOAK_REALM="{{__KEYCLOAK_REALM__}}"
-ENV KEYCLOAK_CLIENT_ID="{{__KEYCLOAK_CLIENT_ID__}}"
 ENV API_BASE_URL=""
 
 WORKDIR /app
@@ -22,6 +19,7 @@ ENV BACKEND_SERVER=http://localhost:8080/
 ENV API_BASE_URL=
 
 COPY --from=frontend-builder /app/dist/ /usr/share/nginx/html/
+COPY --from=frontend-builder /app/src/locales/ /usr/share/nginx/html/textcontent/
 COPY nginx.conf.template /etc/nginx/conf.d/default.conf.template
 
 COPY entrypoint.sh .
