@@ -184,7 +184,7 @@ export default function Login() {
         <Button
           sx={{ mt: '1vh' }}
           onClick={() => {
-            alert('not implemented');
+            navigate('/register');
           }}
         >
           <Typography>{t('or-register-here')}</Typography>
