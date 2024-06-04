@@ -12,8 +12,14 @@ export default function Home() {
   return (
     <div style={{ width: '85%', margin: 'auto', fontFamily: 'Open Sans' }}>
       <Stack direction="column">
+        <div style={{ padding: '2vh' }}></div>
         <Stack direction="row" sx={{ width: '60%', alignItems: 'center' }}>
-          <Typography variant="h2" className="open-sans-bold" color="#00A3E0">
+          <Typography
+            variant="h2"
+            className="open-sans-bold"
+            color="#00A3E0"
+            fontWeight="bold"
+          >
             {daysLeft}
           </Typography>
 
