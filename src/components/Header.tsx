@@ -7,7 +7,7 @@ export default function Header() {
     display: 'flex',
     justifyContent: 'center',
     gap: '20vw',
-    position: 'fixed',
+    position: 'sticky',
     top: '0',
     left: '0',
     width: '100%',
