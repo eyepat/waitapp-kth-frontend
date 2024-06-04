@@ -50,6 +50,7 @@ export default function GeneralQuestions() {
           <MenuItem value="male">{t('male')}</MenuItem>
           <MenuItem value="female">{t('female')}</MenuItem>
           <MenuItem value="non-binary">{t('non-binary')}</MenuItem>
+          <MenuItem value="other">{t('other')}</MenuItem>
         </Select>
       </FormControl>
       <Typography fontWeight="bold">{'2. ' + t('birth-year')}</Typography>
@@ -86,7 +87,7 @@ export default function GeneralQuestions() {
         <Stack direction="column" width="50%">
           <Stack direction="row" justifyContent="space-between">
             <Typography fontWeight="bold">
-              {'5. ' + t('waist-mesurement')}
+              {'5. ' + t('waist-measurement')}
             </Typography>
             <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
               <InfoOutlined />
