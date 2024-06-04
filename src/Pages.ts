@@ -3,6 +3,7 @@ import HealthData from './pages/health-data/HealthData';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Sprint from './pages/sprint/Sprint';
+import Register from './pages/register/Register';
 import { Page } from './types/page';
 import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
 
@@ -43,6 +44,13 @@ export const pages: Page[] = [
     label: 'login',
     isMenu: false,
     component: Login,
+  },
+  {
+    to: '/register',
+    permissionLevel: 0,
+    label: 'register',
+    isMenu: false,
+    component: Register,
   },
   {
     to: '/general-questions',

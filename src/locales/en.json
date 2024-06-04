@@ -11,5 +11,14 @@
   "weight-unit": "kilogram",
   "steps": "steps",
   "pulse": "resting pulse",
-  "latest-result": "Latest results"
+  "latest-result": "Latest results",
+  "register-account": "Register account",
+  "input-details": "Please put in your details",
+  "input-email": "Input your email",
+  "password-input": "Your password",
+  "confirm-password": "Repeat your password",
+  "next": "Next",
+  "have-account": "Already have an account?",
+
+  "your-email": "Your email"
 }

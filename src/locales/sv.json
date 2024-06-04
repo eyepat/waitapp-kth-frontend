@@ -11,5 +11,13 @@
   "weight-unit": "kilogram",
   "steps": "steg",
   "pulse": "vilopuls",
-  "latest-result": "Senaste resultat"
+  "latest-result": "Senaste resultat",
+  "register-account": "Registrera konto",
+  "input-details": "Vänligen ange dina uppgifter",
+  "input-email": "Ange din e-postaddress",
+  "password-input": "Ditt lösenord",
+  "confirm-password": "Upprera lösenord",
+  "next": "Nästa",
+  "have-account": "Redan har ett konto?",
+  "your-email": "Din e-postaddress"
 }
