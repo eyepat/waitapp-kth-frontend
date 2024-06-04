@@ -85,29 +85,23 @@ export default function Register() {
         width: '90%',
         margin: 'auto',
         mt: '10vh',
-        alignItems: 'flex-start',
+        alignItems: 'center', // Center items horizontally
       }}
     >
       <Stack
         direction="column"
         spacing={1}
-        justifyContent="center"
         alignItems="flex-start"
+        sx={{ width: '100%', textAlign: 'center' }}
       >
         <Typography variant="h4" sx={{ color: '#00A3E0' }}>
           {t('register-account')}
         </Typography>
-        <Typography variant="subtitle1">{t('input-details')}</Typography>
-      </Stack>
-      <Stack
-        direction="column"
-        spacing={2}
-        alignItems="center"
-        sx={{ width: '100%', mt: 2 }}
-      >
-        <Typography align="center" variant="subtitle1">
-          {t('your-email')}
+        <Typography variant="subtitle1" sx={{ mb: 2 }}>
+          {t('input-details')}
         </Typography>
+
+        <Typography variant="subtitle1">{t('your-email')}</Typography>
         <StyledInput
           placeholder={t('input-email')}
           endAdornment={
@@ -120,12 +114,10 @@ export default function Register() {
           defaultValue={email}
           inputMode="email"
           type="email"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', mb: 1 }}
         />
 
-        <Typography align="center" variant="subtitle1">
-          {t('password-input')}
-        </Typography>
+        <Typography variant="subtitle1">{t('password-input')}</Typography>
         <StyledInput
           placeholder={t('password')}
           endAdornment={
@@ -140,12 +132,10 @@ export default function Register() {
           defaultValue={password}
           inputMode="text"
           type={showPassword ? 'text' : 'password'}
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', mb: 1 }}
         />
 
-        <Typography align="center" variant="subtitle1">
-          {t('repeat-password')}
-        </Typography>
+        <Typography variant="subtitle1">{t('confirm-password')}</Typography>
         <StyledInput
           placeholder={t('confirm-password')}
           endAdornment={
@@ -160,10 +150,10 @@ export default function Register() {
           defaultValue={confirmPassword}
           inputMode="text"
           type={showConfirmPassword ? 'text' : 'password'}
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', mb: 2 }}
         />
       </Stack>
-      <div style={{ padding: '2vh' }}></div>
+
       <Button
         variant="contained"
         sx={{
@@ -171,20 +161,23 @@ export default function Register() {
           padding: '0.75rem',
           backgroundColor: '#0A74DA',
           color: 'white',
+          mt: 3, // Increased margin between inputs and button
         }}
         onClick={handleRegister}
       >
         {t('next')}
       </Button>
-      <Typography align="center" variant="body2" sx={{ mt: '1rem' }}>
+
+      <Typography variant="body2" sx={{ mt: 2 }}>
         {t('have-account')}
       </Typography>
+
       <Button
         variant="outlined"
         sx={{
           width: '100%',
           padding: '0.75rem',
-          mt: '1rem',
+          mt: 1,
           borderColor: '#0A74DA',
           color: '#0A74DA',
         }}
