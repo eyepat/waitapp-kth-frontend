@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
+import { useCookies } from 'react-cookie';
 
 interface AuthContextType {
   authLevel: number;
@@ -17,7 +18,14 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [authLevel, setAuthlevel] = useState<number>(0);
+  const [cookies, setCookie] = useCookies(['auth']); // Todo: Use tokens with something like keycloak later
+  const [authLevel, setAuthlevel] = useState<number>(() => cookies.auth || 0);
+
+  useEffect(() => {
+    if (cookies.auth !== authLevel) {
+      setCookie('auth', authLevel);
+    }
+  }, [authLevel]);
 
   const value: AuthContextType = {
     authLevel,
