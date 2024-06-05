@@ -1,8 +1,10 @@
 import { Button, styled } from '@mui/material';
 import { BackArrow, ClosedBook, Settings, Svg } from '../utils/Icons';
 import ki from '../assets/logo/ki.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate();
   const TopBar = styled('div')({
     display: 'flex',
     justifyContent: 'space-between',
@@ -61,7 +63,11 @@ export default function Header() {
         <ButtonOverride>
           <ClosedBook />
         </ButtonOverride>
-        <ButtonOverride>
+        <ButtonOverride
+          onClick={() => {
+            navigate('/settings');
+          }}
+        >
           <Settings />
         </ButtonOverride>
       </RightSide>

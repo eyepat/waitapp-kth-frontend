@@ -39,5 +39,6 @@
   "blood-pressure": "Blood pressure",
   "select-blood-pressure": "Type in your waist blood pressure",
   "ablation": "Ablation",
-  "select-ablation-date": "Select your ablation date"
+  "select-ablation-date": "Select your ablation date",
+  "settings": "Settings"
 }

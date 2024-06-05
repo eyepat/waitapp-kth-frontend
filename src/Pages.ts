@@ -6,6 +6,7 @@ import Sprint from './pages/sprint/Sprint';
 import Register from './pages/register/Register';
 import { Page } from './types/page';
 import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
+import Settings from './pages/settings/Settings';
 
 export const pages: Page[] = [
   {
@@ -59,5 +60,14 @@ export const pages: Page[] = [
     isMenu: false,
     component: GeneralQuestions,
     showHeader: true,
+  },
+  {
+    to: '/settings',
+    permissionLevel: 1,
+    label: 'settings',
+    isMenu: false,
+    component: Settings,
+    showHeader: true,
+    showBottomNav: true,
   },
 ];
