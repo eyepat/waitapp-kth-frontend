@@ -63,23 +63,15 @@ export default function GeneralQuestions() {
         <Stack direction="column" width="100%">
           <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
           <FormControl fullWidth>
-            <InputLabel>{t('select-length')}</InputLabel>
-            <OutlinedInput
-              label={t('select-length')}
-              placeholder="..."
-              endAdornment={'cm'}
-            />
+            <InputLabel>...</InputLabel>
+            <OutlinedInput label={t('select-length')} endAdornment={'cm'} />
           </FormControl>
         </Stack>
         <Stack direction="column" width="100%">
           <Typography fontWeight="bold">{'4. ' + t('weight')}</Typography>
           <FormControl fullWidth>
-            <InputLabel>{t('select-weight')}</InputLabel>
-            <OutlinedInput
-              label={t('select-weight')}
-              placeholder="..."
-              endAdornment={'kg'}
-            />
+            <InputLabel>...</InputLabel>
+            <OutlinedInput label={t('select-weight')} endAdornment={'kg'} />
           </FormControl>
         </Stack>
       </Stack>
@@ -94,10 +86,9 @@ export default function GeneralQuestions() {
             </Button>
           </Stack>
           <FormControl fullWidth>
-            <InputLabel>{t('select-waist-measurement')}</InputLabel>
+            <InputLabel>...</InputLabel>
             <OutlinedInput
               label={t('select-waist-measurement')}
-              placeholder="..."
               endAdornment={'cm'}
             />
           </FormControl>
@@ -115,10 +106,9 @@ export default function GeneralQuestions() {
             </Button>
           </Stack>
           <FormControl fullWidth>
-            <InputLabel>{t('select-resting-pulse')}</InputLabel>
+            <InputLabel>...</InputLabel>
             <OutlinedInput
               label={t('select-resting-pulse')}
-              placeholder="..."
               endAdornment={'bpm'}
             />
           </FormControl>
@@ -133,10 +123,9 @@ export default function GeneralQuestions() {
             </Button>
           </Stack>
           <FormControl fullWidth>
-            <InputLabel>{t('select-blood-pressure')}</InputLabel>
+            <InputLabel>...</InputLabel>
             <OutlinedInput
               label={t('select-blood-pressure')}
-              placeholder="..."
               endAdornment={'mm/hg'}
             />
           </FormControl>
@@ -146,7 +135,15 @@ export default function GeneralQuestions() {
         <Typography fontWeight="bold">{t('ablation')}</Typography>
         <DatePicker sx={{ width: '100%' }} label={t('select-ablation-date')} />
       </div>
-      <Button variant="contained" sx={{ width: '80%', margin: 'auto' }}>
+      <Button
+        variant="contained"
+        sx={{
+          width: '80%',
+          margin: 'auto',
+          bgcolor: 'black',
+          borderRadius: '10px',
+        }}
+      >
         {t('next')}
       </Button>
     </Stack>
