@@ -8,12 +8,7 @@ import {
 } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
-  ArrowRightOutlined,
-  PersonOutline,
-  SafetyCheck,
-  SafetyCheckOutlined,
-} from '@mui/icons-material';
-import {
+  ArrowRight,
   Bell,
   Help,
   Information,
@@ -31,8 +26,6 @@ export default function Settings() {
     <Stack
       direction="column"
       alignItems="start"
-      padding="0 8vw 0 8vw"
-      maxWidth="1000px"
       margin="auto"
       marginBottom={'20%'}
       spacing={3}
@@ -41,7 +34,13 @@ export default function Settings() {
         {t('settings')}
       </Typography>
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('profile')} />
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('profile')}
+            </Typography>
+          }
+        />
         <CardContent>
           <Button
             fullWidth={true}
@@ -53,7 +52,7 @@ export default function Settings() {
                 {t('personal-details')}
               </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
           <Button
             fullWidth={true}
@@ -65,7 +64,7 @@ export default function Settings() {
                 {t('password-and-security')}
               </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
           <Button
             fullWidth={true}
@@ -75,7 +74,7 @@ export default function Settings() {
               <Integrity />
               <Typography marginLeft={'10px'}>{t('integrity')}</Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
           <Button
             fullWidth={true}
@@ -85,13 +84,19 @@ export default function Settings() {
               <Bell />
               <Typography marginLeft={'10px'}>{t('messages')}</Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
         </CardContent>
       </Card>
 
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('how-waitapp-works')} />
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('how-waitapp-works')}
+            </Typography>
+          }
+        />
         <CardContent>
           <Button
             fullWidth={true}
@@ -101,13 +106,19 @@ export default function Settings() {
               <Information />
               <Typography marginLeft={'10px'}>{t('information')}</Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
         </CardContent>
       </Card>
 
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('ongoing-sprint')} />
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('ongoing-sprint')}
+            </Typography>
+          }
+        />
         <CardContent>
           <Button
             fullWidth={true}
@@ -119,13 +130,19 @@ export default function Settings() {
                 {t('start-new-sprint')}
               </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
         </CardContent>
       </Card>
 
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('data-and-analysis')} />
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('data-and-analysis')}
+            </Typography>
+          }
+        />
         <CardContent>
           <Button
             fullWidth={true}
@@ -137,7 +154,7 @@ export default function Settings() {
                 {t('alt-data-export')}
               </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
           <Button
             fullWidth={true}
@@ -149,13 +166,19 @@ export default function Settings() {
                 {t('alt-visualization')}
               </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
         </CardContent>
       </Card>
 
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('health-and-support')} />
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('help-and-support')}
+            </Typography>
+          }
+        />
         <CardContent>
           <Button
             fullWidth={true}
@@ -165,7 +188,7 @@ export default function Settings() {
               <Help />
               <Typography marginLeft={'10px'}>{t('help')}</Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
         </CardContent>
       </Card>
