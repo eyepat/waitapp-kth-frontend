@@ -24,7 +24,7 @@ const Home: React.FC = () => {
         display: 'flex',
       }}
     >
-      <Stack direction="column" style={{ flex: 1, marginLeft: '10px' }}>
+      <Stack direction="column" style={{ flex: 1, marginLeft: '30px' }}>
         <div style={{ padding: '2vh' }}></div>
         <Stack direction="row" sx={{ width: '60%', alignItems: 'center' }}>
           <Typography
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
           </Typography>
           <Typography
             variant="h5"
-            sx={{ lineHeight: '1', fontWeight: 'bold', marginLeft: '10px' }}
+            sx={{ lineHeight: '1', fontWeight: 'bold', marginLeft: '5px' }}
           >
             {t('days-left')}
           </Typography>
@@ -77,11 +77,11 @@ const Home: React.FC = () => {
         style={{
           flex: 1,
           marginLeft: '30px',
-          marginTop: '10px',
+          marginTop: 'px',
           alignItems: 'center',
         }}
       >
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" spacing={1} style={{ alignItems: 'flex-end' }}>
           <ChartMeter
             value={pulse}
             label={<Pulse />}
