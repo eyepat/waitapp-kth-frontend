@@ -36,5 +36,19 @@
   "blood-pressure": "Blood pressure",
   "ablation": "Ablation",
   "select-ablation-date": "Select your ablation date",
-  "settings": "Settings"
+  "settings": "Settings",
+  "profile": "Porfile",
+  "personal-details": "Personal details",
+  "password-and-security": "Password & security",
+  "integrity": "Integrity",
+  "messages": "Messages",
+  "how-waitapp-works": "How WAITapp works",
+  "information": "Information",
+  "ongoing-sprint": "Ongoing sprint",
+  "start-new-sprint": "Start a new sprint",
+  "data-and-analysis": "Data and analysis",
+  "alt-data-export": "Alternative data export",
+  "alt-visualization": "Alternative visualization",
+  "health-and-support": "Healt and support",
+  "help": "Help"
 }

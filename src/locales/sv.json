@@ -37,5 +37,19 @@
   "blood-pressure": "Blodtryck",
   "ablation": "Ablation",
   "select-ablation-date": "Välj ablation datum",
-  "settings": "Inställningar"
+  "settings": "Inställningar",
+  "profile": "Profil",
+  "personal-details": "Personuppgifter",
+  "password-and-security": "Lösenord & säkerhet",
+  "integrity": "Integritet",
+  "messages": "Meddelanden",
+  "how-waitapp-works": "Hur funkar WAITapp",
+  "information": "Information",
+  "ongoing-sprint": "Pågående sprint",
+  "start-new-sprint": "Starta en ny sprint",
+  "data-and-analysis": "Data och analys",
+  "alt-data-export": "Alternativ för dataexport",
+  "alt-visualization": "Alternativ för visualisering",
+  "health-and-support": "Hjälp och support",
+  "help": "Hjälp"
 }

@@ -107,7 +107,7 @@ export default function Settings() {
       </Card>
 
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('current-sprint')} />
+        <CardHeader title={t('ongoing-sprint')} />
         <CardContent>
           <Button
             fullWidth={true}
