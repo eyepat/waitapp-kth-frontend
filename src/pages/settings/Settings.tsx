@@ -8,11 +8,17 @@ import {
 } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
-  ArrowRightOutlined,
-  PersonOutline,
-  SafetyCheck,
-  SafetyCheckOutlined,
-} from '@mui/icons-material';
+  ArrowRight,
+  Bell,
+  Help,
+  Information,
+  Integrity,
+  Profile,
+  Shield,
+  Start,
+  Upload,
+  Visualize,
+} from '../../utils/Icons';
 
 export default function Settings() {
   const { t } = useLanguage();
@@ -20,46 +26,169 @@ export default function Settings() {
     <Stack
       direction="column"
       alignItems="start"
-      padding="0 8vw 0 8vw"
-      maxWidth="1000px"
       margin="auto"
+      marginBottom={'20%'}
       spacing={3}
     >
-      <Typography variant="h5" marginBottom="1rem" alignSelf="center">
+      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
         {t('settings')}
       </Typography>
       <Card sx={{ width: '100%' }}>
-        <CardHeader title={t('profile')} />
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('profile')}
+            </Typography>
+          }
+        />
         <CardContent>
           <Button
             fullWidth={true}
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-              <PersonOutline />
-              <Typography>{t('personal-details')}</Typography>
+              <Profile />
+              <Typography marginLeft={'10px'}>
+                {t('personal-details')}
+              </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
           <Button
             fullWidth={true}
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-              <SafetyCheck />
-              <Typography>{t('password-and-security')}</Typography>
+              <Shield />
+              <Typography marginLeft={'10px'}>
+                {t('password-and-security')}
+              </Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
           </Button>
           <Button
             fullWidth={true}
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-              <SafetyCheckOutlined />
-              <Typography>{t('integrity')}</Typography>
+              <Integrity />
+              <Typography marginLeft={'10px'}>{t('integrity')}</Typography>
             </div>
-            <ArrowRightOutlined />
+            <ArrowRight />
+          </Button>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              <Bell />
+              <Typography marginLeft={'10px'}>{t('messages')}</Typography>
+            </div>
+            <ArrowRight />
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card sx={{ width: '100%' }}>
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('how-waitapp-works')}
+            </Typography>
+          }
+        />
+        <CardContent>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              <Information />
+              <Typography marginLeft={'10px'}>{t('information')}</Typography>
+            </div>
+            <ArrowRight />
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card sx={{ width: '100%' }}>
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('ongoing-sprint')}
+            </Typography>
+          }
+        />
+        <CardContent>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              <Start />
+              <Typography marginLeft={'10px'}>
+                {t('start-new-sprint')}
+              </Typography>
+            </div>
+            <ArrowRight />
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card sx={{ width: '100%' }}>
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('data-and-analysis')}
+            </Typography>
+          }
+        />
+        <CardContent>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              <Upload />
+              <Typography marginLeft={'10px'}>
+                {t('alt-data-export')}
+              </Typography>
+            </div>
+            <ArrowRight />
+          </Button>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              <Visualize />
+              <Typography marginLeft={'10px'}>
+                {t('alt-visualization')}
+              </Typography>
+            </div>
+            <ArrowRight />
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card sx={{ width: '100%' }}>
+        <CardHeader
+          title={
+            <Typography variant="h6" fontWeight="bold">
+              {t('help-and-support')}
+            </Typography>
+          }
+        />
+        <CardContent>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              <Help />
+              <Typography marginLeft={'10px'}>{t('help')}</Typography>
+            </div>
+            <ArrowRight />
           </Button>
         </CardContent>
       </Card>

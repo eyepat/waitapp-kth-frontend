@@ -29,7 +29,7 @@ const ChartMeter: React.FC<ChartMeterProps> = ({
         bgcolor={lighterColor}
         borderRadius="15px"
         position="relative"
-        marginTop="8px"
+        marginTop="10px"
       >
         <Box
           position="absolute"
