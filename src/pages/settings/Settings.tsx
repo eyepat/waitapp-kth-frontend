@@ -30,7 +30,7 @@ export default function Settings() {
       marginBottom={'20%'}
       spacing={3}
     >
-      <Typography variant="h5" marginBottom="1rem" alignSelf="center">
+      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
         {t('settings')}
       </Typography>
       <Card sx={{ width: '100%' }}>
