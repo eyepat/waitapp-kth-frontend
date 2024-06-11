@@ -1,19 +1,8 @@
-import { Button, Stack, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import { Stack, Typography } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ArrowRight } from '../../utils/Icons';
 
-const MenuButton = styled(Button)({
-  borderRadius: '5px',
-  width: '90vw',
-  height: '50px',
-  color: 'black',
-  backgroundColor: 'white',
-  justifyContent: 'space-between',
-  '&:hover': {
-    backgroundColor: 'white',
-  },
-});
+import MenuButton from '../../components/menuButton';
 
 export default function KnowledgeBank() {
   const { t } = useLanguage();
