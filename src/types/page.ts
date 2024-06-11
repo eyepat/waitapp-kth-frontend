@@ -10,4 +10,5 @@ export type Page = {
   component: FC | null;
   showBottomNav?: boolean;
   showHeader?: boolean;
+  showExpandedHeader?: boolean;
 };
