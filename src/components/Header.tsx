@@ -3,7 +3,11 @@ import { BackArrow, ClosedBook, Settings, Svg } from '../utils/Icons';
 import ki from '../assets/logo/ki.svg';
 import { useNavigate } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({
+  showExpandedHeader,
+}: {
+  showExpandedHeader: boolean;
+}) {
   const navigate = useNavigate();
   const TopBar = styled('div')({
     display: 'flex',
@@ -26,7 +30,7 @@ export default function Header() {
   const LeftSide = styled('div')({
     display: 'flex',
     justifyContent: 'start',
-    marginLeft: '5vw',
+    marginLeft: '1vw',
     gap: '10vw',
     alignItems: 'center',
   });
@@ -46,9 +50,9 @@ export default function Header() {
   return (
     <TopBar>
       <LeftSide>
-        <ButtonOverride>
+        <Button>
           <BackArrow />
-        </ButtonOverride>
+        </Button>
       </LeftSide>
       <Svg
         src={ki}
@@ -59,18 +63,24 @@ export default function Header() {
           transform: 'translate(-50%, -50%)',
         }}
       />
-      <RightSide>
-        <ButtonOverride>
-          <ClosedBook />
-        </ButtonOverride>
-        <ButtonOverride
-          onClick={() => {
-            navigate('/settings');
-          }}
-        >
-          <Settings />
-        </ButtonOverride>
-      </RightSide>
+      {showExpandedHeader && (
+        <RightSide>
+          <ButtonOverride
+            onClick={() => {
+              navigate('/knowledge-bank');
+            }}
+          >
+            <ClosedBook />
+          </ButtonOverride>
+          <ButtonOverride
+            onClick={() => {
+              navigate('/settings');
+            }}
+          >
+            <Settings />
+          </ButtonOverride>
+        </RightSide>
+      )}
     </TopBar>
   );
 }

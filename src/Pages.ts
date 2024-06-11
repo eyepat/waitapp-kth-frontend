@@ -7,6 +7,7 @@ import Register from './pages/register/Register';
 import { Page } from './types/page';
 import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
 import Settings from './pages/settings/Settings';
+import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
 
 export const pages: Page[] = [
   {
@@ -16,7 +17,7 @@ export const pages: Page[] = [
     icon: HealthDataIcon,
     isMenu: true,
     component: HealthData,
-    showHeader: true,
+    showExpandedHeader: true,
     showBottomNav: true,
   },
   {
@@ -26,7 +27,7 @@ export const pages: Page[] = [
     icon: HomeIcon,
     isMenu: true,
     component: Home,
-    showHeader: true,
+    showExpandedHeader: true,
     showBottomNav: true,
   },
   {
@@ -36,7 +37,7 @@ export const pages: Page[] = [
     icon: SprintIcon,
     isMenu: true,
     component: Sprint,
-    showHeader: true,
+    showExpandedHeader: true,
     showBottomNav: true,
   },
   {
@@ -67,6 +68,15 @@ export const pages: Page[] = [
     label: 'settings',
     isMenu: false,
     component: Settings,
+    showHeader: true,
+    showBottomNav: true,
+  },
+  {
+    to: '/knowledge-bank',
+    permissionLevel: 1,
+    label: 'knowledge-bank',
+    isMenu: false,
+    component: KnowledgeBank,
     showHeader: true,
     showBottomNav: true,
   },

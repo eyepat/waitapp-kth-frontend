@@ -16,7 +16,10 @@ export function Routes() {
             path={page.path ? page.path : page.to}
             Component={() => (
               <>
-                {page.showHeader && <Header />}
+                {page.showExpandedHeader && (
+                  <Header showExpandedHeader={true} />
+                )}
+                {page.showHeader && <Header showExpandedHeader={false} />}
                 {page.component && <page.component />}
                 {page.showBottomNav && <Navigation authLevel={authLevel} />}
               </>
