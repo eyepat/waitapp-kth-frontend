@@ -77,7 +77,7 @@ const Home: React.FC = () => {
         style={{
           flex: 1,
           marginLeft: '30px',
-          marginTop: 'px',
+          marginTop: '10px',
           alignItems: 'center',
         }}
       >
