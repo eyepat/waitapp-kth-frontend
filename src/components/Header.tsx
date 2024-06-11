@@ -48,9 +48,10 @@ export default function Header({
     color: 'inherit',
   });
   return (
+    // TODO: Update this condition to also check if the current page is healthdata, home, or sprint. If it is, do nothing.
     <TopBar>
       <LeftSide>
-        <Button>
+        <Button onClick={() => navigate(-1)}>
           <BackArrow />
         </Button>
       </LeftSide>
