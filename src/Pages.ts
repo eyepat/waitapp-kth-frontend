@@ -17,7 +17,7 @@ export const pages: Page[] = [
     icon: HealthDataIcon,
     isMenu: true,
     component: HealthData,
-    showExpandedHeader: true,
+    showHeader: true,
     showBottomNav: true,
   },
   {
