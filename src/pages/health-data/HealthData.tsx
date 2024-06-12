@@ -51,7 +51,7 @@ export default function HealthData() {
     return (
       <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
         <Typography marginBottom="1rem" alignSelf="left">
-          {t('All-tests')}
+          {t('all-tests')}
         </Typography>
         <MenuButton variant="contained" endIcon={<ArrowRight />}>
           {t('blood-pressure')}
