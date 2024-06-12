@@ -15,12 +15,10 @@ export default function HealthData() {
   };
 
   const renderOverviewContent = () => {
-    // Your code here
     return <div>{t('overview content')}</div>;
   };
 
   const renderSprintsContent = () => {
-    // Your code here
     return <div>{t('sprints content')}</div>;
   };
 
