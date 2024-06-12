@@ -59,5 +59,7 @@
   "recipe": "Recept",
   "training": "Träning",
   "training-tips": "Träningstips",
-  "atrial-fibrillation": "Förmaksflimmer"
+  "atrial-fibrillation": "Förmaksflimmer",
+  "sprint-text": "På vägen mot en hälsosammare version av dig själv räknas varje steg. Har du inte börjat dina utvärderingar ännu? Inga problem, du är på rätt spår! Påbörja din välmåenderesa nu genom att starta en sprint. Ditt åtagande att förstå och förbättra din hälsa är det första steget mot positiv förändring. Kom igen, låt oss komma igång!",
+  "pick-new-sprint": "Välj en ny sprint"
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import NavTab from '../../components/TabMenu/NavTab';
 import NavTabs from '../../components/TabMenu/NavTabs';
@@ -17,9 +17,34 @@ export default function HealthData() {
   const renderOverviewContent = () => {
     return <div>{t('overview content')}</div>;
   };
-
+  //Very rough implementation at this point, in the future we need to check
+  //if on going sprints exist, right now everything is hardcoded to look like figma.
   const renderSprintsContent = () => {
-    return <div>{t('sprints content')}</div>;
+    return (
+      <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
+        <Typography marginTop={'20%'} width={'80%'} fontStyle={'italic'}>
+          {t('sprint-text')}
+        </Typography>
+        <Button
+          sx={{
+            marginTop: '25px',
+            width: '60%',
+            borderRadius: '10px',
+            backgroundColor: 'hsla(200, 100%, 26%, 1)',
+            '&:hover': {
+              backgroundColor: 'hsla(200, 100%, 26%, 1)',
+            },
+            '&:active': {
+              backgroundColor: 'hsla(200, 100%, 26%, 1)',
+            },
+          }}
+          variant="contained"
+          TouchRippleProps={{ style: { color: 'hsla(200, 100%, 6%, 1)' } }}
+        >
+          <Typography>{t('pick-new-sprint')}</Typography>
+        </Button>
+      </Stack>
+    );
   };
 
   const renderTestsContent = () => {
