@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Collapse,
+  Grid,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import NavTab from '../../components/TabMenu/NavTab';
 import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/menuButton';
+import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
 
 export default function HealthData() {
   const { t } = useLanguage();
@@ -14,9 +25,124 @@ export default function HealthData() {
     setValue(newValue);
   };
 
-  const renderOverviewContent = () => {
-    return <div>{t('overview content')}</div>;
+  const [expandedCards, setExpandedCards] = React.useState({
+    bloodPressure: false,
+    weight: false,
+  });
+
+  const handleExpandClick = (card: keyof typeof expandedCards) => {
+    setExpandedCards((prev) => ({
+      ...prev,
+      [card]: !prev[card],
+    }));
   };
+
+  const renderOverviewContent = () => {
+    return (
+      <Stack marginTop={'25px'}>
+        <Card>
+          <CardHeader
+            title={
+              <Typography variant="body1" fontWeight="bold">
+                {t('blood-pressure')}
+              </Typography>
+            }
+            sx={{ paddingBottom: '0px' }}
+          />
+
+          <CardContent sx={{ paddingTop: '0px' }}>
+            <Typography>{`${t('recent-pressure')} ${t('goal-pressure')}`}</Typography>
+          </CardContent>
+
+          <Collapse
+            in={expandedCards.bloodPressure}
+            timeout="auto"
+            unmountOnExit
+          >
+            <CardContent>
+              <Typography>Graph</Typography> {/* Fix a graph here later */}
+            </CardContent>
+          </Collapse>
+
+          <CardActions disableSpacing>
+            <Grid container direction="row" justifyContent="space-between">
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  endIcon={<AddCircleOutline />}
+                >
+                  <Typography>{t('new-measurment')}</Typography>
+                </Button>
+              </Grid>
+              <Grid item>
+                <ExpandMore
+                  onClick={() => handleExpandClick('bloodPressure')}
+                  aria-expanded={expandedCards.bloodPressure}
+                  aria-label="show more"
+                  style={{
+                    transform: expandedCards.bloodPressure
+                      ? 'rotate(180deg)'
+                      : 'rotate(0deg)',
+                    transition: 'transform 0.3s',
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </CardActions>
+        </Card>
+
+        <Card sx={{ marginTop: '30px' }}>
+          <CardHeader
+            title={
+              <Typography variant="body1" fontWeight="bold">
+                {t('weight')}
+              </Typography>
+            }
+            sx={{ paddingBottom: '0px' }}
+          />
+
+          <CardContent sx={{ paddingTop: '0px' }}>
+            <Typography>{`${t('recent-weight')} ${t('goal-weight')}`}</Typography>
+          </CardContent>
+
+          <Collapse in={expandedCards.weight} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography>Graph</Typography> {/* Fix a graph here later */}
+            </CardContent>
+          </Collapse>
+
+          <CardActions disableSpacing>
+            <Grid container direction="row" justifyContent="space-between">
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  endIcon={<AddCircleOutline />}
+                >
+                  <Typography>{t('new-measurment')}</Typography>
+                </Button>
+              </Grid>
+              <Grid item>
+                <ExpandMore
+                  onClick={() => handleExpandClick('weight')}
+                  aria-expanded={expandedCards.weight}
+                  aria-label="show more"
+                  style={{
+                    transform: expandedCards.weight
+                      ? 'rotate(180deg)'
+                      : 'rotate(0deg)',
+                    transition: 'transform 0.3s',
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </CardActions>
+        </Card>
+      </Stack>
+    );
+  };
+
   //Very rough implementation at this point, in the future we need to check
   //if on going sprints exist, right now everything is hardcoded to look like figma.
   const renderSprintsContent = () => {
