@@ -51,7 +51,8 @@ export default function HealthData() {
           />
 
           <CardContent sx={{ paddingTop: '0px' }}>
-            <Typography>{`${t('recent-pressure')} ${t('goal-pressure')}`}</Typography>
+            <Typography>{`${t('recent-pressure')} currnetPulse mmHg. ${t('goal-pressure')} goalPulse mmHg`}</Typography>{' '}
+            {/*Add pressure and goal pressure to render text properly.*/}
           </CardContent>
 
           <Collapse
@@ -70,6 +71,7 @@ export default function HealthData() {
                 <Button
                   variant="outlined"
                   color="primary"
+                  sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
                 >
                   <Typography>{t('new-measurment')}</Typography>
@@ -103,7 +105,8 @@ export default function HealthData() {
           />
 
           <CardContent sx={{ paddingTop: '0px' }}>
-            <Typography>{`${t('recent-weight')} ${t('goal-weight')}`}</Typography>
+            <Typography>{`${t('recent-weight')} currentWeight kg. ${t('goal-weight')} goalWeight kg`}</Typography>{' '}
+            {/*Add weight and goal weight to dispaly information properly*/}
           </CardContent>
 
           <Collapse in={expandedCards.weight} timeout="auto" unmountOnExit>
@@ -118,6 +121,7 @@ export default function HealthData() {
                 <Button
                   variant="outlined"
                   color="primary"
+                  sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
                 >
                   <Typography>{t('new-measurment')}</Typography>

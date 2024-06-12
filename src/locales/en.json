@@ -63,5 +63,10 @@
   "pick-new-sprint": "Pick a new sprint",
   "test-for-physical-activity": "Test for physical activity",
   "meal-control": "Meal control",
-  "all-tests": "All tests"
+  "all-tests": "All tests",
+  "recent-pressure": "Your most recent measured blood pressure was ",
+  "goal-pressure": "Your goal is to get below ",
+  "recent-weight": "Your most recent measured weight was ",
+  "goal-weight": "Your goal is to lose ",
+  "new-measurment": "New measurment"
 }

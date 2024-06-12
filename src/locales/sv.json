@@ -64,5 +64,10 @@
   "pick-new-sprint": "Välj en ny sprint",
   "test-for-physical-activity": "Test för fysisk aktivitet",
   "meal-control": "Måltidskontroll",
-  "all-tests": "Alla tester"
+  "all-tests": "Alla tester",
+  "recent-pressure": "Ditt senaste uppmätta blodtryck var ",
+  "goal-pressure": "Ditt mål är att nå under ",
+  "recent-weight": "Ditt senaste uppmätta vikt var ",
+  "goal-weight": "Ditt mål är att gå ner ",
+  "new-measurment": "Ny mättning"
 }
