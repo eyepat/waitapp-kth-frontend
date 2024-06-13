@@ -16,10 +16,12 @@ import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/menuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 export default function HealthData() {
   const { t } = useLanguage();
   const [value, setValue] = useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -179,11 +181,23 @@ export default function HealthData() {
 
   const renderTestsContent = () => {
     const tests = [
-      { name: t('blood-pressure'), icon: <ArrowRight /> },
-      { name: t('weight'), icon: <ArrowRight /> },
-      { name: t('waist-measurement'), icon: <ArrowRight /> },
-      { name: t('test-for-physical-activity'), icon: <ArrowRight /> },
-      { name: t('meal-control'), icon: <ArrowRight /> },
+      {
+        name: t('blood-pressure'),
+        icon: <ArrowRight />,
+        page: '/blood-pressure-test',
+      },
+      { name: t('weight'), icon: <ArrowRight />, page: '/weight-test' },
+      {
+        name: t('waist-measurement'),
+        icon: <ArrowRight />,
+        page: '/waist-measurement',
+      },
+      {
+        name: t('test-for-physical-activity'),
+        icon: <ArrowRight />,
+        page: '/physical-activity-test',
+      },
+      { name: t('meal-control'), icon: <ArrowRight />, page: '/meal-control' },
     ];
 
     const randomTest =
@@ -200,6 +214,9 @@ export default function HealthData() {
           <MenuButton
             variant="contained"
             endIcon={randomTest.icon}
+            onClick={() => {
+              navigate(randomTest.page);
+            }}
             sx={{
               backgroundColor: 'hsla(198, 26%, 92%, 1)',
               '&:hover': {
@@ -218,7 +235,14 @@ export default function HealthData() {
             {t('all-tests')}
           </Typography>
           {tests.map((test) => (
-            <MenuButton key={test.name} variant="contained" endIcon={test.icon}>
+            <MenuButton
+              key={test.name}
+              variant="contained"
+              endIcon={test.icon}
+              onClick={() => {
+                navigate(test.page);
+              }}
+            >
               {test.name}
             </MenuButton>
           ))}
