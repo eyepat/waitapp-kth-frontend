@@ -16,10 +16,12 @@ import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/menuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 export default function HealthData() {
   const { t } = useLanguage();
   const [value, setValue] = useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -73,6 +75,9 @@ export default function HealthData() {
                   color="primary"
                   sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
+                  onClick={() => {
+                    navigate('/blood-pressure-test');
+                  }}
                 >
                   <Typography>{t('new-measurment')}</Typography>
                 </Button>
@@ -123,6 +128,9 @@ export default function HealthData() {
                   color="primary"
                   sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
+                  onClick={() => {
+                    navigate('/weight-test');
+                  }}
                 >
                   <Typography>{t('new-measurment')}</Typography>
                 </Button>
@@ -178,26 +186,73 @@ export default function HealthData() {
   };
 
   const renderTestsContent = () => {
+    const tests = [
+      {
+        name: t('blood-pressure'),
+        icon: <ArrowRight />,
+        page: '/blood-pressure-test',
+      },
+      { name: t('weight'), icon: <ArrowRight />, page: '/weight-test' },
+      {
+        name: t('waist-measurement'),
+        icon: <ArrowRight />,
+        page: '/waist-measurement',
+      },
+      {
+        name: t('test-for-physical-activity'),
+        icon: <ArrowRight />,
+        page: '/physical-activity-test',
+      },
+      { name: t('meal-control'), icon: <ArrowRight />, page: '/meal-control' },
+    ];
+
+    const randomTest =
+      tests[
+        Math.floor(Math.random() * tests.length)
+      ]; /*Currently Random test every time u re-enter the tab. In the future update it to recommend the most urgent test.*/
+
     return (
       <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
-        <Typography marginBottom="1rem" alignSelf="left">
-          {t('all-tests')}
-        </Typography>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('blood-pressure')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('weight')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('waist-measurement')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('test-for-physical-activity')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('meal-control')}
-        </MenuButton>
+        <Stack direction="column" margin="auto" spacing={1}>
+          <Typography marginBottom="1rem" alignSelf="left">
+            {t('recommended-today')}
+          </Typography>
+          <MenuButton
+            variant="contained"
+            endIcon={randomTest.icon}
+            onClick={() => {
+              navigate(randomTest.page);
+            }}
+            sx={{
+              backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              '&:hover': {
+                backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              },
+              '&:active': {
+                backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              },
+            }}
+          >
+            {randomTest.name}
+          </MenuButton>
+        </Stack>
+        <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
+          <Typography marginBottom="1rem" alignSelf="left">
+            {t('all-tests')}
+          </Typography>
+          {tests.map((test) => (
+            <MenuButton
+              key={test.name}
+              variant="contained"
+              endIcon={test.icon}
+              onClick={() => {
+                navigate(test.page);
+              }}
+            >
+              {test.name}
+            </MenuButton>
+          ))}
+        </Stack>
       </Stack>
     );
   };

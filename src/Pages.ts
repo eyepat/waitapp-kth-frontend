@@ -8,6 +8,8 @@ import { Page } from './types/page';
 import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
 import Settings from './pages/settings/Settings';
 import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
+import BloodPressureTest from './pages/tests/BloodPressureTest';
+import WeightTest from './pages/tests/WeightTest';
 
 export const pages: Page[] = [
   {
@@ -79,5 +81,21 @@ export const pages: Page[] = [
     component: KnowledgeBank,
     showHeader: true,
     showBottomNav: true,
+  },
+  {
+    to: '/blood-pressure-test',
+    permissionLevel: 1,
+    label: 'blood-pressure-test',
+    component: BloodPressureTest,
+    showHeader: true,
+    isMenu: false,
+  },
+  {
+    to: '/weight-test',
+    permissionLevel: 1,
+    label: 'weight-test',
+    component: WeightTest,
+    showHeader: true,
+    isMenu: false,
   },
 ];
