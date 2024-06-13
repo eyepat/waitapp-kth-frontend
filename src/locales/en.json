@@ -58,5 +58,15 @@
   "recipe": "Recipe",
   "training": "Training",
   "training-tips": "Training tips",
-  "atrial-fibrillation": "Atrial fibrillation"
+  "atrial-fibrillation": "Atrial fibrillation",
+  "sprint-text": "On the way to a healthier version of yourself, every step counts. Haven't started your evaluations yet? No problem, you're on the right track! Begin your wellness journey now by starting a sprint. Your commitment to understanding and improving your health is the first step towards positive change. Come on, let's get started!",
+  "pick-new-sprint": "Pick a new sprint",
+  "test-for-physical-activity": "Test for physical activity",
+  "meal-control": "Meal control",
+  "all-tests": "All tests",
+  "recent-pressure": "Your most recent measured blood pressure was ",
+  "goal-pressure": "Your goal is to get below ",
+  "recent-weight": "Your most recent measured weight was ",
+  "goal-weight": "Your goal is to lose ",
+  "new-measurment": "New measurment"
 }
