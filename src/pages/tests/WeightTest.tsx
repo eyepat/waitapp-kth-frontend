@@ -15,27 +15,27 @@ export default function WeightTest() {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderWidth: '2px',
-        borderColor: 'rgba(7, 65, 109, 1)', // Border color
-        borderRadius: '10px', // Border radius
-        boxShadow: '0px 0px 10px 1px rgba(7, 65, 109, 0.2)', // Box shadow for the border
+        borderColor: 'rgba(7, 65, 109, 1)',
+        borderRadius: '10px',
+        boxShadow: '0px 0px 10px 1px rgba(7, 65, 109, 0.2)',
       },
       '&:hover fieldset': {
-        borderColor: 'rgba(7, 65, 109, 0.8)', // Hover effect on the border
+        borderColor: 'rgba(7, 65, 109, 0.8)',
       },
       '&.Mui-focused fieldset': {
-        borderColor: 'rgba(7, 65, 109, 1)', // Focus effect on the border
+        borderColor: 'rgba(7, 65, 109, 1)',
       },
       '& input': {
-        textAlign: 'center', // Center text alignment
-        fontSize: '24px', // Text size
-        fontWeight: 'bold', // Text weight
-        color: 'rgba(0, 0, 0, 0.87)', // Text color
+        textAlign: 'center',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        color: 'rgba(0, 0, 0, 0.87)',
       },
     },
   });
   const { t } = useLanguage();
   return (
-    <Stack marginBottom="20%" alignItems="center">
+    <Stack alignItems="center" sx={{ position: 'absolute' }}>
       <Typography variant="h4" marginBottom="1rem" alignSelf="center">
         {t('weight-test')}
       </Typography>
@@ -44,7 +44,7 @@ export default function WeightTest() {
       </Typography>
 
       <Box
-        position="absolute"
+        marginTop="100px"
         bottom="15%"
         width="100%"
         display="flex"
@@ -71,12 +71,15 @@ export default function WeightTest() {
         <Button
           variant="contained"
           color="primary"
-          style={{
+          sx={{
             backgroundColor: 'black',
-            marginTop: '30%',
+            marginTop: '100px',
             borderRadius: '10px',
             width: '60%',
             height: '50px',
+            '&:active, &:focus': {
+              backgroundColor: 'black',
+            },
           }}
         >
           <Typography> {t('save')}</Typography>
