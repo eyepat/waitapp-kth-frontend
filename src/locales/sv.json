@@ -69,5 +69,9 @@
   "goal-pressure": "Ditt mål är att nå under ",
   "recent-weight": "Ditt senaste uppmätta vikt var ",
   "goal-weight": "Ditt mål är att gå ner ",
-  "new-measurment": "Ny mättning"
+  "new-measurment": "Ny mättning",
+  "weight-test": "Viktmätning",
+  "about-weight": "Mät din vikt regelbundet för att hålla koll på din hälsa och framsteg. Genom att notera din vikt kan du följa förändringar över tid och anpass dina hälsomål för att uppnå en balanserad och hållbar livstil.",
+  "blood-pressure-test": "Blodtrycksmätning",
+  "about-blood-pressure": "Högt blodtryck är kopplat till hjärtkärlsjukdomar, men kan förbättras genom läkemedel och sunda vanor. I vår app fokuserar vi på en hälsosam kost, regelbunden motion och att begränsa alkoholkonsumtionen för att sänka blodtrycket. Om blodtrycket fortsatt ligger för högt rekommenderar vi att du kontaktar xxx för vård."
 }

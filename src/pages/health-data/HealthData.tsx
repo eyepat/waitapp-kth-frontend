@@ -75,6 +75,9 @@ export default function HealthData() {
                   color="primary"
                   sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
+                  onClick={() => {
+                    navigate('/blood-pressure-test');
+                  }}
                 >
                   <Typography>{t('new-measurment')}</Typography>
                 </Button>
@@ -125,6 +128,9 @@ export default function HealthData() {
                   color="primary"
                   sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
+                  onClick={() => {
+                    navigate('/weight-test');
+                  }}
                 >
                   <Typography>{t('new-measurment')}</Typography>
                 </Button>
