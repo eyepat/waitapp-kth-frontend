@@ -35,6 +35,7 @@ export default function Settings() {
       </Typography>
       <Card sx={{ width: '100%' }}>
         <CardHeader
+          sx={{ marginBottom: '-25px' }}
           title={
             <Typography variant="h6" fontWeight="bold">
               {t('profile')}
@@ -91,6 +92,7 @@ export default function Settings() {
 
       <Card sx={{ width: '100%' }}>
         <CardHeader
+          sx={{ marginBottom: '-25px' }}
           title={
             <Typography variant="h6" fontWeight="bold">
               {t('how-waitapp-works')}
@@ -113,6 +115,7 @@ export default function Settings() {
 
       <Card sx={{ width: '100%' }}>
         <CardHeader
+          sx={{ marginBottom: '-25px' }}
           title={
             <Typography variant="h6" fontWeight="bold">
               {t('ongoing-sprint')}
@@ -137,6 +140,7 @@ export default function Settings() {
 
       <Card sx={{ width: '100%' }}>
         <CardHeader
+          sx={{ marginBottom: '-25px' }}
           title={
             <Typography variant="h6" fontWeight="bold">
               {t('data-and-analysis')}
@@ -173,6 +177,7 @@ export default function Settings() {
 
       <Card sx={{ width: '100%' }}>
         <CardHeader
+          sx={{ marginBottom: '-25px' }}
           title={
             <Typography variant="h6" fontWeight="bold">
               {t('help-and-support')}
