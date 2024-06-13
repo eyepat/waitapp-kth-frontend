@@ -178,26 +178,43 @@ export default function HealthData() {
   };
 
   const renderTestsContent = () => {
+    const tests = [
+      { name: t('blood-pressure'), icon: <ArrowRight /> },
+      { name: t('weight'), icon: <ArrowRight /> },
+      { name: t('waist-measurement'), icon: <ArrowRight /> },
+      { name: t('test-for-physical-activity'), icon: <ArrowRight /> },
+      { name: t('meal-control'), icon: <ArrowRight /> },
+    ];
+
+    const randomTest =
+      tests[
+        Math.floor(Math.random() * tests.length)
+      ]; /*Currently Random test every time u re-enter the tab. In the future update it to recommend the most urgent test.*/
+
     return (
       <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
-        <Typography marginBottom="1rem" alignSelf="left">
-          {t('all-tests')}
-        </Typography>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('blood-pressure')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('weight')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('waist-measurement')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('test-for-physical-activity')}
-        </MenuButton>
-        <MenuButton variant="contained" endIcon={<ArrowRight />}>
-          {t('meal-control')}
-        </MenuButton>
+        <Stack direction="column" margin="auto" spacing={1}>
+          <Typography marginBottom="1rem" alignSelf="left">
+            {t('recommended-today')}
+          </Typography>
+          <MenuButton
+            variant="contained"
+            endIcon={randomTest.icon}
+            sx={{ backgroundColor: 'hsla(198, 26%, 92%, 1)' }}
+          >
+            {randomTest.name}
+          </MenuButton>
+        </Stack>
+        <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
+          <Typography marginBottom="1rem" alignSelf="left">
+            {t('all-tests')}
+          </Typography>
+          {tests.map((test) => (
+            <MenuButton key={test.name} variant="contained" endIcon={test.icon}>
+              {test.name}
+            </MenuButton>
+          ))}
+        </Stack>
       </Stack>
     );
   };
