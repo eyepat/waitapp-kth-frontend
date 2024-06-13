@@ -200,7 +200,15 @@ export default function HealthData() {
           <MenuButton
             variant="contained"
             endIcon={randomTest.icon}
-            sx={{ backgroundColor: 'hsla(198, 26%, 92%, 1)' }}
+            sx={{
+              backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              '&:hover': {
+                backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              },
+              '&:active': {
+                backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              },
+            }}
           >
             {randomTest.name}
           </MenuButton>
