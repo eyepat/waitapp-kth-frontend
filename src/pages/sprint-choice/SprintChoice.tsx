@@ -105,13 +105,13 @@ export default function SprintChoice() {
         </RadioGroup>
       </Stack>
 
-      <Stack width="60%">
+      <Stack width="60%" marginTop="20px">
         <Button
           variant="contained"
           color="primary"
           sx={{
             backgroundColor: 'black',
-            marginTop: '10px',
+
             marginBottom: '20px',
             borderRadius: '10px',
             width: '100%',

@@ -82,5 +82,6 @@
   "physical-activity": "Physical activity",
   "info-text-physical-activity": "We recommend trying to increase the level of physical activity",
   "alcohol": "Alcohol",
-  "info-text-alcohol": "We recommend reducing or taking a break from regular alcohol consumption"
+  "info-text-alcohol": "We recommend reducing or taking a break from regular alcohol consumption",
+  "recommended-today": "Recommended today"
 }
