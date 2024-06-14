@@ -13,9 +13,8 @@ import physact from '../../assets/sprintchoice/physact.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { styled } from '@mui/system';
 import CheckIcon from '@mui/icons-material/Check';
-import { Svg } from '../../utils/Icons';
 
-const CustomRadio = styled(Radio)(({ theme }) => ({
+const CustomRadio = styled(Radio)(({}) => ({
   '&.Mui-checked .MuiSvgIcon-root': {
     color: 'white',
     backgroundColor: 'hsla(126, 100%, 38%, 1)',
