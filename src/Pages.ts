@@ -10,6 +10,7 @@ import Settings from './pages/settings/Settings';
 import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
 import BloodPressureTest from './pages/tests/BloodPressureTest';
 import WeightTest from './pages/tests/WeightTest';
+import SprintChoice from './pages/sprint-choice/SprintChoice';
 
 export const pages: Page[] = [
   {
@@ -95,6 +96,14 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'weight-test',
     component: WeightTest,
+    showHeader: true,
+    isMenu: false,
+  },
+  {
+    to: '/sprint-choice',
+    permissionLevel: 1,
+    label: 'sprint-choice',
+    component: SprintChoice,
     showHeader: true,
     isMenu: false,
   },

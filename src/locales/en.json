@@ -74,5 +74,14 @@
   "blood-pressure-test": "Blood Pressure Measurement",
   "about-blood-pressure": "High blood pressure is linked to cardiovascular diseases but can be improved with medication and healthy habits. In our app, we focus on a healthy diet, regular exercise, and limiting alcohol consumption to lower blood pressure. If your blood pressure remains high, we recommend contacting xxx for medical care.",
   "how-to-measure": "How to measure",
-  "your-healthdata": "Your health data"
+  "your-healthdata": "Your health data",
+  "new-habits": "New habits",
+  "about-new-habits": "We have analyzed the information you provided in previous steps. Based on this, we have developed the following recommendations on areas of your life that you can work on changing.",
+  "select-your-goal": "Check the goals you want to work towards.",
+  "info-text-eat-habit": "We recommend working on healthier eating habits",
+  "physical-activity": "Physical activity",
+  "info-text-physical-activity": "We recommend trying to increase the level of physical activity",
+  "alcohol": "Alcohol",
+  "info-text-alcohol": "We recommend reducing or taking a break from regular alcohol consumption",
+  "recommended-today": "Recommended today"
 }
