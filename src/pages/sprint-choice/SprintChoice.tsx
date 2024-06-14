@@ -7,9 +7,13 @@ import {
   Box,
   RadioGroup,
 } from '@mui/material';
+import alcohol from '../../assets/sprintchoice/alcohol.svg';
+import food from '../../assets/sprintchoice/food.svg';
+import physact from '../../assets/sprintchoice/physact.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { styled } from '@mui/system';
 import CheckIcon from '@mui/icons-material/Check';
+import { Svg } from '../../utils/Icons';
 
 const CustomRadio = styled(Radio)(({ theme }) => ({
   '&.Mui-checked .MuiSvgIcon-root': {
@@ -33,19 +37,19 @@ export default function SprintChoice() {
 
   const rectangles = [
     {
-      imgSrc: 'path/to/image1.jpg',
+      imgSrc: food,
       header: t('eating-habit'),
       info: t('info-text-eat-habit'),
       value: 'option1',
     },
     {
-      imgSrc: 'path/to/image2.jpg',
+      imgSrc: physact,
       header: t('physical-activity'),
       info: t('info-text-physical-activity'),
       value: 'option2',
     },
     {
-      imgSrc: 'path/to/image3.jpg',
+      imgSrc: alcohol,
       header: t('alcohol'),
       info: t('info-text-alcohol'),
       value: 'option3',
@@ -71,8 +75,8 @@ export default function SprintChoice() {
               key={index}
               direction="row"
               alignItems="center"
-              padding="1rem"
-              border="1px solid #ccc"
+              padding="0px"
+              border="0px solid #ccc"
               margin="5px"
               boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
               onClick={() => handleRectangleClick(rectangle.value)}
@@ -81,7 +85,8 @@ export default function SprintChoice() {
                 component="img"
                 src={rectangle.imgSrc}
                 alt={rectangle.header}
-                width="40%"
+                width="100px"
+                sx={{ marginLeft: 0, marginTop: 0, marginBottom: 0 }}
               />
               <Stack flexGrow={1} paddingLeft="1rem">
                 <Typography variant="h6">{rectangle.header}</Typography>
