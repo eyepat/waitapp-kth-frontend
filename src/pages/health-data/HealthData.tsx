@@ -164,6 +164,7 @@ export default function HealthData() {
           {t('sprint-text')}
         </Typography>
         <Button
+          onClick={() => navigate('/sprint-choice')}
           sx={{
             marginTop: '25px',
             width: '60%',

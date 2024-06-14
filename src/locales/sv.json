@@ -75,5 +75,13 @@
   "blood-pressure-test": "Blodtrycksmätning",
   "about-blood-pressure": "Högt blodtryck är kopplat till hjärtkärlsjukdomar, men kan förbättras genom läkemedel och sunda vanor. I vår app fokuserar vi på en hälsosam kost, regelbunden motion och att begränsa alkoholkonsumtionen för att sänka blodtrycket. Om blodtrycket fortsatt ligger för högt rekommenderar vi att du kontaktar xxx för vård.",
   "how-to-measure": "Hur man mäter",
-  "your-healthdata": "Din hälsodata"
+  "your-healthdata": "Din hälsodata",
+  "new-habits": "Nya vanor",
+  "about-new-habits": "Vi har analyserat den information du angett i tidigare steg. Utifrån detta har vi tagit fram följande rekommendationer på områden i ditt liv som du kan jobba med att förändra.",
+  "select-your-goal": "Kryssa i de mål du vill jobba mot.",
+  "info-text-eat-habit": "Vi rekommenderar att jobba på mer hälsosamma matvanor",
+  "physical-activity": "Fysisk aktivitet",
+  "info-text-physical-activity": "Vi rekommenderar att försöka öka nivån av fysisk aktivitet",
+  "alcohol": "Alkohol",
+  "info-text-alcohol": "Vi rekommenderar att trappa ner eller göra uppehåll med regelbunden alkoholkonsumption"
 }
