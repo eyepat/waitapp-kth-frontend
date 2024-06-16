@@ -7,6 +7,9 @@ export default function Sprint() {
   const { t } = useLanguage();
   return (
     <Stack marginBottom="20%" alignItems="center">
+      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
+        {t('sprint')}
+      </Typography>
       <Svg
         src={moon}
         style={{
