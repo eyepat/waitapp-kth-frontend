@@ -1,10 +1,24 @@
-import under_construction from '../../assets/popup/under-construction.svg';
+import { Stack, Typography } from '@mui/material';
+import moon from '../../assets/sprint/moon.svg';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { Svg } from '../../utils/Icons';
 
 export default function Sprint() {
+  const { t } = useLanguage();
   return (
-    <div>
-      <h1>Under construction</h1>
-      <img src={under_construction} />
-    </div>
+    <Stack marginBottom="20%" alignItems="center">
+      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
+        {t('sprint')}
+      </Typography>
+      <Svg
+        src={moon}
+        style={{
+          position: 'absolute',
+          top: '45%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+    </Stack>
   );
 }
