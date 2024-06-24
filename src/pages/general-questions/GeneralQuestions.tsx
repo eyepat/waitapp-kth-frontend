@@ -142,6 +142,9 @@ export default function GeneralQuestions() {
           margin: 'auto',
           bgcolor: 'black',
           borderRadius: '10px',
+          '&:hover': {
+            backgroundColor: '#333',
+          },
         }}
       >
         {t('next')}

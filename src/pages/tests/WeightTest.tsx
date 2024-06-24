@@ -80,6 +80,9 @@ export default function WeightTest() {
             '&:active, &:focus': {
               backgroundColor: 'black',
             },
+            '&:hover': {
+              backgroundColor: '#333',
+            },
           }}
         >
           <Typography> {t('save')}</Typography>

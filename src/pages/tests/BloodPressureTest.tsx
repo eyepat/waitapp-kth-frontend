@@ -135,6 +135,7 @@ export default function BloodPressureTest() {
           >
             <Typography>{t('how-to-measure')}</Typography>
           </Button>
+
           <Button
             variant="contained"
             color="primary"
@@ -146,6 +147,9 @@ export default function BloodPressureTest() {
               height: '50px',
               '&:active, &:focus': {
                 backgroundColor: 'black',
+              },
+              '&:hover': {
+                backgroundColor: '#333',
               },
             }}
           >
