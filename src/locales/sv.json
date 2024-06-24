@@ -73,7 +73,7 @@
   "weight-test": "Viktmätning",
   "about-weight": "Mät din vikt regelbundet för att hålla koll på din hälsa och framsteg. Genom att notera din vikt kan du följa förändringar över tid och anpass dina hälsomål för att uppnå en balanserad och hållbar livstil.",
   "blood-pressure-test": "Blodtrycksmätning",
-  "about-blood-pressure": "Högt blodtryck är kopplat till hjärtkärlsjukdomar, men kan förbättras genom läkemedel och sunda vanor. I vår app fokuserar vi på en hälsosam kost, regelbunden motion och att begränsa alkoholkonsumtionen för att sänka blodtrycket. Om blodtrycket fortsatt ligger för högt rekommenderar vi att du kontaktar xxx för vård.",
+  "about-blood-pressure": "Högt blodtryck är kopplat till hjärtkärlsjukdomar, men kan förbättras genom läkemedel och sunda vanor. I vår app fokuserar vi på en hälsosam kost, regelbunden motion och att begränsa alkoholkonsumtionen för att sänka blodtrycket. Om blodtrycket fortsatt ligger för högt rekommenderar vi att du kontaktar 112 för vård.",
   "how-to-measure": "Hur man mäter",
   "your-healthdata": "Din hälsodata",
   "new-habits": "Nya vanor",
@@ -83,6 +83,9 @@
   "physical-activity": "Fysisk aktivitet",
   "info-text-physical-activity": "Vi rekommenderar att försöka öka nivån av fysisk aktivitet",
   "alcohol": "Alkohol",
+  "save": "spara",
   "info-text-alcohol": "Vi rekommenderar att trappa ner eller göra uppehåll med regelbunden alkoholkonsumption",
-  "recommended-today": "Rekommenderad idag"
+  "recommended-today": "Rekommenderad idag",
+  "how-do-i-measure": "Hur mäter jag",
+  "how-to-measure-blood-pressure": "Sitt med ryggstöd och fötterna i golvet. Sätt dit lodtrycksmanschetten och vila i fem minuter. Inget nikotin eller koffein 30 minuter före mätning. Mät vid tre tillfällen med en–två minuters mellanrum. Manschett i hjärthöjd. Hoppa över den första mätningen, skriva ner både andra och tredje mätningen."
 }

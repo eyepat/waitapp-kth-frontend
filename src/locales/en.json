@@ -72,7 +72,7 @@
   "weight-test": "Weight Measurement",
   "about-weight": "Measure your weight regularly to keep track of your health and progress. By noting your weight, you can track changes over time and adjust your health goals to achieve a balanced and sustainable lifestyle.",
   "blood-pressure-test": "Blood Pressure Measurement",
-  "about-blood-pressure": "High blood pressure is linked to cardiovascular diseases but can be improved with medication and healthy habits. In our app, we focus on a healthy diet, regular exercise, and limiting alcohol consumption to lower blood pressure. If your blood pressure remains high, we recommend contacting xxx for medical care.",
+  "about-blood-pressure": "High blood pressure is linked to cardiovascular diseases but can be improved with medication and healthy habits. In our app, we focus on a healthy diet, regular exercise, and limiting alcohol consumption to lower blood pressure. If your blood pressure remains high, we recommend contacting 112 for medical care.",
   "how-to-measure": "How to measure",
   "your-healthdata": "Your health data",
   "new-habits": "New habits",
@@ -82,6 +82,9 @@
   "physical-activity": "Physical activity",
   "info-text-physical-activity": "We recommend trying to increase the level of physical activity",
   "alcohol": "Alcohol",
+  "save": "Save",
   "info-text-alcohol": "We recommend reducing or taking a break from regular alcohol consumption",
-  "recommended-today": "Recommended today"
+  "recommended-today": "Recommended today",
+  "how-do-i-measure": "How do I measure",
+  "how-to-measure-blood-pressure": "Sit with back support and feet on the floor. Place the blood pressure cuff and rest for five minutes. No nicotine or caffeine 30 minutes before measurement. Measure three times with one–two minute intervals. Cuff at heart level. Skip the first measurement, write down both the second and third measurements."
 }

@@ -1,38 +1,43 @@
 import {
   Box,
   Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   InputAdornment,
   Stack,
   TextField,
   Typography,
   styled,
 } from '@mui/material';
+import bloodpressure from '../../assets/tests/bloodpressure.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useState } from 'react';
+import { Svg } from '../../utils/Icons';
 
 const CustomTextField = styled(TextField)({
   width: '60%',
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: 'rgba(7, 65, 109, 1)', // Border color
-      borderRadius: '10px', // Border radius
-      borderWidth: '2px', // Border width
+      borderColor: 'rgba(7, 65, 109, 1)',
+      borderRadius: '10px',
+      borderWidth: '2px',
     },
     '&:hover fieldset': {
-      borderColor: 'rgba(7, 65, 109, 0.8)', // Hover effect on the border
+      borderColor: 'rgba(7, 65, 109, 0.8)',
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'rgba(7, 65, 109, 1)', // Focus effect on the border
+      borderColor: 'rgba(7, 65, 109, 1)',
     },
     '& input': {
-      textAlign: 'center', // Center text alignment
-      fontSize: '24px', // Text size
-      fontWeight: 'bold', // Text weight
-      color: 'rgba(0, 0, 0, 0.87)', // Text color
+      textAlign: 'center',
+      fontSize: '24px',
+      fontWeight: 'bold',
+      color: 'rgba(0, 0, 0, 0.87)',
     },
   },
   '& .MuiOutlinedInput-notchedOutline': {
-    border: 'none', // Remove individual borders
+    border: 'none',
   },
 });
 
@@ -49,11 +54,20 @@ const WrapperBox = styled(Box)({
 export default function BloodPressureTest() {
   const [systolic, setSystolic] = useState('');
   const [diastolic, setDiastolic] = useState('');
+  const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+
+  function handleHowToMeasure(): void {
+    setOpen(true);
+  }
+
+  function handleClose(): void {
+    setOpen(false);
+  }
 
   return (
     <Stack alignItems="center" sx={{ position: 'absolute' }}>
-      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
+      <Typography variant="h4" marginBottom="1rem" textAlign="center">
         {t('blood-pressure-test')}
       </Typography>
       <Typography width={'80%'} textAlign="justify">
@@ -136,6 +150,7 @@ export default function BloodPressureTest() {
                 borderWidth: '2px',
               },
             }}
+            onClick={handleHowToMeasure}
           >
             <Typography>{t('how-to-measure')}</Typography>
           </Button>
@@ -161,6 +176,26 @@ export default function BloodPressureTest() {
           </Button>
         </Box>
       </Stack>
+
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <Svg src={bloodpressure} />
+        <Typography
+          variant="h5"
+          textAlign="center"
+          fontStyle="bold"
+          marginTop="10px"
+        >
+          {t('how-do-i-measure')}
+        </Typography>
+        <Typography variant="h5" textAlign="center" fontStyle="bold">
+          {t('blood-pressure')}
+        </Typography>
+        <DialogContent>
+          <Typography variant="subtitle2" textAlign="justify" marginTop="-10px">
+            {t('how-to-measure-blood-pressure')}
+          </Typography>
+        </DialogContent>
+      </Dialog>
     </Stack>
   );
 }
