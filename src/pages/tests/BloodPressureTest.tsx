@@ -131,6 +131,10 @@ export default function BloodPressureTest() {
               color: 'black',
               borderColor: 'black',
               borderWidth: '2px',
+              '&:hover': {
+                borderColor: 'black',
+                borderWidth: '2px',
+              },
             }}
           >
             <Typography>{t('how-to-measure')}</Typography>
