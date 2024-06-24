@@ -42,7 +42,7 @@ export default function HealthData() {
   const renderOverviewContent = () => {
     return (
       <Stack marginTop={'25px'}>
-        <Card>
+        <Card sx={{ borderRadius: '12px' }}>
           <CardHeader
             title={
               <Typography variant="body1" fontWeight="bold">
@@ -99,7 +99,7 @@ export default function HealthData() {
           </CardActions>
         </Card>
 
-        <Card sx={{ marginTop: '30px' }}>
+        <Card sx={{ marginTop: '30px', borderRadius: '12px' }}>
           <CardHeader
             title={
               <Typography variant="body1" fontWeight="bold">
