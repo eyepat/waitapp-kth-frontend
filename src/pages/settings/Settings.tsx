@@ -3,6 +3,8 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Dialog,
+  DialogContent,
   Stack,
   Typography,
 } from '@mui/material';
@@ -19,9 +21,19 @@ import {
   Upload,
   Visualize,
 } from '../../utils/Icons';
+import { useState } from 'react';
 
 export default function Settings() {
+  const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+
+  function handlePopUp(): void {
+    setOpen(true);
+  }
+
+  function handleClose(): void {
+    setOpen(false);
+  }
   return (
     <Stack
       direction="column"
@@ -103,6 +115,7 @@ export default function Settings() {
           <Button
             fullWidth={true}
             sx={{ display: 'flex', justifyContent: 'space-between' }}
+            onClick={handlePopUp}
           >
             <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
               <Information />
@@ -197,6 +210,23 @@ export default function Settings() {
           </Button>
         </CardContent>
       </Card>
+
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          fontSize="20px"
+          marginTop="10px"
+          marginLeft="20px"
+        >
+          {t('how-waitapp-works')}?
+        </Typography>
+        <DialogContent>
+          <Typography textAlign="left" marginTop="-10px">
+            {t('how-waitapp-works-text')}
+          </Typography>
+        </DialogContent>
+      </Dialog>
     </Stack>
   );
 }
