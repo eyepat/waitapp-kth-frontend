@@ -1,5 +1,7 @@
 import {
   Button,
+  Dialog,
+  DialogContent,
   FormControl,
   InputLabel,
   MenuItem,
@@ -15,7 +17,16 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { InfoOutlined } from '@mui/icons-material';
 
 export default function GeneralQuestions() {
+  const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+
+  function handlePopUp(): void {
+    setOpen(true);
+  }
+
+  function handleClose(): void {
+    setOpen(false);
+  }
   const [selectedGender, setSelectedGender] = useState<string | undefined>(
     undefined
   );
@@ -81,7 +92,10 @@ export default function GeneralQuestions() {
             <Typography fontWeight="bold">
               {'5. ' + t('waist-measurement')}
             </Typography>
-            <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
+            <Button
+              sx={{ padding: 0, margin: 0, minWidth: 0 }}
+              onClick={handlePopUp}
+            >
               <InfoOutlined />
             </Button>
           </Stack>
@@ -101,7 +115,10 @@ export default function GeneralQuestions() {
             <Typography fontWeight="bold">
               {'6. ' + t('resting-pulse')}
             </Typography>
-            <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
+            <Button
+              sx={{ padding: 0, margin: 0, minWidth: 0 }}
+              onClick={handlePopUp}
+            >
               <InfoOutlined />
             </Button>
           </Stack>
@@ -118,7 +135,10 @@ export default function GeneralQuestions() {
             <Typography fontWeight="bold">
               {'7. ' + t('blood-pressure')}
             </Typography>
-            <Button sx={{ padding: 0, margin: 0, minWidth: 0 }}>
+            <Button
+              sx={{ padding: 0, margin: 0, minWidth: 0 }}
+              onClick={handlePopUp}
+            >
               <InfoOutlined />
             </Button>
           </Stack>
@@ -149,6 +169,23 @@ export default function GeneralQuestions() {
       >
         {t('next')}
       </Button>
+
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          fontSize="20px"
+          marginTop="10px"
+          marginLeft="20px"
+        >
+          {t('why-we-need-this-data')}
+        </Typography>
+        <DialogContent>
+          <Typography textAlign="left" marginTop="-10px">
+            {t('why-we-need-this-data-text')}
+          </Typography>
+        </DialogContent>
+      </Dialog>
     </Stack>
   );
 }

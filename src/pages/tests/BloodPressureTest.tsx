@@ -3,7 +3,6 @@ import {
   Button,
   Dialog,
   DialogContent,
-  DialogTitle,
   InputAdornment,
   Stack,
   TextField,
@@ -182,12 +181,12 @@ export default function BloodPressureTest() {
         <Typography
           variant="h5"
           textAlign="center"
-          fontStyle="bold"
+          fontWeight="bold"
           marginTop="10px"
         >
           {t('how-do-i-measure')}
         </Typography>
-        <Typography variant="h5" textAlign="center" fontStyle="bold">
+        <Typography variant="h5" textAlign="center" fontWeight="bold">
           {t('blood-pressure')}
         </Typography>
         <DialogContent>
