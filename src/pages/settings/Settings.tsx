@@ -12,12 +12,14 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import {
   ArrowRight,
   Bell,
+  EnglishFlag,
   Help,
   Information,
   Integrity,
   Profile,
   Shield,
   Start,
+  SwedishFlag,
   Upload,
   Visualize,
 } from '../../utils/Icons';
@@ -25,15 +27,22 @@ import { useState } from 'react';
 
 export default function Settings() {
   const [open, setOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
 
-  function handlePopUp(): void {
+  function handleLanguageChange() {
+    const newLanguage = language === 'en' ? 'sv' : 'en';
+    console.log(newLanguage);
+    setLanguage(newLanguage);
+  }
+
+  function handlePopUp() {
     setOpen(true);
   }
 
-  function handleClose(): void {
+  function handleClose() {
     setOpen(false);
   }
+
   return (
     <Stack
       direction="column"
@@ -198,6 +207,19 @@ export default function Settings() {
           }
         />
         <CardContent>
+          <Button
+            fullWidth={true}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+            onClick={handleLanguageChange}
+          >
+            <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+              {language === 'en' ? <SwedishFlag /> : <EnglishFlag />}
+              <Typography marginLeft={'10px'}>
+                {t('change-language')}
+              </Typography>
+            </div>
+            <ArrowRight />
+          </Button>
           <Button
             fullWidth={true}
             sx={{ display: 'flex', justifyContent: 'space-between' }}
