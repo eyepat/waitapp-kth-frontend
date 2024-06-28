@@ -3,8 +3,9 @@ import { styled } from '@mui/system';
 
 const NavTab = styled(Tab)({
   flexGrow: 1,
+  height: '25px',
   width: '50px',
-  borderRadius: '15px',
+  borderRadius: '9px',
   '&.Mui-selected': {
     backgroundColor: 'black',
     color: 'white',
