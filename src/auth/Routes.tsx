@@ -20,7 +20,16 @@ export function Routes() {
                   <Header showExpandedHeader={true} />
                 )}
                 {page.showHeader && <Header showExpandedHeader={false} />}
-                {page.component && <page.component />}
+                {page.component && (
+                  <div
+                    style={{
+                      maxWidth: '1000px',
+                      margin: 'auto',
+                    }}
+                  >
+                    <page.component />
+                  </div>
+                )}
                 {page.showBottomNav && <Navigation authLevel={authLevel} />}
               </>
             )}
