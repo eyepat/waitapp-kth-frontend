@@ -1,6 +1,6 @@
 import { Button, styled } from '@mui/material';
-import { BackArrow, ClosedBook, Settings, Svg } from '../utils/Icons';
-import ki from '../assets/logo/ki.svg';
+import { BackArrow, ClosedBook, Settings, Svg } from '../../utils/Icons';
+import ki from '../../assets/logo/ki.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header({
