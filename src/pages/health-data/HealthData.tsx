@@ -213,8 +213,8 @@ export default function HealthData() {
       ]; /*Currently Random test every time u re-enter the tab. In the future update it to recommend the most urgent test.*/
 
     return (
-      <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
-        <Stack direction="column" margin="auto" spacing={1}>
+      <Stack direction="column" paddingTop="30px" spacing={1}>
+        <Stack direction="column" spacing={1}>
           <Typography marginBottom="1rem" alignSelf="left">
             {t('recommended-today')}
           </Typography>
@@ -237,7 +237,7 @@ export default function HealthData() {
             {randomTest.name}
           </MenuButton>
         </Stack>
-        <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
+        <Stack direction="column" paddingTop="30px" spacing={1}>
           <Typography marginBottom="1rem" alignSelf="left">
             {t('all-tests')}
           </Typography>

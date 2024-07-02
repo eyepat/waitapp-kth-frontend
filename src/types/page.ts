@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { HeaderOpts } from './headerOpts';
 
 export type Page = {
   to: string;
@@ -9,6 +10,5 @@ export type Page = {
   isMenu: boolean;
   component: FC | null;
   showBottomNav?: boolean;
-  showHeader?: boolean;
-  showExpandedHeader?: boolean;
+  header?: HeaderOpts;
 };

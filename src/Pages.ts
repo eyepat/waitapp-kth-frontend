@@ -20,7 +20,7 @@ export const pages: Page[] = [
     icon: HealthDataIcon,
     isMenu: true,
     component: HealthData,
-    showHeader: true,
+    header: {},
     showBottomNav: true,
   },
   {
@@ -30,7 +30,7 @@ export const pages: Page[] = [
     icon: HomeIcon,
     isMenu: true,
     component: Home,
-    showExpandedHeader: true,
+    header: {expanded: true},
     showBottomNav: true,
   },
   {
@@ -40,7 +40,7 @@ export const pages: Page[] = [
     icon: SprintIcon,
     isMenu: true,
     component: Sprint,
-    showExpandedHeader: true,
+    header: {expanded: true},
     showBottomNav: true,
   },
   {
@@ -63,7 +63,7 @@ export const pages: Page[] = [
     label: 'general-questions',
     isMenu: false,
     component: GeneralQuestions,
-    showHeader: true,
+    header: {expanded: false},
   },
   {
     to: '/settings',
@@ -71,7 +71,7 @@ export const pages: Page[] = [
     label: 'settings',
     isMenu: false,
     component: Settings,
-    showHeader: true,
+    header: {expanded: false, transparent: true},
     showBottomNav: true,
   },
   {
@@ -80,7 +80,7 @@ export const pages: Page[] = [
     label: 'knowledge-bank',
     isMenu: false,
     component: KnowledgeBank,
-    showHeader: true,
+    header: {expanded: false},
     showBottomNav: true,
   },
   {
@@ -88,7 +88,7 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'blood-pressure-test',
     component: BloodPressureTest,
-    showHeader: true,
+    header: {expanded: false},
     isMenu: false,
   },
   {
@@ -96,7 +96,7 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'weight-test',
     component: WeightTest,
-    showHeader: true,
+    header: {expanded: false},
     isMenu: false,
   },
   {
@@ -104,7 +104,7 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'sprint-choice',
     component: SprintChoice,
-    showHeader: true,
+    header: {expanded: false},
     isMenu: false,
   },
 ];
