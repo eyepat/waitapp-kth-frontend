@@ -1,13 +1,15 @@
 import { Button, styled } from '@mui/material';
-import { BackArrow, ClosedBook, Settings, Svg } from '../../utils/Icons';
+import {WhiteBackArrow, BackArrow, ClosedBook, Settings, Svg } from '../../utils/Icons';
 import ki from '../../assets/logo/ki.svg';
+import whiteki from '../../assets/logo/whiteKi.svg';
 import { useNavigate } from 'react-router-dom';
+import { HeaderOpts } from '../../types/headerOpts';
 
 export default function Header({
-  showExpandedHeader,
-}: {
-  showExpandedHeader: boolean;
-}) {
+  expanded,
+  transparent
+
+}: HeaderOpts) {
   const navigate = useNavigate();
   const TopBar = styled('div')({
     display: 'flex',
@@ -49,14 +51,14 @@ export default function Header({
   });
   return (
     // TODO: Update this condition to also check if the current page is healthdata, home, or sprint. If it is, do nothing.
-    <TopBar>
+    <TopBar sx={transparent?{background: 'none'}:undefined}>
       <LeftSide>
         <Button onClick={() => navigate(-1)}>
-          <BackArrow />
+          {transparent ? <WhiteBackArrow/> : <BackArrow/>}
         </Button>
       </LeftSide>
       <Svg
-        src={ki}
+        src={transparent ? whiteki : ki }
         style={{
           position: 'absolute',
           top: '50%',
@@ -64,7 +66,7 @@ export default function Header({
           transform: 'translate(-50%, -50%)',
         }}
       />
-      {showExpandedHeader && (
+      {expanded && (
         <RightSide>
           <ButtonOverride
             onClick={() => {

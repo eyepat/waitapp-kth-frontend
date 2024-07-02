@@ -71,7 +71,7 @@ export const pages: Page[] = [
     label: 'settings',
     isMenu: false,
     component: Settings,
-    header: {expanded: false},
+    header: {expanded: false, transparent: true},
     showBottomNav: true,
   },
   {
