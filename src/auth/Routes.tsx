@@ -16,10 +16,9 @@ export function Routes() {
             path={page.path ? page.path : page.to}
             Component={() => (
               <>
-                {page.showExpandedHeader && (
-                  <Header showExpandedHeader={true} />
+                {page.header != undefined && (
+                  <Header showExpandedHeader={page.header.expanded != undefined ? page.header.expanded : false} />
                 )}
-                {page.showHeader && <Header showExpandedHeader={false} />}
                 {page.component && (
                   <div
                     style={{
