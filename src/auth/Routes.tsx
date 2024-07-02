@@ -17,7 +17,14 @@ export function Routes() {
             Component={() => (
               <>
                 {page.header != undefined && (
-                  <Header expanded={page.header.expanded != undefined ? page.header.expanded : false} transparent={page.header.transparent} />
+                  <Header
+                    expanded={
+                      page.header.expanded != undefined
+                        ? page.header.expanded
+                        : false
+                    }
+                    transparent={page.header.transparent}
+                  />
                 )}
                 {page.component && (
                   <div
