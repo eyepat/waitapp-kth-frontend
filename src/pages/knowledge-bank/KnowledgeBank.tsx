@@ -7,17 +7,12 @@ import MenuButton from '../../components/menuButton';
 export default function KnowledgeBank() {
   const { t } = useLanguage();
   return (
-    <Stack
-      direction="column"
-      alignItems="start"
-      margin="auto"
-      marginBottom="20%"
-    >
+    <Stack marginBottom="20%" alignItems="center">
       <Typography variant="h4" marginBottom="1rem" alignSelf="center">
         {t('knowledge-bank')}
       </Typography>
 
-      <Stack direction="column" margin="auto" paddingTop="10px" spacing={1}>
+      <Stack direction="column" paddingTop="10px" spacing={1}>
         <Typography
           variant="h6"
           marginBottom="1rem"
@@ -37,7 +32,7 @@ export default function KnowledgeBank() {
         </MenuButton>
       </Stack>
 
-      <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
+      <Stack direction="column" paddingTop="30px" spacing={1}>
         <Typography
           variant="h6"
           marginBottom="1rem"
@@ -57,7 +52,7 @@ export default function KnowledgeBank() {
         </MenuButton>
       </Stack>
 
-      <Stack direction="column" margin="auto" paddingTop="30px" spacing={1}>
+      <Stack direction="column" paddingTop="30px" spacing={1}>
         <Typography
           variant="h6"
           marginBottom="1rem"

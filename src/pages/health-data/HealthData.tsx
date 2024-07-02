@@ -276,7 +276,7 @@ export default function HealthData() {
       <Typography variant="h4" marginBottom="1rem" alignSelf="center">
         {t('your-healthdata')}
       </Typography>
-      <Stack width={'90%'} paddingTop={'10px'}>
+      <Stack paddingTop={'10px'}>
         <NavTabs value={value} onChange={handleChange} centered>
           <NavTab label={t('overview')} />
           <NavTab label={t('sprints')} />
