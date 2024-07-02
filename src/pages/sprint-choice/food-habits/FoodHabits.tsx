@@ -1,10 +1,17 @@
 import { CardMedia, Stack, Typography } from '@mui/material';
 import { useLanguage } from '../../../contexts/LanguageContext';
-
+import React, { useState } from 'react';
 import foodBackground from '../../../assets/backgrounds/foodBackground.jpg';
+import NavTab from '../../../components/TabMenu/NavTab';
+import NavTabs from '../../../components/TabMenu/NavTabs';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   return (
     <Stack alignItems="center">
@@ -60,6 +67,14 @@ export default function FoodHabits() {
             {t('sprint')}
           </Typography>
         </Stack>
+      </Stack>
+      <Stack width={'90%'} paddingTop={'3vh'}>
+        <Typography>{t('goal-level')}</Typography>
+        <NavTabs value={value} onChange={handleChange} centered>
+          <NavTab label={t('low')} />
+          <NavTab label={t('medium')} />
+          <NavTab label={t('high')} />
+        </NavTabs>
       </Stack>
     </Stack>
   );

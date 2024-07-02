@@ -49,7 +49,7 @@
   "data-and-analysis": "Data and analysis",
   "alt-data-export": "Alternative data export",
   "alt-visualization": "Alternative visualization",
-  "help-and-support": "Healt and support",
+  "help-and-support": "Health and support",
   "help": "Help",
   "knowledge-bank": "Knowledge Bank",
   "eating-habit": "Eating habits",
@@ -91,5 +91,6 @@
   "change-language": "Change language",
   "why-we-need-this-data-text": "By collecting your personal health data, we can create a tailored and effective health plan for you. This information enables accurate monitoring of your health and helps us recommend the most suitable and individualized sprints to achieve your health goals. Your data is crucial for creating a personal and successful health revolution for you.",
   "how-waitapp-works-text": "By collecting your personal health data, we can create a tailored and effective health plan for you. This information enables accurate monitoring of your health and helps us recommend the most suitable and individualized sprints to achieve your health goals. Your data is crucial for creating a personal and successful lifestyle change for you.",
-  "food-habits": "Food habits"
+  "food-habits": "Food habits",
+  "goal-level": "Goal level"
 }
