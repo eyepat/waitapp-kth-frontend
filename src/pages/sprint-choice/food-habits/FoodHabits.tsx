@@ -1,12 +1,14 @@
-import { CardMedia, Stack, Typography } from '@mui/material';
+import { Button, CardMedia, Stack, Typography } from '@mui/material';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import React, { useState } from 'react';
 import foodBackground from '../../../assets/backgrounds/foodBackground.jpg';
 import NavTab from '../../../components/TabMenu/NavTab';
 import NavTabs from '../../../components/TabMenu/NavTabs';
+import { useNavigate } from 'react-router-dom';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [value, setValue] = useState(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -131,6 +133,60 @@ export default function FoodHabits() {
           {t('planned-activities-for-upcoming-sprint')}:
         </Typography>
         {renderTabContent()}
+      </Stack>
+      <Stack
+        marginTop="10vh"
+        sx={{
+          justifyContent: 'center',
+          height: '35vh',
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{
+            backgroundColor: 'hsla(210, 2%, 60%, 1)',
+            color: 'black',
+            marginBottom: '20px',
+            borderRadius: '10px',
+            width: '30vh',
+            height: '40px',
+            '&:active, &:focus': {
+              backgroundColor: 'hsla(210, 2%, 40%, 1)',
+            },
+            '&:hover': {
+              backgroundColor: 'hsla(210, 2%, 40%, 1)',
+            },
+          }}
+          onClick={() => {
+            navigate('/sprint-choice');
+          }}
+        >
+          <Typography>{t('change-sprint')}</Typography>
+        </Button>
+        <Typography marginBottom="2vh" textAlign="center" width="32vh">
+          {t('start-sprint-when-you-are-ready')}
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{
+            backgroundColor: 'black',
+            marginBottom: '20px',
+            borderRadius: '10px',
+            width: '30vh',
+            height: '40px',
+            '&:active, &:focus': {
+              backgroundColor: 'black',
+            },
+            '&:hover': {
+              backgroundColor: '#333',
+            },
+          }}
+        >
+          <Typography>{t('start')}</Typography>
+        </Button>
       </Stack>
     </Stack>
   );

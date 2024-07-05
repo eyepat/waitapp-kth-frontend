@@ -103,5 +103,11 @@
   "MediumItemThree": "Hemlagade måltider",
   "HighItemOne": "Minska processad mat",
   "HighItemTwo": "Utforska nya recept",
-  "HighItemThree": "Medvetet kaloriintag"
+  "HighItemThree": "Medvetet kaloriintag",
+  "low": "Låg",
+  "medium": "Mellan",
+  "high": "Hög",
+  "change-sprint": "Byta sprint",
+  "start-sprint-when-you-are-ready": "Starta sprinten när du känner dig redo. Nu börjar din resa!",
+  "start": "Starta"
 }

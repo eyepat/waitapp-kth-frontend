@@ -102,5 +102,11 @@
   "MediumItemThree": "Home-cooked meals",
   "HighItemOne": "Reduce processed food",
   "HighItemTwo": "Explore new recipes",
-  "HighItemThree": "Mindful calorie intake"
+  "HighItemThree": "Mindful calorie intake",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+  "change-sprint": "Change sprint",
+  "start-sprint-when-you-are-ready": "Start the sprint when you are ready. Your journey begins now!",
+  "start": "Start"
 }
