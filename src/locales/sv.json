@@ -93,5 +93,15 @@
   "why-we-need-this-data-text": "Genom att samla in din personliga hälsodata kan vi skapa en skräddarsydd och effektiv hälsoplan för dig. Denna information möjliggör noggran övervakning av din hälsa och hjalper oss att rekomendera de mest lämpiga och individanpassande sprints för att uppnå dina hälsomål. Din data är avgörande för att skapa en personlig och framgångsrik hälsorevolution för dig.",
   "how-waitapp-works-text": "Genom att samla in din personliga hälsodata kan vi skapa en skräddarsydd och effektiv hälsoplan för dig. Denna information möjliggör noggran övervakning av din hälsa och hjälper oss att rekomendera de mest lämpiga och individanpassande sprints för att uppnå dina hälsomål. Din data är avgörande för att skapa en personlig och framgångsrik livsstilsförändring för dig.",
   "food-habits": "Matvanor",
-  "goal-level": "Målnivå"
+  "goal-level": "Målnivå",
+  "planned-activities-for-upcoming-sprint": "Planerade aktiviteter för kommande sprint",
+  "LowItemOne": "Öka grönsaksintaget",
+  "LowItemTwo": "Vätskeboost",
+  "LowItemThree": "Medvetet mellanmål",
+  "MediumItemOne": "Balanserad tallrik",
+  "MediumItemTwo": "Minska tillsatt socker",
+  "MediumItemThree": "Hemlagade måltider",
+  "HighItemOne": "Minska processad mat",
+  "HighItemTwo": "Utforska nya recept",
+  "HighItemThree": "Medvetet kaloriintag"
 }

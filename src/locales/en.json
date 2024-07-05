@@ -92,5 +92,15 @@
   "why-we-need-this-data-text": "By collecting your personal health data, we can create a tailored and effective health plan for you. This information enables accurate monitoring of your health and helps us recommend the most suitable and individualized sprints to achieve your health goals. Your data is crucial for creating a personal and successful health revolution for you.",
   "how-waitapp-works-text": "By collecting your personal health data, we can create a tailored and effective health plan for you. This information enables accurate monitoring of your health and helps us recommend the most suitable and individualized sprints to achieve your health goals. Your data is crucial for creating a personal and successful lifestyle change for you.",
   "food-habits": "Food habits",
-  "goal-level": "Goal level"
+  "goal-level": "Goal level",
+  "planned-activities-for-upcoming-sprint": "Planned activities for upcoming sprint",
+  "LowItemOne": "Increase vegetable intake",
+  "LowItemTwo": "Hydration boost",
+  "LowItemThree": "Mindful snack",
+  "MediumItemOne": "Balanced plate",
+  "MediumItemTwo": "Reduce added sugar",
+  "MediumItemThree": "Home-cooked meals",
+  "HighItemOne": "Reduce processed food",
+  "HighItemTwo": "Explore new recipes",
+  "HighItemThree": "Mindful calorie intake"
 }
