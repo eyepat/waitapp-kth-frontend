@@ -121,6 +121,9 @@ export default function SprintChoice() {
             '&:active, &:focus': {
               backgroundColor: 'black',
             },
+            '&:hover': {
+              backgroundColor: '#333',
+            },
           }}
           onClick={() => {
             if (selectedValue) {
