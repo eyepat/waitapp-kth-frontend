@@ -19,9 +19,9 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px' }}>{t('LowItemOne')}</li>
-          <li style={{ marginBottom: '4px' }}>{t('LowItemTwo')}</li>
-          <li style={{ marginBottom: '4px' }}>{t('LowItemThree')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowHealthItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowHealthItemTwo')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowHealthItemThree')}</li>
         </ul>
       </Stack>
     );
@@ -31,9 +31,9 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px' }}>{t('MediumItemOne')}</li>
-          <li style={{ marginBottom: '4px' }}>{t('MediumItemTwo')}</li>
-          <li style={{ marginBottom: '4px' }}>{t('MediumItemThree')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('MediumHealthItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('MediumHealthItemTwo')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('MediumHealthItemThree')}</li>
         </ul>
       </Stack>
     );
@@ -43,9 +43,9 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px' }}>{t('HighItemOne')}</li>
-          <li style={{ marginBottom: '4px' }}>{t('HighItemTwo')}</li>
-          <li style={{ marginBottom: '4px' }}>{t('HighItemThree')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('HighHealthItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('HighHealthItemTwo')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('HighHealthItemThree')}</li>
         </ul>
       </Stack>
     );
