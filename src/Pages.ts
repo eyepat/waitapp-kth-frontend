@@ -11,6 +11,7 @@ import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
 import BloodPressureTest from './pages/tests/BloodPressureTest';
 import WeightTest from './pages/tests/WeightTest';
 import SprintChoice from './pages/sprint-choice/SprintChoice';
+import FoodHabits from './pages/sprint-choice/food-habits/FoodHabits';
 
 export const pages: Page[] = [
   {
@@ -30,7 +31,7 @@ export const pages: Page[] = [
     icon: HomeIcon,
     isMenu: true,
     component: Home,
-    header: {expanded: true},
+    header: { expanded: true },
     showBottomNav: true,
   },
   {
@@ -40,7 +41,7 @@ export const pages: Page[] = [
     icon: SprintIcon,
     isMenu: true,
     component: Sprint,
-    header: {expanded: true},
+    header: { expanded: true },
     showBottomNav: true,
   },
   {
@@ -63,7 +64,7 @@ export const pages: Page[] = [
     label: 'general-questions',
     isMenu: false,
     component: GeneralQuestions,
-    header: {expanded: false},
+    header: { expanded: false },
   },
   {
     to: '/settings',
@@ -71,7 +72,7 @@ export const pages: Page[] = [
     label: 'settings',
     isMenu: false,
     component: Settings,
-    header: {expanded: false, transparent: true},
+    header: { expanded: false },
     showBottomNav: true,
   },
   {
@@ -80,7 +81,7 @@ export const pages: Page[] = [
     label: 'knowledge-bank',
     isMenu: false,
     component: KnowledgeBank,
-    header: {expanded: false},
+    header: { expanded: false },
     showBottomNav: true,
   },
   {
@@ -88,7 +89,7 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'blood-pressure-test',
     component: BloodPressureTest,
-    header: {expanded: false},
+    header: { expanded: false },
     isMenu: false,
   },
   {
@@ -96,7 +97,7 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'weight-test',
     component: WeightTest,
-    header: {expanded: false},
+    header: { expanded: false },
     isMenu: false,
   },
   {
@@ -104,7 +105,15 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'sprint-choice',
     component: SprintChoice,
-    header: {expanded: false},
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: '/sprint-food-habits',
+    permissionLevel: 1,
+    label: 'sprint-food-habits',
+    component: FoodHabits,
+    header: { expanded: false, transparent: true },
     isMenu: false,
   },
 ];

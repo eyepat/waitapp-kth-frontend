@@ -7,7 +7,9 @@ interface LanguageContextType {
   setLanguage: (language: string) => void;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
@@ -17,17 +19,28 @@ export const useLanguage = () => {
   return context;
 };
 
-export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
+export const LanguageProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [cookies, setCookie] = useCookies(['language']);
-  const [language, setLanguageState] = useState<string>(() => cookies.language || 'sv');
-  const [translations, setTranslations] = useState<{ [key: string]: string }>({});
+  const [language, setLanguageState] = useState<string>(
+    () => cookies.language || 'sv'
+  );
+  const [translations, setTranslations] = useState<{ [key: string]: string }>(
+    {}
+  );
 
   const importTranslations = async (lang: string) => {
     try {
       const module = await import(`../locales/${lang}.json`);
       setTranslations(module.default);
     } catch (error) {
-      console.error(`Failed to load translations for language '${lang}':`, error);
+      console.error(
+        `Failed to load translations for language '${lang}':`,
+        error
+      );
       try {
         const module = await import(`../locales/sv.json`);
         setTranslations(module.default);
@@ -46,7 +59,10 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       const data = await response.json();
       setTranslations(data);
     } catch (error) {
-      console.error(`Failed to load translations for language '${lang}':`, error);
+      console.error(
+        `Failed to load translations for language '${lang}':`,
+        error
+      );
       try {
         const fallbackResponse = await fetch(`/textcontent/sv.json`);
         if (!fallbackResponse.ok) {
@@ -94,5 +110,9 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
     }
   }, []);
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
 };

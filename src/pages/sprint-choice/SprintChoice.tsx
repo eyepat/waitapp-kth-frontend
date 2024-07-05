@@ -13,6 +13,7 @@ import physact from '../../assets/sprintchoice/physact.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { styled } from '@mui/system';
 import CheckIcon from '@mui/icons-material/Check';
+import { useNavigate } from 'react-router-dom';
 
 const CustomRadio = styled(Radio)(({}) => ({
   '&.Mui-checked .MuiSvgIcon-root': {
@@ -25,6 +26,8 @@ const CustomRadio = styled(Radio)(({}) => ({
 export default function SprintChoice() {
   const { t } = useLanguage();
   const [selectedValue, setSelectedValue] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
@@ -39,19 +42,19 @@ export default function SprintChoice() {
       imgSrc: food,
       header: t('eating-habit'),
       info: t('info-text-eat-habit'),
-      value: 'option1',
+      value: '/sprint-food-habits',
     },
     {
       imgSrc: physact,
       header: t('physical-activity'),
       info: t('info-text-physical-activity'),
-      value: 'option2',
+      value: '/sprint-physical-habits',
     },
     {
       imgSrc: alcohol,
       header: t('alcohol'),
       info: t('info-text-alcohol'),
-      value: 'option3',
+      value: '/sprint-alcohol-habits',
     },
   ];
 
@@ -118,6 +121,14 @@ export default function SprintChoice() {
             '&:active, &:focus': {
               backgroundColor: 'black',
             },
+            '&:hover': {
+              backgroundColor: '#333',
+            },
+          }}
+          onClick={() => {
+            if (selectedValue) {
+              navigate(selectedValue);
+            }
           }}
         >
           <Typography>{t('next')}</Typography>

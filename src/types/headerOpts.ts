@@ -1,4 +1,4 @@
 export type HeaderOpts = {
-    expanded?: boolean;
-    transparent?: boolean;
+  expanded?: boolean;
+  transparent?: boolean;
 };
