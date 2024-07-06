@@ -108,5 +108,14 @@
   "high": "High",
   "change-sprint": "Change sprint",
   "start-sprint-when-you-are-ready": "Start the sprint when you are ready. Your journey begins now!",
-  "start": "Start"
+  "start": "Start",
+  "normal": "Normal",
+  "intensive": "Intensive",
+  "LowPhysicalItemOne": "Find group training",
+  "LowPhysicalItemTwo": "Perform intense exercise every week",
+  "LowPhysicalItemThree": "Walk every day",
+  "HighPhysicalItemOne": "Perform intense exercise twice a week",
+  "HighPhysicalItemTwo": "Walk every day",
+  "AlcoholItemOne": "Stop drinking alcohol",
+  "AlcoholItemTwo": "Buy healthy alternatives to alcoholic beverages"
 }

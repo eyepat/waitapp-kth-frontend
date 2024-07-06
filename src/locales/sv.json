@@ -109,5 +109,14 @@
   "high": "Hög",
   "change-sprint": "Byta sprint",
   "start-sprint-when-you-are-ready": "Starta sprinten när du känner dig redo. Nu börjar din resa!",
-  "start": "Starta"
+  "start": "Starta",
+  "normal": "Normal",
+  "intensive": "Intensiv",
+  "LowPhysicalItemOne": "Hitta gruppsträning",
+  "LowPhysicalItemTwo": "Utför intensiv träning varje vecka",
+  "LowPhysicalItemThree": "Promenera varje dag",
+  "HighPhysicalItemOne": "Utför intensiv träning 2ggr/vecka",
+  "HighPhysicalItemTwo": "Promenera varje dag",
+  "AlcoholItemOne": "Sluta dricka alkohol",
+  "AlcoholItemTwo": "Köp hälsosamma alternativ till alkoholdrycker"
 }
