@@ -65,7 +65,7 @@ export default function BloodPressureTest() {
   }
 
   return (
-    <Stack alignItems="center" sx={{ position: 'absolute' }}>
+    <Stack alignItems="center">
       <Typography variant="h4" marginBottom="1rem" textAlign="center">
         {t('blood-pressure-test')}
       </Typography>

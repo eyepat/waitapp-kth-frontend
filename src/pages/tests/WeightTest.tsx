@@ -35,7 +35,7 @@ export default function WeightTest() {
   });
   const { t } = useLanguage();
   return (
-    <Stack alignItems="center" sx={{ position: 'absolute' }}>
+    <Stack alignItems="center">
       <Typography variant="h4" marginBottom="1rem" alignSelf="center">
         {t('weight-test')}
       </Typography>
