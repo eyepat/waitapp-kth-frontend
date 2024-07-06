@@ -25,15 +25,21 @@ const CustomRadio = styled(Radio)(({}) => ({
 
 export default function SprintChoice() {
   const { t } = useLanguage();
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
-  const handleRadioChange = (event) => {
+  const handleRadioChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    _: boolean | undefined
+  ) => {
     setSelectedValue(event.target.value);
   };
 
-  const handleRectangleClick = (value) => {
+  const handleRectangleClick = (
+    _: React.ChangeEvent<HTMLInputElement> | undefined,
+    value: string
+  ) => {
     setSelectedValue(value);
   };
 
@@ -71,7 +77,12 @@ export default function SprintChoice() {
       </Typography>
 
       <Stack width="80%" spacing={2} marginTop="10px">
-        <RadioGroup value={selectedValue} onChange={handleRadioChange}>
+        <RadioGroup
+          value={selectedValue}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>, _) =>
+            handleRadioChange(event, undefined)
+          }
+        >
           {rectangles.map((rectangle, index) => (
             <Stack
               key={index}
@@ -81,7 +92,7 @@ export default function SprintChoice() {
               border="0px solid #ccc"
               margin="5px"
               boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
-              onClick={() => handleRectangleClick(rectangle.value)}
+              onClick={() => handleRectangleClick(undefined, rectangle.value)}
             >
               <Box
                 component="img"

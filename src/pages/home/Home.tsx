@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/material';
 import { Pulse, Scale, Steps } from '../../utils/Icons';
 import ChartMeter from './ChartMeter';
@@ -10,6 +10,16 @@ const Home: React.FC = () => {
   const [steps, setSteps] = useState<number>(2472);
   const [pulse, setPulse] = useState<number>(74);
   const { t } = useLanguage();
+
+  // Added the useEffect below to prevent ts checking from failing since the
+  // set functions arn´t used
+  // TODO: Remove once they are used
+  useEffect(() => {
+    setDaysLeft(142);
+    setWeight(84);
+    setSteps(2472);
+    setPulse(74);
+  }, []);
 
   const maxWeight = 100;
   const maxSteps = 2500;
