@@ -4,10 +4,12 @@ import {
   InputAdornment,
   Stack,
   TextField,
+  ThemeProvider,
   Typography,
   styled,
 } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
+import theme from '../../components/Theme';
 
 export default function WeightTest() {
   const CustomInputField = styled(TextField)({
@@ -35,59 +37,61 @@ export default function WeightTest() {
   });
   const { t } = useLanguage();
   return (
-    <Stack alignItems="center">
-      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
-        {t('weight-test')}
-      </Typography>
-      <Typography width={'80%'} textAlign="justify">
-        {t('about-weight')}
-      </Typography>
+    <ThemeProvider theme={theme}>
+      <Stack alignItems="center">
+        <Typography variant="h4" marginBottom="1rem" alignSelf="center">
+          {t('weight-test')}
+        </Typography>
+        <Typography width={'80%'} textAlign="justify">
+          {t('about-weight')}
+        </Typography>
 
-      <Box
-        marginTop="100px"
-        bottom="15%"
-        width="100%"
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <CustomInputField
-          type="number"
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Typography
-                  fontWeight="bold"
-                  fontSize="large"
-                  color="hsla(0, 0%, 20%, 1)"
-                >
-                  kg
-                </Typography>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            backgroundColor: 'black',
-            marginTop: '100px',
-            borderRadius: '10px',
-            width: '60%',
-            height: '50px',
-            '&:active, &:focus': {
-              backgroundColor: 'black',
-            },
-            '&:hover': {
-              backgroundColor: '#333',
-            },
-          }}
+        <Box
+          marginTop="100px"
+          bottom="15%"
+          width="100%"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
         >
-          <Typography> {t('save')}</Typography>
-        </Button>
-      </Box>
-    </Stack>
+          <CustomInputField
+            type="number"
+            variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Typography
+                    fontWeight="bold"
+                    fontSize="large"
+                    color="hsla(0, 0%, 20%, 1)"
+                  >
+                    kg
+                  </Typography>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              backgroundColor: 'black',
+              marginTop: '100px',
+              borderRadius: '10px',
+              width: '60%',
+              height: '50px',
+              '&:active, &:focus': {
+                backgroundColor: 'black',
+              },
+              '&:hover': {
+                backgroundColor: '#333',
+              },
+            }}
+          >
+            <Typography> {t('save')}</Typography>
+          </Button>
+        </Box>
+      </Stack>
+    </ThemeProvider>
   );
 }

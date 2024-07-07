@@ -117,5 +117,8 @@
   "HighPhysicalItemOne": "Perform intense exercise twice a week",
   "HighPhysicalItemTwo": "Walk every day",
   "AlcoholItemOne": "Stop drinking alcohol",
-  "AlcoholItemTwo": "Buy healthy alternatives to alcoholic beverages"
+  "AlcoholItemTwo": "Buy healthy alternatives to alcoholic beverages",
+  "overview": "Overview",
+  "sprints": "Sprints",
+  "tests": "Tests"
 }

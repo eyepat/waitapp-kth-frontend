@@ -83,7 +83,7 @@
   "physical-activity": "Fysisk aktivitet",
   "info-text-physical-activity": "Vi rekommenderar att försöka öka nivån av fysisk aktivitet",
   "alcohol": "Alkohol",
-  "save": "spara",
+  "save": "Spara",
   "info-text-alcohol": "Vi rekommenderar att trappa ner eller göra uppehåll med regelbunden alkoholkonsumption",
   "recommended-today": "Rekommenderad idag",
   "how-do-i-measure": "Hur mäter jag",
@@ -118,5 +118,8 @@
   "HighPhysicalItemOne": "Utför intensiv träning 2ggr/vecka",
   "HighPhysicalItemTwo": "Promenera varje dag",
   "AlcoholItemOne": "Sluta dricka alkohol",
-  "AlcoholItemTwo": "Köp hälsosamma alternativ till alkoholdrycker"
+  "AlcoholItemTwo": "Köp hälsosamma alternativ till alkoholdrycker",
+  "overview": "Översikt",
+  "sprints": "Sprints",
+  "tests": "Tester"
 }
