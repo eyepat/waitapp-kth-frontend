@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ArrowRight } from '../../utils/Icons';
 
-import MenuButton from '../../components/menuButton';
+import MenuButton from '../../components/MenuButton';
 
 export default function KnowledgeBank() {
   const { t } = useLanguage();

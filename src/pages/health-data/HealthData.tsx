@@ -14,7 +14,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import NavTab from '../../components/TabMenu/NavTab';
 import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
-import MenuButton from '../../components/menuButton';
+import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
