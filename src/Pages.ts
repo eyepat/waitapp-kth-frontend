@@ -12,6 +12,8 @@ import BloodPressureTest from './pages/tests/BloodPressureTest';
 import WeightTest from './pages/tests/WeightTest';
 import SprintChoice from './pages/sprint-choice/SprintChoice';
 import FoodHabits from './pages/sprint-choice/food-habits/FoodHabits';
+import PhysicalActivity from './pages/sprint-choice/physical-activity/PhysicalActivity';
+import Alcohol from './pages/sprint-choice/alcohol/Alcohol';
 
 export const pages: Page[] = [
   {
@@ -113,6 +115,22 @@ export const pages: Page[] = [
     permissionLevel: 1,
     label: 'sprint-food-habits',
     component: FoodHabits,
+    header: { expanded: false, transparent: true },
+    isMenu: false,
+  },
+  {
+    to: '/sprint-physical-activity',
+    permissionLevel: 1,
+    label: 'sprint-physical-activity',
+    component: PhysicalActivity,
+    header: { expanded: false, transparent: true },
+    isMenu: false,
+  },
+  {
+    to: '/sprint-alcohol-habits',
+    permissionLevel: 1,
+    label: 'sprint-alcohol-habits',
+    component: Alcohol,
     header: { expanded: false, transparent: true },
     isMenu: false,
   },

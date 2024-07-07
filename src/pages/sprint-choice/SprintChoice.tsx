@@ -54,7 +54,7 @@ export default function SprintChoice() {
       imgSrc: physact,
       header: t('physical-activity'),
       info: t('info-text-physical-activity'),
-      value: '/sprint-physical-habits',
+      value: '/sprint-physical-activity',
     },
     {
       imgSrc: alcohol,
