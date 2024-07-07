@@ -118,5 +118,8 @@
   "HighPhysicalItemOne": "Utför intensiv träning 2ggr/vecka",
   "HighPhysicalItemTwo": "Promenera varje dag",
   "AlcoholItemOne": "Sluta dricka alkohol",
-  "AlcoholItemTwo": "Köp hälsosamma alternativ till alkoholdrycker"
+  "AlcoholItemTwo": "Köp hälsosamma alternativ till alkoholdrycker",
+  "overview": "Översikt",
+  "sprints": "Sprints",
+  "tests": "Tester"
 }
