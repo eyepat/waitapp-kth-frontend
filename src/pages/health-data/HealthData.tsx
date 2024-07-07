@@ -8,6 +8,7 @@ import {
   Collapse,
   Grid,
   Stack,
+  ThemeProvider,
   Typography,
 } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -17,6 +18,7 @@ import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import theme from '../../components/Theme';
 
 export default function HealthData() {
   const { t } = useLanguage();
@@ -272,18 +274,20 @@ export default function HealthData() {
   };
 
   return (
-    <Stack marginBottom="20%" alignItems="center">
-      <Typography variant="h4" marginBottom="1rem" alignSelf="center">
-        {t('your-healthdata')}
-      </Typography>
-      <Stack width={'90%'} paddingTop={'10px'}>
-        <NavTabs value={value} onChange={handleChange} centered>
-          <NavTab label={t('overview')} />
-          <NavTab label={t('sprints')} />
-          <NavTab label={t('tests')} />
-        </NavTabs>
-        {renderTabContent()}
+    <ThemeProvider theme={theme}>
+      <Stack marginBottom="20%" alignItems="center">
+        <Typography variant="h4" marginBottom="1rem" alignSelf="center">
+          {t('your-healthdata')}
+        </Typography>
+        <Stack width={'90%'} paddingTop={'10px'}>
+          <NavTabs value={value} onChange={handleChange} centered>
+            <NavTab label={t('overview')} />
+            <NavTab label={t('sprints')} />
+            <NavTab label={t('tests')} />
+          </NavTabs>
+          {renderTabContent()}
+        </Stack>
       </Stack>
-    </Stack>
+    </ThemeProvider>
   );
 }
