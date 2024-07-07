@@ -6,6 +6,7 @@ const NavTab = styled(Tab)({
   height: '30px',
   width: '50px',
   borderRadius: '9px',
+  textTransform: 'none',
   '&.Mui-selected': {
     backgroundColor: 'black',
     color: 'white',
