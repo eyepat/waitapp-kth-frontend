@@ -123,5 +123,9 @@
   "tests": "Tests",
   "no-aktive-sprint": "No active sprint",
   "no-aktive-sprint-yet": "It looks like you are not in an active sprint yet.",
-  "choose-new-sprint": "Choose a new sprint"
+  "choose-new-sprint": "Choose a new sprint",
+  "placeholder-recomended-recipe": "[placeholder new recomendation for recipe]",
+  "title-recomended-today": "Recomended Today",
+  "title-all-saved-recipes": "All saved recipes",
+  "placeholder-saved-recipe": "Placeholder for a saved recipe"
 }

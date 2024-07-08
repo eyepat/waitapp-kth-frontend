@@ -1,9 +1,18 @@
-import { Stack, ThemeProvider, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Stack,
+  ThemeProvider,
+  Typography,
+} from '@mui/material';
 import theme from '../../components/Theme';
 import NavTab from '../../components/TabMenu/NavTab';
 import NavTabs from '../../components/TabMenu/NavTabs';
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { BigArrow } from '../../utils/Icons';
 
 export default function Recipes() {
   const [value, setValue] = useState(0);
@@ -24,7 +33,47 @@ export default function Recipes() {
   };
 
   const renderOverviewContent = () => {
-    return <Typography>Overwiev</Typography>;
+    return (
+      /*sett fixed width in evry box in the stack... Should fix scaling problems   */
+      <Stack marginTop="25px">
+        <Typography variant="body1">{t('title-recomended-today')}</Typography>
+        <Button disableRipple>
+          <Card sx={{ borderRadius: '12px' }}>
+            <Stack direction="row" alignItems="center" spacing={4}>
+              <Box
+                height="100px"
+                width="200px"
+                borderRight="2px solid black"
+              ></Box>
+              <Typography variant="body1" fontWeight="bold" textAlign="justify">
+                {t('placeholder-recomended-recipe')}
+              </Typography>
+              <Box sx={{ fontSize: '48px', paddingRight: '20px' }}>
+                <BigArrow />
+              </Box>
+            </Stack>
+          </Card>
+        </Button>
+        <Typography variant="body1">{t('title-all-saved-recipes')}</Typography>
+        <Button disableRipple>
+          <Card sx={{ borderRadius: '12px' }}>
+            <Stack direction="row" alignItems="center" spacing={4}>
+              <Box
+                height="100px"
+                width="200px"
+                borderRight="2px solid black"
+              ></Box>
+              <Typography variant="body1" fontWeight="bold" textAlign="justify">
+                {t('placeholder-saved-racipe')}
+              </Typography>
+              <Box sx={{ fontSize: '48px', paddingRight: '20px' }}>
+                <BigArrow />
+              </Box>
+            </Stack>
+          </Card>
+        </Button>
+      </Stack>
+    );
   };
   const renderFavouriteContent = () => {
     return <Typography>Favourite</Typography>;
