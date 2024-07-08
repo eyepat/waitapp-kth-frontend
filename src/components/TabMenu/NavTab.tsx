@@ -12,7 +12,7 @@ const NavTab = styled(Tab)({
     color: 'white',
   },
   '&:not(.Mui-selected)': {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     color: 'black',
   },
 });
