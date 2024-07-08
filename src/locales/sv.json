@@ -121,5 +121,8 @@
   "AlcoholItemTwo": "Köp hälsosamma alternativ till alkoholdrycker",
   "overview": "Översikt",
   "sprints": "Sprints",
-  "tests": "Tester"
+  "tests": "Tester",
+  "no-aktive-sprint": "Ingen aktiv sprint",
+  "no-aktive-sprint-yet": "Det verkar som att du inte befinner dig i en aktiv sprint ännu.",
+  "choose-new-sprint": "Välj en ny sprint"
 }

@@ -120,5 +120,8 @@
   "AlcoholItemTwo": "Buy healthy alternatives to alcoholic beverages",
   "overview": "Overview",
   "sprints": "Sprints",
-  "tests": "Tests"
+  "tests": "Tests",
+  "no-aktive-sprint": "No active sprint",
+  "no-aktive-sprint-yet": "It looks like you are not in an active sprint yet.",
+  "choose-new-sprint": "Choose a new sprint"
 }
