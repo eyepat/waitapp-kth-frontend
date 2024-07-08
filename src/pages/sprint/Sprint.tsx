@@ -36,10 +36,10 @@ export default function Sprint() {
         >
           {/*ToDo Fix backgrund color, Remove visual border, Make button wider */}
           <Typography variant="h6" marginBottom="1rem" alignSelf="center">
-            {t('no-aktive-sprint')}
+            {t('no-active-sprint')}
           </Typography>
           <Typography variant="body1" marginBottom="1rem" alignSelf="center">
-            {t('no-aktive-sprint-yet')}
+            {t('no-active-sprint-yet')}
           </Typography>
           <Button
             variant="contained"
