@@ -125,7 +125,7 @@ export default function GeneralQuestions() {
             <Stack direction="column" width="100%">
               <Stack direction="row" justifyContent="space-between">
                 <Typography fontWeight="bold">
-                  {'7. ' + t('blood-pressure')}
+                  {'6. ' + t('blood-pressure')}
                 </Typography>
                 <Button
                   sx={{ padding: 0, margin: 0, minWidth: 0 }}
