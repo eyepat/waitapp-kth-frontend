@@ -14,6 +14,7 @@ import SprintChoice from './pages/sprint-choice/SprintChoice';
 import FoodHabits from './pages/sprint-choice/food-habits/FoodHabits';
 import PhysicalActivity from './pages/sprint-choice/physical-activity/PhysicalActivity';
 import Alcohol from './pages/sprint-choice/alcohol/Alcohol';
+import Recipes from './pages/recipes/Recipes';
 
 export const pages: Page[] = [
   {
@@ -132,6 +133,14 @@ export const pages: Page[] = [
     label: 'sprint-alcohol-habits',
     component: Alcohol,
     header: { expanded: false, transparent: true },
+    isMenu: false,
+  },
+  {
+    to: '/recipes',
+    permissionLevel: 1,
+    label: 'recipes',
+    component: Recipes,
+    header: { expanded: false },
     isMenu: false,
   },
 ];

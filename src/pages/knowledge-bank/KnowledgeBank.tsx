@@ -1,12 +1,13 @@
 import { Stack, ThemeProvider, Typography } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ArrowRight } from '../../utils/Icons';
-
 import MenuButton from '../../components/MenuButton';
 import theme from '../../components/Theme';
+import { useNavigate } from 'react-router-dom';
 
 export default function KnowledgeBank() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20%" alignItems="center">
@@ -29,7 +30,11 @@ export default function KnowledgeBank() {
           <MenuButton variant="contained" endIcon={<ArrowRight />}>
             {t('video-material')}
           </MenuButton>
-          <MenuButton variant="contained" endIcon={<ArrowRight />}>
+          <MenuButton
+            onClick={() => navigate('/recipes')}
+            variant="contained"
+            endIcon={<ArrowRight />}
+          >
             {t('recipe')}
           </MenuButton>
         </Stack>
