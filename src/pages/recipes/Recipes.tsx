@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Card,
-  CardHeader,
   Stack,
   ThemeProvider,
   Typography,
@@ -64,7 +63,7 @@ export default function Recipes() {
                 borderRight="2px solid black"
               ></Box>
               <Typography variant="body1" fontWeight="bold" textAlign="justify">
-                {t('placeholder-saved-racipe')}
+                {t('placeholder-saved-recipe')}
               </Typography>
               <Box sx={{ fontSize: '48px', paddingRight: '20px' }}>
                 <BigArrow />
