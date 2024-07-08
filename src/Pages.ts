@@ -67,7 +67,7 @@ export const pages: Page[] = [
     label: 'general-questions',
     isMenu: false,
     component: GeneralQuestions,
-    header: { expanded: false },
+    header: { help: true },
   },
   {
     to: '/settings',

@@ -19,16 +19,18 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { InfoOutlined } from '@mui/icons-material';
 
 export default function GeneralQuestions() {
-  const [open, setOpen] = useState(false);
   const { t } = useLanguage();
 
-  function handlePopUp(): void {
-    setOpen(true);
-  }
+  const [openWaistDialog, setOpenWaistDialog] = useState(false);
+  const [openBloodPressureDialog, setOpenBloodPressureDialog] = useState(false);
 
-  function handleClose(): void {
-    setOpen(false);
-  }
+  const handleOpenWaistDialog = () => setOpenWaistDialog(true);
+  const handleCloseWaistDialog = () => setOpenWaistDialog(false);
+
+  const handleOpenBloodPressureDialog = () => setOpenBloodPressureDialog(true);
+  const handleCloseBloodPressureDialog = () =>
+    setOpenBloodPressureDialog(false);
+
   const [selectedGender, setSelectedGender] = useState<string | undefined>(
     undefined
   );
@@ -36,6 +38,7 @@ export default function GeneralQuestions() {
   const handleGenderChange = (event: SelectChangeEvent<string>) => {
     setSelectedGender(event.target.value);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Stack
@@ -45,10 +48,14 @@ export default function GeneralQuestions() {
         maxWidth="1000px"
         margin="auto"
       >
-        <Typography variant="h5" marginBottom="1rem" alignSelf="center">
+        <Typography
+          variant="h4"
+          alignSelf="start"
+          color="hsla(196, 85%, 46%, 1)"
+        >
           {t('questions-about-you')}
         </Typography>
-        <Typography variant="caption" alignSelf="start" marginBottom="2vh">
+        <Typography variant="body1" alignSelf="start" marginBottom="2vh">
           {t('general-questions')}
         </Typography>
         <Typography fontWeight="bold">{'1. ' + t('gender')}</Typography>
@@ -67,13 +74,16 @@ export default function GeneralQuestions() {
             <MenuItem value="other">{t('other')}</MenuItem>
           </Select>
         </FormControl>
-        <Typography fontWeight="bold">{'2. ' + t('birth-year')}</Typography>
+        <Typography fontWeight="bold" marginTop="4vh">
+          {'2. ' + t('birth-year')}
+        </Typography>
         <DatePicker
           sx={{ width: '100%' }}
           label={t('select-birth-year')}
           views={['year']}
         />
-        <Stack direction="row" spacing={3} width="100%">
+
+        <Stack direction="row" spacing={3} width="100%" marginTop="4vh">
           <Stack direction="column" width="100%">
             <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
             <FormControl fullWidth>
@@ -89,15 +99,16 @@ export default function GeneralQuestions() {
             </FormControl>
           </Stack>
         </Stack>
-        <Stack direction="row" spacing={3} width="100%">
-          <Stack direction="column" width="50%">
+
+        <Stack direction="row" spacing={3} width="100%" marginTop="4vh">
+          <Stack direction="column" width="100%">
             <Stack direction="row" justifyContent="space-between">
               <Typography fontWeight="bold">
                 {'5. ' + t('waist-measurement')}
               </Typography>
               <Button
                 sx={{ padding: 0, margin: 0, minWidth: 0 }}
-                onClick={handlePopUp}
+                onClick={handleOpenWaistDialog}
               >
                 <InfoOutlined />
               </Button>
@@ -110,85 +121,110 @@ export default function GeneralQuestions() {
               />
             </FormControl>
           </Stack>
-          <div style={{ width: '50%' }}></div>
-        </Stack>
-        <Stack direction="row" spacing={3} width="100%">
-          <Stack direction="column" width="50%">
-            <Stack direction="row" justifyContent="space-between">
-              <Typography fontWeight="bold">
-                {'6. ' + t('resting-pulse')}
-              </Typography>
-              <Button
-                sx={{ padding: 0, margin: 0, minWidth: 0 }}
-                onClick={handlePopUp}
-              >
-                <InfoOutlined />
-              </Button>
+          <Stack direction="row" spacing={3} width="100%">
+            <Stack direction="column" width="100%">
+              <Stack direction="row" justifyContent="space-between">
+                <Typography fontWeight="bold">
+                  {'7. ' + t('blood-pressure')}
+                </Typography>
+                <Button
+                  sx={{ padding: 0, margin: 0, minWidth: 0 }}
+                  onClick={handleOpenBloodPressureDialog}
+                >
+                  <InfoOutlined />
+                </Button>
+              </Stack>
+              <FormControl fullWidth>
+                <InputLabel>...</InputLabel>
+                <OutlinedInput
+                  label={t('select-blood-pressure')}
+                  endAdornment={'mmHg'}
+                />
+              </FormControl>
             </Stack>
-            <FormControl fullWidth>
-              <InputLabel>...</InputLabel>
-              <OutlinedInput
-                label={t('select-resting-pulse')}
-                endAdornment={'bpm'}
-              />
-            </FormControl>
-          </Stack>
-          <Stack direction="column" width="50%">
-            <Stack direction="row" justifyContent="space-between">
-              <Typography fontWeight="bold">
-                {'7. ' + t('blood-pressure')}
-              </Typography>
-              <Button
-                sx={{ padding: 0, margin: 0, minWidth: 0 }}
-                onClick={handlePopUp}
-              >
-                <InfoOutlined />
-              </Button>
-            </Stack>
-            <FormControl fullWidth>
-              <InputLabel>...</InputLabel>
-              <OutlinedInput
-                label={t('select-blood-pressure')}
-                endAdornment={'mm/hg'}
-              />
-            </FormControl>
           </Stack>
         </Stack>
-        <div style={{ marginTop: '4vh', marginBottom: '4vh', width: '100%' }}>
-          <Typography fontWeight="bold">{t('ablation')}</Typography>
+
+        <div style={{ marginTop: '2vh', marginBottom: '4vh', width: '100%' }}>
+          <Typography fontWeight="bold" marginTop="3vh">
+            {t('ablation')}
+          </Typography>
           <DatePicker
             sx={{ width: '100%' }}
             label={t('select-ablation-date')}
           />
         </div>
-        <Button
-          variant="contained"
-          sx={{
-            width: '80%',
-            margin: 'auto',
-            bgcolor: 'black',
-            borderRadius: '10px',
-            '&:hover': {
-              backgroundColor: '#333',
-            },
-          }}
-        >
-          {t('next')}
-        </Button>
+        <Stack marginTop="3vh" width="100%">
+          <Button
+            variant="contained"
+            sx={{
+              fontSize: '1.3rem',
+              width: '90%',
+              height: '6vh',
+              margin: 'auto',
+              bgcolor: 'hsla(200, 100%, 26%, 1)',
+              borderRadius: '8px',
+              '&:hover': {
+                backgroundColor: 'hsla(200, 100%, 16%, 1)',
+              },
+            }}
+          >
+            {t('register')}
+          </Button>
+        </Stack>
 
-        <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <Dialog
+          open={openWaistDialog}
+          onClose={handleCloseWaistDialog}
+          maxWidth="md"
+          fullWidth
+        >
           <Typography
             variant="h5"
+            textAlign="center"
             fontWeight="bold"
-            fontSize="20px"
             marginTop="10px"
-            marginLeft="20px"
           >
-            {t('why-we-need-this-data')}
+            {t('how-do-i-measure')}
+          </Typography>
+          <Typography variant="h5" textAlign="center" fontWeight="bold">
+            {t('waist-measurement')}
           </Typography>
           <DialogContent>
-            <Typography textAlign="left" marginTop="-10px">
-              {t('why-we-need-this-data-text')}
+            <Typography
+              variant="subtitle2"
+              textAlign="justify"
+              marginTop="-10px"
+            >
+              {t('how-to-measure-waist')}
+            </Typography>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog
+          open={openBloodPressureDialog}
+          onClose={handleCloseBloodPressureDialog}
+          maxWidth="md"
+          fullWidth
+        >
+          <Typography
+            variant="h5"
+            textAlign="center"
+            fontWeight="bold"
+            marginTop="10px"
+          >
+            {t('how-do-i-measure')}
+          </Typography>
+          <Typography variant="h5" textAlign="center" fontWeight="bold">
+            {t('blood-pressure')}
+          </Typography>
+          <DialogContent>
+            <Typography
+              variant="subtitle2"
+              textAlign="justify"
+              marginTop="-10px"
+            >
+              {t('how-to-measure-blood-pressure')}
             </Typography>
           </DialogContent>
         </Dialog>

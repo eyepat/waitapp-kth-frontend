@@ -24,6 +24,8 @@ export function Routes() {
                         : false
                     }
                     transparent={page.header.transparent}
+                    settings={page.header.settings}
+                    help={page.header.help}
                   />
                 )}
                 {page.component && (

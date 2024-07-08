@@ -1,17 +1,31 @@
-import { Button, styled } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  Typography,
+  styled,
+} from '@mui/material';
 import {
   WhiteBackArrow,
   BackArrow,
   ClosedBook,
   Settings,
+  BlackQuestionMark,
   Svg,
 } from '../../utils/Icons';
 import ki from '../../assets/logo/ki.svg';
 import whiteki from '../../assets/logo/whiteKi.svg';
 import { useNavigate } from 'react-router-dom';
 import { HeaderOpts } from '../../types/headerOpts';
+import { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-export default function Header({ expanded, transparent }: HeaderOpts) {
+export default function Header({
+  expanded,
+  transparent,
+  settings,
+  help,
+}: HeaderOpts) {
   const navigate = useNavigate();
   const TopBar = styled('div')({
     display: 'flex',
@@ -51,6 +65,16 @@ export default function Header({ expanded, transparent }: HeaderOpts) {
     minWidth: '0',
     color: 'inherit',
   });
+  const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
+
+  function handlePopUp(): void {
+    setOpen(true);
+  }
+
+  function handleClose(): void {
+    setOpen(false);
+  }
   return (
     // TODO: Update this condition to also check if the current page is healthdata, home, or sprint. If it is, do nothing.
     <TopBar sx={transparent ? { background: 'none' } : undefined}>
@@ -86,6 +110,46 @@ export default function Header({ expanded, transparent }: HeaderOpts) {
           </ButtonOverride>
         </RightSide>
       )}
+      {settings && (
+        <RightSide>
+          <ButtonOverride
+            onClick={() => {
+              navigate('/settings');
+            }}
+          >
+            <Settings />
+          </ButtonOverride>
+        </RightSide>
+      )}
+      {help && (
+        <RightSide>
+          <ButtonOverride onClick={handlePopUp}>
+            <BlackQuestionMark />
+          </ButtonOverride>
+        </RightSide>
+      )}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="md"
+        fullWidth
+        sx={{ '& .MuiPaper-root': { borderRadius: '8px' } }}
+      >
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          fontSize="20px"
+          marginTop="10px"
+          marginLeft="20px"
+        >
+          {t('why-we-need-this-data')}
+        </Typography>
+        <DialogContent>
+          <Typography textAlign="left" marginTop="-10px">
+            {t('why-we-need-this-data-text')}
+          </Typography>
+        </DialogContent>
+      </Dialog>
     </TopBar>
   );
 }
