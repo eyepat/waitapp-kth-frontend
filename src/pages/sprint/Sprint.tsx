@@ -10,7 +10,7 @@ export default function Sprint() {
   const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
-      <Stack marginBottom="20%" alignItems="center">
+      <Stack marginBottom="20vh" alignItems="center">
         <Typography variant="h4" marginBottom="1rem" alignSelf="center">
           {t('sprint')}
         </Typography>
@@ -26,11 +26,9 @@ export default function Sprint() {
         <Box
           position="absolute"
           bottom="0"
-          marginBottom="50px"
-          width="43vh"
-          borderTop="1px solid black"
-          borderRadius="20px 20px 0 0"
-          padding="1rem"
+          marginBottom="10vh"
+          borderTop="2px solid black"
+          borderRadius="15px"
           textAlign="center"
           bgcolor="white"
         >
