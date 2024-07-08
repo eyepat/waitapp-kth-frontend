@@ -61,7 +61,7 @@ export default function KnowledgeBank() {
             alignSelf="left"
             fontWeight="bold"
           >
-            {t('atrial-fibrillation') /*I DONT KNOW WHAT THIS IS!!*/}
+            {t('atrial-fibrillation')}
           </Typography>
           <MenuButton variant="contained" endIcon={<ArrowRight />}>
             {t('reading-material')}
