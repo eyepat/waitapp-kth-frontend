@@ -25,10 +25,12 @@ import {
   Visualize,
 } from '../../utils/Icons';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
 
 export default function Settings() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
 
   function handleLanguageChange() {
@@ -149,6 +151,7 @@ export default function Settings() {
           />
           <CardContent>
             <Button
+              onClick={() => navigate('/sprint-choice')}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >

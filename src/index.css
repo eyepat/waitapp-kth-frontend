@@ -29,7 +29,7 @@
 body {
   color-scheme: var(--theme);
   font-family: 'Open Sans', sans-serif;
-  background-color: var(--background-color);
+  background-color: hsla(240, 7%, 95%, 1);
   color: var(--foreground-color);
   padding: 0;
   margin: 0;

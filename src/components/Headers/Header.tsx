@@ -36,7 +36,7 @@ export default function Header({
     left: '0',
     width: '100%',
     minHeight: '8vh',
-    backgroundColor: 'white',
+    backgroundColor: 'hsla(240, 7%, 95%, 1)',
     zIndex: '1000',
     'nav-link': {
       color: 'inherit',

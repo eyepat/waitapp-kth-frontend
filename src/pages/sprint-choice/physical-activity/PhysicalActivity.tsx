@@ -134,9 +134,6 @@ export default function FoodHabits() {
                 '&.Mui-selected': {
                   color: 'hsla(196, 100%, 44%, 1)',
                 },
-                '&:not(.Mui-selected)': {
-                  backgroundColor: 'hsla(196, 100%, 44%, 1)',
-                },
               }}
             />
             <NavTab
