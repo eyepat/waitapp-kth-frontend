@@ -3,8 +3,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Dialog,
-  DialogContent,
   Stack,
   ThemeProvider,
   Typography,
@@ -28,9 +26,10 @@ import { useState } from 'react';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
+import Popup from '../../components/PopUps/Popup';
 
 export default function Settings() {
-  const [open, setOpen] = useState(false);
+  const [openInfo, setOpenInfo] = useState(false);
   const [openWip, setOpenWip] = useState(false);
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
@@ -50,11 +49,11 @@ export default function Settings() {
   }
 
   function handlePopUp() {
-    setOpen(true);
+    setOpenInfo(true);
   }
 
-  function handleClose() {
-    setOpen(false);
+  function handleCloseInfo() {
+    setOpenInfo(false);
   }
 
   return (
@@ -250,22 +249,12 @@ export default function Settings() {
           </CardContent>
         </Card>
 
-        <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            fontSize="20px"
-            marginTop="10px"
-            marginLeft="20px"
-          >
-            {t('how-waitapp-works')}?
-          </Typography>
-          <DialogContent>
-            <Typography textAlign="left" marginTop="-10px">
-              {t('how-waitapp-works-text')}
-            </Typography>
-          </DialogContent>
-        </Dialog>
+        <Popup
+          open={openInfo}
+          onClose={handleCloseInfo}
+          title="how-waitapp-works"
+          content="how-waitapp-works-text"
+        />
         <WipPopUp open={openWip} onClose={handleCloseWip} />
       </Stack>
     </ThemeProvider>
