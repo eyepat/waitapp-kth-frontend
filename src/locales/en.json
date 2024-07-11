@@ -42,7 +42,7 @@
   "password-and-security": "Password & security",
   "integrity": "Integrity",
   "messages": "Messages",
-  "how-waitapp-works": "How WAITapp works",
+  "how-waitapp-works": "How does WAITapp works?",
   "information": "Information",
   "ongoing-sprint": "Ongoing sprint",
   "start-new-sprint": "Start a new sprint",
@@ -90,7 +90,7 @@
   "why-we-need-this-data": "Why do we need this data?",
   "change-language": "Change language",
   "why-we-need-this-data-text": "By collecting your personal health data, we can create a tailored and effective health plan for you. This information enables accurate monitoring of your health and helps us recommend the most suitable and individualized sprints to achieve your health goals. Your data is crucial for creating a personal and successful health revolution for you.",
-  "how-waitapp-works-text": "By collecting your personal health data, we can create a tailored and effective health plan for you. This information enables accurate monitoring of your health and helps us recommend the most suitable and individualized sprints to achieve your health goals. Your data is crucial for creating a personal and successful lifestyle change for you.",
+  "how-waitapp-works-text": "With WAITapp, we take you on 'sprints', where each sprint lasts for 10 days. During each sprint, we will give you daily tasks and measurements to encourage you to improve a goal of your choice. These help you improve your lifestyle and provide real-time feedback on your progress. With WAITapp, healthy choices become a part of your daily life!",
   "food-habits": "Food habits",
   "goal-level": "Goal level",
   "planned-activities-for-upcoming-sprint": "Planned activities for upcoming sprint",
@@ -128,8 +128,12 @@
   "title-recomended-today": "Recomended Today",
   "title-all-saved-recipes": "All saved recipes",
   "placeholder-saved-recipe": "Placeholder for a saved recipe",
-  "how-to-measure-pulse": "Sit or lie down comfortably and relax for at least five minutes before starting the measurement. Place two fingers (index and middle finger) lightly on the side of the wrist where the pulse is most noticeable. Count the number of heartbeats in 60 seconds to get your resting pulse. For a more accurate measurement, repeat this three times and calculate the average of the measurements.",
-  "how-to-measure-waist": "Stand upright and exhale normally. Place the measuring tape around the waist, directly above the hip bone. Ensure that the measuring tape is horizontal and does not press into the skin too hard. Check that the measuring tape is parallel to the floor and that you are not holding your breath while measuring. Read the measurement and write it down carefully.",
+  "how-to-measure-pulse": "How to measure pulse",
+  "how-to-measure-pulse-text": "Sit or lie down comfortably and relax for at least five minutes before starting the measurement. Place two fingers (index and middle finger) lightly on the side of the wrist where the pulse is most noticeable. Count the number of heartbeats in 60 seconds to get your resting pulse. For a more accurate measurement, repeat this three times and calculate the average of the measurements.",
+  "how-to-measure-waist": "How to measure waist",
+  "how-to-measure-waist-text": "Stand upright and exhale normally. Place the measuring tape around the waist, directly above the hip bone. Ensure that the measuring tape is horizontal and does not press into the skin too hard. Check that the measuring tape is parallel to the floor and that you are not holding your breath while measuring. Read the measurement and write it down carefully.",
   "register": "Register",
-  "this-function-is-wip": "This function is still in progress"
+  "this-function-is-wip": "This function is still in progress",
+  "what-is-a-sprint": "What is a sprint",
+  "what-is-a-sprint-text": "A sprint is a 10-day period where you focus on achieving a specific goal, such as losing weight, reducing alcohol consumption, smoking less, or being more active. During this intensive period, you receive tools and support to reach your health goals."
 }

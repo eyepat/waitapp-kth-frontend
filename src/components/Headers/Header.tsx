@@ -1,10 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  Typography,
-  styled,
-} from '@mui/material';
+import { Button, styled } from '@mui/material';
 import {
   WhiteBackArrow,
   BackArrow,
@@ -18,7 +12,7 @@ import whiteki from '../../assets/logo/whiteKi.svg';
 import { useNavigate } from 'react-router-dom';
 import { HeaderOpts } from '../../types/headerOpts';
 import { useState } from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import Popup from '../PopUps/Popup';
 
 export default function Header({
   expanded,
@@ -66,7 +60,6 @@ export default function Header({
     color: 'inherit',
   });
   const [open, setOpen] = useState(false);
-  const { t } = useLanguage();
 
   function handlePopUp(): void {
     setOpen(true);
@@ -128,28 +121,13 @@ export default function Header({
           </ButtonOverride>
         </RightSide>
       )}
-      <Dialog
+
+      <Popup
         open={open}
         onClose={handleClose}
-        maxWidth="md"
-        fullWidth
-        sx={{ '& .MuiPaper-root': { borderRadius: '8px' } }}
-      >
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          fontSize="20px"
-          marginTop="10px"
-          marginLeft="20px"
-        >
-          {t('why-we-need-this-data')}
-        </Typography>
-        <DialogContent>
-          <Typography textAlign="left" marginTop="-10px">
-            {t('why-we-need-this-data-text')}
-          </Typography>
-        </DialogContent>
-      </Dialog>
+        title="why-we-need-this-data"
+        content="why-we-need-this-data-text"
+      />
     </TopBar>
   );
 }

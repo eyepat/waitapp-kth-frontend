@@ -4,8 +4,15 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { Svg } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
+import Popup from '../../components/PopUps/Popup';
+import { useState } from 'react';
 
 export default function Sprint() {
+  const [openSprintInfo, setOpenSprintInfo] = useState(false);
+  const handleOpenSprintInfo = () =>
+    setOpenSprintInfo(true); /*Use in future (the i button on sprint page)*/
+  const handleCloseSprintInfo = () => setOpenSprintInfo(false);
+
   const { t } = useLanguage();
   const navigate = useNavigate();
   return (
@@ -48,6 +55,13 @@ export default function Sprint() {
           </Button>
         </Box>
       </Stack>
+
+      <Popup
+        open={openSprintInfo}
+        onClose={handleCloseSprintInfo}
+        title="what-is-a-sprint"
+        content="what-is-a-sprint-text"
+      />
     </ThemeProvider>
   );
 }

@@ -43,7 +43,7 @@
   "password-and-security": "Lösenord & säkerhet",
   "integrity": "Integritet",
   "messages": "Meddelanden",
-  "how-waitapp-works": "Hur funkar WAITapp",
+  "how-waitapp-works": "Hur funkar WAITapp?",
   "information": "Information",
   "ongoing-sprint": "Pågående sprint",
   "start-new-sprint": "Starta en ny sprint",
@@ -91,7 +91,7 @@
   "why-we-need-this-data": "Varför behöver vi den här data?",
   "change-language": "Byt språk",
   "why-we-need-this-data-text": "Genom att samla in din personliga hälsodata kan vi skapa en skräddarsydd och effektiv hälsoplan för dig. Denna information möjliggör noggran övervakning av din hälsa och hjalper oss att rekomendera de mest lämpiga och individanpassande sprints för att uppnå dina hälsomål. Din data är avgörande för att skapa en personlig och framgångsrik hälsorevolution för dig.",
-  "how-waitapp-works-text": "Genom att samla in din personliga hälsodata kan vi skapa en skräddarsydd och effektiv hälsoplan för dig. Denna information möjliggör noggran övervakning av din hälsa och hjälper oss att rekomendera de mest lämpiga och individanpassande sprints för att uppnå dina hälsomål. Din data är avgörande för att skapa en personlig och framgångsrik livsstilsförändring för dig.",
+  "how-waitapp-works-text": "Med WAITapp tar vi dig med på \"sprints\", där varje sprint varar i 10 dagar. Under varje sprint kommer vi att ge dig dagliga uppdrag och mätningar för att stimulera dig att förbättra ett mål som du väljer. Dessa hjälper dig att förbättra din livstil och ger realtidsfeedback om din utveckling. Med WAITapp blir hälsosamma val en del av ditt dagliga liv!",
   "food-habits": "Matvanor",
   "goal-level": "Målnivå",
   "planned-activities-for-upcoming-sprint": "Planerade aktiviteter för kommande sprint",
@@ -129,8 +129,12 @@
   "title-recomended-today": "Rekommenderat idag",
   "title-all-saved-recipes": "Alla sparade recept",
   "placeholder-saved-recipe": "Placeholder för ett sparat recept",
-  "how-to-measure-pulse": "Sitt eller ligg bekvämt och slappna av i minst fem minuter innan du påbörjar mätningen. Placera två fingrar (index och långfinger) lätt på den sidan av handleden där pulsen känns tydligast. Räkna antalet hjärtslag i 60 sekunder för att få din vilopuls. För att få en mer noggrann mätning, upprepa detta tre gånger och räkna ut genomsnittet av mätningarna.",
-  "how-to-measure-waist": "Stå upprätt och andas ut normalt. Placera måttbandet runt midjan, direkt ovanför höftbenet. Se till att måttbandet ligger horisontellt och inte trycker in huden för hårt. Kontrollera att måttbandet är parallellt med golvet och att du inte håller andan medan du mäter. Läs av måttet och skriv ner det noggrant.",
+  "how-to-measure-pressure": "Hur man mäter blodtryck",
+  "how-to-measure-pressure-text": "Sitt eller ligg bekvämt och slappna av i minst fem minuter innan du påbörjar mätningen. Placera två fingrar (index och långfinger) lätt på den sidan av handleden där pulsen känns tydligast. Räkna antalet hjärtslag i 60 sekunder för att få din vilopuls. För att få en mer noggrann mätning, upprepa detta tre gånger och räkna ut genomsnittet av mätningarna.",
+  "how-to-measure-waist": "Hur man mäter midjemått",
+  "how-to-measure-waist-text": "Stå upprätt och andas ut normalt. Placera måttbandet runt midjan, direkt ovanför höftbenet. Se till att måttbandet ligger horisontellt och inte trycker in huden för hårt. Kontrollera att måttbandet är parallellt med golvet och att du inte håller andan medan du mäter. Läs av måttet och skriv ner det noggrant.",
   "register": "Registrera",
-  "this-function-is-wip": "Denna funktion fungerar inte ännu"
+  "this-function-is-wip": "Denna funktion fungerar inte ännu",
+  "what-is-a-sprint": "Vad är en sprint",
+  "what-is-a-sprint-text": "En sprint är en 10-dagars period där du fokuserar på att nå ett specifikt mål, som att gå ner i vikt, minska alkoholkonsumtionen, röka mindre eller vara mer aktiv. Under denna intensiva period får du verktyg och stöd för att uppnå dina hälsomål."
 }

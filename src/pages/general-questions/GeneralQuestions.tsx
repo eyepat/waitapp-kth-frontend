@@ -1,7 +1,5 @@
 import {
   Button,
-  Dialog,
-  DialogContent,
   FormControl,
   InputLabel,
   MenuItem,
@@ -17,6 +15,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { InfoOutlined } from '@mui/icons-material';
+import Popup from '../../components/PopUps/Popup';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
@@ -173,61 +172,19 @@ export default function GeneralQuestions() {
           </Button>
         </Stack>
 
-        <Dialog
+        <Popup
           open={openWaistDialog}
           onClose={handleCloseWaistDialog}
-          maxWidth="md"
-          fullWidth
-        >
-          <Typography
-            variant="h5"
-            textAlign="center"
-            fontWeight="bold"
-            marginTop="10px"
-          >
-            {t('how-do-i-measure')}
-          </Typography>
-          <Typography variant="h5" textAlign="center" fontWeight="bold">
-            {t('waist-measurement')}
-          </Typography>
-          <DialogContent>
-            <Typography
-              variant="subtitle2"
-              textAlign="justify"
-              marginTop="-10px"
-            >
-              {t('how-to-measure-waist')}
-            </Typography>
-          </DialogContent>
-        </Dialog>
+          title="how-to-measure-waist"
+          content="how-to-measure-waist-text"
+        />
 
-        <Dialog
+        <Popup
           open={openBloodPressureDialog}
           onClose={handleCloseBloodPressureDialog}
-          maxWidth="md"
-          fullWidth
-        >
-          <Typography
-            variant="h5"
-            textAlign="center"
-            fontWeight="bold"
-            marginTop="10px"
-          >
-            {t('how-do-i-measure')}
-          </Typography>
-          <Typography variant="h5" textAlign="center" fontWeight="bold">
-            {t('blood-pressure')}
-          </Typography>
-          <DialogContent>
-            <Typography
-              variant="subtitle2"
-              textAlign="justify"
-              marginTop="-10px"
-            >
-              {t('how-to-measure-blood-pressure')}
-            </Typography>
-          </DialogContent>
-        </Dialog>
+          title="how-to-measure-pressure"
+          content="how-to-measure-pressure-text"
+        />
       </Stack>
     </ThemeProvider>
   );
