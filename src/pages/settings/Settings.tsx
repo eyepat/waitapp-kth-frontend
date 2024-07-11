@@ -25,11 +25,13 @@ import {
   Visualize,
 } from '../../utils/Icons';
 import { useState } from 'react';
+import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
 
 export default function Settings() {
   const [open, setOpen] = useState(false);
+  const [openWip, setOpenWip] = useState(false);
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
 
@@ -37,6 +39,14 @@ export default function Settings() {
     const newLanguage = language === 'en' ? 'sv' : 'en';
     console.log(newLanguage);
     setLanguage(newLanguage);
+  }
+
+  function handleOpenWip() {
+    setOpenWip(true);
+  }
+
+  function handleCloseWip() {
+    setOpenWip(false);
   }
 
   function handlePopUp() {
@@ -177,6 +187,7 @@ export default function Settings() {
           />
           <CardContent>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -255,6 +266,7 @@ export default function Settings() {
             </Typography>
           </DialogContent>
         </Dialog>
+        <WipPopUp open={openWip} onClose={handleCloseWip} />
       </Stack>
     </ThemeProvider>
   );
