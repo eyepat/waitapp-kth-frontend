@@ -1,10 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  Typography,
-  styled,
-} from '@mui/material';
+import { Button, styled } from '@mui/material';
 import {
   WhiteBackArrow,
   BackArrow,
@@ -18,7 +12,6 @@ import whiteki from '../../assets/logo/whiteKi.svg';
 import { useNavigate } from 'react-router-dom';
 import { HeaderOpts } from '../../types/headerOpts';
 import { useState } from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
 import Popup from '../PopUps/Popup';
 
 export default function Header({
@@ -67,7 +60,6 @@ export default function Header({
     color: 'inherit',
   });
   const [open, setOpen] = useState(false);
-  const { t } = useLanguage();
 
   function handlePopUp(): void {
     setOpen(true);
