@@ -129,8 +129,10 @@
   "title-recomended-today": "Rekommenderat idag",
   "title-all-saved-recipes": "Alla sparade recept",
   "placeholder-saved-recipe": "Placeholder för ett sparat recept",
-  "how-to-measure-pulse": "Sitt eller ligg bekvämt och slappna av i minst fem minuter innan du påbörjar mätningen. Placera två fingrar (index och långfinger) lätt på den sidan av handleden där pulsen känns tydligast. Räkna antalet hjärtslag i 60 sekunder för att få din vilopuls. För att få en mer noggrann mätning, upprepa detta tre gånger och räkna ut genomsnittet av mätningarna.",
-  "how-to-measure-waist": "Stå upprätt och andas ut normalt. Placera måttbandet runt midjan, direkt ovanför höftbenet. Se till att måttbandet ligger horisontellt och inte trycker in huden för hårt. Kontrollera att måttbandet är parallellt med golvet och att du inte håller andan medan du mäter. Läs av måttet och skriv ner det noggrant.",
+  "how-to-measure-pressure": "Hur man mäter blodtryck",
+  "how-to-measure-pressure-text": "Sitt eller ligg bekvämt och slappna av i minst fem minuter innan du påbörjar mätningen. Placera två fingrar (index och långfinger) lätt på den sidan av handleden där pulsen känns tydligast. Räkna antalet hjärtslag i 60 sekunder för att få din vilopuls. För att få en mer noggrann mätning, upprepa detta tre gånger och räkna ut genomsnittet av mätningarna.",
+  "how-to-measure-waist": "Hur man mäter midjemått",
+  "how-to-measure-waist-text": "Stå upprätt och andas ut normalt. Placera måttbandet runt midjan, direkt ovanför höftbenet. Se till att måttbandet ligger horisontellt och inte trycker in huden för hårt. Kontrollera att måttbandet är parallellt med golvet och att du inte håller andan medan du mäter. Läs av måttet och skriv ner det noggrant.",
   "register": "Registrera",
   "this-function-is-wip": "Denna funktion fungerar inte ännu"
 }

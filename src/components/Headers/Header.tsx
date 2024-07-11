@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { HeaderOpts } from '../../types/headerOpts';
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import Popup from '../PopUps/Popup';
 
 export default function Header({
   expanded,
@@ -128,28 +129,13 @@ export default function Header({
           </ButtonOverride>
         </RightSide>
       )}
-      <Dialog
+
+      <Popup
         open={open}
         onClose={handleClose}
-        maxWidth="md"
-        fullWidth
-        sx={{ '& .MuiPaper-root': { borderRadius: '8px' } }}
-      >
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          fontSize="20px"
-          marginTop="10px"
-          marginLeft="20px"
-        >
-          {t('why-we-need-this-data')}
-        </Typography>
-        <DialogContent>
-          <Typography textAlign="left" marginTop="-10px">
-            {t('why-we-need-this-data-text')}
-          </Typography>
-        </DialogContent>
-      </Dialog>
+        title="why-we-need-this-data"
+        content="why-we-need-this-data-text"
+      />
     </TopBar>
   );
 }
