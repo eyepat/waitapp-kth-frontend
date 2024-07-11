@@ -17,7 +17,11 @@ const Popup: React.FC<PopupProps> = ({ open, onClose, title, content }) => {
   const { t } = useLanguage();
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      sx={{ '& .MuiPaper-root': { borderRadius: '8px' } }}
+    >
       <DialogTitle>
         <Typography variant="h5" fontWeight="bold" fontSize="20px">
           {t(title)}
