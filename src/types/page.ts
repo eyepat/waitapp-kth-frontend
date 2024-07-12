@@ -11,4 +11,6 @@ export type Page = {
   component: FC | null;
   showBottomNav?: boolean;
   header?: HeaderOpts;
+  tabs?: boolean;
+  defaultTab?: string;
 };

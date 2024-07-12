@@ -26,6 +26,8 @@ export const pages: Page[] = [
     component: HealthData,
     header: {},
     showBottomNav: true,
+    tabs: true,
+    defaultTab: 'overview',
   },
   {
     to: '/',

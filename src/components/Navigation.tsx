@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useMatch } from 'react-router-dom';
 import { Page } from '../types/page';
 import { pages } from '../Pages';
 import { Stack, Typography, styled } from '@mui/material';
@@ -39,8 +39,8 @@ export function Navigation({ authLevel }: NavigationProps) {
           page.isMenu &&
           page.permissionLevel <= authLevel && (
             <NavLink
-              className="nav-link"
-              to={page.to}
+            className={`nav-link ${useMatch(page.to + '/*') ? 'active' : ''}`}
+              to={page.to + (page.tabs ? ('/' + page.defaultTab) : '')}
               style={{ textDecoration: 'none' }}
             >
               <Stack

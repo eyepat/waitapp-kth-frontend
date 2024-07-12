@@ -13,7 +13,7 @@ export function Routes() {
       {pages.map((page: Page) =>
         page.component && page.permissionLevel <= authLevel ? (
           <Route
-            path={page.path ? page.path : page.to}
+            path={page.path ? page.path : page.to + (page.tabs ? '/:tab' : '')}
             Component={() => (
               <>
                 {page.header != undefined && (
