@@ -32,26 +32,50 @@ export default function Recipes() {
         <Typography variant="subtitle1">
           {t('title-recomended-today')}
         </Typography>
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
         <Typography variant="subtitle1">
           {t('title-all-saved-recipes')}
         </Typography>
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
       </Stack>
     );
   };
   const renderFavouriteContent = () => {
     return (
       <Stack marginTop="25px" spacing={2}>
-        <Typography variant="subtitle1">{t('favourite-recipes')}</Typography>
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
-        <RecipeCard img={placeHolderImg} title={'Place Holder Reciple Name '} />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
       </Stack>
     );
   };

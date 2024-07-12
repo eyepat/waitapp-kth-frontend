@@ -6,6 +6,7 @@ import { BigArrow } from '../../utils/Icons';
 interface RecipeCardProps {
   img: string;
   title: string;
+  onClick: () => void;
 }
 
 const RecipeCardButton = styled(Button)({
@@ -33,9 +34,9 @@ const RecipeImage = styled('img')({
   objectFit: 'cover',
 });
 
-const RecipeCard: React.FC<RecipeCardProps> = ({ img, title }) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ img, title, onClick }) => {
   return (
-    <RecipeCardButton>
+    <RecipeCardButton onClick={onClick}>
       <RecipeImage src={img} alt={title} />
       <Typography
         variant="body1"
