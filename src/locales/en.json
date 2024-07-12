@@ -55,7 +55,6 @@
   "eating-habit": "Eating habits",
   "reading-material": "Reading material",
   "video-material": "Video material",
-  "recipe": "Recipe",
   "training": "Training",
   "training-tips": "Training tips",
   "atrial-fibrillation": "Atrial fibrillation",
@@ -135,5 +134,8 @@
   "register": "Register",
   "this-function-is-wip": "This function is still in progress",
   "what-is-a-sprint": "What is a sprint",
-  "what-is-a-sprint-text": "A sprint is a 10-day period where you focus on achieving a specific goal, such as losing weight, reducing alcohol consumption, smoking less, or being more active. During this intensive period, you receive tools and support to reach your health goals."
+  "what-is-a-sprint-text": "A sprint is a 10-day period where you focus on achieving a specific goal, such as losing weight, reducing alcohol consumption, smoking less, or being more active. During this intensive period, you receive tools and support to reach your health goals.",
+  "favourite": "Favourite",
+  "favourite-recipes": "Favourite recipes",
+  "recipes": "Recipes"
 }

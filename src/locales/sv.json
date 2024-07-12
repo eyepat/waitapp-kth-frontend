@@ -56,7 +56,6 @@
   "eating-habit": "Matvanor",
   "reading-material": "Läsmaterial",
   "video-material": "Videomaterial",
-  "recipe": "Recept",
   "training": "Träning",
   "training-tips": "Träningstips",
   "atrial-fibrillation": "Förmaksflimmer",
@@ -136,5 +135,8 @@
   "register": "Registrera",
   "this-function-is-wip": "Denna funktion fungerar inte ännu",
   "what-is-a-sprint": "Vad är en sprint",
-  "what-is-a-sprint-text": "En sprint är en 10-dagars period där du fokuserar på att nå ett specifikt mål, som att gå ner i vikt, minska alkoholkonsumtionen, röka mindre eller vara mer aktiv. Under denna intensiva period får du verktyg och stöd för att uppnå dina hälsomål."
+  "what-is-a-sprint-text": "En sprint är en 10-dagars period där du fokuserar på att nå ett specifikt mål, som att gå ner i vikt, minska alkoholkonsumtionen, röka mindre eller vara mer aktiv. Under denna intensiva period får du verktyg och stöd för att uppnå dina hälsomål.",
+  "favourite": "Favoriter",
+  "favourite-recipes": "Favorit recept",
+  "recipes": "Recept"
 }
