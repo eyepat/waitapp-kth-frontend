@@ -1,17 +1,12 @@
-import {
-  Box,
-  Button,
-  Card,
-  Stack,
-  ThemeProvider,
-  Typography,
-} from '@mui/material';
+import { Stack, ThemeProvider, Typography } from '@mui/material';
 import theme from '../../components/Theme';
 import NavTab from '../../components/TabMenu/NavTab';
 import NavTabs from '../../components/TabMenu/NavTabs';
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { BigArrow } from '../../utils/Icons';
+
+import placeHolderImg from '../../assets/reciplePlaceHolderImg/placeHolderFood.png';
+import RecipeCard from '../../components/Cards/RecipeCard';
 
 export default function Recipes() {
   const [value, setValue] = useState(0);
@@ -33,49 +28,57 @@ export default function Recipes() {
 
   const renderOverviewContent = () => {
     return (
-      /*sett fixed width in evry box in the stack... Should fix scaling problems   */
-      <Stack marginTop="25px">
-        <Typography variant="body1">{t('title-recomended-today')}</Typography>
-        <Button disableRipple>
-          <Card sx={{ borderRadius: '12px' }}>
-            <Stack direction="row" alignItems="center" spacing={4}>
-              <Box
-                height="100px"
-                width="200px"
-                borderRight="2px solid black"
-              ></Box>
-              <Typography variant="body1" fontWeight="bold" textAlign="justify">
-                {t('placeholder-recomended-recipe')}
-              </Typography>
-              <Box sx={{ fontSize: '48px', paddingRight: '20px' }}>
-                <BigArrow />
-              </Box>
-            </Stack>
-          </Card>
-        </Button>
-        <Typography variant="body1">{t('title-all-saved-recipes')}</Typography>
-        <Button disableRipple>
-          <Card sx={{ borderRadius: '12px' }}>
-            <Stack direction="row" alignItems="center" spacing={4}>
-              <Box
-                height="100px"
-                width="200px"
-                borderRight="2px solid black"
-              ></Box>
-              <Typography variant="body1" fontWeight="bold" textAlign="justify">
-                {t('placeholder-saved-recipe')}
-              </Typography>
-              <Box sx={{ fontSize: '48px', paddingRight: '20px' }}>
-                <BigArrow />
-              </Box>
-            </Stack>
-          </Card>
-        </Button>
+      <Stack marginTop="25px" spacing={1}>
+        <Typography variant="subtitle1">
+          {t('title-recomended-today')}
+        </Typography>
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <Typography variant="subtitle1">
+          {t('title-all-saved-recipes')}
+        </Typography>
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
       </Stack>
     );
   };
   const renderFavouriteContent = () => {
-    return <Typography>Favourite</Typography>;
+    return (
+      <Stack marginTop="25px" spacing={2}>
+        <Typography variant="subtitle1">{t('favourite-recipes')}</Typography>
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+        <RecipeCard
+          img={placeHolderImg}
+          title={'Place Holder Recipe Name'}
+          onClick={() => console.log('clicked!')}
+        />
+      </Stack>
+    );
   };
 
   return (

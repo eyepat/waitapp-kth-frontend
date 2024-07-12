@@ -35,7 +35,7 @@ export default function KnowledgeBank() {
             variant="contained"
             endIcon={<ArrowRight />}
           >
-            {t('recipe')}
+            {t('recipes')}
           </MenuButton>
         </Stack>
 

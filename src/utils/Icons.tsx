@@ -579,8 +579,8 @@ export function WhiteBackArrow() {
 export function BigArrow() {
   return (
     <svg
-      width="19"
-      height="46"
+      width="31"
+      height="58"
       viewBox="0 0 19 46"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
