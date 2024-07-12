@@ -26,6 +26,10 @@ export default function HealthData() {
   let { tab = 'overview'} = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
 
+  useEffect(() => {
+    setSelectedTab(tab);
+  }, [tab]);
+
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     navigate(`/health-data/${newValue}`);
     setSelectedTab(newValue);

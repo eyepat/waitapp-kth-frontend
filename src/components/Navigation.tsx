@@ -38,7 +38,8 @@ export function Navigation({ authLevel }: NavigationProps) {
         (page: Page) =>
           page.isMenu &&
           page.permissionLevel <= authLevel && (
-            <NavLink
+            <NavLink 
+            key={page.to}
             className={`nav-link ${useMatch(page.to + '/*') ? 'active' : ''}`}
               to={page.to + (page.tabs ? ('/' + page.defaultTab) : '')}
               style={{ textDecoration: 'none' }}
