@@ -6,7 +6,7 @@ import { BigArrow } from '../../utils/Icons';
 interface RecipeCardProps {
   img: string;
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const RecipeCardButton = styled(Button)({
