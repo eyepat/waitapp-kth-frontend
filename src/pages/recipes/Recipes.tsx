@@ -51,6 +51,7 @@ export default function Recipes() {
   const renderFavouriteContent = () => {
     return (
       <Stack marginTop="25px" spacing={2}>
+        <Typography variant="subtitle1">{t('favourite-recipes')}</Typography>
         <RecipeCard
           img={placeHolderImg}
           title={'Place Holder Recipe Name'}
