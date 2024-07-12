@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Card,
@@ -17,16 +17,22 @@ import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
 
 export default function HealthData() {
   const { t } = useLanguage();
-  const [value, setValue] = useState(0);
   const navigate = useNavigate();
+  let { tab = 'overview'} = useParams();
+  const [selectedTab, setSelectedTab] = useState(tab);
 
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  useEffect(() => {
+    setSelectedTab(tab);
+  }, [tab]);
+
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
+    navigate(`/health-data/${newValue}`);
+    setSelectedTab(newValue);
   };
 
   const [expandedCards, setExpandedCards] = React.useState({
@@ -261,12 +267,12 @@ export default function HealthData() {
   };
 
   const renderTabContent = () => {
-    switch (value) {
-      case 0:
+    switch (tab) {
+      case 'overview':
         return renderOverviewContent();
-      case 1:
+      case 'sprints':
         return renderSprintsContent();
-      case 2:
+      case 'tests':
         return renderTestsContent();
       default:
         return null;
@@ -280,10 +286,10 @@ export default function HealthData() {
           {t('your-healthdata')}
         </Typography>
         <Stack width={'90%'} paddingTop={'10px'}>
-          <NavTabs value={value} onChange={handleChange} centered>
-            <NavTab label={t('overview')} />
-            <NavTab label={t('sprints')} />
-            <NavTab label={t('tests')} />
+          <NavTabs value={selectedTab} onChange={handleChange} centered>
+            <NavTab value='overview' label={t('overview')} />
+            <NavTab value='sprints'  label={t('sprints')} />
+            <NavTab value='tests'    label={t('tests')} />
           </NavTabs>
           {renderTabContent()}
         </Stack>

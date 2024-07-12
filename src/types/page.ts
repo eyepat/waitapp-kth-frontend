@@ -11,4 +11,8 @@ export type Page = {
   component: FC | null;
   showBottomNav?: boolean;
   header?: HeaderOpts;
+  // Will create a path-variable ":tab" in the route, can be used with ´const { tab } = useParams()´
+  tabs?: boolean;       
+  // Used in the Navigation bar to set the default tab
+  defaultTab?: string;  
 };
