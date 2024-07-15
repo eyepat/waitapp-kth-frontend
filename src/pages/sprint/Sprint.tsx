@@ -9,8 +9,8 @@ import { useState } from 'react';
 
 export default function Sprint() {
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
-  const handleOpenSprintInfo = () =>
-    setOpenSprintInfo(true); /*Use in future (the i button on sprint page)*/
+  /*const handleOpenSprintInfo = () =>
+    setOpenSprintInfo(true); Use in future (the i button on sprint page)*/
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
 
   const { t } = useLanguage();
