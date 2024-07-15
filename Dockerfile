@@ -1,17 +1,18 @@
 # Frontend Builder
-FROM node:latest AS frontend-builder
+FROM --platform=$BUILDPLATFORM oven/bun:latest AS frontend-builder
 
 ENV API_BASE_URL=""
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+COPY bun.lockb ./
+RUN bun i
 COPY . .
 RUN chmod +x /app/build-docker.sh
 
-RUN npm run docker-build
-RUN npm run build
+RUN bun run docker-build
+RUN bun run build
 
 # Runner
 FROM nginx:latest
