@@ -31,6 +31,7 @@ import Popup from '../../components/PopUps/Popup';
 export default function Settings() {
   const [openInfo, setOpenInfo] = useState(false);
   const [openWip, setOpenWip] = useState(false);
+
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
 
