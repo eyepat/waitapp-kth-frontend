@@ -68,6 +68,7 @@ export default function Register() {
 
   const StyledInput = styled(Input)({
     margin: 'auto',
+    backgroundColor: 'white',
     borderRadius: '0.5rem',
     boxShadow: '0 2px 1rem rgba(0, 0, 0, 0.1)',
     padding: '0.5rem',
@@ -162,28 +163,39 @@ export default function Register() {
           variant="contained"
           sx={{
             width: '100%',
+            borderRadius: '8px',
             padding: '0.75rem',
-            backgroundColor: '#0A74DA',
+            backgroundColor: '#hsla(200, 100%, 26%, 1)',
             color: 'white',
-            mt: 3,
+            marginTop: '28vh',
           }}
           onClick={handleRegister}
         >
           {t('next')}
         </Button>
 
-        <Typography variant="body2" sx={{ mt: 2 }}>
+        <Typography variant="body2" sx={{ mt: 4 }}>
           {t('have-account')}
         </Typography>
 
         <Button
-          variant="outlined"
+          variant="contained"
           sx={{
             width: '100%',
+            borderRadius: '8px',
             padding: '0.75rem',
             mt: 1,
-            borderColor: '#0A74DA',
-            color: '#0A74DA',
+            backgroundColor: 'hsla(196, 59%, 81%, 1)',
+            borderColor: 'hsla(196, 59%, 81%, 1)',
+            color: 'hsla(200, 100%, 26%, 1)',
+            '&:hover': {
+              backgroundColor: 'hsla(196, 59%, 89%, 1)',
+              borderColor: 'hsla(196, 59%, 91%, 1)',
+            },
+            '&:active': {
+              backgroundColor: 'hsla(196, 59%, 91%, 1)',
+              borderColor: 'hsla(196, 59%, 91%, 1)',
+            },
           }}
           onClick={() => {
             navigate('/login');
