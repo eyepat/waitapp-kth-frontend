@@ -44,6 +44,7 @@ const CustomTextField = styled(TextField)({
 
 const WrapperBox = styled(Box)({
   display: 'flex',
+  backgroundColor: 'white',
   width: '60%',
   alignItems: 'center',
   border: '2px solid rgba(7, 65, 109, 1)',
