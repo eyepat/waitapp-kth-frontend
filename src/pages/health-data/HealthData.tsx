@@ -23,7 +23,7 @@ import theme from '../../components/Theme';
 export default function HealthData() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  let { tab = 'overview'} = useParams();
+  let { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
 
   useEffect(() => {
@@ -287,9 +287,9 @@ export default function HealthData() {
         </Typography>
         <Stack width={'90%'} paddingTop={'10px'}>
           <NavTabs value={selectedTab} onChange={handleChange} centered>
-            <NavTab value='overview' label={t('overview')} />
-            <NavTab value='sprints'  label={t('sprints')} />
-            <NavTab value='tests'    label={t('tests')} />
+            <NavTab value="overview" label={t('overview')} />
+            <NavTab value="sprints" label={t('sprints')} />
+            <NavTab value="tests" label={t('tests')} />
           </NavTabs>
           {renderTabContent()}
         </Stack>
