@@ -19,12 +19,22 @@ import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
+import { WipPopUp } from '../../components/PopUps/WipPopUp';
 
 export default function HealthData() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   let { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
+  const [openWip, setOpenWip] = useState(false);
+
+  function handleOpenWip() {
+    setOpenWip(true);
+  }
+
+  function handleCloseWip() {
+    setOpenWip(false);
+  }
 
   useEffect(() => {
     setSelectedTab(tab);
@@ -294,6 +304,7 @@ export default function HealthData() {
           {renderTabContent()}
         </Stack>
       </Stack>
+      <WipPopUp open={openWip} onClose={handleCloseWip} />
     </ThemeProvider>
   );
 }
