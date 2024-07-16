@@ -116,7 +116,9 @@ const Notification: React.FC<NotificationProps> = ({
             flexShrink: 0,
           }}
         >
-          {getIcon(severity)}
+          <Box marginLeft="0.5vh" marginTop="0.5vh">
+            {getIcon(severity)}
+          </Box>
         </Box>
         <Stack
           direction="row"

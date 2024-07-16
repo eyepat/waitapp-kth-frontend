@@ -659,9 +659,9 @@ export function WarningIcon() {
 export function InfoIcon() {
   return (
     <svg
-      width="25px"
-      height="25px"
-      viewBox="-0.5 0 25 25"
+      width="28px"
+      height="28px"
+      viewBox="1.5 1 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
