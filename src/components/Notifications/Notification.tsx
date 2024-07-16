@@ -96,7 +96,7 @@ const Notification: React.FC<NotificationProps> = ({
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'stretch',
           borderRadius: '20px',
           backgroundColor: 'white',
           color: getTextColor(severity),
@@ -110,7 +110,6 @@ const Notification: React.FC<NotificationProps> = ({
           sx={{
             backgroundColor: getBorderColor(severity),
             width: '5vh',
-            height: '50px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
