@@ -49,7 +49,7 @@ bun tsc
 RESULT=$?
 
 # If tsc failed, prevent the commit
-if [ \$RESULT -ne 0 ]; then
+if [ '$RESULT' -ne '0' ]; then
   echo "TypeScript check failed. Commit aborted."
   exit 1
 fi
