@@ -277,7 +277,7 @@ export default function Settings() {
         open={openNotification}
         onClose={handleCloseNotification}
         message="page-does-not-work"
-        severity={'warning'}
+        severity={'info'}
       />
     </ThemeProvider>
   );
