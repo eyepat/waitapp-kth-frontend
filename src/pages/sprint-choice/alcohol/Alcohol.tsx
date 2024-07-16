@@ -26,7 +26,7 @@ export default function FoodHabits() {
           alt="Food Background"
           sx={{
             minwidth: '100vw',
-            maxWidth: '1000px',
+            width: '100vw',
             height: '26.75vh',
             top: 0,
             left: 0,

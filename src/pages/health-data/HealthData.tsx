@@ -19,12 +19,22 @@ import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
+import { WipPopUp } from '../../components/PopUps/WipPopUp';
 
 export default function HealthData() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   let { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
+  const [openWip, setOpenWip] = useState(false);
+
+  function handleOpenWip() {
+    setOpenWip(true);
+  }
+
+  function handleCloseWip() {
+    setOpenWip(false);
+  }
 
   useEffect(() => {
     setSelectedTab(tab);
@@ -199,26 +209,40 @@ export default function HealthData() {
       {
         name: t('blood-pressure'),
         icon: <ArrowRight />,
-        page: '/blood-pressure-test',
+        onClick: () => navigate('/blood-pressure-test'),
       },
-      { name: t('weight'), icon: <ArrowRight />, page: '/weight-test' },
+      {
+        name: t('weight'),
+        icon: <ArrowRight />,
+        onClick: () => navigate('/weight-test'),
+      },
       {
         name: t('waist-measurement'),
         icon: <ArrowRight />,
-        page: '/waist-measurement',
+        onClick: handleOpenWip,
       },
       {
         name: t('test-for-physical-activity'),
         icon: <ArrowRight />,
-        page: '/physical-activity-test',
+        onClick: handleOpenWip,
       },
-      { name: t('meal-control'), icon: <ArrowRight />, page: '/meal-control' },
+      {
+        name: t('meal-control'),
+        icon: <ArrowRight />,
+        onClick: handleOpenWip,
+      },
     ];
 
-    const randomTest =
-      tests[
-        Math.floor(Math.random() * tests.length)
-      ]; /*Currently Random test every time u re-enter the tab. In the future update it to recommend the most urgent test.*/
+    // Function to get a pseudo-random index based on the current date (maybe they dont want it to be random but now it is :))
+    const getRandomIndexForDay = (max: number) => {
+      const now = new Date();
+      const seed =
+        now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate(); // YYYYMMDD format
+      return seed % max;
+    };
+
+    const randomTestIndex = getRandomIndexForDay(tests.length);
+    const randomTest = tests[randomTestIndex];
 
     return (
       <Stack direction="column" paddingTop="30px" spacing={1}>
@@ -229,9 +253,7 @@ export default function HealthData() {
           <MenuButton
             variant="contained"
             endIcon={randomTest.icon}
-            onClick={() => {
-              navigate(randomTest.page);
-            }}
+            onClick={randomTest.onClick}
             sx={{
               backgroundColor: 'hsla(198, 26%, 92%, 1)',
               '&:hover': {
@@ -254,9 +276,7 @@ export default function HealthData() {
               key={test.name}
               variant="contained"
               endIcon={test.icon}
-              onClick={() => {
-                navigate(test.page);
-              }}
+              onClick={test.onClick}
             >
               {test.name}
             </MenuButton>
@@ -294,6 +314,7 @@ export default function HealthData() {
           {renderTabContent()}
         </Stack>
       </Stack>
+      <WipPopUp open={openWip} onClose={handleCloseWip} />
     </ThemeProvider>
   );
 }

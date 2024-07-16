@@ -8,6 +8,7 @@ import {
   Typography,
   styled,
 } from '@mui/material';
+import { ChangeEvent } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import theme from '../../components/Theme';
 
@@ -35,7 +36,16 @@ export default function WeightTest() {
       },
     },
   });
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length > 4) {
+      e.target.value = value.slice(0, 4);
+    }
+  };
+
   const { t } = useLanguage();
+
   return (
     <ThemeProvider theme={theme}>
       <Stack alignItems="center">
@@ -57,6 +67,8 @@ export default function WeightTest() {
           <CustomInputField
             type="number"
             variant="outlined"
+            onInput={handleInput}
+            inputProps={{ maxLength: 4 }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -88,7 +100,7 @@ export default function WeightTest() {
               },
             }}
           >
-            <Typography> {t('save')}</Typography>
+            <Typography>{t('save')}</Typography>
           </Button>
         </Box>
       </Stack>
