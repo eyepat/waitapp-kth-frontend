@@ -77,8 +77,8 @@ export default function FoodHabits() {
           image={physicalBackground}
           alt="Food Background"
           sx={{
-            minwidth: '100vw',
-            maxWidth: '1000px',
+            minWidth: '100vw',
+            width: '100vw',
             height: '26.75vh',
             top: 0,
             left: 0,
@@ -160,10 +160,8 @@ export default function FoodHabits() {
           <div style={{ minHeight: '150px' }}>{renderTabContent()}</div>
         </Stack>
         <Stack
-          marginTop="8vh"
           sx={{
             justifyContent: 'center',
-            height: '35vh',
             alignItems: 'center',
           }}
         >
