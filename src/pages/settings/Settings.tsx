@@ -114,6 +114,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -211,6 +212,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -249,6 +251,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -273,7 +276,7 @@ export default function Settings() {
       <Notification
         open={openNotification}
         onClose={handleCloseNotification}
-        message="This is a message"
+        message="page-does-not-work"
         severity={'warning'}
       />
     </ThemeProvider>

@@ -141,5 +141,6 @@
   "well-done": "WELL DONE",
   "warning": "WARNING",
   "heads-up": "HEADS UP",
-  "oh-snap": "OH SNAP"
+  "oh-snap": "OH SNAP",
+  "page-does-not-work": "This page does not work yet!"
 }
