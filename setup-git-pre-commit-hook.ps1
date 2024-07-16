@@ -17,6 +17,7 @@ if (Test-Path $GIT_DIR_PATH -PathType Leaf) {
 
 # Path to the hooks directory
 $HOOK_DIR = Join-Path -Path $GIT_DIR -ChildPath "hooks"
+$PRE_COMMIT_SAMPLE = Join-Path -Path $HOOK_DIR -ChildPath "pre-commit.sample"
 $PRE_COMMIT_HOOK = Join-Path -Path $HOOK_DIR -ChildPath "pre-commit"
 
 # Create the hooks directory if it doesn't exist
@@ -24,7 +25,16 @@ if (-not (Test-Path $HOOK_DIR)) {
     New-Item -ItemType Directory -Path $HOOK_DIR | Out-Null
 }
 
-# Write the pre-commit hook
+# Check if pre-commit.sample exists
+if (-not (Test-Path $PRE_COMMIT_SAMPLE)) {
+    Write-Host "Error: pre-commit.sample does not exist in hooks directory."
+    exit 1
+}
+
+# Copy pre-commit.sample to pre-commit
+Copy-Item -Path $PRE_COMMIT_SAMPLE -Destination $PRE_COMMIT_HOOK -Force
+
+# Overwrite the pre-commit hook contents with the internal bash script
 @"
 #!/bin/sh
 
@@ -46,9 +56,6 @@ fi
 
 # Otherwise, allow the commit
 exit 0
-"@ > $PRE_COMMIT_HOOK
+"@ | Set-Content -Path $PRE_COMMIT_HOOK -Force
 
-# Make the pre-commit hook executable
-& chmod +x $PRE_COMMIT_HOOK
-
-Write-Host "Pre-commit hook installed successfully."
+# Write-Host "Pre-commit hook installed successfully."
