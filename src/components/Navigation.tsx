@@ -19,7 +19,7 @@ export function Navigation({ authLevel }: NavigationProps) {
     bottom: '0',
     left: '0',
     width: '100%',
-    paddingTop: '1.5vh',
+    paddingTop: '2vh',
     minHeight: '8vh',
     backgroundColor: 'white',
     zIndex: '1000',

@@ -73,7 +73,10 @@ export default function FoodHabits() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack alignItems="center">
+      <Stack 
+        alignItems="center"
+        sx={{ height: '92vh' }}
+      >
         <CardMedia
           component="img"
           image={foodBackground}

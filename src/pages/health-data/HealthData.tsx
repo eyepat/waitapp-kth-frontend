@@ -20,6 +20,7 @@ import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
+import Graph, { GraphMode } from './Graph';
 
 export default function HealthData() {
   const { t } = useLanguage();
@@ -81,7 +82,7 @@ export default function HealthData() {
             unmountOnExit
           >
             <CardContent>
-              <Typography>Graph</Typography> {/* Fix a graph here later */}
+              <Graph mode={GraphMode.BloodPressure} />
             </CardContent>
           </Collapse>
 
@@ -134,7 +135,7 @@ export default function HealthData() {
 
           <Collapse in={expandedCards.weight} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography>Graph</Typography> {/* Fix a graph here later */}
+              <Graph mode={GraphMode.Weight} />
             </CardContent>
           </Collapse>
 
