@@ -27,10 +27,13 @@ import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
 import Popup from '../../components/PopUps/Popup';
+import Notification from '../../components/Notifications/Notification';
 
 export default function Settings() {
   const [openInfo, setOpenInfo] = useState(false);
   const [openWip, setOpenWip] = useState(false);
+  const [openNotification, setOpenNotification] = useState(false);
+
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
 
@@ -54,6 +57,14 @@ export default function Settings() {
 
   function handleCloseInfo() {
     setOpenInfo(false);
+  }
+
+  function handleCloseNotification() {
+    setOpenNotification(false);
+  }
+
+  function handleNotification() {
+    setOpenNotification(true);
   }
 
   return (
@@ -103,6 +114,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -115,6 +127,7 @@ export default function Settings() {
             <Button
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
+              onClick={handleNotification}
             >
               <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
                 <Bell />
@@ -199,6 +212,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -237,6 +251,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -257,6 +272,13 @@ export default function Settings() {
         />
         <WipPopUp open={openWip} onClose={handleCloseWip} />
       </Stack>
+
+      <Notification
+        open={openNotification}
+        onClose={handleCloseNotification}
+        message="page-does-not-work"
+        severity={'info'}
+      />
     </ThemeProvider>
   );
 }
