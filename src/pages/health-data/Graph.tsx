@@ -20,7 +20,6 @@ interface DataPoint {
   value: number;
 }
 
-// Define the props type
 interface GraphProps {
   mode?: GraphMode;
   data?: DataPoint[];
@@ -37,7 +36,6 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     { date: dayjs().format('MM/DD'), value: 160 / 70 },
   ]);
 
-  // Function to calculate the domain based on the mode and the data (Y-axis)
   const calculateDomain = (): [string | number, string | number] => {
     if (!data) {
       return [0, 'auto'];
@@ -59,12 +57,11 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     }
   };
 
-  // Generate ticks for the past seven months (X-axis)
   const generateTicks = (): string[] => {
     const ticks = [];
     const currentDay = dayjs().date();
     for (let i = 6; i >= 0; i--) {
-      ticks.push(dayjs().subtract(i, 'month').date(currentDay).format('MM/DD')); // Change 1 to the desired day
+      ticks.push(dayjs().subtract(i, 'month').date(currentDay).format('MM/DD'));
     }
     return ticks;
   };
@@ -75,14 +72,22 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         data={data ? data : sampleData}
         margin={{ top: 10, right: 40, bottom: 10, left: -40 }}
       >
+        <defs>
+          <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsla(0, 100%, 50%, 1)" />
+            <stop offset="33%" stopColor="hsla(47, 77%, 68%, 1)" />
+            <stop offset="66%" stopColor="hsla(101, 77%, 68%, 1)" />
+            <stop offset="100%" stopColor="hsla(50, 100%, 50%, 1)" />
+          </linearGradient>
+        </defs>
         <XAxis
           dataKey="date"
-          stroke="#000" // Color of the X-axis line
-          strokeWidth={4} // Thickness of the X-axis line
-          tickSize={5} // Width of the ticks
+          stroke="#000"
+          strokeWidth={4}
+          tickSize={5}
           interval="preserveStartEnd"
-          ticks={generateTicks()} // Custom ticks
-          tickFormatter={(tick) => dayjs(tick).format('MM/DD')} // Format the ticks as MM/DD
+          ticks={generateTicks()}
+          tickFormatter={(tick) => dayjs(tick).format('MM/DD')}
         />
         <YAxis
           tick={false}
@@ -95,7 +100,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         <Line
           type="linear"
           dataKey="value"
-          stroke="#FBCEB1"
+          stroke="url(#colorGradient)"
           strokeWidth={3}
           dot={false}
         />
