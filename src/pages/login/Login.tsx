@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import theme from '../../components/Theme';
+import { useDevice } from '../../contexts/DeviceContext';
 
 export default function Login() {
   const { t } = useLanguage();
@@ -36,6 +37,8 @@ export default function Login() {
   const [password, setPassword] = useState<string>('');
   const [usernameValid, setUsernameValid] = useState<boolean | null>(null);
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
+
+  const { isOnDesktop } = useDevice();
 
   const checkUsername = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -75,10 +78,10 @@ export default function Login() {
   return (
     <ThemeProvider theme={theme}>
       <Stack
+        direction={isOnDesktop ? 'row' : 'column'}
         sx={{
           justifyContent: 'center',
           display: 'flex',
-          flexDirection: 'column',
           height: '80%',
           width: '90%',
           margin: 'auto',
@@ -100,98 +103,100 @@ export default function Login() {
           </Typography>
         </Stack>
         <div style={{ padding: '2vh' }}></div>
-        <Stack direction="column" spacing={2} alignItems="center">
-          <Stack
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-            sx={{ width: '60%', display: 'flex' }}
-          >
-            <StyledInput
-              placeholder={t('username')}
-              startAdornment={<PersonOutline sx={{ color: '#00A3E0' }} />}
-              disableUnderline={true}
-              endAdornment={
-                <div
-                  style={{
-                    minWidth: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {usernameValid !== false ? (
-                    <CheckCircle
-                      sx={
-                        usernameValid
-                          ? { color: 'green' }
-                          : { visibility: 'hidden' }
-                      }
-                    />
-                  ) : (
-                    <Error sx={{ color: 'red' }} />
-                  )}
-                </div>
-              }
-              onBlur={checkUsername}
-              defaultValue={username}
-              inputMode="text"
-              type="username"
-              sx={{ width: '100%' }}
-            ></StyledInput>
+        <Stack>
+          <Stack direction="column" spacing={2} alignItems="center">
+            <Stack
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              spacing={2}
+              sx={{ width: '60%', display: 'flex' }}
+            >
+              <StyledInput
+                placeholder={t('username')}
+                startAdornment={<PersonOutline sx={{ color: '#00A3E0' }} />}
+                disableUnderline={true}
+                endAdornment={
+                  <div
+                    style={{
+                      minWidth: '24px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {usernameValid !== false ? (
+                      <CheckCircle
+                        sx={
+                          usernameValid
+                            ? { color: 'green' }
+                            : { visibility: 'hidden' }
+                        }
+                      />
+                    ) : (
+                      <Error sx={{ color: 'red' }} />
+                    )}
+                  </div>
+                }
+                onBlur={checkUsername}
+                defaultValue={username}
+                inputMode="text"
+                type="username"
+                sx={{ width: '100%' }}
+              ></StyledInput>
 
-            <StyledInput
-              placeholder={t('password')}
-              startAdornment={<LockOutlined sx={{ color: '#00A3E0' }} />}
-              disableUnderline={true}
-              endAdornment={
-                <div
-                  style={{
-                    minWidth: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {passwordValid !== false ? (
-                    <CheckCircle
-                      sx={
-                        passwordValid
-                          ? { color: 'green' }
-                          : { visibility: 'hidden' }
-                      }
-                    />
-                  ) : (
-                    <Error sx={{ color: 'red' }} />
-                  )}
-                </div>
-              }
-              onBlur={checkPassword}
-              defaultValue={password}
-              inputMode="text"
-              type="password"
-              sx={{ width: '100%' }}
-            ></StyledInput>
+              <StyledInput
+                placeholder={t('password')}
+                startAdornment={<LockOutlined sx={{ color: '#00A3E0' }} />}
+                disableUnderline={true}
+                endAdornment={
+                  <div
+                    style={{
+                      minWidth: '24px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {passwordValid !== false ? (
+                      <CheckCircle
+                        sx={
+                          passwordValid
+                            ? { color: 'green' }
+                            : { visibility: 'hidden' }
+                        }
+                      />
+                    ) : (
+                      <Error sx={{ color: 'red' }} />
+                    )}
+                  </div>
+                }
+                onBlur={checkPassword}
+                defaultValue={password}
+                inputMode="text"
+                type="password"
+                sx={{ width: '100%' }}
+              ></StyledInput>
+            </Stack>
+            <Button
+              variant="contained"
+              sx={{ width: '60%', padding: '0.5rem' }}
+              onClick={tempLoginDemo}
+            >
+              {t('log-in')}
+            </Button>
           </Stack>
-          <Button
-            variant="contained"
-            sx={{ width: '60%', padding: '0.5rem' }}
-            onClick={tempLoginDemo}
-          >
-            {t('log-in')}
-          </Button>
-        </Stack>
-        <Divider color="black" sx={{ mt: '5vh' }} />
-        <Stack direction="column">
-          <Button
-            sx={{ mt: '1vh' }}
-            onClick={() => {
-              navigate('/register');
-            }}
-          >
-            <Typography>{t('or-register-here')}</Typography>
-          </Button>
+          <Divider color="black" sx={{ mt: '5vh' }} />
+          <Stack direction="column">
+            <Button
+              sx={{ mt: '1vh' }}
+              onClick={() => {
+                navigate('/register');
+              }}
+            >
+              <Typography>{t('or-register-here')}</Typography>
+            </Button>
+          </Stack>
         </Stack>
       </Stack>
     </ThemeProvider>

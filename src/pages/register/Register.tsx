@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ClosedEye, Mail, OpenEye } from '../../utils/Icons';
 import theme from '../../components/Theme';
+import { enqueueSnackbar } from 'notistack';
 
 export default function Register() {
   const { t } = useLanguage();
@@ -59,7 +60,10 @@ export default function Register() {
 
   const handleRegister = () => {
     if (!emailValid || !passwordValid || !confirmPasswordValid) {
-      alert('Invalid registration details, please correct the errors.');
+      enqueueSnackbar('invalid-registration-details', {
+        variant: 'error',
+      });
+      //alert('Invalid registration details, please correct the errors.');
       return;
     }
 

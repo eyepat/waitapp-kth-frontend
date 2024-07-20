@@ -27,15 +27,17 @@ import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
 import Popup from '../../components/PopUps/Popup';
-import Notification from '../../components/Notifications/Notification';
+import { MeetingRoomOutlined } from '@mui/icons-material';
+import { useAuth } from '../../contexts/AuthContext';
+import { enqueueSnackbar } from 'notistack';
 
 export default function Settings() {
   const [openInfo, setOpenInfo] = useState(false);
   const [openWip, setOpenWip] = useState(false);
-  const [openNotification, setOpenNotification] = useState(false);
 
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
+  const { setAuth } = useAuth();
 
   function handleLanguageChange() {
     const newLanguage = language === 'en' ? 'sv' : 'en';
@@ -59,12 +61,14 @@ export default function Settings() {
     setOpenInfo(false);
   }
 
-  function handleCloseNotification() {
-    setOpenNotification(false);
+  function handleNotification() {
+    enqueueSnackbar('page-does-not-work', {
+      variant: 'info',
+    });
   }
 
-  function handleNotification() {
-    setOpenNotification(true);
+  function handleLogout() {
+    setAuth(0);
   }
 
   return (
@@ -251,6 +255,19 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              fullWidth={true}
+              sx={{ display: 'flex', justifyContent: 'space-between' }}
+              onClick={handleLogout}
+            >
+              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+                <MeetingRoomOutlined
+                  style={{ width: 20, height: 20, fill: '#000' }}
+                />
+                <Typography marginLeft={'10px'}>{t('logout')}</Typography>
+              </div>
+              <ArrowRight />
+            </Button>
+            <Button
               onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
@@ -272,13 +289,6 @@ export default function Settings() {
         />
         <WipPopUp open={openWip} onClose={handleCloseWip} />
       </Stack>
-
-      <Notification
-        open={openNotification}
-        onClose={handleCloseNotification}
-        message="page-does-not-work"
-        severity={'info'}
-      />
     </ThemeProvider>
   );
 }

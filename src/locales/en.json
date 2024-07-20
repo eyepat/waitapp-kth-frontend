@@ -142,5 +142,7 @@
   "warning": "WARNING",
   "heads-up": "HEADS UP",
   "oh-snap": "OH SNAP",
-  "page-does-not-work": "This page does not work yet!"
+  "page-does-not-work": "This page does not work yet!",
+  "logout": "Logout",
+  "invalid-registration-details": "Invalid registration details"
 }

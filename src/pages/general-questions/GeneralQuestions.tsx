@@ -16,9 +16,13 @@ import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { InfoOutlined } from '@mui/icons-material';
 import Popup from '../../components/PopUps/Popup';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const [openWaistDialog, setOpenWaistDialog] = useState(false);
   const [openBloodPressureDialog, setOpenBloodPressureDialog] = useState(false);
@@ -154,6 +158,11 @@ export default function GeneralQuestions() {
         </div>
         <Stack marginTop="3vh" width="100%">
           <Button
+            onClick={() => {
+              // TODO: handle actual registration
+              setAuth(1);
+              navigate('/');
+            }}
             variant="contained"
             sx={{
               fontSize: '1.3rem',
