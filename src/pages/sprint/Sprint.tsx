@@ -47,6 +47,7 @@ export default function Sprint() {
           bottom="0"
           marginBottom="10vh"
           borderRadius="25px 25px 0px 0px"
+          maxWidth="1000px"
           borderBottom="1px solid #ABABAB"
           padding="12px 24px"
           textAlign="center"

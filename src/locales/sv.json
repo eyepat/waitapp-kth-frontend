@@ -18,7 +18,7 @@
   "password-input": "Ditt lösenord",
   "confirm-password": "Upprepa lösenord",
   "next": "Nästa",
-  "have-account": "Redan har ett konto?",
+  "have-account": "Har du redan ett konto?",
   "your-email": "Din e-postaddress",
   "questions-about-you": "Frågor om dig",
   "general-questions": "Allmänna frågor",
@@ -143,5 +143,7 @@
   "warning": "VARNING",
   "heads-up": "OBS",
   "oh-snap": "ÅH NEJ",
-  "page-does-not-work": "Denna sida fungerar inte än!"
+  "page-does-not-work": "Denna sida fungerar inte än!",
+  "logout": "Logga ut",
+  "invalid-registration-details": "Felaktiga registreringsuppgifter"
 }
