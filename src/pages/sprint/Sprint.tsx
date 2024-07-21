@@ -8,11 +8,12 @@ import {
 } from '@mui/material';
 import moon from '../../assets/sprint/moon.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Svg, Information } from '../../utils/Icons';
+import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
 import { useState } from 'react';
+import { Background } from './MoonBackground';
 
 export default function Sprint() {
   const [activeSprint, _] = useState(false); // Determine if there is an active sprint, set to false for now
@@ -30,15 +31,7 @@ export default function Sprint() {
   const noActiveSprint = () => {
     return (
       <>
-        <Svg
-          src={moon}
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        />
+        <Background src={moon} />
 
         <Box
           position="fixed"
