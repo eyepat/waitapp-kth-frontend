@@ -5,7 +5,6 @@ import {
   ClosedBook,
   Settings,
   BlackQuestionMark,
-  Svg,
 } from '../../utils/Icons';
 import ki from '../../assets/logo/ki.svg';
 import whiteki from '../../assets/logo/whiteKi.svg';
@@ -13,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { HeaderOpts } from '../../types/headerOpts';
 import { useState } from 'react';
 import Popup from '../PopUps/Popup';
+import { Logo } from './Logo';
 
 export default function Header({
   expanded,
@@ -76,15 +76,7 @@ export default function Header({
           {transparent ? <WhiteBackArrow /> : <BackArrow />}
         </Button>
       </LeftSide>
-      <Svg
-        src={transparent ? whiteki : ki}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
+      <Logo src={transparent ? whiteki : ki} />
       {expanded && (
         <RightSide>
           <ButtonOverride

@@ -4,7 +4,6 @@ import {
   Radio,
   Stack,
   Typography,
-  Box,
   RadioGroup,
   ThemeProvider,
 } from '@mui/material';
@@ -16,6 +15,7 @@ import { styled } from '@mui/system';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
+import { ImageBox } from '../../components/Cards/ImageBox';
 
 const CustomRadio = styled(Radio)(({}) => ({
   '&.Mui-checked .MuiSvgIcon-root': {
@@ -97,13 +97,7 @@ export default function SprintChoice() {
                 boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
                 onClick={() => handleRectangleClick(undefined, rectangle.value)}
               >
-                <Box
-                  component="img"
-                  src={rectangle.imgSrc}
-                  alt={rectangle.header}
-                  width="100px"
-                  sx={{ marginLeft: 0, marginTop: 0, marginBottom: 0 }}
-                />
+                <ImageBox image={rectangle.imgSrc} />
                 <Stack flexGrow={1} paddingLeft="1rem">
                   <Typography variant="h6">{rectangle.header}</Typography>
                   <Typography

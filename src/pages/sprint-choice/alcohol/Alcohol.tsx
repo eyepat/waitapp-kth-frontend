@@ -1,14 +1,9 @@
-import {
-  Button,
-  CardMedia,
-  Stack,
-  ThemeProvider,
-  Typography,
-} from '@mui/material';
+import { Button, Stack, ThemeProvider, Typography } from '@mui/material';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import alcoholBackground from '../../../assets/backgrounds/alcoholBackground.jpg';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../../components/Theme';
+import { ImageHeader } from '../../../components/Headers/ImageHeader';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
@@ -20,23 +15,7 @@ export default function FoodHabits() {
         alignItems="center"
         sx={{ backgroundColor: 'hsla(196, 100%, 44%, 1)', height: '92vh' }}
       >
-        <CardMedia
-          component="img"
-          image={alcoholBackground}
-          alt="Food Background"
-          sx={{
-            minwidth: '100vw',
-            width: '100vw',
-            height: '26.75vh',
-            top: 0,
-            left: 0,
-            position: 'absolute',
-            '@media (min-width: 1000px)': {
-              left: 'auto',
-            },
-            filter: 'brightness(65%)',
-          }}
-        />
+        <ImageHeader image={alcoholBackground} />
         <Stack
           direction="column"
           justifyContent="flex-end"
