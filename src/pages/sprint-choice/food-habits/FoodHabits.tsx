@@ -1,10 +1,4 @@
-import {
-  Button,
-  CardMedia,
-  Stack,
-  ThemeProvider,
-  Typography,
-} from '@mui/material';
+import { Button, Stack, ThemeProvider, Typography } from '@mui/material';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import React, { useState } from 'react';
 import foodBackground from '../../../assets/backgrounds/foodBackground.jpg';
@@ -12,6 +6,7 @@ import NavTab from '../../../components/TabMenu/NavTab';
 import NavTabs from '../../../components/TabMenu/NavTabs';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../../components/Theme';
+import { ImageHeader } from '../../../components/Headers/ImageHeader';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
@@ -74,24 +69,7 @@ export default function FoodHabits() {
   return (
     <ThemeProvider theme={theme}>
       <Stack alignItems="center" sx={{ height: '92vh' }}>
-        <CardMedia
-          component="img"
-          image={foodBackground}
-          alt="Food Background"
-          sx={{
-            transform: 'scaleX(-1)',
-            minwidth: '100vw',
-            width: '100vw',
-            height: '26.75vh',
-            top: 0,
-            left: 0,
-            position: 'absolute',
-            '@media (min-width: 1000px)': {
-              left: 'auto',
-            },
-            filter: 'brightness(65%)',
-          }}
-        />
+        <ImageHeader image={foodBackground} />
         <Stack
           direction="column"
           justifyContent="flex-end"
