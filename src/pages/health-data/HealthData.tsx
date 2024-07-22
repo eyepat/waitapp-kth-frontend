@@ -170,6 +170,34 @@ export default function HealthData() {
             </Grid>
           </CardActions>
         </Card>
+
+        <Card sx={{ marginTop: '30px', borderRadius: '12px' }}>
+          <CardHeader
+            title={
+              <Typography variant="body1" fontWeight="bold">
+                {t('waist-measurement')}
+              </Typography>
+            }
+            sx={{ paddingBottom: '0px' }}
+          />
+
+          <CardContent sx={{ paddingTop: '0px' }}>
+            <Typography>{`${t('recent-waist')} recentWaist cm. ${t('goal-waist')} goalWaist cm`}</Typography>{' '}
+            {/*Add pressure and goal pressure to render text properly.*/}
+          </CardContent>
+        </Card>
+
+        <Typography
+          variant="subtitle2"
+          textAlign="center"
+          color="grey"
+          sx={{ paddingTop: '2vh' }}
+        >
+          {t('more-results-to-come')}
+        </Typography>
+        <Typography variant="subtitle2" textAlign="center" color="grey">
+          {t('during-your-journey')}
+        </Typography>
       </Stack>
     );
   };
