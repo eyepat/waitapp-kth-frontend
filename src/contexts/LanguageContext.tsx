@@ -108,7 +108,7 @@ export const LanguageProvider = ({
     if (cookies.language) {
       setLanguage(cookies.language);
     }
-  }, []);
+  });
 
   return (
     <LanguageContext.Provider value={value}>

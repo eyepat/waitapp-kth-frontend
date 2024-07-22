@@ -45,7 +45,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (cookies.theme) {
       setTheme(cookies.theme);
     }
-  }, []);
+  });
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>

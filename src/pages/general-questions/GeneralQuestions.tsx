@@ -12,17 +12,20 @@ import {
 } from '@mui/material';
 import theme from '../../components/Theme';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { InfoOutlined } from '@mui/icons-material';
 import Popup from '../../components/PopUps/Popup';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { enqueueSnackbar } from 'notistack';
+import { AuthenticationLevels } from '../../Pages';
+import { Dayjs } from 'dayjs';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { user, registerInfo } = useAuth();
 
   const [openWaistDialog, setOpenWaistDialog] = useState(false);
   const [openBloodPressureDialog, setOpenBloodPressureDialog] = useState(false);
@@ -37,10 +40,87 @@ export default function GeneralQuestions() {
   const [selectedGender, setSelectedGender] = useState<string | undefined>(
     undefined
   );
+  const [selectedDOB, setSelectedDOB] = useState<Dayjs | null>(null);
+  const [selectedHeight, setSelectedHeight] = useState<number | undefined>(
+    undefined
+  );
+  const [selectedWeight, setSelectedWeight] = useState<string | undefined>(
+    undefined
+  );
+  const [selectedWaistSize, setSelectedWaistSize] = useState<
+    string | undefined
+  >(undefined);
+  const [selectedBloodPressure, setSelectedBloodPressure] = useState<
+    number | undefined
+  >(undefined);
+  const [selectedAblationDate, setSelectedAblationDate] =
+    useState<Dayjs | null>(null);
 
   const handleGenderChange = (event: SelectChangeEvent<string>) => {
     setSelectedGender(event.target.value);
   };
+  const handleDOBChange = (value: Dayjs | null) => {
+    setSelectedDOB(value);
+  };
+  const handleHeightChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const value = event.target.value;
+    if (!isNaN(Number(value))) {
+      setSelectedHeight(Number(value));
+    }
+  };
+  const handleWeightChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const value = event.target.value;
+
+    setSelectedWeight(value);
+  };
+  const handleWaistSizeChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const value = event.target.value;
+
+    setSelectedWaistSize(value);
+  };
+  const handleBloodPressureChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const value = event.target.value;
+    if (!isNaN(Number(value))) {
+      setSelectedBloodPressure(Number(value));
+    }
+  };
+  const handleAblationDateChange = (value: Dayjs | null) => {
+    setSelectedAblationDate(value);
+  };
+
+  const validateUserProvidedData: () => boolean = () => {
+    return (
+      selectedGender !== null &&
+      selectedDOB != undefined &&
+      selectedHeight != undefined &&
+      selectedWeight != undefined &&
+      selectedWaistSize != undefined &&
+      selectedBloodPressure != undefined &&
+      selectedAblationDate != undefined
+    );
+  };
+
+  useEffect(() => {
+    if (
+      user?.authLevel ? user.authLevel >= AuthenticationLevels.LOGGED_IN : false
+    ) {
+      navigate('/');
+    } else if (
+      user?.authLevel
+        ? user.authLevel < AuthenticationLevels.NO_DATA_PROVIDED
+        : true
+    ) {
+      navigate('/login');
+    }
+  }, [user]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,20 +164,29 @@ export default function GeneralQuestions() {
           sx={{ width: '100%' }}
           label={t('select-birth-year')}
           views={['year']}
+          onChange={handleDOBChange}
         />
         <Stack direction="row" spacing={3} width="100%" marginTop="4vh">
           <Stack direction="column" width="100%">
             <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
             <FormControl fullWidth>
               <InputLabel>...</InputLabel>
-              <OutlinedInput label={t('select-length')} endAdornment={'cm'} />
+              <OutlinedInput
+                label={t('select-length')}
+                endAdornment={'cm'}
+                onChange={handleHeightChange}
+              />
             </FormControl>
           </Stack>
           <Stack direction="column" width="100%">
             <Typography fontWeight="bold">{'4. ' + t('weight')}</Typography>
             <FormControl fullWidth>
               <InputLabel>...</InputLabel>
-              <OutlinedInput label={t('select-weight')} endAdornment={'kg'} />
+              <OutlinedInput
+                label={t('select-weight')}
+                endAdornment={'kg'}
+                onChange={handleWeightChange}
+              />
             </FormControl>
           </Stack>
         </Stack>
@@ -120,6 +209,7 @@ export default function GeneralQuestions() {
               <OutlinedInput
                 label={t('select-waist-measurement')}
                 endAdornment={'cm'}
+                onChange={handleWaistSizeChange}
               />
             </FormControl>
           </Stack>
@@ -141,6 +231,7 @@ export default function GeneralQuestions() {
                 <OutlinedInput
                   label={t('select-blood-pressure')}
                   endAdornment={'mmHg'}
+                  onChange={handleBloodPressureChange}
                 />
               </FormControl>
             </Stack>
@@ -154,14 +245,36 @@ export default function GeneralQuestions() {
           <DatePicker
             sx={{ width: '100%' }}
             label={t('select-ablation-date')}
+            onChange={handleAblationDateChange}
           />
         </div>
         <Stack marginTop="3vh" width="100%">
           <Button
             onClick={() => {
               // TODO: handle actual registration
-              setAuth(1);
-              navigate('/');
+              if (user == undefined) {
+                enqueueSnackbar('error-no-user', {
+                  variant: 'error',
+                });
+                return;
+              }
+              if (!validateUserProvidedData()) {
+                enqueueSnackbar('error-bad-user-data', {
+                  variant: 'error',
+                });
+                return;
+              }
+
+              // TODO: fill with actual info
+              registerInfo({
+                name: user.name,
+                dateOfBirth: selectedDOB?.toISOString(),
+                height: selectedHeight,
+                weight: selectedWeight,
+                waistSize: selectedWeight,
+                bloodPressure: selectedBloodPressure,
+                ablationDate: selectedAblationDate?.toISOString(),
+              });
             }}
             variant="contained"
             sx={{
