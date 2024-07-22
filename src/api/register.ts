@@ -17,7 +17,8 @@ export async function register(user: User): Promise<UserWithToken> {
 
 export async function registerInfo(
   id: number,
-  user: User
+  user: User,
+  token: string
 ): Promise<UserWithToken> {
   delete user.userIdPk;
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/register/${id}`;
@@ -25,6 +26,7 @@ export async function registerInfo(
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(user),
   });

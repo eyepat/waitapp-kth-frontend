@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
 import { useCookies } from 'react-cookie';
-import { login } from '../api/login';
+import { login, loginWithToken } from '../api/login';
 import { enqueueSnackbar } from 'notistack';
 import { register, registerInfo } from '../api/register';
 
 interface AuthContextType {
-  // @deprecated (move to user.authLevel)
-  authLevel: number;
-  setAuth: (auth: number) => void;
+  token?: string;
   user?: UserWithToken;
   login: (
     username: string,
@@ -30,8 +28,10 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cookies, setCookie] = useCookies(['auth']); // Todo: Use tokens with something like keycloak later
-  const [authLevel, setAuthlevel] = useState<number>(() => cookies.auth || 0);
+  const [cookies, setCookie] = useCookies(['token']); // Todo: Use tokens with something like keycloak later
+  const [token, setToken] = useState<string | undefined>(
+    () => cookies.token || 0
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<UserWithToken | undefined>(undefined);
 
@@ -40,9 +40,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setLoading(true);
       const user: UserWithToken = await login({ username, password });
-      if (user.authLevel) {
-        setAuthlevel(user.authLevel);
-      }
+
+      setToken(user.token);
+      setUser(user);
+      return user;
+    } catch (error) {
+      if (error instanceof Error)
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loginWithTokenFunc = async (tokenToUse: string) => {
+    if (loading) return;
+    try {
+      setLoading(true);
+      const user: UserWithToken = await loginWithToken({ token: tokenToUse });
+
+      setToken(user.token);
       setUser(user);
       return user;
     } catch (error) {
@@ -60,9 +78,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setLoading(true);
       const registeredUser: UserWithToken = await register(userToRegister);
-      if (registeredUser.authLevel) {
-        setAuthlevel(registeredUser.authLevel);
-      }
       setUser(registeredUser);
       return registeredUser;
     } catch (error) {
@@ -76,16 +91,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const registerInfoFunc = async (userToRegister: User) => {
-    if (loading || user?.user_id == undefined) return;
+    if (loading || user?.user_id == undefined || token == undefined) return;
     try {
       setLoading(true);
       const registeredUser: UserWithToken = await registerInfo(
         user?.user_id,
-        userToRegister
+        userToRegister,
+        token
       );
-      if (registeredUser.authLevel) {
-        setAuthlevel(registeredUser.authLevel);
-      }
       setUser(registeredUser);
       return registeredUser;
     } catch (error) {
@@ -99,18 +112,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    if (cookies.auth !== authLevel) {
-      setCookie('auth', authLevel);
+    if (user != undefined) {
+      setToken(user?.token);
     }
-  }, [authLevel]);
+  }, [user]);
+
+  useEffect(() => {
+    if (cookies.token !== token && token != undefined) {
+      setCookie('token', token);
+    } else if (user == undefined && token != undefined) {
+      loginWithTokenFunc(token);
+    }
+  }, [token]);
 
   const value: AuthContextType = {
-    authLevel,
-    setAuth: setAuthlevel,
+    token: token,
     user: user,
     login: loginFunc,
     logout: () => {
-      setAuthlevel(0);
       setUser(undefined);
     },
     register: registerFunc,
