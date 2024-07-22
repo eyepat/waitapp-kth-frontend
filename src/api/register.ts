@@ -14,3 +14,23 @@ export async function register(user: User): Promise<UserWithToken> {
 
   return data;
 }
+
+export async function registerInfo(
+  id: number,
+  user: User
+): Promise<UserWithToken> {
+  delete user.userIdPk;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/register/${id}`;
+  const response: Response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  const data = await response.json();
+
+  if (data.message) throw new Error(data.message);
+
+  return data;
+}

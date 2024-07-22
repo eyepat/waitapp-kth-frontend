@@ -22,15 +22,22 @@ import { useAuth } from '../../contexts/AuthContext';
 import theme from '../../components/Theme';
 import { useDevice } from '../../contexts/DeviceContext';
 import { enqueueSnackbar } from 'notistack';
+import { AuthenticationLevels } from '../../Pages';
 
 export default function Login() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { authLevel, setAuth /*, login */ } = useAuth();
-
+  const { user, login } = useAuth();
+  const authLevel = () => {
+    return user?.authLevel != undefined
+      ? user.authLevel
+      : AuthenticationLevels.NOT_LOGGED_IN;
+  };
   useEffect(() => {
-    if (authLevel > 0) {
+    if (authLevel() >= AuthenticationLevels.LOGGED_IN) {
       navigate('/');
+    } else if (authLevel() == AuthenticationLevels.NO_DATA_PROVIDED) {
+      navigate('/general-questions');
     }
   }, [authLevel, navigate]);
 
@@ -64,8 +71,7 @@ export default function Login() {
       });
       return;
     }
-    //login(username, password); // use this later
-    setAuth(1);
+    login(username, password);
   };
 
   const StyledInput = styled(Input)({

@@ -16,10 +16,17 @@ import PhysicalActivity from './pages/sprint-choice/physical-activity/PhysicalAc
 import Alcohol from './pages/sprint-choice/alcohol/Alcohol';
 import Recipes from './pages/recipes/Recipes';
 
+export enum AuthenticationLevels {
+  NOT_LOGGED_IN,
+  NO_DATA_PROVIDED,
+  LOGGED_IN,
+  HIGHER_AUTH_LEVEL,
+}
+
 export const pages: Page[] = [
   {
     to: '/health-data',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'health-data',
     icon: HealthDataIcon,
     isMenu: true,
@@ -31,7 +38,7 @@ export const pages: Page[] = [
   },
   {
     to: '/',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'home',
     icon: HomeIcon,
     isMenu: true,
@@ -41,7 +48,7 @@ export const pages: Page[] = [
   },
   {
     to: '/sprint',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint',
     icon: SprintIcon,
     isMenu: true,
@@ -51,21 +58,21 @@ export const pages: Page[] = [
   },
   {
     to: '/login',
-    permissionLevel: 0,
+    permissionLevel: AuthenticationLevels.NOT_LOGGED_IN,
     label: 'login',
     isMenu: false,
     component: Login,
   },
   {
     to: '/register',
-    permissionLevel: 0,
+    permissionLevel: AuthenticationLevels.NOT_LOGGED_IN,
     label: 'register',
     isMenu: false,
     component: Register,
   },
   {
     to: '/general-questions',
-    permissionLevel: 0,
+    permissionLevel: AuthenticationLevels.NO_DATA_PROVIDED,
     label: 'general-questions',
     isMenu: false,
     component: GeneralQuestions,
@@ -73,7 +80,7 @@ export const pages: Page[] = [
   },
   {
     to: '/settings',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'settings',
     isMenu: false,
     component: Settings,
@@ -82,7 +89,7 @@ export const pages: Page[] = [
   },
   {
     to: '/knowledge-bank',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'knowledge-bank',
     isMenu: false,
     component: KnowledgeBank,
@@ -91,7 +98,7 @@ export const pages: Page[] = [
   },
   {
     to: '/blood-pressure-test',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'blood-pressure-test',
     component: BloodPressureTest,
     header: { expanded: false },
@@ -99,7 +106,7 @@ export const pages: Page[] = [
   },
   {
     to: '/weight-test',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'weight-test',
     component: WeightTest,
     header: { expanded: false },
@@ -107,7 +114,7 @@ export const pages: Page[] = [
   },
   {
     to: '/sprint-choice',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-choice',
     component: SprintChoice,
     header: { expanded: false },
@@ -115,7 +122,7 @@ export const pages: Page[] = [
   },
   {
     to: '/sprint-food-habits',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-food-habits',
     component: FoodHabits,
     header: { expanded: false, transparent: true },
@@ -123,7 +130,7 @@ export const pages: Page[] = [
   },
   {
     to: '/sprint-physical-activity',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-physical-activity',
     component: PhysicalActivity,
     header: { expanded: false, transparent: true },
@@ -131,7 +138,7 @@ export const pages: Page[] = [
   },
   {
     to: '/sprint-alcohol-habits',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-alcohol-habits',
     component: Alcohol,
     header: { expanded: false, transparent: true },
@@ -139,7 +146,7 @@ export const pages: Page[] = [
   },
   {
     to: '/recipes',
-    permissionLevel: 1,
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'recipes',
     component: Recipes,
     header: { expanded: false },

@@ -3,8 +3,10 @@ import { createContext, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 import { login } from '../api/login';
 import { enqueueSnackbar } from 'notistack';
+import { register, registerInfo } from '../api/register';
 
 interface AuthContextType {
+  // @deprecated (move to user.authLevel)
   authLevel: number;
   setAuth: (auth: number) => void;
   user?: UserWithToken;
@@ -13,6 +15,8 @@ interface AuthContextType {
     password: string
   ) => Promise<UserWithToken | undefined>;
   logout: () => void;
+  register: (userToRegister: User) => Promise<UserWithToken | undefined>;
+  registerInfo: (userToRegister: User) => Promise<UserWithToken | undefined>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -51,6 +55,49 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const registerFunc = async (userToRegister: User) => {
+    if (loading) return;
+    try {
+      setLoading(true);
+      const registeredUser: UserWithToken = await register(userToRegister);
+      if (registeredUser.authLevel) {
+        setAuthlevel(registeredUser.authLevel);
+      }
+      setUser(registeredUser);
+      return registeredUser;
+    } catch (error) {
+      if (error instanceof Error)
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const registerInfoFunc = async (userToRegister: User) => {
+    if (loading || user?.user_id == undefined) return;
+    try {
+      setLoading(true);
+      const registeredUser: UserWithToken = await registerInfo(
+        user?.user_id,
+        userToRegister
+      );
+      if (registeredUser.authLevel) {
+        setAuthlevel(registeredUser.authLevel);
+      }
+      setUser(registeredUser);
+      return registeredUser;
+    } catch (error) {
+      if (error instanceof Error)
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (cookies.auth !== authLevel) {
       setCookie('auth', authLevel);
@@ -64,7 +111,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login: loginFunc,
     logout: () => {
       setAuthlevel(0);
+      setUser(undefined);
     },
+    register: registerFunc,
+    registerInfo: registerInfoFunc,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
