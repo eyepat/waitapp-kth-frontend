@@ -25,7 +25,7 @@ import Graph, { GraphMode } from './Graph';
 export default function HealthData() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  let { tab = 'overview' } = useParams();
+  const { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
   const [openWip, setOpenWip] = useState(false);
 

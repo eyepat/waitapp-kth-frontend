@@ -26,7 +26,7 @@ interface GraphProps {
 }
 
 const Graph: React.FC<GraphProps> = ({ mode, data }) => {
-  const [sampleData, _] = useState([
+  const [sampleData] = useState([
     { date: dayjs().subtract(6, 'month').format('MM/DD'), value: 130 / 91 },
     { date: dayjs().subtract(5, 'month').format('MM/DD'), value: 120 / 89 },
     { date: dayjs().subtract(4, 'month').format('MM/DD'), value: 127 / 83 },

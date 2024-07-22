@@ -1,0 +1,16 @@
+export async function register(user: User): Promise<UserWithToken> {
+  delete user.userIdPk;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/register`;
+  const response: Response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  const data = await response.json();
+
+  if (data.message) throw new Error(data.message);
+
+  return data;
+}

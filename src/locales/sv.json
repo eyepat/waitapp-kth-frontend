@@ -145,5 +145,6 @@
   "oh-snap": "ÅH NEJ",
   "page-does-not-work": "Denna sida fungerar inte än!",
   "logout": "Logga ut",
-  "invalid-registration-details": "Felaktiga registreringsuppgifter"
+  "invalid-registration-details": "Felaktiga registreringsuppgifter",
+  "invalid-login-details": "Felaktiga inloggningsuppgifter"
 }

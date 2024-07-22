@@ -39,6 +39,7 @@ export default function SprintChoice() {
   };
 
   const handleRectangleClick = (
+    // tslint:disable-next-line:@typescript-eslint/no-unused-vars
     _: React.ChangeEvent<HTMLInputElement> | undefined,
     value: string
   ) => {

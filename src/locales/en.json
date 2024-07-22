@@ -144,5 +144,6 @@
   "oh-snap": "OH SNAP",
   "page-does-not-work": "This page does not work yet!",
   "logout": "Logout",
-  "invalid-registration-details": "Invalid registration details"
+  "invalid-registration-details": "Invalid registration details",
+  "invalid-login-details": "Invalid login details"
 }
