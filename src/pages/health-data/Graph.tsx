@@ -59,19 +59,16 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         { date: dayjs().subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
         { date: dayjs().subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
         { date: dayjs().format('MM/DD'), systolic: 150, diastolic: 80 }
-      ]
-      : mode === GraphMode.Weight
-        ? [
-          { date: dayjs().subtract(6, 'month').format('MM/DD'), weight: 50 },
-          { date: dayjs().subtract(5, 'month').format('MM/DD'), weight: 68 },
-          { date: dayjs().subtract(4, 'month').format('MM/DD'), weight: 72 },
-          { date: dayjs().subtract(3, 'month').format('MM/DD'), weight: 45 },
-          { date: dayjs().subtract(2, 'month').format('MM/DD'), weight: 73 },
-          { date: dayjs().subtract(1, 'month').format('MM/DD'), weight: 90 },
-          { date: dayjs().subtract(5, 'days').format('MM/DD'), weight: 76 },
-          { date: dayjs().format('MM/DD'), weight: 76 },
-        ]
-        : [];
+      ] : [
+        { date: dayjs().subtract(6, 'month').format('MM/DD'), weight: 50 },
+        { date: dayjs().subtract(5, 'month').format('MM/DD'), weight: 68 },
+        { date: dayjs().subtract(4, 'month').format('MM/DD'), weight: 72 },
+        { date: dayjs().subtract(3, 'month').format('MM/DD'), weight: 45 },
+        { date: dayjs().subtract(2, 'month').format('MM/DD'), weight: 73 },
+        { date: dayjs().subtract(1, 'month').format('MM/DD'), weight: 90 },
+        { date: dayjs().subtract(5, 'days').format('MM/DD'), weight: 76 },
+        { date: dayjs().format('MM/DD'), weight: 76 },
+      ];
   });
 
   // Use sample data if no data is provided (TEMPORARY)
@@ -87,7 +84,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     });
   }
 
-  // Generate domain for y-axis (TODO: Implement dynamic domain calculation?)
+  // Generate domain for y-axis (STATIC FOR NOW!)
   const calculateDomain = (): [string | number, string | number] => {
     if (!data) {
       return [0, 'auto'];
@@ -140,7 +137,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         <g>
           {textParts.map((part: string, index: number) => (
             <text
-              key={`tspan-${index}`}
+              key={`tspan-${part}`}
               textAnchor="start"
               x={mode === GraphMode.BloodPressure ? 10 : 30}
               y={25 + index * 16}
@@ -162,9 +159,10 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
   const getLines = (dataKeys: string[]) => {
     return (
       <>
-        {dataKeys.map((key) => {
+        {dataKeys.map((key, index) => {
           return (
             <Line
+              key={"plotted-line-" + index}
               type="monotone"
               dataKey={key}
               stroke="url(#colorGradient)"
@@ -183,7 +181,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
 
       <ResponsiveContainer width="100%" height={130}>
         <LineChart
-          data={data ? data : sampleData}
+          data={data || sampleData}
           margin={{ top: 0, right: 40, bottom: 0, left: -50 }}
         >
           <defs>
