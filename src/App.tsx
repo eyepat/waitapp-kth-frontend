@@ -22,6 +22,7 @@ import moonImage from './assets/sprint/moon.svg';
 import kiLogo from './assets/logo/ki.svg';
 import whiteKiLogo from './assets/logo/whiteKi.svg';
 import underConstruction from './assets/popup/under-construction.svg';
+import { LoadingProvider } from './contexts/LoadContext';
 
 export default function App() {
   preloadImages([
@@ -39,36 +40,38 @@ export default function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        <AuthProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DeviceContextProvider>
-              <SnackbarProvider
-                maxSnack={5}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                autoHideDuration={3000}
-                dense
-                preventDuplicate
-                Components={{
-                  error: StackNotification,
-                  info: StackNotification,
-                  success: StackNotification,
-                  warning: StackNotification,
-                  default: StackNotification,
-                }}
-                action={(snack) => (
-                  <IconButton
-                    color="inherit"
-                    onClick={() => closeSnackbar(snack)}
-                  >
-                    <CloseIcon fontSize="medium" />
-                  </IconButton>
-                )}
-              >
-                <Routes />
-              </SnackbarProvider>
-            </DeviceContextProvider>
-          </LocalizationProvider>
-        </AuthProvider>
+        <LoadingProvider>
+          <AuthProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DeviceContextProvider>
+                <SnackbarProvider
+                  maxSnack={5}
+                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  autoHideDuration={3000}
+                  dense
+                  preventDuplicate
+                  Components={{
+                    error: StackNotification,
+                    info: StackNotification,
+                    success: StackNotification,
+                    warning: StackNotification,
+                    default: StackNotification,
+                  }}
+                  action={(snack) => (
+                    <IconButton
+                      color="inherit"
+                      onClick={() => closeSnackbar(snack)}
+                    >
+                      <CloseIcon fontSize="medium" />
+                    </IconButton>
+                  )}
+                >
+                  <Routes />
+                </SnackbarProvider>
+              </DeviceContextProvider>
+            </LocalizationProvider>
+          </AuthProvider>
+        </LoadingProvider>
       </LanguageProvider>
     </BrowserRouter>
   );
