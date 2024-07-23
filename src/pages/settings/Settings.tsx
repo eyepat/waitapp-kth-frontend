@@ -11,6 +11,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import {
   ArrowRight,
   Bell,
+  Contact,
   EnglishFlag,
   Help,
   Information,
@@ -238,6 +239,28 @@ export default function Settings() {
           />
           <CardContent>
             <Button
+              onClick={handleOpenWip}
+              fullWidth={true}
+              sx={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+                <Help />
+                <Typography marginLeft={'10px'}>{t('faq')}</Typography>
+              </div>
+              <ArrowRight />
+            </Button>
+            <Button
+              onClick={handleOpenWip}
+              fullWidth={true}
+              sx={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+                <Contact />
+                <Typography marginLeft={'10px'}>{t('contact')}</Typography>
+              </div>
+              <ArrowRight />
+            </Button>
+            <Button
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
               onClick={handleLanguageChange}
@@ -250,28 +273,27 @@ export default function Settings() {
               </div>
               <ArrowRight />
             </Button>
+          </CardContent>
+        </Card>
+
+        <Card sx={{ width: '100%' }}>
+          <CardHeader
+            sx={{ marginBottom: '-25px' }}
+            title={
+              <Typography variant="h6" fontWeight="bold">
+                Login
+              </Typography>
+            }
+          />
+          <CardContent>
             <Button
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
               onClick={logout}
             >
-              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-                <MeetingRoomOutlined
-                  style={{ width: 20, height: 20, fill: '#000' }}
-                />
-                <Typography marginLeft={'10px'}>{t('logout')}</Typography>
-              </div>
-              <ArrowRight />
-            </Button>
-            <Button
-              onClick={handleOpenWip}
-              fullWidth={true}
-              sx={{ display: 'flex', justifyContent: 'space-between' }}
-            >
-              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-                <Help />
-                <Typography marginLeft={'10px'}>{t('help')}</Typography>
-              </div>
+              <Typography marginLeft={'10px'} color="red">
+                {t('logout')}
+              </Typography>
               <ArrowRight />
             </Button>
           </CardContent>

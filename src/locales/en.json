@@ -145,5 +145,11 @@
   "page-does-not-work": "This page does not work yet!",
   "logout": "Logout",
   "invalid-registration-details": "Invalid registration details",
+  "faq": "Frequently asked questions",
+  "contact": "Contact",
+  "recent-waist": "Your last measured waist measurement was ",
+  "goal-waist": "Your goal is to reach below ",
+  "more-results-to-come": "More results will appear",
+  "during-your-journey": "as your journey continues",
   "invalid-login-details": "Invalid login details"
 }
