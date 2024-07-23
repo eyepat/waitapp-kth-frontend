@@ -1,15 +1,18 @@
 import { NavLink, useMatch } from 'react-router-dom';
 import { Page } from '../types/page';
-import { pages } from '../Pages';
+import { AuthenticationLevels, pages } from '../Pages';
 import { Stack, Typography, styled } from '@mui/material';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 
-export interface NavigationProps {
-  authLevel: number;
-}
-
-export function Navigation({ authLevel }: NavigationProps) {
+export function Navigation() {
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const authLevel = () => {
+    return user?.authLevel != undefined
+      ? user.authLevel
+      : AuthenticationLevels.NOT_LOGGED_IN;
+  };
 
   const NavigationBar = styled('div')({
     display: 'flex',
@@ -37,7 +40,7 @@ export function Navigation({ authLevel }: NavigationProps) {
       {pages.map(
         (page: Page) =>
           page.isMenu &&
-          page.permissionLevel <= authLevel && (
+          page.permissionLevel <= authLevel() && (
             <NavLink
               key={page.to}
               className={`nav-link ${useMatch(page.to + '/*') ? 'active' : ''}`}

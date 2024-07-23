@@ -21,17 +21,25 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import theme from '../../components/Theme';
 import { useDevice } from '../../contexts/DeviceContext';
+import { enqueueSnackbar } from 'notistack';
+import { AuthenticationLevels } from '../../Pages';
 
 export default function Login() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { authLevel, setAuth } = useAuth();
-
+  const { user, login } = useAuth();
+  const authLevel = () => {
+    return user?.authLevel != undefined
+      ? user.authLevel
+      : AuthenticationLevels.NOT_LOGGED_IN;
+  };
   useEffect(() => {
-    if (authLevel > 0) {
+    if (authLevel() >= AuthenticationLevels.LOGGED_IN) {
       navigate('/');
+    } else if (authLevel() == AuthenticationLevels.NO_DATA_PROVIDED) {
+      navigate('/general-questions');
     }
-  }, [authLevel]);
+  }, [authLevel, navigate]);
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -47,6 +55,7 @@ export default function Login() {
     setUsername(value);
     setUsernameValid(value.length > 0 ? true : null);
   };
+
   const checkPassword = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -54,13 +63,15 @@ export default function Login() {
     setPassword(value);
     setPasswordValid(value.length > 0 ? true : null);
   };
+
   const tempLoginDemo = () => {
     if (!usernameValid || !passwordValid) {
-      alert('Invalid login credentials, demo text here');
+      enqueueSnackbar('invalid-login-details', {
+        variant: 'error',
+      });
       return;
     }
-    setAuth(1);
-    //navigate('/'); Handled in the useEffect above
+    login(username, password);
   };
 
   const StyledInput = styled(Input)({

@@ -38,7 +38,7 @@ export default function Settings() {
 
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
-  const { setAuth } = useAuth();
+  const { logout } = useAuth();
 
   function handleLanguageChange() {
     const newLanguage = language === 'en' ? 'sv' : 'en';
@@ -66,10 +66,6 @@ export default function Settings() {
     enqueueSnackbar('page-does-not-work', {
       variant: 'info',
     });
-  }
-
-  function handleLogout() {
-    setAuth(0);
   }
 
   return (
@@ -293,7 +289,7 @@ export default function Settings() {
             <Button
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
-              onClick={handleLogout}
+              onClick={logout}
             >
               <Typography marginLeft={'10px'} color="red">
                 {t('logout')}
