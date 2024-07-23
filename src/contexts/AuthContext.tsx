@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { login, loginWithToken } from '../api/login';
 import { enqueueSnackbar } from 'notistack';
 import { register, registerInfo } from '../api/register';
+import { useLoading } from './LoadContext';
 
 interface AuthContextType {
   token?: string;
@@ -28,11 +29,12 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cookies, setCookie] = useCookies(['token']); // Todo: Use tokens with something like keycloak later
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
   const [token, setToken] = useState<string | undefined>(
-    () => cookies.token || 0
+    () => cookies.token || undefined
   );
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const { loading, setLoading } = useLoading();
   const [user, setUser] = useState<UserWithToken | undefined>(undefined);
 
   const loginFunc = async (username: string, password: string) => {
@@ -118,7 +120,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [user]);
 
   useEffect(() => {
-    if (cookies.token !== token && token != undefined) {
+    if (token == '0') {
+      setToken(undefined);
+    } else if (cookies.token !== token && token != undefined) {
       setCookie('token', token);
     } else if (user == undefined && token != undefined) {
       loginWithTokenFunc(token);
@@ -131,6 +135,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login: loginFunc,
     logout: () => {
       setUser(undefined);
+      setToken(undefined);
+      removeCookie('token', { path: '/' });
     },
     register: registerFunc,
     registerInfo: registerInfoFunc,
