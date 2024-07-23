@@ -74,10 +74,20 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         : [];
   });
 
+  // Use sample data if no data is provided (TEMPORARY)
+  // Else, format date to MM/DD
   if (!data) {
     data = sampleData;
+  } else {
+    data = data.map((entry: any) => {
+      return {
+        date: dayjs(entry.date).format('MM/DD'),
+        ...entry
+      };
+    });
   }
 
+  // Generate domain for y-axis (TODO: Implement dynamic domain calculation?)
   const calculateDomain = (): [string | number, string | number] => {
     if (!data) {
       return [0, 'auto'];
@@ -86,6 +96,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     return mode === GraphMode.BloodPressure ? [60, 170] : [30, 100];
   };
 
+  // Generate monthly ticks for x-axis
   const generateTicks = (): string[] => {
     const ticks = [];
     for (let i = 6; i >= 0; i--) {
@@ -94,6 +105,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     return ticks;
   };
 
+  // Styling for x-axis ticks
   const CustomTick = (props: any) => {
     const { x, y, payload } = props;
 
@@ -146,6 +158,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     );
   };
 
+  // Create lines for every given data key (variable name of plotted data)
   const getLines = (dataKeys: string[]) => {
     return (
       <>
