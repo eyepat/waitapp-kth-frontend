@@ -71,7 +71,7 @@ export default function HealthData() {
             sx={{ paddingBottom: '0px' }}
           />
 
-          <CardContent sx={{ paddingTop: '0px' }}>
+          <CardContent sx={{ paddingTop: '0px', paddingBottom: '0px' }}>
             <Typography>{`${t('recent-pressure')} currnetPulse mmHg. ${t('goal-pressure')} goalPulse mmHg`}</Typography>{' '}
             {/*Add pressure and goal pressure to render text properly.*/}
           </CardContent>
@@ -81,7 +81,7 @@ export default function HealthData() {
             timeout="auto"
             unmountOnExit
           >
-            <CardContent>
+            <CardContent style={{ padding: "0" }}>
               <Graph mode={GraphMode.BloodPressure} />
             </CardContent>
           </Collapse>
@@ -128,13 +128,13 @@ export default function HealthData() {
             sx={{ paddingBottom: '0px' }}
           />
 
-          <CardContent sx={{ paddingTop: '0px' }}>
+          <CardContent sx={{ paddingTop: '0px', paddingBottom: '0px' }}>
             <Typography>{`${t('recent-weight')} currentWeight kg. ${t('goal-weight')} goalWeight kg`}</Typography>{' '}
             {/*Add weight and goal weight to dispaly information properly*/}
           </CardContent>
 
           <Collapse in={expandedCards.weight} timeout="auto" unmountOnExit>
-            <CardContent>
+            <CardContent style={{ padding: "0" }}>
               <Graph mode={GraphMode.Weight} />
             </CardContent>
           </Collapse>
