@@ -28,7 +28,6 @@ import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../components/Theme';
 import Popup from '../../components/PopUps/Popup';
-import { MeetingRoomOutlined } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
 
