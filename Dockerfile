@@ -9,6 +9,7 @@ COPY package*.json ./
 COPY bun.lockb ./
 RUN bun i
 COPY . .
+RUN rm -f .env.development
 RUN chmod +x /app/build-docker.sh
 
 RUN bun run docker-build

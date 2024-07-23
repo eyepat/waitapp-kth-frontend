@@ -1,5 +1,5 @@
 import { Navigate, Routes as RRoutes, Route } from 'react-router-dom';
-import { pages } from '../Pages';
+import { AuthenticationLevels, pages } from '../Pages';
 import { Page } from '../types/page';
 import NotFound from '../pages/NotFound';
 import Header from '../components/Headers/Header';
@@ -7,11 +7,16 @@ import { Navigation } from '../components/Navigation';
 import { useAuth } from '../contexts/AuthContext';
 
 export function Routes() {
-  const { authLevel } = useAuth();
+  const { user } = useAuth();
+  const authLevel = () => {
+    return user?.authLevel != undefined
+      ? user.authLevel
+      : AuthenticationLevels.NOT_LOGGED_IN;
+  };
   return (
     <RRoutes>
       {pages.map((page: Page) =>
-        page.component && page.permissionLevel <= authLevel ? (
+        page.component && page.permissionLevel <= authLevel() ? (
           <Route
             key={page.to}
             path={page.path ? page.path : page.to + (page.tabs ? '/:tab?' : '')}
@@ -39,7 +44,7 @@ export function Routes() {
                     <page.component />
                   </div>
                 )}
-                {page.showBottomNav && <Navigation authLevel={authLevel} />}
+                {page.showBottomNav && <Navigation />}
               </>
             )}
           />

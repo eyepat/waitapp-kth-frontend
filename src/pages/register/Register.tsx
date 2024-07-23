@@ -8,15 +8,17 @@ import {
   styled,
   ThemeProvider,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ClosedEye, Mail, OpenEye } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { enqueueSnackbar } from 'notistack';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Register() {
   const { t } = useLanguage();
+  const { user, register } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
@@ -33,6 +35,12 @@ export default function Register() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
+
+  useEffect(() => {
+    if (user?.authLevel) {
+      navigate('/general-questions');
+    }
+  }, [user]);
 
   const checkEmail = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -66,8 +74,11 @@ export default function Register() {
       //alert('Invalid registration details, please correct the errors.');
       return;
     }
-
-    navigate('/general-questions');
+    register({
+      name: email,
+      password: password,
+    });
+    //navigate('/general-questions');
   };
 
   const StyledInput = styled(Input)({

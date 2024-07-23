@@ -34,7 +34,7 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = ({ mode, data }) => {
   const { t } = useLanguage();
-  const [sampleData, _] = useState<any>(() => {
+  const [sampleData] = useState<any>(() => {
     // Check if mode is BloodPressure or Weight and generate sample data accordingly
     return mode === GraphMode.BloodPressure
       ? [

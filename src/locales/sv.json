@@ -148,5 +148,12 @@
   "invalid-registration-details": "Felaktiga registreringsuppgifter",
   "over": "Över",
   "systolic": "Systolisk",
-  "diastolic": "Diastolisk"
+  "diastolic": "Diastolisk",
+  "faq": "Vanliga fårgor",
+  "contact": "Kontakt",
+  "recent-waist": "Ditt senaste uppmätta midjemått var ",
+  "goal-waist": "Ditt mål är att nå under ",
+  "more-results-to-come": "Fler resultat kommer att dyka",
+  "during-your-journey": "upp när din resa fortsätter",
+  "invalid-login-details": "Felaktiga inloggningsuppgifter"
 }
