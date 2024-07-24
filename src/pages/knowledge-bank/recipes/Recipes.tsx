@@ -1,12 +1,12 @@
 import { Stack, ThemeProvider, Typography } from '@mui/material';
-import theme from '../../components/Theme';
-import NavTab from '../../components/TabMenu/NavTab';
-import NavTabs from '../../components/TabMenu/NavTabs';
+import theme from '../../../components/Theme';
+import NavTab from '../../../components/TabMenu/NavTab';
+import NavTabs from '../../../components/TabMenu/NavTabs';
 import { useState } from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../../contexts/LanguageContext';
 
-import placeHolderImg from '../../assets/reciplePlaceHolderImg/placeHolderFood.png';
-import RecipeCard from '../../components/Cards/RecipeCard';
+import placeHolderImg from '../../../assets/reciplePlaceHolderImg/placeHolderFood.png';
+import RecipeCard from '../../../components/Cards/RecipeCard';
 
 export default function Recipes() {
   const [value, setValue] = useState(0);

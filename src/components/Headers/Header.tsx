@@ -9,16 +9,21 @@ import {
 import ki from '../../assets/logo/ki.svg';
 import whiteki from '../../assets/logo/whiteKi.svg';
 import { useNavigate } from 'react-router-dom';
-import { HeaderOpts } from '../../types/headerOpts';
+import { HeaderOpts as HOpts } from '../../types/headerOpts';
 import { useState } from 'react';
 import Popup from '../PopUps/Popup';
 import { Logo } from './Logo';
+
+interface HeaderOpts extends HOpts {
+  tabsParent?: string | undefined;
+}
 
 export default function Header({
   expanded,
   transparent,
   settings,
   help,
+  tabsParent,
 }: HeaderOpts) {
   const navigate = useNavigate();
   const TopBar = styled('div')({
@@ -68,11 +73,24 @@ export default function Header({
   function handleClose(): void {
     setOpen(false);
   }
+
+  function getParent() {
+    const steps = tabsParent
+      ? window.location.pathname.endsWith(tabsParent)
+        ? 1
+        : 2
+      : 1;
+    const path = window.location.pathname.split('/');
+    const parent = path.slice(0, path.length - steps).join('/');
+
+    return parent.length > 0 ? parent : '/';
+  }
+
   return (
     // TODO: Update this condition to also check if the current page is healthdata, home, or sprint. If it is, do nothing.
     <TopBar sx={transparent ? { background: 'none' } : undefined}>
       <LeftSide>
-        <Button onClick={() => navigate(-1)}>
+        <Button onClick={() => navigate(getParent())}>
           {transparent ? <WhiteBackArrow /> : <BackArrow />}
         </Button>
       </LeftSide>

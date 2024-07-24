@@ -10,11 +10,11 @@ import {
   Typography,
   styled,
 } from '@mui/material';
-import bloodpressure from '../../assets/tests/bloodpressure.svg';
-import { useLanguage } from '../../contexts/LanguageContext';
+import bloodpressure from '../../../assets/tests/bloodpressure.svg';
+import { useLanguage } from '../../../contexts/LanguageContext';
 import { useState } from 'react';
-import { Svg } from '../../utils/Icons';
-import theme from '../../components/Theme';
+import { Svg } from '../../../utils/Icons';
+import theme from '../../../components/Theme';
 
 const CustomTextField = styled(TextField)({
   width: '60%',

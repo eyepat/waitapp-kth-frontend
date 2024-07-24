@@ -49,7 +49,7 @@ export default function KnowledgeBank() {
             {t('video-material')}
           </MenuButton>
           <MenuButton
-            onClick={() => navigate('/recipes')}
+            onClick={() => navigate('/knowledge-bank/recipes')}
             variant="contained"
             endIcon={<ArrowRight />}
           >

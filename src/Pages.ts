@@ -8,13 +8,13 @@ import { Page } from './types/page';
 import { HealthDataIcon, HomeIcon, SprintIcon } from './utils/Icons';
 import Settings from './pages/settings/Settings';
 import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
-import BloodPressureTest from './pages/tests/BloodPressureTest';
-import WeightTest from './pages/tests/WeightTest';
-import SprintChoice from './pages/sprint-choice/SprintChoice';
-import FoodHabits from './pages/sprint-choice/food-habits/FoodHabits';
-import PhysicalActivity from './pages/sprint-choice/physical-activity/PhysicalActivity';
-import Alcohol from './pages/sprint-choice/alcohol/Alcohol';
-import Recipes from './pages/recipes/Recipes';
+import BloodPressureTest from './pages/health-data/tests/BloodPressureTest';
+import WeightTest from './pages/health-data/tests/WeightTest';
+import SprintChoice from './pages/sprint/choice/SprintChoice';
+import FoodHabits from './pages/sprint/choice/food-habits/FoodHabits';
+import PhysicalActivity from './pages/sprint/choice/physical-activity/PhysicalActivity';
+import Alcohol from './pages/sprint/choice/alcohol-habits/AlcoholHabits';
+import Recipes from './pages/knowledge-bank/recipes/Recipes';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -97,7 +97,7 @@ export const pages: Page[] = [
     showBottomNav: true,
   },
   {
-    to: '/blood-pressure-test',
+    to: '/health-data/tests/blood-pressure-test',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'blood-pressure-test',
     component: BloodPressureTest,
@@ -105,7 +105,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/weight-test',
+    to: '/health-data/tests/weight-test',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'weight-test',
     component: WeightTest,
@@ -113,7 +113,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/sprint-choice',
+    to: '/sprint/choice',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-choice',
     component: SprintChoice,
@@ -121,7 +121,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/sprint-food-habits',
+    to: '/sprint/choice/food-habits',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-food-habits',
     component: FoodHabits,
@@ -129,7 +129,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/sprint-physical-activity',
+    to: '/sprint/choice/physical-activity',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-physical-activity',
     component: PhysicalActivity,
@@ -137,7 +137,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/sprint-alcohol-habits',
+    to: '/sprint/choice/alcohol-habits',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-alcohol-habits',
     component: Alcohol,
@@ -145,7 +145,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/recipes',
+    to: '/knowledge-bank/recipes',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'recipes',
     component: Recipes,
