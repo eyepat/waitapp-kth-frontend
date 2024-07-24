@@ -81,7 +81,7 @@ export default function HealthData() {
             timeout="auto"
             unmountOnExit
           >
-            <CardContent style={{ padding: "0" }}>
+            <CardContent style={{ padding: '0' }}>
               <Graph mode={GraphMode.BloodPressure} />
             </CardContent>
           </Collapse>
@@ -134,7 +134,7 @@ export default function HealthData() {
           </CardContent>
 
           <Collapse in={expandedCards.weight} timeout="auto" unmountOnExit>
-            <CardContent style={{ padding: "0" }}>
+            <CardContent style={{ padding: '0' }}>
               <Graph mode={GraphMode.Weight} />
             </CardContent>
           </Collapse>
