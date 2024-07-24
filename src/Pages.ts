@@ -97,7 +97,10 @@ export const pages: Page[] = [
     showBottomNav: true,
   },
   {
-    to: '/health-data/tests/blood-pressure-test',
+    to: [
+      '/health-data/tests/blood-pressure-test',
+      '/health-data/overview/blood-pressure-test',
+    ],
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'blood-pressure-test',
     component: BloodPressureTest,
@@ -105,7 +108,7 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: '/health-data/tests/weight-test',
+    to: ['/health-data/tests/weight-test', '/health-data/overview/weight-test'],
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'weight-test',
     component: WeightTest,

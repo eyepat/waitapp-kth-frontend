@@ -19,45 +19,47 @@ export function Routes() {
   return (
     <RRoutes>
       {pages.map((page: Page) =>
-        page.component &&
-        (page.permissionLevel <= authLevel() || isLoadingIn) ? (
-          <Route
-            key={page.to}
-            path={page.path ? page.path : page.to + (page.tabs ? '/:tab?' : '')}
-            Component={() => (
-              <>
-                {page.header != undefined && (
-                  <Header
-                    expanded={
-                      page.header.expanded != undefined
-                        ? page.header.expanded
-                        : false
-                    }
-                    transparent={page.header.transparent}
-                    settings={page.header.settings}
-                    help={page.header.help}
-                    tabsParent={page.to}
-                  />
-                )}
-                {page.component && (
-                  <div
-                    style={{
-                      maxWidth: '1000px',
-                      margin: 'auto',
-                    }}
-                  >
-                    <page.component />
-                  </div>
-                )}
-                {page.showBottomNav && <Navigation />}
-              </>
-            )}
-          />
-        ) : (
-          <Route
-            path={page.path ? page.path : page.to}
-            Component={() => <Navigate to="/login" />}
-          />
+        (Array.isArray(page.to) ? page.to : [page.to]).map((to) =>
+          page.component &&
+          (page.permissionLevel <= authLevel() || isLoadingIn) ? (
+            <Route
+              key={to}
+              path={page.path ? page.path : to + (page.tabs ? '/:tab?' : '')}
+              Component={() => (
+                <>
+                  {page.header != undefined && (
+                    <Header
+                      expanded={
+                        page.header.expanded != undefined
+                          ? page.header.expanded
+                          : false
+                      }
+                      transparent={page.header.transparent}
+                      settings={page.header.settings}
+                      help={page.header.help}
+                      tabsParent={to}
+                    />
+                  )}
+                  {page.component && (
+                    <div
+                      style={{
+                        maxWidth: '1000px',
+                        margin: 'auto',
+                      }}
+                    >
+                      <page.component />
+                    </div>
+                  )}
+                  {page.showBottomNav && <Navigation />}
+                </>
+              )}
+            />
+          ) : (
+            <Route
+              path={page.path ? page.path : to}
+              Component={() => <Navigate to="/login" />}
+            />
+          )
         )
       )}
       {!loading && <Route path={'*'} Component={NotFound} />}
