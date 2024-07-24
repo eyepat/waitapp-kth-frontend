@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { HeaderOpts } from './headerOpts';
 
 export type Page = {
-  to: string;
+  to: string | string[];
   path?: string;
   permissionLevel: number;
   label?: string;
