@@ -88,7 +88,7 @@ export default function Sprint() {
             variant="contained"
             color="primary"
             style={{ borderRadius: '8px', width: '228px', height: '36px' }}
-            onClick={() => navigate('/sprint-choice')}
+            onClick={() => navigate('/sprint/choice')}
           >
             {t('choose-new-sprint')}
           </Button>

@@ -1,65 +1,13 @@
 import { Button, Stack, ThemeProvider, Typography } from '@mui/material';
-import { useLanguage } from '../../../contexts/LanguageContext';
-import React, { useState } from 'react';
-import physicalBackground from '../../../assets/backgrounds/physicalBackground.jpg';
-import NavTab from '../../../components/TabMenu/NavTab';
-import NavTabs from '../../../components/TabMenu/NavTabs';
+import { useLanguage } from '../../../../contexts/LanguageContext';
+import alcoholBackground from '../../../../assets/backgrounds/alcoholBackground.jpg';
 import { useNavigate } from 'react-router-dom';
-import theme from '../../../components/Theme';
-import { ImageHeader } from '../../../components/Headers/ImageHeader';
+import theme from '../../../../components/Theme';
+import { ImageHeader } from '../../../../components/Headers/ImageHeader';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const [value, setValue] = useState(0);
-
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const renderNormal = () => {
-    return (
-      <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
-        <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('LowPhysicalItemOne')}
-          </li>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('LowPhysicalItemTwo')}
-          </li>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('LowPhysicalItemThree')}
-          </li>
-        </ul>
-      </Stack>
-    );
-  };
-
-  const renderIntensive = () => {
-    return (
-      <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
-        <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('HighPhysicalItemOne')}
-          </li>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('HighPhysicalItemTwo')}
-          </li>
-        </ul>
-      </Stack>
-    );
-  };
-
-  const renderTabContent = () => {
-    switch (value) {
-      case 0:
-        return renderNormal();
-      case 1:
-        return renderIntensive();
-      default:
-        return null;
-    }
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -67,7 +15,7 @@ export default function FoodHabits() {
         alignItems="center"
         sx={{ backgroundColor: 'hsla(196, 100%, 44%, 1)', height: '92vh' }}
       >
-        <ImageHeader image={physicalBackground} />
+        <ImageHeader image={alcoholBackground} />
         <Stack
           direction="column"
           justifyContent="flex-end"
@@ -91,7 +39,7 @@ export default function FoodHabits() {
               variant="h4"
               style={{ textTransform: 'uppercase' }}
             >
-              {t('physical-activity')}
+              {t('alcohol')}
             </Typography>
             <Typography
               color="white"
@@ -104,43 +52,33 @@ export default function FoodHabits() {
             </Typography>
           </Stack>
         </Stack>
-        <Stack width={'90%'} paddingTop={'3vh'}>
-          <Typography color="white">{t('goal-level')}</Typography>
-          <NavTabs value={value} onChange={handleChange} centered>
-            <NavTab
-              label={t('normal')}
-              sx={{
-                '&.Mui-selected': {
-                  color: 'hsla(196, 100%, 44%, 1)',
-                },
-              }}
-            />
-            <NavTab
-              label={t('intensive')}
-              sx={{
-                '&.Mui-selected': {
-                  color: 'hsla(196, 100%, 44%, 1)',
-                },
-                '&:not(.Mui-selected)': {
-                  backgroundColor: 'hsla(196, 100%, 44%, 1)',
-                },
-              }}
-            />
-          </NavTabs>
-        </Stack>
         <Stack
           alignItems="start"
           padding="0vh 3vh 0vh 3vh"
+          marginTop="5vh"
           sx={{ flexGrow: 1 }}
         >
-          <Typography color="white" variant="h6" marginTop="3vh">
+          <Typography color="white" variant="h6" marginTop="9vh">
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
-          <div style={{ minHeight: '150px' }}>{renderTabContent()}</div>
+          <div style={{ minHeight: '150px' }}>
+            <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
+              <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
+                <li style={{ marginBottom: '4px', color: 'white' }}>
+                  {t('AlcoholItemOne')}
+                </li>
+                <li style={{ marginBottom: '4px', color: 'white' }}>
+                  {t('AlcoholItemTwo')}
+                </li>
+              </ul>
+            </Stack>
+          </div>
         </Stack>
         <Stack
+          marginTop="8vh"
           sx={{
             justifyContent: 'center',
+            height: '35vh',
             alignItems: 'center',
           }}
         >

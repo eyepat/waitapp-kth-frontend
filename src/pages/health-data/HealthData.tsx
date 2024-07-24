@@ -95,7 +95,7 @@ export default function HealthData() {
                   sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
                   onClick={() => {
-                    navigate('/blood-pressure-test');
+                    navigate('/health-data/tests/blood-pressure-test');
                   }}
                 >
                   <Typography>{t('new-measurment')}</Typography>
@@ -148,7 +148,7 @@ export default function HealthData() {
                   sx={{ borderRadius: '10px' }}
                   endIcon={<AddCircleOutline />}
                   onClick={() => {
-                    navigate('/weight-test');
+                    navigate('/health-data/tests/weight-test');
                   }}
                 >
                   <Typography>{t('new-measurment')}</Typography>
@@ -211,7 +211,7 @@ export default function HealthData() {
           {t('sprint-text')}
         </Typography>
         <Button
-          onClick={() => navigate('/sprint-choice')}
+          onClick={() => navigate('/sprint/choice')}
           sx={{
             marginTop: '25px',
             width: '60%',
@@ -238,12 +238,12 @@ export default function HealthData() {
       {
         name: t('blood-pressure'),
         icon: <ArrowRight />,
-        onClick: () => navigate('/blood-pressure-test'),
+        onClick: () => navigate('/health-data/tests/blood-pressure-test'),
       },
       {
         name: t('weight'),
         icon: <ArrowRight />,
-        onClick: () => navigate('/weight-test'),
+        onClick: () => navigate('/health-data/tests/weight-test'),
       },
       {
         name: t('waist-measurement'),

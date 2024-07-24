@@ -9,8 +9,8 @@ import {
   styled,
 } from '@mui/material';
 import { ChangeEvent } from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
-import theme from '../../components/Theme';
+import { useLanguage } from '../../../contexts/LanguageContext';
+import theme from '../../../components/Theme';
 
 export default function WeightTest() {
   const CustomInputField = styled(TextField)({

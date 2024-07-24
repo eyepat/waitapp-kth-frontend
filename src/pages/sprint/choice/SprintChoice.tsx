@@ -7,15 +7,15 @@ import {
   RadioGroup,
   ThemeProvider,
 } from '@mui/material';
-import alcohol from '../../assets/sprintchoice/alcohol.svg';
-import food from '../../assets/sprintchoice/food.svg';
-import physact from '../../assets/sprintchoice/physact.svg';
-import { useLanguage } from '../../contexts/LanguageContext';
+import alcohol from '../../../assets/sprintchoice/alcohol.svg';
+import food from '../../../assets/sprintchoice/food.svg';
+import physact from '../../../assets/sprintchoice/physact.svg';
+import { useLanguage } from '../../../contexts/LanguageContext';
 import { styled } from '@mui/system';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
-import theme from '../../components/Theme';
-import { ImageBox } from '../../components/Cards/ImageBox';
+import theme from '../../../components/Theme';
+import { ImageBox } from '../../../components/Cards/ImageBox';
 
 const CustomRadio = styled(Radio)(({}) => ({
   '&.Mui-checked .MuiSvgIcon-root': {
@@ -51,19 +51,19 @@ export default function SprintChoice() {
       imgSrc: food,
       header: t('eating-habit'),
       info: t('info-text-eat-habit'),
-      value: '/sprint-food-habits',
+      value: '/sprint/choice/food-habits',
     },
     {
       imgSrc: physact,
       header: t('physical-activity'),
       info: t('info-text-physical-activity'),
-      value: '/sprint-physical-activity',
+      value: '/sprint/choice/physical-activity',
     },
     {
       imgSrc: alcohol,
       header: t('alcohol'),
       info: t('info-text-alcohol'),
-      value: '/sprint-alcohol-habits',
+      value: '/sprint/choice/alcohol-habits',
     },
   ];
 
