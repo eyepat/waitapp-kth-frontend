@@ -23,6 +23,8 @@ import kiLogo from './assets/logo/ki.svg';
 import whiteKiLogo from './assets/logo/whiteKi.svg';
 import underConstruction from './assets/popup/under-construction.svg';
 import { LoadingProvider } from './contexts/LoadContext';
+import BloodPressureTest from './assets/tests/bloodpressure.svg';
+import 'dayjs/locale/en-gb';
 
 export default function App() {
   preloadImages([
@@ -35,6 +37,7 @@ export default function App() {
     moonImage,
     kiLogo,
     whiteKiLogo,
+    BloodPressureTest,
     underConstruction,
   ]);
   return (
@@ -42,7 +45,10 @@ export default function App() {
       <LanguageProvider>
         <LoadingProvider>
           <AuthProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider
+              adapterLocale="en-gb"
+              dateAdapter={AdapterDayjs}
+            >
               <DeviceContextProvider>
                 <SnackbarProvider
                   maxSnack={5}

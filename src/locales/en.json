@@ -154,5 +154,7 @@
   "goal-waist": "Your goal is to reach below ",
   "more-results-to-come": "More results will appear",
   "during-your-journey": "as your journey continues",
-  "invalid-login-details": "Invalid login details"
+  "invalid-login-details": "Invalid login details",
+  "birth-date": "Birth date",
+  "select-birth-date": "Pick your birth date"
 }

@@ -73,7 +73,7 @@ export default function Settings() {
         direction="column"
         alignItems="start"
         margin="auto"
-        marginBottom={'20%'}
+        marginBottom="13vh"
         spacing={3}
       >
         <Typography variant="h4" marginBottom="1rem" alignSelf="center">

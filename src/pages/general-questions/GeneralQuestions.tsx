@@ -37,9 +37,7 @@ export default function GeneralQuestions() {
   const handleCloseBloodPressureDialog = () =>
     setOpenBloodPressureDialog(false);
 
-  const [selectedGender, setSelectedGender] = useState<string | undefined>(
-    undefined
-  );
+  const [selectedGender, setSelectedGender] = useState<string>('');
   const [selectedDOB, setSelectedDOB] = useState<Dayjs | null>(null);
   const [selectedHeight, setSelectedHeight] = useState<number | undefined>(
     undefined
@@ -158,12 +156,11 @@ export default function GeneralQuestions() {
           </Select>
         </FormControl>
         <Typography fontWeight="bold" marginTop="4vh">
-          {'2. ' + t('birth-year')}
+          {'2. ' + t('birth-date')}
         </Typography>
         <DatePicker
           sx={{ width: '100%' }}
-          label={t('select-birth-year')}
-          views={['year']}
+          label={t('select-birth-date')}
           onChange={handleDOBChange}
         />
         <Stack direction="row" spacing={3} width="100%" marginTop="4vh">
