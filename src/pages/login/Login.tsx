@@ -1,11 +1,9 @@
 import {
   Button,
   Divider,
-  Input,
   Stack,
   ThemeProvider,
   Typography,
-  styled,
 } from '@mui/material';
 import { Svg } from '../../utils/Icons';
 import ki from '../../assets/logo/ki.svg';
@@ -20,7 +18,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import theme from '../../components/Theme';
-import { useDevice } from '../../contexts/DeviceContext';
+
 import { enqueueSnackbar } from 'notistack';
 import { AuthenticationLevels } from '../../Pages';
 
@@ -46,24 +44,6 @@ export default function Login() {
   const [usernameValid, setUsernameValid] = useState<boolean | null>(null);
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
 
-  const { isOnDesktop } = useDevice();
-
-  const checkUsername = async (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const value = e.target.value;
-    setUsername(value);
-    setUsernameValid(value.length > 0 ? true : null);
-  };
-
-  const checkPassword = async (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const value = e.target.value;
-    setPassword(value);
-    setPasswordValid(value.length > 0 ? true : null);
-  };
-
   const tempLoginDemo = () => {
     if (!usernameValid || !passwordValid) {
       enqueueSnackbar('invalid-login-details', {
@@ -74,22 +54,33 @@ export default function Login() {
     login(username, password);
   };
 
-  const StyledInput = styled(Input)({
-    margin: 'auto',
-    borderRadius: '1rem',
-    boxShadow: '0 2px 1rem rgba(0, 0, 0, 0.4)',
-    padding: '0.2rem',
-    '& .MuiInputBase-input': {
-      paddingLeft: '1rem',
-      width: '75%',
-    },
-    transition: 'width 0.5s',
-  });
+  const updateUsername: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const updatePassword: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (e) => {
+    setPassword(e.target.value);
+  };
+
+  useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setUsernameValid(
+      emailRegex.test(username) ? true : username.length > 0 ? false : null
+    );
+  }, [username]);
+
+  useEffect(() => {
+    setPasswordValid(password.length > 0 ? true : null);
+  }, [password]);
 
   return (
     <ThemeProvider theme={theme}>
       <Stack
-        direction={isOnDesktop ? 'row' : 'column'}
+        direction="column"
         sx={{
           justifyContent: 'center',
           display: 'flex',
@@ -123,71 +114,88 @@ export default function Login() {
               spacing={2}
               sx={{ width: '60%', display: 'flex' }}
             >
-              <StyledInput
-                placeholder={t('username')}
-                startAdornment={<PersonOutline sx={{ color: '#00A3E0' }} />}
-                disableUnderline={true}
-                endAdornment={
-                  <div
-                    style={{
-                      minWidth: '24px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {usernameValid !== false ? (
-                      <CheckCircle
-                        sx={
-                          usernameValid
-                            ? { color: 'green' }
-                            : { visibility: 'hidden' }
-                        }
-                      />
-                    ) : (
-                      <Error sx={{ color: 'red' }} />
-                    )}
-                  </div>
-                }
-                onBlur={checkUsername}
-                defaultValue={username}
-                inputMode="text"
-                type="username"
-                sx={{ width: '100%' }}
-              ></StyledInput>
-
-              <StyledInput
-                placeholder={t('password')}
-                startAdornment={<LockOutlined sx={{ color: '#00A3E0' }} />}
-                disableUnderline={true}
-                endAdornment={
-                  <div
-                    style={{
-                      minWidth: '24px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {passwordValid !== false ? (
-                      <CheckCircle
-                        sx={
-                          passwordValid
-                            ? { color: 'green' }
-                            : { visibility: 'hidden' }
-                        }
-                      />
-                    ) : (
-                      <Error sx={{ color: 'red' }} />
-                    )}
-                  </div>
-                }
-                onBlur={checkPassword}
-                defaultValue={password}
-                inputMode="text"
-                type="password"
-                sx={{ width: '100%' }}
-              ></StyledInput>
+              <div
+                style={{
+                  background: 'white',
+                  boxShadow: '1px 4px 7px -1px rgba(0, 0, 0, 0.25)',
+                  borderRadius: '16px',
+                  minHeight: '1.75rem',
+                  padding: '0.2rem',
+                  display: 'flex',
+                  flex: 'row',
+                  justifyContent: 'space-apart',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  transition: 'width 0.5s',
+                  width: '100%',
+                }}
+              >
+                <PersonOutline sx={{ color: '#00A3E0' }} />
+                <input
+                  onChange={updateUsername}
+                  style={{
+                    outline: 'none',
+                    border: 'none',
+                    background: 'none',
+                    width: '90%',
+                  }}
+                  type={'email'}
+                  value={username}
+                  placeholder={t('username')}
+                ></input>
+                {usernameValid !== false ? (
+                  <CheckCircle
+                    sx={
+                      usernameValid
+                        ? { color: 'green' }
+                        : { visibility: 'hidden' }
+                    }
+                  />
+                ) : (
+                  <Error sx={{ color: 'red' }} />
+                )}
+              </div>
+              <div
+                style={{
+                  background: 'white',
+                  boxShadow: '1px 4px 7px -1px rgba(0, 0, 0, 0.25)',
+                  borderRadius: '16px',
+                  minHeight: '1.75rem',
+                  padding: '0.2rem',
+                  display: 'flex',
+                  flex: 'row',
+                  justifyContent: 'space-apart',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  transition: 'width 0.5s',
+                  width: '100%',
+                }}
+              >
+                <LockOutlined sx={{ color: '#00A3E0' }} />
+                <input
+                  onChange={updatePassword}
+                  style={{
+                    outline: 'none',
+                    border: 'none',
+                    background: 'none',
+                    width: '90%',
+                  }}
+                  type={'password'}
+                  value={password}
+                  placeholder={t('password')}
+                ></input>
+                {passwordValid !== false ? (
+                  <CheckCircle
+                    sx={
+                      passwordValid
+                        ? { color: 'green' }
+                        : { visibility: 'hidden' }
+                    }
+                  />
+                ) : (
+                  <Error sx={{ color: 'red' }} />
+                )}
+              </div>
             </Stack>
             <Button
               variant="contained"

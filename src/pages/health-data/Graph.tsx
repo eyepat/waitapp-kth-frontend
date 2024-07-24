@@ -6,7 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from 'recharts';
 import { useLanguage } from '../../contexts/LanguageContext';
 import dayjs from 'dayjs';
@@ -38,37 +38,154 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     // Check if mode is BloodPressure or Weight and generate sample data accordingly
     return mode === GraphMode.BloodPressure
       ? [
-        { date: dayjs().subtract(6, 'month').subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(6, 'month').subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(6, 'month').format('MM/DD'), systolic: 130, diastolic: 91 },
-        { date: dayjs().subtract(5, 'month').subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(5, 'month').subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(5, 'month').format('MM/DD'), systolic: 120, diastolic: 89 },
-        { date: dayjs().subtract(4, 'month').subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(4, 'month').subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(4, 'month').format('MM/DD'), systolic: 127, diastolic: 83 },
-        { date: dayjs().subtract(3, 'month').subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(3, 'month').subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(3, 'month').format('MM/DD'), systolic: 150, diastolic: 80 },
-        { date: dayjs().subtract(2, 'month').subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(2, 'month').subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(2, 'month').format('MM/DD'), systolic: 140, diastolic: 94 },
-        { date: dayjs().subtract(1, 'month').subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(1, 'month').subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(1, 'month').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(13, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().subtract(5, 'days').format('MM/DD'), systolic: 135, diastolic: 86 },
-        { date: dayjs().format('MM/DD'), systolic: 150, diastolic: 80 }
-      ] : [
-        { date: dayjs().subtract(6, 'month').format('MM/DD'), weight: 50 },
-        { date: dayjs().subtract(5, 'month').format('MM/DD'), weight: 68 },
-        { date: dayjs().subtract(4, 'month').format('MM/DD'), weight: 72 },
-        { date: dayjs().subtract(3, 'month').format('MM/DD'), weight: 45 },
-        { date: dayjs().subtract(2, 'month').format('MM/DD'), weight: 73 },
-        { date: dayjs().subtract(1, 'month').format('MM/DD'), weight: 90 },
-        { date: dayjs().subtract(5, 'days').format('MM/DD'), weight: 76 },
-        { date: dayjs().format('MM/DD'), weight: 76 },
-      ];
+          {
+            date: dayjs()
+              .subtract(6, 'month')
+              .subtract(13, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs()
+              .subtract(6, 'month')
+              .subtract(5, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(6, 'month').format('MM/DD'),
+            systolic: 130,
+            diastolic: 91,
+          },
+          {
+            date: dayjs()
+              .subtract(5, 'month')
+              .subtract(13, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs()
+              .subtract(5, 'month')
+              .subtract(5, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(5, 'month').format('MM/DD'),
+            systolic: 120,
+            diastolic: 89,
+          },
+          {
+            date: dayjs()
+              .subtract(4, 'month')
+              .subtract(13, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs()
+              .subtract(4, 'month')
+              .subtract(5, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(4, 'month').format('MM/DD'),
+            systolic: 127,
+            diastolic: 83,
+          },
+          {
+            date: dayjs()
+              .subtract(3, 'month')
+              .subtract(13, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs()
+              .subtract(3, 'month')
+              .subtract(5, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(3, 'month').format('MM/DD'),
+            systolic: 150,
+            diastolic: 80,
+          },
+          {
+            date: dayjs()
+              .subtract(2, 'month')
+              .subtract(13, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs()
+              .subtract(2, 'month')
+              .subtract(5, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(2, 'month').format('MM/DD'),
+            systolic: 140,
+            diastolic: 94,
+          },
+          {
+            date: dayjs()
+              .subtract(1, 'month')
+              .subtract(13, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs()
+              .subtract(1, 'month')
+              .subtract(5, 'days')
+              .format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(1, 'month').format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(13, 'days').format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          {
+            date: dayjs().subtract(5, 'days').format('MM/DD'),
+            systolic: 135,
+            diastolic: 86,
+          },
+          { date: dayjs().format('MM/DD'), systolic: 150, diastolic: 80 },
+        ]
+      : [
+          { date: dayjs().subtract(6, 'month').format('MM/DD'), weight: 50 },
+          { date: dayjs().subtract(5, 'month').format('MM/DD'), weight: 68 },
+          { date: dayjs().subtract(4, 'month').format('MM/DD'), weight: 72 },
+          { date: dayjs().subtract(3, 'month').format('MM/DD'), weight: 45 },
+          { date: dayjs().subtract(2, 'month').format('MM/DD'), weight: 73 },
+          { date: dayjs().subtract(1, 'month').format('MM/DD'), weight: 90 },
+          { date: dayjs().subtract(5, 'days').format('MM/DD'), weight: 76 },
+          { date: dayjs().format('MM/DD'), weight: 76 },
+        ];
   });
 
   // Use sample data if no data is provided (TEMPORARY)
@@ -79,7 +196,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     data = data.map((entry: any) => {
       return {
         date: dayjs(entry.date).format('MM/DD'),
-        ...entry
+        ...entry,
       };
     });
   }
@@ -108,7 +225,14 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
 
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="middle" fill="#333" fontSize="0.8em">
+        <text
+          x={0}
+          y={0}
+          dy={16}
+          textAnchor="middle"
+          fill="#333"
+          fontSize="0.8em"
+        >
           {payload.value}
         </text>
       </g>
@@ -122,18 +246,18 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
 
     switch (mode) {
       case GraphMode.BloodPressure:
-        text = `${t("systolic")}\n${t("high")} 140\nNormal 120\n${t("diastolic")}\n${t("high")} 90\nNormal 80`;
+        text = `${t('systolic')}\n${t('high')} 140\nNormal 120\n${t('diastolic')}\n${t('high')} 90\nNormal 80`;
         break;
       case GraphMode.Weight:
-        text = `${t("over")}\n90 kg\nNormal\n65 kg\nUnder\n50 kg`;
+        text = `${t('over')}\n90 kg\nNormal\n65 kg\nUnder\n50 kg`;
         break;
     }
 
-    const textParts: string[] = text.split("\n");
+    const textParts: string[] = text.split('\n');
     const highlightEvery = mode == GraphMode.BloodPressure ? 3 : 2;
 
     return (
-      <svg width="100px" >
+      <svg width="100px">
         <g>
           {textParts.map((part: string, index: number) => (
             <text
@@ -142,8 +266,8 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
               x={mode === GraphMode.BloodPressure ? 10 : 30}
               y={25 + index * 16}
               style={{
-                display: "block",
-                fontSize: "0.8em",
+                display: 'block',
+                fontSize: '0.8em',
                 fontWeight: index % highlightEvery === 0 ? '500' : '300',
               }}
             >
@@ -162,7 +286,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         {dataKeys.map((key, index) => {
           return (
             <Line
-              key={"plotted-line-" + index}
+              key={'plotted-line-' + index}
               type="monotone"
               dataKey={key}
               stroke="url(#colorGradient)"
@@ -173,10 +297,17 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
         })}
       </>
     );
-  }
+  };
 
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "100%" }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        width: '100%',
+      }}
+    >
       {ReferencePoints()}
 
       <ResponsiveContainer width="100%" height={130}>
@@ -210,7 +341,11 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
           />
           <CartesianGrid fill="#F6F5F4" horizontal={false} vertical={false} />
           <Tooltip />
-          {getLines(mode === GraphMode.BloodPressure ? ["systolic", "diastolic"] : ["weight"])}
+          {getLines(
+            mode === GraphMode.BloodPressure
+              ? ['systolic', 'diastolic']
+              : ['weight']
+          )}
         </LineChart>
       </ResponsiveContainer>
     </div>
