@@ -100,7 +100,7 @@ export default function FoodHabits() {
               },
             }}
             onClick={() => {
-              navigate('/sprint-choice');
+              navigate('/sprint/choice');
             }}
           >
             <Typography>{t('change-sprint')}</Typography>
