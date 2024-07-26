@@ -37,6 +37,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { loading, setLoading } = useLoading();
   const [user, setUser] = useState<UserWithToken | undefined>(undefined);
 
+  const logoutFunc = () => {
+    setUser(undefined);
+    setToken(undefined);
+    removeCookie('token', { path: '/' });
+  };
+
   const loginFunc = async (username: string, password: string) => {
     if (loading) return;
     try {
@@ -47,10 +53,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(user);
       return user;
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         enqueueSnackbar(error.message, {
           variant: 'error',
         });
+      }
     } finally {
       setLoading(false);
     }
@@ -66,10 +73,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(user);
       return user;
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         enqueueSnackbar(error.message, {
           variant: 'error',
         });
+        if (error?.message === 'invalid-token') {
+          logoutFunc();
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -83,10 +94,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(registeredUser);
       return registeredUser;
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         enqueueSnackbar(error.message, {
           variant: 'error',
         });
+        if (error?.message === 'invalid-token') {
+          logoutFunc();
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -133,11 +148,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     token: token,
     user: user,
     login: loginFunc,
-    logout: () => {
-      setUser(undefined);
-      setToken(undefined);
-      removeCookie('token', { path: '/' });
-    },
+    logout: logoutFunc,
     register: registerFunc,
     registerInfo: registerInfoFunc,
   };
