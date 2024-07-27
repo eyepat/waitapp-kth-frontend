@@ -5,6 +5,7 @@ import { login, loginWithToken } from '../api/login';
 import { enqueueSnackbar } from 'notistack';
 import { register, registerInfo } from '../api/register';
 import { useLoading } from './LoadContext';
+import { putUser } from '../api/user';
 
 interface AuthContextType {
   token?: string;
@@ -16,6 +17,7 @@ interface AuthContextType {
   logout: () => void;
   register: (userToRegister: User) => Promise<UserWithToken | undefined>;
   registerInfo: (userToRegister: User) => Promise<UserWithToken | undefined>;
+  updateUser: (userToRegister: User) => Promise<UserWithToken | undefined>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -128,6 +130,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updateUserFunc = async (updatedUser: User) => {
+    if (loading) return;
+    try {
+      setLoading(true);
+      updatedUser.userIdPk = user?.userIdPk;
+      const updatedUserData: UserWithToken = await putUser(updatedUser);
+      setUser(updatedUserData);
+      return updatedUserData;
+    } catch (error) {
+      if (error instanceof Error) {
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+        if (error?.message === 'invalid-token') {
+          logoutFunc();
+        }
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (user != undefined) {
       setToken(user?.token);
@@ -151,6 +175,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     logout: logoutFunc,
     register: registerFunc,
     registerInfo: registerInfoFunc,
+    updateUser: updateUserFunc,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
