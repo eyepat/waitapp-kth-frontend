@@ -301,7 +301,7 @@ export default function GeneralQuestions() {
           open={openBloodPressureDialog}
           onClose={handleCloseBloodPressureDialog}
           title="how-to-measure-pressure"
-          content="how-to-measure-pressure-text"
+          content="how-to-measure-blood-pressure"
         />
       </Stack>
     </ThemeProvider>
