@@ -11,14 +11,17 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import {
   ArrowRight,
   Bell,
+  ChangeSprint,
   Contact,
   EnglishFlag,
   Help,
   Information,
   Integrity,
+  PauseSprint,
   Profile,
   Shield,
   Start,
+  StopSprint,
   SwedishFlag,
   Upload,
   Visualize,
@@ -37,12 +40,22 @@ export default function Settings() {
 
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+
+  const renderCurrentSprint = () => {
+    if (user && user.currentSprintId && user.currentSprintId <= 0)
+      return renderAvailableSprint();
+    return renderNoAvailableSprint();
+  };
 
   function handleLanguageChange() {
     const newLanguage = language === 'en' ? 'sv' : 'en';
     console.log(newLanguage);
     setLanguage(newLanguage);
+  }
+
+  function handleStopSprint() {
+    console.log('removed sprint!');
   }
 
   function handleOpenWip() {
@@ -66,6 +79,68 @@ export default function Settings() {
       variant: 'info',
     });
   }
+
+  const renderAvailableSprint = () => {
+    return (
+      <CardContent>
+        <Button
+          onClick={handleStopSprint}
+          fullWidth={true}
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+            <StopSprint />
+            <Typography marginLeft={'10px'}>
+              {t('end-current-sprint')}
+            </Typography>
+          </div>
+          <ArrowRight />
+        </Button>
+        <Button
+          onClick={handleOpenWip}
+          fullWidth={true}
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+            <PauseSprint />
+            <Typography marginLeft={'10px'}>{t('plan-a-restday')}</Typography>
+          </div>
+          <ArrowRight />
+        </Button>
+        <Button
+          onClick={() => navigate('/sprint/choice')}
+          fullWidth={true}
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+            <ChangeSprint />
+            <Typography marginLeft={'10px'}>
+              {t('change-current-sprint')}
+            </Typography>
+          </div>
+          <ArrowRight />
+        </Button>
+      </CardContent>
+    );
+  };
+
+  const renderNoAvailableSprint = () => {
+    return (
+      <CardContent>
+        <Button
+          onClick={() => navigate('/sprint-choice')}
+          fullWidth={true}
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+            <Start />
+            <Typography marginLeft={'10px'}>{t('start-new-sprint')}</Typography>
+          </div>
+          <ArrowRight />
+        </Button>
+      </CardContent>
+    );
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -171,21 +246,7 @@ export default function Settings() {
               </Typography>
             }
           />
-          <CardContent>
-            <Button
-              onClick={() => navigate('/sprint-choice')}
-              fullWidth={true}
-              sx={{ display: 'flex', justifyContent: 'space-between' }}
-            >
-              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-                <Start />
-                <Typography marginLeft={'10px'}>
-                  {t('start-new-sprint')}
-                </Typography>
-              </div>
-              <ArrowRight />
-            </Button>
-          </CardContent>
+          {renderCurrentSprint()}
         </Card>
 
         <Card sx={{ width: '100%' }}>
