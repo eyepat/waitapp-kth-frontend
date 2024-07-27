@@ -76,7 +76,7 @@ export default function Settings() {
 
   function handleNotification() {
     enqueueSnackbar('page-does-not-work', {
-      variant: 'info',
+      variant: 'warning',
     });
   }
 
@@ -165,6 +165,7 @@ export default function Settings() {
           />
           <CardContent>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -177,6 +178,7 @@ export default function Settings() {
               <ArrowRight />
             </Button>
             <Button
+              onClick={handleOpenWip}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
