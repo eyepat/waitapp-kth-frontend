@@ -157,5 +157,8 @@
   "during-your-journey": "upp när din resa fortsätter",
   "invalid-login-details": "Felaktiga inloggningsuppgifter",
   "birth-date": "Födelsedatum",
-  "select-birth-date": "Välj Födelsedatum"
+  "select-birth-date": "Välj Födelsedatum",
+  "end-current-sprint": "Stoppa pågående sprint",
+  "plan-a-restday": "Planera en vilodag",
+  "change-current-sprint": "Byta pågående sprint"
 }
