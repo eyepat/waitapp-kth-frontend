@@ -17,7 +17,7 @@ interface AuthContextType {
   logout: () => void;
   register: (userToRegister: User) => Promise<UserWithToken | undefined>;
   registerInfo: (userToRegister: User) => Promise<UserWithToken | undefined>;
-  updateUser: (userToUpdate: User) => Promise<UserWithToken | undefined>;
+  updateUser: (updatedUser: User) => Promise<UserWithToken | undefined>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
