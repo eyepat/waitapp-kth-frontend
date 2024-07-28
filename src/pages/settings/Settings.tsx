@@ -250,7 +250,6 @@ export default function Settings() {
           />
           {renderCurrentSprint()}
         </Card>
-
         <Card sx={{ width: '100%' }}>
           <CardHeader
             sx={{ marginBottom: '-25px' }}
