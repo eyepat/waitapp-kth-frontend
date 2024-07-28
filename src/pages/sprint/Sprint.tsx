@@ -14,28 +14,45 @@ import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Background } from './MoonBackground';
+import { useAuth } from '../../contexts/AuthContext';
+import { getSprint } from '../../api/sprint';
+
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 export default function Sprint() {
-  const [activeSprint, _] = useState(false); // Determine if there is an active sprint, set to false for now
+  const { user } = useAuth();
+  const [activeSprint] = useState(user ? user.current_sprint_Id != -1 : false);
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
 
+  const [currentSprint, setCurrentSprint] = useState<Sprint | null>(null);
+
   const { t } = useLanguage();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCurrentSprint = async () => {
+      const sprint: Sprint = await getSprint(user ? user.current_sprint_Id ?? -1 : -1);
+      setCurrentSprint(sprint);
+    };
+    getCurrentSprint();
+  }, [user]);
 
   const renderActiveSprint = () => {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
-          {t('CurrentSprint.Type')}
+          {t(`${currentSprint ? currentSprint.sprint_type : 'undefined'}`).toUpperCase()}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
           {t('day')} x
         </Typography>
-        <Card sx={{ width: '40vh' }}>
+        <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
           <CardContent>
             <Typography variant="h6" textAlign="center">
               {t('today')}
@@ -121,7 +138,7 @@ export default function Sprint() {
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20vh" alignItems="center">
-        {true ? renderActiveSprint() : noActiveSprint()}
+        {activeSprint ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
       <Popup

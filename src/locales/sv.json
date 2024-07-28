@@ -160,5 +160,8 @@
   "select-birth-date": "Välj Födelsedatum",
   "end-current-sprint": "Stoppa pågående sprint",
   "plan-a-restday": "Planera en vilodag",
-  "change-current-sprint": "Byta pågående sprint"
+  "change-current-sprint": "Byta pågående sprint",
+  "day": "Dag",
+  "today": "Idag",
+  "days-until-ablation": "dagar kvar till ablation"
 }
