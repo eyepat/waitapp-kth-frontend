@@ -173,7 +173,7 @@ export default function Settings() {
           />
           <CardContent>
             <Button
-              onClick={() => navigate('/sprint-choice')}
+              onClick={() => navigate('/sprint/choice')}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
