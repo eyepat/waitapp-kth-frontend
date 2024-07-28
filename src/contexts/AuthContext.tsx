@@ -134,7 +134,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (loading) return;
     try {
       setLoading(true);
-      updatedUser.userIdPk = user?.userIdPk;
+      updatedUser.user_id = user?.user_id;
       const updatedUserData: UserWithToken = await putUser(updatedUser);
       setUser(updatedUserData);
       return updatedUserData;

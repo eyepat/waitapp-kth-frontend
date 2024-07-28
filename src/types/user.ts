@@ -1,15 +1,14 @@
 interface User {
-  userIdPk?: number;
   user_id?: number;
   name: string;
   password?: string;
-  dateOfBirth?: string;
+  date_of_birth?: string;
   height?: number;
   weight?: string;
-  waistSize?: string;
-  bloodPressure?: number;
-  ablationDate?: string;
-  currentSprintId?: number;
+  waist_size?: string;
+  blood_pressure?: number;
+  ablation_date?: string;
+  current_sprint_Id?: number;
 }
 
 interface UserWithToken extends User {

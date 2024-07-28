@@ -43,7 +43,7 @@ export default function Settings() {
   const { user, logout } = useAuth();
 
   const renderCurrentSprint = () => {
-    if (user && user.currentSprintId && user.currentSprintId <= 0)
+    if (user && user.current_sprint_Id && user.current_sprint_Id <= 0)
       return renderAvailableSprint();
     return renderNoAvailableSprint();
   };

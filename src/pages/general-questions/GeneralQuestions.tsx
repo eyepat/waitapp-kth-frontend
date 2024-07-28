@@ -265,12 +265,12 @@ export default function GeneralQuestions() {
               // TODO: fill with actual info
               registerInfo({
                 name: user.name,
-                dateOfBirth: selectedDOB?.toISOString(),
+                date_of_birth: selectedDOB?.toISOString(),
                 height: selectedHeight,
                 weight: selectedWeight,
-                waistSize: selectedWeight,
-                bloodPressure: selectedBloodPressure,
-                ablationDate: selectedAblationDate?.toISOString(),
+                waist_size: selectedWeight,
+                blood_pressure: selectedBloodPressure,
+                ablation_date: selectedAblationDate?.toISOString(),
               });
             }}
             variant="contained"
