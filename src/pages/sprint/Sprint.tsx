@@ -5,6 +5,8 @@ import {
   Button,
   Box,
   IconButton,
+  Card,
+  CardContent,
 } from '@mui/material';
 import moon from '../../assets/sprint/moon.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -25,7 +27,26 @@ export default function Sprint() {
   const navigate = useNavigate();
 
   const renderActiveSprint = () => {
-    return <></>;
+    return (
+      <Stack marginTop="1vh" alignItems="center">
+        <Typography variant="h5" fontWeight="bold">
+          {t('CurrentSprint.Type')}
+        </Typography>
+        <Typography variant="h2" fontWeight="bold" textAlign="center">
+          {t('day')} x
+        </Typography>
+        <Card sx={{ width: '40vh' }}>
+          <CardContent>
+            <Typography variant="h6" textAlign="center">
+              {t('today')}
+            </Typography>
+            <Typography color="text.secondary" textAlign="center">
+              x {t('days-until-ablation')}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Stack>
+    );
   };
 
   const noActiveSprint = () => {
@@ -100,7 +121,7 @@ export default function Sprint() {
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20vh" alignItems="center">
-        {activeSprint ? renderActiveSprint() : noActiveSprint()}
+        {true ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
       <Popup
