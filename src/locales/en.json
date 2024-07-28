@@ -156,5 +156,8 @@
   "during-your-journey": "as your journey continues",
   "invalid-login-details": "Invalid login details",
   "birth-date": "Birth date",
-  "select-birth-date": "Pick your birth date"
+  "select-birth-date": "Pick your birth date",
+  "end-current-sprint": "Stop current sprint",
+  "plan-a-restday": "Plan a rest day",
+  "change-current-sprint": "Change current sprint"
 }

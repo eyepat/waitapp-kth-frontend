@@ -7,14 +7,25 @@ import NavTabs from '../../../../components/TabMenu/NavTabs';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../../../components/Theme';
 import { ImageHeader } from '../../../../components/Headers/ImageHeader';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
+  const { user, updateUser } = useAuth();
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleSprintStart = () => {
+    if (user != undefined) {
+      const myUpdatedUser = user;
+      myUpdatedUser.currentSprintId = 99;
+      console.log(user.userIdPk);
+      //updateUser(myUpdatedUser);
+    }
   };
 
   const renderLow = () => {
@@ -155,6 +166,7 @@ export default function FoodHabits() {
             {t('start-sprint-when-you-are-ready')}
           </Typography>
           <Button
+            onClick={handleSprintStart}
             variant="contained"
             color="primary"
             sx={{
