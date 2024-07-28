@@ -15,4 +15,5 @@ export type Page = {
   tabs?: boolean;
   // Used in the Navigation bar to set the default tab
   defaultTab?: string;
+  backgroundColor?: string;
 };

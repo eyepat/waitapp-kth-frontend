@@ -108,7 +108,10 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
-    to: ['/health-data/tests/weight-test', '/health-data/overview/weight-test'],
+    to: [
+      '/health-data/tests/weight-test',
+      '/health-data/overview/weight-test'
+    ],
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'weight-test',
     component: WeightTest,
@@ -138,6 +141,7 @@ export const pages: Page[] = [
     component: PhysicalActivity,
     header: { expanded: false, transparent: true },
     isMenu: false,
+    backgroundColor: 'hsla(196, 100%, 44%, 1)',
   },
   {
     to: '/sprint/choice/alcohol-habits',
@@ -146,6 +150,7 @@ export const pages: Page[] = [
     component: Alcohol,
     header: { expanded: false, transparent: true },
     isMenu: false,
+    backgroundColor: 'hsla(196, 100%, 44%, 1)',
   },
   {
     to: '/knowledge-bank/recipes',
