@@ -261,9 +261,7 @@ export default function GeneralQuestions() {
                 });
                 return;
               }
-
-              // TODO: fill with actual info
-              registerInfo({
+              const registerUser: User = {
                 name: user.name,
                 dateOfBirth: selectedDOB?.toISOString(),
                 height: selectedHeight,
@@ -271,7 +269,12 @@ export default function GeneralQuestions() {
                 waistSize: selectedWeight,
                 bloodPressure: selectedBloodPressure,
                 ablationDate: selectedAblationDate?.toISOString(),
-              });
+              };
+
+              console.log(registerUser);
+
+              // TODO: fill with actual info
+              registerInfo(registerUser);
             }}
             variant="contained"
             sx={{

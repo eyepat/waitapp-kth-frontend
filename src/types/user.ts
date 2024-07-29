@@ -1,6 +1,5 @@
 interface User {
-  userIdPk?: number;
-  user_id?: number;
+  ID?: number;
   name: string;
   password?: string;
   dateOfBirth?: string;
@@ -9,7 +8,7 @@ interface User {
   waistSize?: string;
   bloodPressure?: number;
   ablationDate?: string;
-  currentSprintId?: number;
+  currentSprintID?: number;
 }
 
 interface UserWithToken extends User {

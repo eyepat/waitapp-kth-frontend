@@ -22,8 +22,8 @@ export default function FoodHabits() {
   const handleSprintStart = () => {
     if (user != undefined) {
       const myUpdatedUser = user;
-      myUpdatedUser.currentSprintId = 99;
-      console.log(user.userIdPk);
+      myUpdatedUser.currentSprintID = 99;
+      console.log(user.ID);
       //updateUser(myUpdatedUser);
     }
   };
