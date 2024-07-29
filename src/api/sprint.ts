@@ -51,8 +51,8 @@ export async function postSprint(
 export async function putSprint(
     sprint: Sprint
 ): Promise<Sprint> {
-    if (sprint.sprint_id_pk === undefined) throw new Error('sprint is missing sprint_id_pk');
-    const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprint.sprint_id_pk}`;
+    if (sprint.ID === undefined) throw new Error('sprint is missing ID');
+    const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprint.ID}`;
     const response: Response = await fetch(url, {
         method: 'PUT',
         headers: {
@@ -70,8 +70,8 @@ export async function putSprint(
 export async function deleteSprint(
     sprint: Sprint
 ): Promise<Sprint> {
-    if (sprint.sprint_id_pk === undefined) throw new Error('sprint is missing sprint_id_pk');
-    const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprint.sprint_id_pk}`;
+    if (sprint.ID === undefined) throw new Error('sprint is missing ID');
+    const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprint.ID}`;
     const response: Response = await fetch(url, {
         method: 'DELETE',
         headers: {

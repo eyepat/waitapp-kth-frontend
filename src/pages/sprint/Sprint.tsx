@@ -19,13 +19,9 @@ import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { getSprint } from '../../api/sprint';
 
-function capitalize(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
 export default function Sprint() {
   const { user } = useAuth();
-  const [activeSprint] = useState(user ? user.current_sprint_Id != -1 : false);
+  const [activeSprint] = useState(user ? user.currentSprintID != -1 : false);
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
@@ -37,7 +33,7 @@ export default function Sprint() {
 
   useEffect(() => {
     const getCurrentSprint = async () => {
-      const sprint: Sprint = await getSprint(user ? user.current_sprint_Id ?? -1 : -1);
+      const sprint: Sprint = await getSprint(user ? user.currentSprintID ?? -1 : -1);
       setCurrentSprint(sprint);
     };
     getCurrentSprint();
@@ -47,7 +43,7 @@ export default function Sprint() {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
-          {t(`${currentSprint ? currentSprint.sprint_type : 'undefined'}`).toUpperCase()}
+          {t(`${currentSprint ? currentSprint.type : 'undefined'}`).toUpperCase()}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
           {t('day')} x
