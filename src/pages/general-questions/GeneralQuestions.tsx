@@ -261,17 +261,20 @@ export default function GeneralQuestions() {
                 });
                 return;
               }
-
-              // TODO: fill with actual info
-              registerInfo({
+              const registerUser: User = {
                 name: user.name,
                 date_of_birth: selectedDOB?.toISOString(),
                 height: selectedHeight,
                 weight: selectedWeight,
-                waist_size: selectedWeight,
-                blood_pressure: selectedBloodPressure,
-                ablation_date: selectedAblationDate?.toISOString(),
-              });
+                waistSize: selectedWeight,
+                bloodPressure: selectedBloodPressure,
+                ablationDate: selectedAblationDate?.toISOString(),
+              };
+
+              console.log(registerUser);
+
+              // TODO: fill with actual info
+              registerInfo(registerUser);
             }}
             variant="contained"
             sx={{

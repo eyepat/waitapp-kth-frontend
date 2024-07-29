@@ -110,11 +110,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const registerInfoFunc = async (userToRegister: User) => {
-    if (loading || user?.user_id == undefined || token == undefined) return;
+    if (loading || user?.ID == undefined || token == undefined) return;
     try {
       setLoading(true);
       const registeredUser: UserWithToken = await registerInfo(
-        user?.user_id,
+        user?.ID,
         userToRegister,
         token
       );
@@ -134,7 +134,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (loading) return;
     try {
       setLoading(true);
-      updatedUser.user_id = user?.user_id;
+      updatedUser.ID = user?.ID;
       const updatedUserData: UserWithToken = await putUser(updatedUser);
       setUser(updatedUserData);
       return updatedUserData;

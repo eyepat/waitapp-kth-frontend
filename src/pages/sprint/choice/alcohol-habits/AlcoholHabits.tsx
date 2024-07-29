@@ -11,10 +11,7 @@ export default function FoodHabits() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack
-        alignItems="center"
-        sx={{ height: '92vh' }}
-      >
+      <Stack alignItems="center" sx={{ height: '92vh' }}>
         <ImageHeader image={alcoholBackground} />
         <Stack
           direction="column"

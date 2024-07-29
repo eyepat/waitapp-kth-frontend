@@ -1,24 +1,24 @@
 export type Recipe = {
-  recipe_id: number;
-  base_url: string;
-  url_variable: string;
+  ID: number;
+  baseURL: string;
+  URLPath: string;
   title: string;
   description: string;
   image: string;
-  cooking_time: number;
-  meal_type: 'MIDDAG' | 'LUNCH' | 'BREAKFAST' | 'SNACK' | 'OTHER'; // Adjust "OTHER" if needed
-  lunch: boolean;
-  dinner: boolean;
-  breakfast: boolean;
-  snack: boolean;
-  fall_food: boolean;
-  summer_food: boolean;
-  winter_food: boolean;
-  hot_food: boolean;
-  christmas_food: boolean;
-  family_food: boolean;
-  vegetarian: boolean;
-  fish: boolean;
-  meat: boolean;
-  favorite: boolean;
+  cookingTimeMinutes: number;
+  mealType: 'MIDDAG' | 'LUNCH' | 'BREAKFAST' | 'SNACK' | 'OTHER'; // Adjust "OTHER" if needed
+  isLunch: boolean;
+  isDinner: boolean;
+  isBreakfast: boolean;
+  isSnack: boolean;
+  isFallFood: boolean;
+  isSummerFood: boolean;
+  isWinterFood: boolean;
+  isHotFood: boolean;
+  isChristmasFood: boolean;
+  isFamilyFood: boolean;
+  isVegitarian: boolean;
+  isFish: boolean;
+  isMeat: boolean;
+  isFavorite: boolean;
 };
