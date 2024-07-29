@@ -26,7 +26,7 @@ export default function FoodHabits() {
           <Stack
             sx={{
               boxDecoration: 'underline',
-              paddingTop: '8vh',
+              marginTop: '5vh',
               paddingLeft: '2vh',
             }}
           >
@@ -52,10 +52,15 @@ export default function FoodHabits() {
         <Stack
           alignItems="start"
           padding="0vh 3vh 0vh 3vh"
-          marginTop="5vh"
+          marginTop="4vh"
           sx={{ flexGrow: 1 }}
         >
-          <Typography color="white" variant="h6" marginTop="9vh">
+          <Typography
+            color="white"
+            variant="body1"
+            fontSize="18px"
+            marginTop="9vh"
+          >
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
           <div style={{ minHeight: '150px' }}>

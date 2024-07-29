@@ -80,7 +80,10 @@ export default function FoodHabits() {
   return (
     <ThemeProvider theme={theme}>
       <Stack alignItems="center" sx={{ height: '92vh' }}>
-        <ImageHeader image={foodBackground} />
+        <ImageHeader
+          image={foodBackground}
+          sx={{ transform: 'rotateY(180deg)' }}
+        />
         <Stack
           direction="column"
           justifyContent="flex-end"
@@ -94,7 +97,7 @@ export default function FoodHabits() {
           <Stack
             sx={{
               boxDecoration: 'underline',
-              paddingTop: '8vh',
+              marginTop: '5vh',
               paddingLeft: '2vh',
             }}
           >
@@ -117,7 +120,7 @@ export default function FoodHabits() {
             </Typography>
           </Stack>
         </Stack>
-        <Stack width={'90%'} paddingTop={'3vh'}>
+        <Stack width={'90%'} paddingTop={'5vh'}>
           <Typography>{t('goal-level')}</Typography>
           <NavTabs value={value} onChange={handleChange} centered>
             <NavTab label={t('low')} />
@@ -126,7 +129,7 @@ export default function FoodHabits() {
           </NavTabs>
         </Stack>
         <Stack alignItems="start" padding="0vh 3vh 0vh 3vh">
-          <Typography variant="h6" marginTop="3vh">
+          <Typography variant="body1" fontSize="18px" marginTop="3vh">
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
           {renderTabContent()}
