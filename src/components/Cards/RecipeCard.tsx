@@ -40,7 +40,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ img, title, onClick }) => {
       <RecipeImage src={img} alt={title} />
       <Typography
         variant="body1"
-        fontSize="19px"
+        fontSize="15px"
         fontWeight="bold"
         style={{ flexGrow: 1, marginLeft: '35px', textAlign: 'left' }}
       >
