@@ -13,4 +13,10 @@ server {
         proxy_pass  ${BACKEND_SERVER};
         proxy_set_header  Host $http_host;
     }
+
+    # Cache .jpg, .png, .json and .svg files for one hour
+    location ~* \.(jpg|jpeg|png|svg|json)$ {
+        root /usr/share/nginx/html;
+        add_header Cache-Control "max-age=3600";
+    }
 }

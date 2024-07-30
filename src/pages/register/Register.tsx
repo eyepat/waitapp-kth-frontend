@@ -7,6 +7,7 @@ import {
   Typography,
   styled,
   ThemeProvider,
+  Box,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -101,7 +102,7 @@ export default function Register() {
           display: 'flex',
           flexDirection: 'column',
           height: '80%',
-          mt: '10vh',
+          mt: '5vh',
           alignItems: 'center',
         }}
         padding="0 8vw 0 8vw"
@@ -173,51 +174,59 @@ export default function Register() {
             sx={{ width: '100%', mb: 2 }}
           />
         </Stack>
-
-        <Button
-          variant="contained"
+        <Box
           sx={{
-            width: '100%',
-            borderRadius: '8px',
-            padding: '0.75rem',
-            backgroundColor: '#hsla(200, 100%, 26%, 1)',
-            color: 'white',
-            marginTop: '28vh',
-          }}
-          onClick={handleRegister}
-        >
-          {t('next')}
-        </Button>
-
-        <Typography variant="body2" sx={{ mt: 4 }}>
-          {t('have-account')}
-        </Typography>
-
-        <Button
-          variant="contained"
-          sx={{
-            width: '100%',
-            borderRadius: '8px',
-            padding: '0.75rem',
-            mt: 1,
-            backgroundColor: 'hsla(196, 59%, 81%, 1)',
-            borderColor: 'hsla(196, 59%, 81%, 1)',
-            color: 'hsla(200, 100%, 26%, 1)',
-            '&:hover': {
-              backgroundColor: 'hsla(196, 59%, 89%, 1)',
-              borderColor: 'hsla(196, 59%, 91%, 1)',
-            },
-            '&:active': {
-              backgroundColor: 'hsla(196, 59%, 91%, 1)',
-              borderColor: 'hsla(196, 59%, 91%, 1)',
-            },
-          }}
-          onClick={() => {
-            navigate('/login');
+            width: '80%',
+            position: 'fixed',
+            bottom: '6vh',
+            left: '50%',
+            transform: 'translateX(-50%)',
           }}
         >
-          {t('login')}
-        </Button>
+          <Button
+            variant="contained"
+            sx={{
+              width: '100%',
+              borderRadius: '8px',
+              padding: '0.75rem',
+              backgroundColor: '#hsla(200, 100%, 26%, 1)',
+              color: 'white',
+            }}
+            onClick={handleRegister}
+          >
+            {t('next')}
+          </Button>
+
+          <Typography variant="body2" textAlign="center" sx={{ mt: 4 }}>
+            {t('have-account')}
+          </Typography>
+
+          <Button
+            variant="contained"
+            sx={{
+              width: '100%',
+              borderRadius: '8px',
+              padding: '0.75rem',
+              mt: 1,
+              backgroundColor: 'hsla(196, 59%, 81%, 1)',
+              borderColor: 'hsla(196, 59%, 81%, 1)',
+              color: 'hsla(200, 100%, 26%, 1)',
+              '&:hover': {
+                backgroundColor: 'hsla(196, 59%, 89%, 1)',
+                borderColor: 'hsla(196, 59%, 91%, 1)',
+              },
+              '&:active': {
+                backgroundColor: 'hsla(196, 59%, 91%, 1)',
+                borderColor: 'hsla(196, 59%, 91%, 1)',
+              },
+            }}
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            {t('login')}
+          </Button>
+        </Box>
       </Stack>
     </ThemeProvider>
   );

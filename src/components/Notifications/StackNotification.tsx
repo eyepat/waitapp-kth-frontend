@@ -101,7 +101,7 @@ const StackNotification = forwardRef<HTMLDivElement, StackNotificationProps>(
             backgroundColor: 'white',
             color: getTextColor(props.variant),
             border: `1px solid ${getBorderColor(props.variant)}`,
-            width: '80vh',
+            width: '95vw',
             overflow: 'hidden',
             position: 'relative',
           }}
@@ -109,7 +109,7 @@ const StackNotification = forwardRef<HTMLDivElement, StackNotificationProps>(
           <Box
             sx={{
               backgroundColor: getBorderColor(props.variant),
-              width: '5vh',
+              width: '10vw',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -139,7 +139,6 @@ const StackNotification = forwardRef<HTMLDivElement, StackNotificationProps>(
             aria-label="close"
             color="inherit"
             onClick={handleDismiss}
-            sx={{ position: 'absolute', top: 8, right: 8 }}
           >
             <CloseIcon fontSize="medium" />
           </IconButton>
