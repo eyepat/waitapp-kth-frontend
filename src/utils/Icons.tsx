@@ -808,3 +808,41 @@ export function ChangeSprint() {
     </svg>
   );
 }
+
+export function GrayCircleCheck() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18ZM4 10H14V8H4V10Z"
+        fill="#53565A"
+      />
+    </svg>
+  );
+}
+
+export function GreenCircleCheck() {
+  return (
+    <svg
+      width="24"
+      height="25"
+      viewBox="0 0 18 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12 21.5C16.9706 21.5 21 17.4706 21 12.5C21 7.52944 16.9706 3.5 12 3.5C7.02944 3.5 3 7.52944 3 12.5C3 17.4706 7.02944 21.5 12 21.5ZM11.7682 16.1402L16.7682 10.1402L15.2318 8.85982L10.9328 14.0186L8.70711 11.7929L7.29289 13.2071L10.2929 16.2071L11.0672 16.9814L11.7682 16.1402Z"
+        fill="#00BF13"
+      />
+    </svg>
+  );
+}
