@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { getSprint } from '../../api/sprint';
+import SprintCard from '../../components/Cards/sprintCard';
 
 export default function Sprint() {
   const { user } = useAuth();
@@ -33,7 +34,9 @@ export default function Sprint() {
 
   useEffect(() => {
     const getCurrentSprint = async () => {
-      const sprint: Sprint = await getSprint(user ? user.currentSprintID ?? -1 : -1);
+      const sprint: Sprint = await getSprint(
+        user ? user.currentSprintID ?? -1 : -1
+      );
       setCurrentSprint(sprint);
     };
     getCurrentSprint();
@@ -43,7 +46,9 @@ export default function Sprint() {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
-          {t(`${currentSprint ? currentSprint.type : 'undefined'}`).toUpperCase()}
+          {t(
+            `${currentSprint ? currentSprint.type : 'undefined'}`
+          ).toUpperCase()}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
           {t('day')} x
@@ -53,6 +58,9 @@ export default function Sprint() {
             <Typography variant="h6" textAlign="center">
               {t('today')}
             </Typography>
+            <SprintCard img={''} title={'test text'}></SprintCard>
+            <SprintCard img={''} title={'test text'}></SprintCard>
+            <SprintCard img={''} title={'test text'}></SprintCard>
             <Typography color="text.secondary" textAlign="center">
               x {t('days-until-ablation')}
             </Typography>
@@ -134,7 +142,7 @@ export default function Sprint() {
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20vh" alignItems="center">
-        {activeSprint ? renderActiveSprint() : noActiveSprint()}
+        {true ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
       <Popup
