@@ -19,6 +19,8 @@ import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { getSprint } from '../../api/sprint';
 import SprintCard from '../../components/Cards/sprintCard';
+import { Measure } from '../../utils/Icons';
+import { Chat } from '../../utils/Icons';
 
 export default function Sprint() {
   const { user } = useAuth();
@@ -54,16 +56,48 @@ export default function Sprint() {
           {t('day')} x
         </Typography>
         <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
-          <CardContent>
+          <CardContent sx={{ position: 'relative' }}>
             <Typography variant="h6" textAlign="center">
               {t('today')}
             </Typography>
-            <SprintCard img={''} title={'test text'}></SprintCard>
-            <SprintCard img={''} title={'test text'}></SprintCard>
-            <SprintCard img={''} title={'test text'}></SprintCard>
-            <Typography color="text.secondary" textAlign="center">
+            <SprintCard img={''} title={'test text'} />
+            <SprintCard img={''} title={'test text'} />
+            <SprintCard img={''} title={'test text'} />
+            <Typography marginBottom="4vh" textAlign="center">
               x {t('days-until-ablation')}
             </Typography>
+            <Button
+              variant="contained"
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                width: '6vw',
+                height: '5vh',
+                left: 0,
+                backgroundColor: 'hsla(200, 100%, 26%, 1)',
+                color: 'white',
+                borderRadius: '0px 8px 0px 0px',
+              }}
+            >
+              <Typography marginRight="5px">{t('measure')}</Typography>
+              <Measure />
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                width: '6vw',
+                height: '5vh',
+                right: 0,
+                backgroundColor: 'hsla(196, 100%, 44%, 1)',
+                color: 'white',
+                borderRadius: '8px 0px 0px 0px',
+              }}
+            >
+              <Typography marginRight="10px">{t('chat')}</Typography>
+              <Chat />
+            </Button>
           </CardContent>
         </Card>
       </Stack>
