@@ -40,12 +40,12 @@ export default function Settings() {
 
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
-  const { user, logout } = useAuth();
+  const { user, logout, updateUser } = useAuth();
 
   const renderCurrentSprint = () => {
     if (user && user.currentSprintId && user.currentSprintId <= 0)
-      return renderAvailableSprint();
-    return renderNoAvailableSprint();
+      return renderNoAvailableSprint();
+    return renderAvailableSprint();
   };
 
   function handleLanguageChange() {
@@ -55,7 +55,11 @@ export default function Settings() {
   }
 
   function handleStopSprint() {
-    console.log('removed sprint!');
+    if (user != undefined) {
+      const myUpdatedUser = user;
+      myUpdatedUser.currentSprintId = -1;
+      updateUser(myUpdatedUser);
+    }
   }
 
   function handleOpenWip() {

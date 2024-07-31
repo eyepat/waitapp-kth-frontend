@@ -24,7 +24,7 @@ export default function FoodHabits() {
       const myUpdatedUser = user;
       myUpdatedUser.currentSprintId = 99;
       console.log(user.userIdPk);
-      //updateUser(myUpdatedUser);
+      updateUser(myUpdatedUser);
     }
   };
 
