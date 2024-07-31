@@ -43,7 +43,9 @@ export default function Sprint() {
       );
       setCurrentSprint(sprint);
     };
-    getCurrentSprint();
+    if (user?.currentSprintID !== undefined && user?.currentSprintID > 0) {
+      getCurrentSprint();
+    }
   }, [user]);
 
   const renderActiveSprint = () => {
