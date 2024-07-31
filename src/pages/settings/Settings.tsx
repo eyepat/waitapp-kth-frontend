@@ -44,8 +44,8 @@ export default function Settings() {
 
   const renderCurrentSprint = () => {
     if (user && user.currentSprintID && user.currentSprintID <= 0)
-      return renderAvailableSprint();
-    return renderNoAvailableSprint();
+      return renderNoAvailableSprint();
+    return renderAvailableSprint();
   };
 
   function handleLanguageChange() {
