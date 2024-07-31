@@ -51,13 +51,18 @@ export async function postUser(user: User): Promise<User> {
   return data;
 }
 
-export async function putUser(user: User): Promise<User> {
+export async function putUser(
+  user: User,
+  token: string | undefined
+): Promise<User> {
   if (user.ID === undefined) throw new Error('user is missing userID');
+  if (token === undefined) throw new Error('no-token');
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.ID}`;
   const response: Response = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(user),
   });

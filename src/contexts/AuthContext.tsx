@@ -132,11 +132,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const updateUserFunc = async (updatedUser: User) => {
     if (loading) return;
+    if (token == undefined) {
+      enqueueSnackbar('no-token', {
+        variant: 'error',
+      });
+    }
     try {
       setLoading(true);
       updatedUser.ID = user?.ID;
-      const updatedUserData: UserWithToken = await putUser(updatedUser);
+      const updatedUserData: UserWithToken = await putUser(updatedUser, token);
+      console.log('setting user');
       setUser(updatedUserData);
+      console.log('user updated');
       return updatedUserData;
     } catch (error) {
       if (error instanceof Error) {
@@ -153,7 +160,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    if (user != undefined) {
+    if (user != undefined && token != user?.token) {
       setToken(user?.token);
     }
   }, [user]);
