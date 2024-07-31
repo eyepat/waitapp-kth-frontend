@@ -5,6 +5,8 @@ import {
   Button,
   Box,
   IconButton,
+  Card,
+  CardContent,
 } from '@mui/material';
 import moon from '../../assets/sprint/moon.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -12,20 +14,94 @@ import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Background } from './MoonBackground';
+import { useAuth } from '../../contexts/AuthContext';
+import { getSprint } from '../../api/sprint';
+import SprintCard from '../../components/Cards/sprintCard';
+import { Measure } from '../../utils/Icons';
+import { Chat } from '../../utils/Icons';
 
 export default function Sprint() {
-  const [activeSprint, _] = useState(false); // Determine if there is an active sprint, set to false for now
+  const { user } = useAuth();
+  const [activeSprint] = useState(user ? user.currentSprintID != -1 : false);
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
 
+  const [currentSprint, setCurrentSprint] = useState<Sprint | null>(null);
+
   const { t } = useLanguage();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const getCurrentSprint = async () => {
+      const sprint: Sprint = await getSprint(
+        user ? user.currentSprintID ?? -1 : -1
+      );
+      setCurrentSprint(sprint);
+    };
+    getCurrentSprint();
+  }, [user]);
+
   const renderActiveSprint = () => {
-    return <></>;
+    return (
+      <Stack marginTop="1vh" alignItems="center">
+        <Typography variant="h5" fontWeight="bold">
+          {t(
+            `${currentSprint ? currentSprint.type : 'undefined'}`
+          ).toUpperCase()}
+        </Typography>
+        <Typography variant="h2" fontWeight="bold" textAlign="center">
+          {t('day')} x
+        </Typography>
+        <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
+          <CardContent sx={{ position: 'relative' }}>
+            <Typography variant="h6" textAlign="center">
+              {t('today')}
+            </Typography>
+            <SprintCard img={''} title={'test text'} />
+            <SprintCard img={''} title={'test text'} />
+            <SprintCard img={''} title={'test text'} />
+            <Typography marginBottom="4vh" textAlign="center">
+              x {t('days-until-ablation')}
+            </Typography>
+            <Button
+              variant="contained"
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                width: '6vw',
+                height: '5vh',
+                left: 0,
+                backgroundColor: 'hsla(200, 100%, 26%, 1)',
+                color: 'white',
+                borderRadius: '0px 8px 0px 0px',
+              }}
+            >
+              <Typography marginRight="5px">{t('measure')}</Typography>
+              <Measure />
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                width: '6vw',
+                height: '5vh',
+                right: 0,
+                backgroundColor: 'hsla(196, 100%, 44%, 1)',
+                color: 'white',
+                borderRadius: '8px 0px 0px 0px',
+              }}
+            >
+              <Typography marginRight="10px">{t('chat')}</Typography>
+              <Chat />
+            </Button>
+          </CardContent>
+        </Card>
+      </Stack>
+    );
   };
 
   const noActiveSprint = () => {
@@ -100,7 +176,7 @@ export default function Sprint() {
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20vh" alignItems="center">
-        {activeSprint ? renderActiveSprint() : noActiveSprint()}
+        {true ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
       <Popup

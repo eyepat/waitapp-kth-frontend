@@ -159,5 +159,8 @@
   "select-birth-date": "Pick your birth date",
   "end-current-sprint": "Stop current sprint",
   "plan-a-restday": "Plan a rest day",
-  "change-current-sprint": "Change current sprint"
+  "change-current-sprint": "Change current sprint",
+  "day": "Day",
+  "today": "Today",
+  "days-until-ablation": "days left until ablation"
 }
