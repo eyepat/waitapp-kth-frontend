@@ -13,7 +13,7 @@ export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
-  const { user /*updateUser*/ } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -24,7 +24,7 @@ export default function FoodHabits() {
       const myUpdatedUser = user;
       myUpdatedUser.currentSprintID = 99;
       console.log(user.ID);
-      //updateUser(myUpdatedUser);
+      updateUser(myUpdatedUser);
     }
   };
 

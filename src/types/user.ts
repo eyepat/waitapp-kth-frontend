@@ -2,7 +2,7 @@ interface User {
   ID?: number;
   name: string;
   password?: string;
-  dateOfBirth?: string;
+  date_of_birth?: string;
   height?: number;
   weight?: string;
   waistSize?: string;

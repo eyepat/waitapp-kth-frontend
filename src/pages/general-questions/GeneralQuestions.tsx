@@ -263,7 +263,7 @@ export default function GeneralQuestions() {
               }
               const registerUser: User = {
                 name: user.name,
-                dateOfBirth: selectedDOB?.toISOString(),
+                date_of_birth: selectedDOB?.toISOString(),
                 height: selectedHeight,
                 weight: selectedWeight,
                 waistSize: selectedWeight,

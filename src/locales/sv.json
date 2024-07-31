@@ -86,7 +86,7 @@
   "info-text-alcohol": "Vi rekommenderar att trappa ner eller göra uppehåll med regelbunden alkoholkonsumtion",
   "recommended-today": "Rekommenderad idag",
   "how-do-i-measure": "Hur mäter jag",
-  "how-to-measure-blood-pressure": "Sitt med ryggstöd och fötterna i golvet. Sätt dit lodtrycksmanschetten och vila i fem minuter. Inget nikotin eller koffein 30 minuter före mätning. Mät vid tre tillfällen med en–två minuters mellanrum. Manschett i hjärthöjd. Hoppa över den första mätningen, skriva ner både andra och tredje mätningen.",
+  "how-to-measure-blood-pressure": "Sitt med ryggstöd och fötterna i golvet. Sätt dit blodtrycksmanschetten och vila i fem minuter. Inget nikotin eller koffein 30 minuter före mätning. Mät vid tre tillfällen med en–två minuters mellanrum. Manschett i hjärthöjd. Hoppa över den första mätningen, skriva ner både andra och tredje mätningen.",
   "why-we-need-this-data": "Varför behöver vi den här data?",
   "change-language": "Byt språk",
   "why-we-need-this-data-text": "Genom att samla in din personliga hälsodata kan vi skapa en skräddarsydd och effektiv hälsoplan för dig. Denna information möjliggör noggran övervakning av din hälsa och hjalper oss att rekomendera de mest lämpiga och individanpassande sprints för att uppnå dina hälsomål. Din data är avgörande för att skapa en personlig och framgångsrik hälsorevolution för dig.",
@@ -160,5 +160,8 @@
   "select-birth-date": "Välj Födelsedatum",
   "end-current-sprint": "Stoppa pågående sprint",
   "plan-a-restday": "Planera en vilodag",
-  "change-current-sprint": "Byta pågående sprint"
+  "change-current-sprint": "Byta pågående sprint",
+  "day": "Dag",
+  "today": "Idag",
+  "days-until-ablation": "dagar kvar till ablation"
 }
