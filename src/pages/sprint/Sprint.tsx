@@ -24,7 +24,9 @@ import { Chat } from '../../utils/Icons';
 
 export default function Sprint() {
   const { user } = useAuth();
-  const [activeSprint] = useState(user ? user.currentSprintID != -1 : false);
+  const [activeSprint] = useState(
+    user ? user && user.currentSprintID && user.currentSprintID >= 0 : false
+  );
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
@@ -176,7 +178,7 @@ export default function Sprint() {
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20vh" alignItems="center">
-        {true ? renderActiveSprint() : noActiveSprint()}
+        {activeSprint ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
       <Popup
