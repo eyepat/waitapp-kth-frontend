@@ -26,7 +26,13 @@ export function Routes() {
               key={to}
               path={page.path ? page.path : to + (page.tabs ? '/:tab?' : '')}
               Component={() => (
-                <>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: page.backgroundColor,
+                  }}
+                >
                   {page.header != undefined && (
                     <Header
                       expanded={
@@ -51,7 +57,7 @@ export function Routes() {
                     </div>
                   )}
                   {page.showBottomNav && <Navigation />}
-                </>
+                </div>
               )}
             />
           ) : (

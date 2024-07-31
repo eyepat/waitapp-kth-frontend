@@ -138,6 +138,7 @@ export const pages: Page[] = [
     component: PhysicalActivity,
     header: { expanded: false, transparent: true },
     isMenu: false,
+    backgroundColor: 'hsla(196, 100%, 44%, 1)',
   },
   {
     to: '/sprint/choice/alcohol-habits',
@@ -146,6 +147,7 @@ export const pages: Page[] = [
     component: Alcohol,
     header: { expanded: false, transparent: true },
     isMenu: false,
+    backgroundColor: 'hsla(196, 100%, 44%, 1)',
   },
   {
     to: '/knowledge-bank/recipes',

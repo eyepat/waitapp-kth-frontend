@@ -35,7 +35,7 @@ export async function getUser(
 }
 
 export async function postUser(user: User): Promise<User> {
-  delete user.userIdPk;
+  delete user.ID;
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/users`;
   const response: Response = await fetch(url, {
     method: 'POST',
@@ -52,8 +52,8 @@ export async function postUser(user: User): Promise<User> {
 }
 
 export async function putUser(user: User): Promise<User> {
-  if (user.userIdPk === undefined) throw new Error('user is missing userID');
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.userIdPk}`;
+  if (user.ID === undefined) throw new Error('user is missing userID');
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.ID}`;
   const response: Response = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -69,8 +69,8 @@ export async function putUser(user: User): Promise<User> {
 }
 
 export async function deleteUser(user: User): Promise<User> {
-  if (user.userIdPk === undefined) throw new Error('user is missing userID');
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.userIdPk}`;
+  if (user.ID === undefined) throw new Error('user is missing userID');
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.ID}`;
   const response: Response = await fetch(url, {
     method: 'DELETE',
     headers: {

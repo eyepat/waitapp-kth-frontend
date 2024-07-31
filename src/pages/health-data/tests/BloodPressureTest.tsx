@@ -45,7 +45,7 @@ const CustomTextField = styled(TextField)({
 const WrapperBox = styled(Box)({
   display: 'flex',
   backgroundColor: 'white',
-  width: '60%',
+  width: '65%',
   alignItems: 'center',
   border: '2px solid rgba(7, 65, 109, 1)',
   borderRadius: '10px',
@@ -121,7 +121,7 @@ export default function BloodPressureTest() {
                   }
                 }}
                 inputProps={{ style: { textAlign: 'left' } }}
-                sx={{ width: '80%' }}
+                sx={{ width: '90%' }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">

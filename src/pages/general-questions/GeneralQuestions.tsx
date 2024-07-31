@@ -155,7 +155,7 @@ export default function GeneralQuestions() {
             <MenuItem value="other">{t('other')}</MenuItem>
           </Select>
         </FormControl>
-        <Typography fontWeight="bold" marginTop="4vh">
+        <Typography fontWeight="bold" marginTop="2vh">
           {'2. ' + t('birth-date')}
         </Typography>
         <DatePicker
@@ -163,7 +163,7 @@ export default function GeneralQuestions() {
           label={t('select-birth-date')}
           onChange={handleDOBChange}
         />
-        <Stack direction="row" spacing={3} width="100%" marginTop="4vh">
+        <Stack direction="row" spacing={3} width="100%" marginTop="2vh">
           <Stack direction="column" width="100%">
             <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
             <FormControl fullWidth>
@@ -188,7 +188,7 @@ export default function GeneralQuestions() {
           </Stack>
         </Stack>
 
-        <Stack direction="row" spacing={3} width="100%" marginTop="4vh">
+        <Stack direction="row" spacing={3} width="100%" marginTop="2vh">
           <Stack direction="column" width="100%">
             <Stack direction="row" justifyContent="space-between">
               <Typography fontWeight="bold">
@@ -235,7 +235,7 @@ export default function GeneralQuestions() {
           </Stack>
         </Stack>
 
-        <div style={{ marginTop: '2vh', marginBottom: '4vh', width: '100%' }}>
+        <div style={{ marginBottom: '4vh', width: '100%' }}>
           <Typography fontWeight="bold" marginTop="3vh">
             {t('ablation')}
           </Typography>
@@ -245,7 +245,7 @@ export default function GeneralQuestions() {
             onChange={handleAblationDateChange}
           />
         </div>
-        <Stack marginTop="3vh" width="100%">
+        <Stack marginTop="2vh" marginBottom="4vh" width="100%">
           <Button
             onClick={() => {
               // TODO: handle actual registration
@@ -261,9 +261,7 @@ export default function GeneralQuestions() {
                 });
                 return;
               }
-
-              // TODO: fill with actual info
-              registerInfo({
+              const registerUser: User = {
                 name: user.name,
                 dateOfBirth: selectedDOB?.toISOString(),
                 height: selectedHeight,
@@ -271,7 +269,12 @@ export default function GeneralQuestions() {
                 waistSize: selectedWeight,
                 bloodPressure: selectedBloodPressure,
                 ablationDate: selectedAblationDate?.toISOString(),
-              });
+              };
+
+              console.log(registerUser);
+
+              // TODO: fill with actual info
+              registerInfo(registerUser);
             }}
             variant="contained"
             sx={{

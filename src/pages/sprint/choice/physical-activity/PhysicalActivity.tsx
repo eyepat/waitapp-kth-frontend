@@ -63,10 +63,7 @@ export default function FoodHabits() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack
-        alignItems="center"
-        sx={{ backgroundColor: 'hsla(196, 100%, 44%, 1)', height: '92vh' }}
-      >
+      <Stack alignItems="center" sx={{ height: '92vh' }}>
         <ImageHeader image={physicalBackground} />
         <Stack
           direction="column"
@@ -81,7 +78,7 @@ export default function FoodHabits() {
           <Stack
             sx={{
               boxDecoration: 'underline',
-              paddingTop: '8vh',
+              marginTop: '5vh',
               paddingLeft: '2vh',
             }}
           >
@@ -104,7 +101,7 @@ export default function FoodHabits() {
             </Typography>
           </Stack>
         </Stack>
-        <Stack width={'90%'} paddingTop={'3vh'}>
+        <Stack width={'90%'} paddingTop={'5vh'}>
           <Typography color="white">{t('goal-level')}</Typography>
           <NavTabs value={value} onChange={handleChange} centered>
             <NavTab
@@ -133,7 +130,12 @@ export default function FoodHabits() {
           padding="0vh 3vh 0vh 3vh"
           sx={{ flexGrow: 1 }}
         >
-          <Typography color="white" variant="h6" marginTop="3vh">
+          <Typography
+            color="white"
+            variant="body1"
+            fontSize="18px"
+            marginTop="3vh"
+          >
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
           <div style={{ minHeight: '150px' }}>{renderTabContent()}</div>

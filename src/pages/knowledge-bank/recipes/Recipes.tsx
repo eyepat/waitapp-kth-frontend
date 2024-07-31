@@ -71,7 +71,7 @@ export default function Recipes() {
                 onClick={() =>
                   (window.location.href =
                     'https://www.hjart-lungfonden.se/halsa/recept/' +
-                    recipe.url_variable)
+                    recipe.URLPath)
                 }
               />
             ))}

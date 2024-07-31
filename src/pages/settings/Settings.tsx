@@ -43,9 +43,9 @@ export default function Settings() {
   const { user, logout, updateUser } = useAuth();
 
   const renderCurrentSprint = () => {
-    if (user && user.currentSprintId && user.currentSprintId <= 0)
-      return renderNoAvailableSprint();
-    return renderAvailableSprint();
+    if (user && user.currentSprintID && user.currentSprintID <= 0)
+      return renderAvailableSprint();
+    return renderNoAvailableSprint();
   };
 
   function handleLanguageChange() {
@@ -57,7 +57,7 @@ export default function Settings() {
   function handleStopSprint() {
     if (user != undefined) {
       const myUpdatedUser = user;
-      myUpdatedUser.currentSprintId = -1;
+      myUpdatedUser.currentSprintID = -1;
       updateUser(myUpdatedUser);
     }
   }
@@ -254,7 +254,6 @@ export default function Settings() {
           />
           {renderCurrentSprint()}
         </Card>
-
         <Card sx={{ width: '100%' }}>
           <CardHeader
             sx={{ marginBottom: '-25px' }}

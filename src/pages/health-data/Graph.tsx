@@ -39,167 +39,139 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     return mode === GraphMode.BloodPressure
       ? [
           {
-            date: dayjs()
-              .subtract(6, 'month')
-              .subtract(13, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(6, 'month').subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs()
-              .subtract(6, 'month')
-              .subtract(5, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(6, 'month').subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(6, 'month').format('MM/DD'),
+            date: dayjs().subtract(6, 'month'),
             systolic: 130,
             diastolic: 91,
           },
           {
-            date: dayjs()
-              .subtract(5, 'month')
-              .subtract(13, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(5, 'month').subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs()
-              .subtract(5, 'month')
-              .subtract(5, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(5, 'month').subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(5, 'month').format('MM/DD'),
+            date: dayjs().subtract(5, 'month'),
             systolic: 120,
             diastolic: 89,
           },
           {
-            date: dayjs()
-              .subtract(4, 'month')
-              .subtract(13, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(4, 'month').subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs()
-              .subtract(4, 'month')
-              .subtract(5, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(4, 'month').subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(4, 'month').format('MM/DD'),
+            date: dayjs().subtract(4, 'month'),
             systolic: 127,
             diastolic: 83,
           },
           {
-            date: dayjs()
-              .subtract(3, 'month')
-              .subtract(13, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(3, 'month').subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs()
-              .subtract(3, 'month')
-              .subtract(5, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(3, 'month').subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(3, 'month').format('MM/DD'),
+            date: dayjs().subtract(3, 'month'),
             systolic: 150,
             diastolic: 80,
           },
           {
-            date: dayjs()
-              .subtract(2, 'month')
-              .subtract(13, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(2, 'month').subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs()
-              .subtract(2, 'month')
-              .subtract(5, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(2, 'month').subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(2, 'month').format('MM/DD'),
+            date: dayjs().subtract(2, 'month'),
             systolic: 140,
             diastolic: 94,
           },
           {
-            date: dayjs()
-              .subtract(1, 'month')
-              .subtract(13, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(1, 'month').subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs()
-              .subtract(1, 'month')
-              .subtract(5, 'days')
-              .format('MM/DD'),
+            date: dayjs().subtract(1, 'month').subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(1, 'month').format('MM/DD'),
+            date: dayjs().subtract(1, 'month'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(13, 'days').format('MM/DD'),
+            date: dayjs().subtract(13, 'days'),
             systolic: 135,
             diastolic: 86,
           },
           {
-            date: dayjs().subtract(5, 'days').format('MM/DD'),
+            date: dayjs().subtract(5, 'days'),
             systolic: 135,
             diastolic: 86,
           },
-          { date: dayjs().format('MM/DD'), systolic: 150, diastolic: 80 },
+          { date: dayjs(), systolic: 150, diastolic: 80 },
         ]
       : [
-          { date: dayjs().subtract(6, 'month').format('MM/DD'), weight: 50 },
-          { date: dayjs().subtract(5, 'month').format('MM/DD'), weight: 68 },
-          { date: dayjs().subtract(4, 'month').format('MM/DD'), weight: 72 },
-          { date: dayjs().subtract(3, 'month').format('MM/DD'), weight: 45 },
-          { date: dayjs().subtract(2, 'month').format('MM/DD'), weight: 73 },
-          { date: dayjs().subtract(1, 'month').format('MM/DD'), weight: 90 },
-          { date: dayjs().subtract(5, 'days').format('MM/DD'), weight: 76 },
-          { date: dayjs().format('MM/DD'), weight: 76 },
+          { date: dayjs().subtract(10, 'month'), weight: 30 },
+          { date: dayjs().subtract(10, 'month'), weight: 100 },
+          { date: dayjs().subtract(6, 'month'), weight: 50 },
+          { date: dayjs().subtract(5, 'month'), weight: 68 },
+          { date: dayjs().subtract(4, 'month'), weight: 72 },
+          { date: dayjs().subtract(3, 'month'), weight: 45 },
+          { date: dayjs().subtract(2, 'month'), weight: 73 },
+          { date: dayjs().subtract(1, 'month'), weight: 90 },
+          { date: dayjs().subtract(5, 'days'), weight: 76 },
+          { date: dayjs(), weight: 76 },
         ];
   });
 
   // Use sample data if no data is provided (TEMPORARY)
-  // Else, format date to MM/DD
   if (!data) {
     data = sampleData;
-  } else {
-    data = data.map((entry: any) => {
-      return {
-        date: dayjs(entry.date).format('MM/DD'),
-        ...entry,
-      };
-    });
   }
+
+  // Filters data points older than 7 months and formats date
+  data = data
+    ? data
+        .filter((entry: any) =>
+          dayjs(entry.date).isAfter(dayjs().subtract(7, 'month'))
+        )
+        .map((entry: any) => {
+          return {
+            ...entry,
+            date: dayjs(entry.date).format('MM/DD'),
+          };
+        })
+    : [];
 
   // Generate domain for y-axis (STATIC FOR NOW!)
   const calculateDomain = (): [string | number, string | number] => {
