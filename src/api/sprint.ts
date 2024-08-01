@@ -28,6 +28,26 @@ export async function getAllSprintsByUserID(userID: number): Promise<Sprint[]> {
   return data;
 }
 
+export async function createSprintAndReturnUser(
+  sprint: Sprint,
+  token: string
+): Promise<User> {
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/new`;
+  const response: Response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(sprint),
+  });
+  const data = await response.json();
+
+  if (data.message) throw new Error(data.message);
+
+  return data;
+}
+
 export async function getSprint(sprintID: number): Promise<Sprint> {
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprintID}`;
   const response: Response = await fetch(url, {
