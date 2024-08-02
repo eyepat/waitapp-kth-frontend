@@ -163,5 +163,7 @@
   "change-current-sprint": "Byta pågående sprint",
   "day": "Dag",
   "today": "Idag",
-  "days-until-ablation": "dagar kvar till ablation"
+  "days-until-ablation": "dagar kvar till ablation",
+  "full-name": "Namn",
+  "enter-name": "Skriv in för- och efternamn"
 }

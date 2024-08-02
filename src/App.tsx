@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './auth/Routes';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
+import { SprintProvider } from './contexts/SprintContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DeviceContextProvider } from './contexts/DeviceContext';
@@ -45,37 +46,39 @@ export default function App() {
       <LanguageProvider>
         <LoadingProvider>
           <AuthProvider>
-            <LocalizationProvider
-              adapterLocale="en-gb"
-              dateAdapter={AdapterDayjs}
-            >
-              <DeviceContextProvider>
-                <SnackbarProvider
-                  maxSnack={5}
-                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                  autoHideDuration={3000}
-                  dense
-                  preventDuplicate
-                  Components={{
-                    error: StackNotification,
-                    info: StackNotification,
-                    success: StackNotification,
-                    warning: StackNotification,
-                    default: StackNotification,
-                  }}
-                  action={(snack) => (
-                    <IconButton
-                      color="inherit"
-                      onClick={() => closeSnackbar(snack)}
-                    >
-                      <CloseIcon fontSize="medium" />
-                    </IconButton>
-                  )}
-                >
-                  <Routes />
-                </SnackbarProvider>
-              </DeviceContextProvider>
-            </LocalizationProvider>
+            <SprintProvider>
+              <LocalizationProvider
+                adapterLocale="en-gb"
+                dateAdapter={AdapterDayjs}
+              >
+                <DeviceContextProvider>
+                  <SnackbarProvider
+                    maxSnack={5}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    autoHideDuration={3000}
+                    dense
+                    preventDuplicate
+                    Components={{
+                      error: StackNotification,
+                      info: StackNotification,
+                      success: StackNotification,
+                      warning: StackNotification,
+                      default: StackNotification,
+                    }}
+                    action={(snack) => (
+                      <IconButton
+                        color="inherit"
+                        onClick={() => closeSnackbar(snack)}
+                      >
+                        <CloseIcon fontSize="medium" />
+                      </IconButton>
+                    )}
+                  >
+                    <Routes />
+                  </SnackbarProvider>
+                </DeviceContextProvider>
+              </LocalizationProvider>
+            </SprintProvider>
           </AuthProvider>
         </LoadingProvider>
       </LanguageProvider>
