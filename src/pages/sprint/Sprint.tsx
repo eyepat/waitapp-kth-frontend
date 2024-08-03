@@ -14,19 +14,18 @@ import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 import SprintCard from '../../components/Cards/sprintCard';
-import { Measure } from '../../utils/Icons';
-import { Chat } from '../../utils/Icons';
+import { Measure, Chat } from '../../utils/Icons';
 import dayjs from 'dayjs';
 
 export default function Sprint() {
   const { user } = useAuth();
   const [activeSprint] = useState(
-    user ? user && user.currentSprintID && user.currentSprintID >= 0 : false
+    user ? user.currentSprintID && user.currentSprintID >= 0 : false
   );
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
@@ -57,9 +56,7 @@ export default function Sprint() {
             {dayjs(user ? user.ablationDate ?? "" : "").diff(dayjs(), "days")} {t('days-until-ablation')}
             </Typography>
             <Stack direction="column">
-            <SprintCard img={''} title={'test text'} />
-            <SprintCard img={''} title={'test text'} />
-            <SprintCard img={''} title={'test text'} />'
+            <SprintCard day={1} rapa={1} week={1} />'
             </Stack>
             
             <Button
