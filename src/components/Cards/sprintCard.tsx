@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Typography, Card, CardContent } from '@mui/material';
+import { Typography, Card } from '@mui/material';
 import { styled } from '@mui/system';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { trainingActivities } from '../../data/trainingActivities';
