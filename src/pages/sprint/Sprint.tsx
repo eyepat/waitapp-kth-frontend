@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   Stack,
   ThemeProvider,
@@ -14,18 +15,16 @@ import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
-import { useState, useEffect } from 'react';
 import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { getSprint } from '../../api/sprint';
 import SprintCard from '../../components/Cards/sprintCard';
-import { Measure } from '../../utils/Icons';
-import { Chat } from '../../utils/Icons';
+import { Measure, Chat } from '../../utils/Icons';
 
 export default function Sprint() {
   const { user } = useAuth();
   const [activeSprint] = useState(
-    user ? user && user.currentSprintID && user.currentSprintID >= 0 : false
+    user ? user.currentSprintID && user.currentSprintID >= 0 : false
   );
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
@@ -38,9 +37,7 @@ export default function Sprint() {
 
   useEffect(() => {
     const getCurrentSprint = async () => {
-      const sprint: Sprint = await getSprint(
-        user ? user.currentSprintID ?? -1 : -1
-      );
+      const sprint = await getSprint(user ? user.currentSprintID ?? -1 : -1);
       setCurrentSprint(sprint);
     };
     if (user?.currentSprintID !== undefined && user?.currentSprintID > 0) {
@@ -52,9 +49,7 @@ export default function Sprint() {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
-          {t(
-            `${currentSprint ? currentSprint.type : 'undefined'}`
-          ).toUpperCase()}
+          {t(`${currentSprint ? currentSprint.type : 'undefined'}`).toUpperCase()}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
           {t('day')} x
@@ -64,9 +59,7 @@ export default function Sprint() {
             <Typography variant="h6" textAlign="center">
               {t('today')}
             </Typography>
-            <SprintCard img={''} title={'test text'} />
-            <SprintCard img={''} title={'test text'} />
-            <SprintCard img={''} title={'test text'} />
+            <SprintCard day={1} rapa={1} week={1} />
             <Typography marginBottom="4vh" textAlign="center">
               x {t('days-until-ablation')}
             </Typography>
