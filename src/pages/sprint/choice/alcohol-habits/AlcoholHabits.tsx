@@ -4,10 +4,28 @@ import alcoholBackground from '../../../../assets/backgrounds/alcoholBackground.
 import { useNavigate } from 'react-router-dom';
 import theme from '../../../../components/Theme';
 import { ImageHeader } from '../../../../components/Headers/ImageHeader';
+import { useSprintContext } from '../../../../contexts/SprintContext';
+import dayjs from 'dayjs';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const { createSprintAndUpdateUser } = useSprintContext();
+  
+  const handleSprintStart = () => {
+    const sprint: Sprint = {
+      userID: -1,
+      type: "alcohol",
+      startDate: dayjs().toISOString(),
+      endDate: dayjs().add(7, 'days').toISOString(),
+      isCompleted: false,
+      level: 0,
+      score: 0,
+    };
+
+    createSprintAndUpdateUser(sprint);
+    navigate('/sprint');
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -118,6 +136,7 @@ export default function FoodHabits() {
           <Button
             variant="contained"
             color="primary"
+            onClick={handleSprintStart}
             sx={{
               backgroundColor: 'black',
               marginBottom: '20px',

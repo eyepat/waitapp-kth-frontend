@@ -28,10 +28,10 @@ export async function getAllSprintsByUserID(userID: number): Promise<Sprint[]> {
   return data;
 }
 
-export async function createSprintAndReturnUser(
+export async function createNewSprint(
   sprint: Sprint,
   token: string
-): Promise<User> {
+): Promise<Sprint> {
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/new`;
   const response: Response = await fetch(url, {
     method: 'POST',

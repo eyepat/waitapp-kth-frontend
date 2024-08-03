@@ -17,10 +17,11 @@ import Popup from '../../components/PopUps/Popup';
 import { useState, useEffect } from 'react';
 import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
-import { getSprint } from '../../api/sprint';
+import { useSprintContext } from '../../contexts/SprintContext';
 import SprintCard from '../../components/Cards/sprintCard';
 import { Measure } from '../../utils/Icons';
 import { Chat } from '../../utils/Icons';
+import dayjs from 'dayjs';
 
 export default function Sprint() {
   const { user } = useAuth();
@@ -31,45 +32,36 @@ export default function Sprint() {
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
 
-  const [currentSprint, setCurrentSprint] = useState<Sprint | null>(null);
+  const { sprint } = useSprintContext();
 
   const { t } = useLanguage();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const getCurrentSprint = async () => {
-      const sprint: Sprint = await getSprint(
-        user ? user.currentSprintID ?? -1 : -1
-      );
-      setCurrentSprint(sprint);
-    };
-    if (user?.currentSprintID !== undefined && user?.currentSprintID > 0) {
-      getCurrentSprint();
-    }
-  }, [user]);
 
   const renderActiveSprint = () => {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
           {t(
-            `${currentSprint ? currentSprint.type : 'undefined'}`
+            `${sprint ? sprint.type : 'undefined'}`
           ).toUpperCase()}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
-          {t('day')} x
+          {t('day')} {dayjs().diff(dayjs(sprint ? sprint.startDate ?? "" : ""), "days") + 1}
         </Typography>
         <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
           <CardContent sx={{ position: 'relative' }}>
-            <Typography variant="h6" textAlign="center">
+            <Typography variant="h6" fontWeight='bold' textAlign="center">
               {t('today')}
             </Typography>
-            <SprintCard img={''} title={'test text'} />
-            <SprintCard img={''} title={'test text'} />
-            <SprintCard img={''} title={'test text'} />
-            <Typography marginBottom="4vh" textAlign="center">
-              x {t('days-until-ablation')}
+            <Typography marginBottom="1vh" textAlign="center">
+            {dayjs(user ? user.ablationDate ?? "" : "").diff(dayjs(), "days")} {t('days-until-ablation')}
             </Typography>
+            <Stack direction="column">
+            <SprintCard img={''} title={'test text'} />
+            <SprintCard img={''} title={'test text'} />
+            <SprintCard img={''} title={'test text'} />'
+            </Stack>
+            
             <Button
               variant="contained"
               sx={{
