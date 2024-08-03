@@ -5,6 +5,7 @@ import { createSprintAndReturnUser } from '../api/sprint';
 import { useAuth } from './AuthContext';
 
 interface SprintContextType {
+  sprint?: Sprint;
   createSprint: (sprint: Sprint) => Promise<UserWithToken | undefined>;
 }
 
