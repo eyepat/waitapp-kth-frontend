@@ -21,13 +21,15 @@ export const useSprintContext = () => {
 };
 
 export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currentSprint, setCurrentSprint] = useState<Sprint | undefined>(undefined);
+  const [currentSprint, setCurrentSprint] = useState<Sprint | undefined>(
+    undefined
+  );
   const { loading, setLoading } = useLoading();
   const { enqueueSnackbar } = useSnackbar();
   const { user, token } = useAuth();
 
   useEffect(() => {
-    if (user?.currentSprintID) {
+    if (user?.currentSprintID && user.currentSprintID > 0) {
       getSprint(user.currentSprintID).then((sprint) => {
         setCurrentSprint(sprint);
       });
