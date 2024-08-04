@@ -40,25 +40,29 @@ export default function Sprint() {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
-          {t(
-            `${sprint ? sprint.type : 'undefined'}`
-          ).toUpperCase()}
+          {t(`${sprint ? sprint.type : 'undefined'}`).toUpperCase()}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
-          {t('day')} {dayjs().diff(dayjs(sprint ? sprint.startDate ?? "" : ""), "days") + 1}
+          {t('day')}{' '}
+          {dayjs().diff(dayjs(sprint ? (sprint.startDate ?? '') : ''), 'days') +
+            1}
         </Typography>
         <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
           <CardContent sx={{ position: 'relative' }}>
-            <Typography variant="h6" fontWeight='bold' textAlign="center">
+            <Typography variant="h6" fontWeight="bold" textAlign="center">
               {t('today')}
             </Typography>
             <Typography marginBottom="1vh" textAlign="center">
-            {dayjs(user ? user.ablationDate ?? "" : "").diff(dayjs(), "days")} {t('days-until-ablation')}
+              {dayjs(user ? (user.ablationDate ?? '') : '').diff(
+                dayjs(),
+                'days'
+              )}{' '}
+              {t('days-until-ablation')}
             </Typography>
             <Stack direction="column">
-            <SprintCard day={1} rapa={1} week={1} />'
+              <SprintCard day={1} rapa={1} week={1} />'
             </Stack>
-            
+
             <Button
               variant="contained"
               sx={{

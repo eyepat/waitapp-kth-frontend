@@ -31,9 +31,19 @@ const YouTubeFrame = styled('iframe')({
   marginTop: '16px',
 });
 
-const getActivity = (day: number, rapa: number, week: number): TrainingActivity => {
+const getActivity = (
+  day: number,
+  rapa: number,
+  week: number
+): TrainingActivity => {
   const key = `${day}-${rapa}-${week}`;
-  return trainingActivities[key] || { title: 'Rest Day', description: 'Take a break and relax.', videoUrl: '' };
+  return (
+    trainingActivities[key] || {
+      title: 'Rest Day',
+      description: 'Take a break and relax.',
+      videoUrl: '',
+    }
+  );
 };
 
 const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
