@@ -1,7 +1,7 @@
 import { TrainingActivity } from '../types';
 
 export const trainingActivities: { [key: string]: TrainingActivity } = {
-    //Just a placeholder for test 
+  //Just a placeholder for test
   '1-1-1': {
     title: 'Promenad',
     description: 'Prominera enkelt på stället.',

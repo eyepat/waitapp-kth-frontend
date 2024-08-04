@@ -15,11 +15,11 @@ export default function FoodHabits() {
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const { createSprintAndUpdateUser } = useSprintContext();
-  
+
   const handleSprintStart = () => {
     const sprint: Sprint = {
       userID: -1,
-      type: "physical-activity",
+      type: 'physical-activity',
       startDate: dayjs().toISOString(),
       endDate: dayjs().add(7, 'days').toISOString(),
       isCompleted: false,

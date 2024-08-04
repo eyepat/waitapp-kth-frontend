@@ -11,11 +11,11 @@ export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { createSprintAndUpdateUser } = useSprintContext();
-  
+
   const handleSprintStart = () => {
     const sprint: Sprint = {
       userID: -1,
-      type: "alcohol",
+      type: 'alcohol',
       startDate: dayjs().toISOString(),
       endDate: dayjs().add(7, 'days').toISOString(),
       isCompleted: false,

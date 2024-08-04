@@ -1,5 +1,5 @@
 export interface TrainingActivity {
-    title: string;
-    description: string;
-    videoUrl: string;
-  }
+  title: string;
+  description: string;
+  videoUrl: string;
+}
