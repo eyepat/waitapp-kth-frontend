@@ -1,10 +1,10 @@
 type LoginProps = {
-  username: string;
+  email: string;
   password: string;
 };
 
 export async function login({
-  username,
+  email,
   password,
 }: LoginProps): Promise<UserWithToken> {
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/login`;
@@ -13,7 +13,7 @@ export async function login({
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, password }),
   });
   const data = await response.json();
 

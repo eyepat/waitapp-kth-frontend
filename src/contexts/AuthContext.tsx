@@ -11,7 +11,7 @@ interface AuthContextType {
   token?: string;
   user?: UserWithToken;
   login: (
-    username: string,
+    email: string,
     password: string
   ) => Promise<UserWithToken | undefined>;
   logout: () => void;
@@ -45,11 +45,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     removeCookie('token', { path: '/' });
   };
 
-  const loginFunc = async (username: string, password: string) => {
+  const loginFunc = async (email: string, password: string) => {
     if (loading) return;
     try {
       setLoading(true);
-      const user: UserWithToken = await login({ username, password });
+      const user: UserWithToken = await login({ email, password });
 
       setToken(user.token);
       setUser(user);

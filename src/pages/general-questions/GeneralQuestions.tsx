@@ -37,23 +37,30 @@ export default function GeneralQuestions() {
   const handleCloseBloodPressureDialog = () =>
     setOpenBloodPressureDialog(false);
 
+  const [selectedName, setSelectedName] = useState<string>('');
   const [selectedGender, setSelectedGender] = useState<string>('');
   const [selectedDOB, setSelectedDOB] = useState<Dayjs | null>(null);
   const [selectedHeight, setSelectedHeight] = useState<number | undefined>(
     undefined
   );
-  const [selectedWeight, setSelectedWeight] = useState<string | undefined>(
+  const [selectedWeight, setSelectedWeight] = useState<number | undefined>(
     undefined
   );
   const [selectedWaistSize, setSelectedWaistSize] = useState<
-    string | undefined
+    number | undefined
   >(undefined);
   const [selectedBloodPressure, setSelectedBloodPressure] = useState<
-    number | undefined
+    string | undefined
   >(undefined);
   const [selectedAblationDate, setSelectedAblationDate] =
     useState<Dayjs | null>(null);
 
+  const handleNameChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const value = event.target.value;
+    setSelectedName(value);
+  };
   const handleGenderChange = (event: SelectChangeEvent<string>) => {
     setSelectedGender(event.target.value);
   };
@@ -72,23 +79,23 @@ export default function GeneralQuestions() {
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
     const value = event.target.value;
-
-    setSelectedWeight(value);
+    if (!isNaN(Number(value))) {
+      setSelectedWeight(Number(value));
+    }
   };
   const handleWaistSizeChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
     const value = event.target.value;
-
-    setSelectedWaistSize(value);
+    if (!isNaN(Number(value))) {
+      setSelectedWaistSize(Number(value));
+    }
   };
   const handleBloodPressureChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
     const value = event.target.value;
-    if (!isNaN(Number(value))) {
-      setSelectedBloodPressure(Number(value));
-    }
+    setSelectedBloodPressure(value);
   };
   const handleAblationDateChange = (value: Dayjs | null) => {
     setSelectedAblationDate(value);
@@ -139,7 +146,14 @@ export default function GeneralQuestions() {
         <Typography variant="body1" alignSelf="start" marginBottom="2vh">
           {t('general-questions')}
         </Typography>
-        <Typography fontWeight="bold">{'1. ' + t('gender')}</Typography>
+        <Typography fontWeight="bold">{'1. ' + t('full-name')}</Typography>
+        <FormControl fullWidth>
+          <InputLabel>{t('enter-name')}</InputLabel>
+          <OutlinedInput label={t('full-name')} onChange={handleNameChange} />
+        </FormControl>
+        <Typography fontWeight="bold" marginTop="2vh">
+          {'2. ' + t('gender')}
+        </Typography>
         <FormControl fullWidth>
           <InputLabel>{t('select-gender')}</InputLabel>
           <Select
@@ -156,7 +170,7 @@ export default function GeneralQuestions() {
           </Select>
         </FormControl>
         <Typography fontWeight="bold" marginTop="2vh">
-          {'2. ' + t('birth-date')}
+          {'3. ' + t('birth-date')}
         </Typography>
         <DatePicker
           sx={{ width: '100%' }}
@@ -165,7 +179,7 @@ export default function GeneralQuestions() {
         />
         <Stack direction="row" spacing={3} width="100%" marginTop="2vh">
           <Stack direction="column" width="100%">
-            <Typography fontWeight="bold">{'3. ' + t('length')}</Typography>
+            <Typography fontWeight="bold">{'4. ' + t('length')}</Typography>
             <FormControl fullWidth>
               <InputLabel>...</InputLabel>
               <OutlinedInput
@@ -176,7 +190,7 @@ export default function GeneralQuestions() {
             </FormControl>
           </Stack>
           <Stack direction="column" width="100%">
-            <Typography fontWeight="bold">{'4. ' + t('weight')}</Typography>
+            <Typography fontWeight="bold">{'5. ' + t('weight')}</Typography>
             <FormControl fullWidth>
               <InputLabel>...</InputLabel>
               <OutlinedInput
@@ -192,7 +206,7 @@ export default function GeneralQuestions() {
           <Stack direction="column" width="100%">
             <Stack direction="row" justifyContent="space-between">
               <Typography fontWeight="bold">
-                {'5. ' + t('waist-measurement')}
+                {'6. ' + t('waist-measurement')}
               </Typography>
               <Button
                 sx={{ padding: 0, margin: 0, minWidth: 0 }}
@@ -214,7 +228,7 @@ export default function GeneralQuestions() {
             <Stack direction="column" width="100%">
               <Stack direction="row" justifyContent="space-between">
                 <Typography fontWeight="bold">
-                  {'6. ' + t('blood-pressure')}
+                  {'7. ' + t('blood-pressure')}
                 </Typography>
                 <Button
                   sx={{ padding: 0, margin: 0, minWidth: 0 }}
@@ -262,11 +276,12 @@ export default function GeneralQuestions() {
                 return;
               }
               const registerUser: User = {
-                name: user.name,
+                name: selectedName,
+                email: user.email,
                 dateOfBirth: selectedDOB?.toISOString(),
                 height: selectedHeight,
                 weight: selectedWeight,
-                waistSize: selectedWeight,
+                waistSize: selectedWaistSize,
                 bloodPressure: selectedBloodPressure,
                 ablationDate: selectedAblationDate?.toISOString(),
               };

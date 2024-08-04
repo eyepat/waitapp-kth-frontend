@@ -76,7 +76,7 @@ export default function Register() {
       return;
     }
     register({
-      name: email,
+      email: email,
       password: password,
     });
     //navigate('/general-questions');

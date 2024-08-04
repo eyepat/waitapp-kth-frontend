@@ -7,25 +7,32 @@ import NavTabs from '../../../../components/TabMenu/NavTabs';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../../../components/Theme';
 import { ImageHeader } from '../../../../components/Headers/ImageHeader';
-import { useAuth } from '../../../../contexts/AuthContext';
+import { useSprintContext } from '../../../../contexts/SprintContext';
+import dayjs from 'dayjs';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
-  const { user, updateUser } = useAuth();
+  const { createSprintAndUpdateUser } = useSprintContext();
+  
+  const handleSprintStart = () => {
+    const sprint: Sprint = {
+      userID: -1,
+      type: "food-habits",
+      startDate: dayjs().toISOString(),
+      endDate: dayjs().add(7, 'days').toISOString(),
+      isCompleted: false,
+      level: value,
+      score: 0,
+    };
+
+    createSprintAndUpdateUser(sprint);
+    navigate('/sprint');
+  };
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-  };
-
-  const handleSprintStart = () => {
-    if (user != undefined) {
-      const myUpdatedUser = user;
-      myUpdatedUser.currentSprintID = 99;
-      console.log(user.ID);
-      updateUser(myUpdatedUser);
-    }
   };
 
   const renderLow = () => {

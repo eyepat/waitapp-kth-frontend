@@ -39,25 +39,25 @@ export default function Login() {
     }
   }, [authLevel, navigate]);
 
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [usernameValid, setUsernameValid] = useState<boolean | null>(null);
+  const [emailValid, setEmailValid] = useState<boolean | null>(null);
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
 
   const tempLoginDemo = () => {
-    if (!usernameValid || !passwordValid) {
+    if (!emailValid || !passwordValid) {
       enqueueSnackbar('invalid-login-details', {
         variant: 'error',
       });
       return;
     }
-    login(username, password);
+    login(email, password);
   };
 
-  const updateUsername: React.ChangeEventHandler<
+  const updateEmail: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (e) => {
-    setUsername(e.target.value);
+    setEmail(e.target.value);
   };
 
   const updatePassword: React.ChangeEventHandler<
@@ -68,10 +68,10 @@ export default function Login() {
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setUsernameValid(
-      emailRegex.test(username) ? true : username.length > 0 ? false : null
+    setEmailValid(
+      emailRegex.test(email) ? true : email.length > 0 ? false : null
     );
-  }, [username]);
+  }, [email]);
 
   useEffect(() => {
     setPasswordValid(password.length > 0 ? true : null);
@@ -132,7 +132,7 @@ export default function Login() {
               >
                 <PersonOutline sx={{ color: '#00A3E0' }} />
                 <input
-                  onChange={updateUsername}
+                  onChange={updateEmail}
                   style={{
                     outline: 'none',
                     border: 'none',
@@ -140,15 +140,13 @@ export default function Login() {
                     width: '90%',
                   }}
                   type={'email'}
-                  value={username}
+                  value={email}
                   placeholder={t('username')}
                 ></input>
-                {usernameValid !== false ? (
+                {emailValid !== false ? (
                   <CheckCircle
                     sx={
-                      usernameValid
-                        ? { color: 'green' }
-                        : { visibility: 'hidden' }
+                      emailValid ? { color: 'green' } : { visibility: 'hidden' }
                     }
                   />
                 ) : (

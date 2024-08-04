@@ -162,5 +162,7 @@
   "change-current-sprint": "Change current sprint",
   "day": "Day",
   "today": "Today",
-  "days-until-ablation": "days left until ablation"
+  "days-until-ablation": "days left until ablation",
+  "full-name": "Name",
+  "enter-name": "Enter your first and last name"
 }

@@ -1,12 +1,13 @@
 interface User {
   ID?: number;
-  name: string;
+  name?: string;
+  email: string;
   password?: string;
   dateOfBirth?: string;
   height?: number;
-  weight?: string;
-  waistSize?: string;
-  bloodPressure?: number;
+  weight?: number;
+  waistSize?: number;
+  bloodPressure?: string;
   ablationDate?: string;
   currentSprintID?: number;
 }
