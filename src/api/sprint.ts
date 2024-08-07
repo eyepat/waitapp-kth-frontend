@@ -32,7 +32,7 @@ export async function createNewSprint(
   sprint: Sprint,
   token: string
 ): Promise<Sprint> {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/new`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints`;
   const response: Response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -48,12 +48,13 @@ export async function createNewSprint(
   return data;
 }
 
-export async function getSprint(sprintID: number): Promise<Sprint> {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprintID}`;
+export async function getSprint(token: string): Promise<Sprint> {
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/latest`;
   const response: Response = await fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   });
   const data = await response.json();

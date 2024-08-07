@@ -1,15 +1,11 @@
 interface User {
-  ID?: number;
-  name?: string;
+  id?: number;
   email: string;
   password?: string;
+  fullName?: string;
   dateOfBirth?: string;
-  height?: number;
-  weight?: number;
-  waistSize?: number;
-  bloodPressure?: string;
+  gender?: string;
   ablationDate?: string;
-  currentSprintID?: number;
 }
 
 interface UserWithToken extends User {

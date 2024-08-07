@@ -3,6 +3,7 @@ import { useSnackbar } from 'notistack';
 import { useLoading } from './LoadContext';
 import { createNewSprint, putSprint, getSprint } from '../api/sprint';
 import { useAuth } from './AuthContext';
+import { AuthenticationLevels } from '../Pages';
 
 interface SprintContextType {
   sprint?: Sprint;
@@ -29,8 +30,12 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
   const { user, token } = useAuth();
 
   useEffect(() => {
-    if (user?.currentSprintID && user.currentSprintID > 0) {
-      getSprint(user.currentSprintID).then((sprint) => {
+    if (
+      user?.token != undefined &&
+      user?.authLevel != undefined &&
+      user?.authLevel >= AuthenticationLevels.LOGGED_IN
+    ) {
+      getSprint(user.token).then((sprint) => {
         setCurrentSprint(sprint);
       });
     }
@@ -42,9 +47,6 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       const newSprint: Sprint = await createNewSprint(sprint, token);
       setCurrentSprint(newSprint);
-      if (user) {
-        user.currentSprintID = newSprint.ID;
-      }
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {

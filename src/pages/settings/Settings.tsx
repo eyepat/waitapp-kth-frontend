@@ -33,6 +33,7 @@ import theme from '../../components/Theme';
 import Popup from '../../components/PopUps/Popup';
 import { useAuth } from '../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
+import { useSprintContext } from '../../contexts/SprintContext';
 
 export default function Settings() {
   const [openInfo, setOpenInfo] = useState(false);
@@ -40,11 +41,11 @@ export default function Settings() {
 
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
-  const { user, logout, updateUser } = useAuth();
+  const { user, logout } = useAuth();
+  const { sprint } = useSprintContext();
 
   const renderCurrentSprint = () => {
-    if (user && user.currentSprintID && user.currentSprintID <= 0)
-      return renderNoAvailableSprint();
+    if (!sprint) return renderNoAvailableSprint();
     return renderAvailableSprint();
   };
 
@@ -56,9 +57,7 @@ export default function Settings() {
 
   function handleStopSprint() {
     if (user != undefined) {
-      const myUpdatedUser = user;
-      myUpdatedUser.currentSprintID = -1;
-      updateUser(myUpdatedUser);
+      console.log('stop sprint');
     }
   }
 

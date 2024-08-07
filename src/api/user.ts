@@ -35,7 +35,7 @@ export async function getUser(
 }
 
 export async function postUser(user: User): Promise<User> {
-  delete user.ID;
+  delete user.id;
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/users`;
   const response: Response = await fetch(url, {
     method: 'POST',
@@ -55,9 +55,9 @@ export async function putUser(
   user: User,
   token: string | undefined
 ): Promise<User> {
-  if (user.ID === undefined) throw new Error('user is missing userID');
+  if (user.id === undefined) throw new Error('user is missing userID');
   if (token === undefined) throw new Error('no-token');
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.ID}`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.id}`;
   const response: Response = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -74,8 +74,8 @@ export async function putUser(
 }
 
 export async function deleteUser(user: User): Promise<User> {
-  if (user.ID === undefined) throw new Error('user is missing userID');
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.ID}`;
+  if (user.id === undefined) throw new Error('user is missing userID');
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/users/${user.id}`;
   const response: Response = await fetch(url, {
     method: 'DELETE',
     headers: {

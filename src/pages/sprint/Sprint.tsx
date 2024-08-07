@@ -24,14 +24,11 @@ import dayjs from 'dayjs';
 
 export default function Sprint() {
   const { user } = useAuth();
-  const [activeSprint] = useState(
-    user ? user.currentSprintID && user.currentSprintID >= 0 : false
-  );
+  const { sprint } = useSprintContext();
+
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
-
-  const { sprint } = useSprintContext();
 
   const { t } = useLanguage();
   const navigate = useNavigate();
@@ -44,7 +41,7 @@ export default function Sprint() {
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
           {t('day')}{' '}
-          {dayjs().diff(dayjs(sprint ? (sprint.startDate ?? '') : ''), 'days') +
+          {dayjs().diff(dayjs(sprint ? sprint.startDate ?? '' : ''), 'days') +
             1}
         </Typography>
         <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
@@ -53,10 +50,7 @@ export default function Sprint() {
               {t('today')}
             </Typography>
             <Typography marginBottom="1vh" textAlign="center">
-              {dayjs(user ? (user.ablationDate ?? '') : '').diff(
-                dayjs(),
-                'days'
-              )}{' '}
+              {dayjs(user ? user.ablationDate ?? '' : '').diff(dayjs(), 'days')}{' '}
               {t('days-until-ablation')}
             </Typography>
             <Stack direction="column">
@@ -173,7 +167,7 @@ export default function Sprint() {
   return (
     <ThemeProvider theme={theme}>
       <Stack marginBottom="20vh" alignItems="center">
-        {activeSprint ? renderActiveSprint() : noActiveSprint()}
+        {sprint ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
       <Popup

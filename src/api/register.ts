@@ -1,5 +1,7 @@
+import { RegisterInfo } from '../types/registerInfo';
+
 export async function register(user: User): Promise<UserWithToken> {
-  delete user.ID;
+  delete user.id;
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/register`;
   const response: Response = await fetch(url, {
     method: 'POST',
@@ -17,10 +19,10 @@ export async function register(user: User): Promise<UserWithToken> {
 
 export async function registerInfo(
   id: number,
-  user: User,
+  user: RegisterInfo,
   token: string
 ): Promise<UserWithToken> {
-  delete user.ID;
+  delete user.id;
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/register/${id}`;
   const response: Response = await fetch(url, {
     method: 'PUT',
