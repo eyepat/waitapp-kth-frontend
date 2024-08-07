@@ -10,6 +10,7 @@ import {
   Typography,
   ThemeProvider,
 } from '@mui/material';
+import React from 'react';
 import theme from '../../components/Theme';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { AuthenticationLevels } from '../../Pages';
 import { Dayjs } from 'dayjs';
+import { RegisterInfo } from '../../types/registerInfo';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
@@ -75,12 +77,15 @@ export default function GeneralQuestions() {
       setSelectedHeight(Number(value));
     }
   };
+
   const handleWeightChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
     const value = event.target.value;
     if (!isNaN(Number(value))) {
-      setSelectedWeight(Number(value));
+      const valueAsNum = Number(value);
+      //ToDo fix magical numbers and get check values from  KI
+      setSelectedWeight(valueAsNum);
     }
   };
   const handleWaistSizeChange: React.ChangeEventHandler<
@@ -88,6 +93,7 @@ export default function GeneralQuestions() {
   > = (event) => {
     const value = event.target.value;
     if (!isNaN(Number(value))) {
+      //ToDo fix magical numbers and get check values from  KI
       setSelectedWaistSize(Number(value));
     }
   };
@@ -102,6 +108,25 @@ export default function GeneralQuestions() {
   };
 
   const validateUserProvidedData: () => boolean = () => {
+    const bloodPressureRegex = /^\d+\/\d+$/;
+
+    if (Number(selectedWaistSize) < 30 || Number(selectedWaistSize) > 170)
+      return false;
+
+    if (Number(selectedWeight) < 30 || Number(selectedWeight) > 600)
+      return false;
+
+    if (Number(selectedHeight) < 50 || Number(selectedHeight) > 250)
+      return false;
+
+    if (
+      !(
+        selectedBloodPressure !== undefined &&
+        bloodPressureRegex.test(selectedBloodPressure)
+      )
+    )
+      return false;
+
     return (
       selectedGender !== null &&
       selectedDOB != undefined &&
@@ -275,10 +300,12 @@ export default function GeneralQuestions() {
                 });
                 return;
               }
-              const registerUser: User = {
-                name: selectedName,
+              const registerUser: RegisterInfo = {
+                id: user.id,
+                gender: selectedGender.toUpperCase(),
+                fullName: selectedName,
                 email: user.email,
-                dateOfBirth: selectedDOB?.toISOString(),
+                birthDate: selectedDOB?.toISOString(),
                 height: selectedHeight,
                 weight: selectedWeight,
                 waistSize: selectedWaistSize,

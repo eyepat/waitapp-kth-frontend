@@ -6,6 +6,7 @@ import { enqueueSnackbar } from 'notistack';
 import { register, registerInfo } from '../api/register';
 import { useLoading } from './LoadContext';
 import { putUser } from '../api/user';
+import { RegisterInfo } from '../types/registerInfo';
 
 interface AuthContextType {
   token?: string;
@@ -16,7 +17,9 @@ interface AuthContextType {
   ) => Promise<UserWithToken | undefined>;
   logout: () => void;
   register: (userToRegister: User) => Promise<UserWithToken | undefined>;
-  registerInfo: (userToRegister: User) => Promise<UserWithToken | undefined>;
+  registerInfo: (
+    userToRegister: RegisterInfo
+  ) => Promise<UserWithToken | undefined>;
   updateUser: (updatedUser: User) => Promise<UserWithToken | undefined>;
 }
 
@@ -109,12 +112,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const registerInfoFunc = async (userToRegister: User) => {
-    if (loading || user?.ID == undefined || token == undefined) return;
+  const registerInfoFunc = async (userToRegister: RegisterInfo) => {
+    if (loading || user?.id == undefined || token == undefined) return;
     try {
       setLoading(true);
       const registeredUser: UserWithToken = await registerInfo(
-        user?.ID,
+        user?.id,
         userToRegister,
         token
       );
@@ -139,7 +142,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
     try {
       setLoading(true);
-      updatedUser.ID = user?.ID;
+      updatedUser.id = user?.id;
       const updatedUserData: UserWithToken = await putUser(updatedUser, token);
       console.log('setting user');
       setUser(updatedUserData);

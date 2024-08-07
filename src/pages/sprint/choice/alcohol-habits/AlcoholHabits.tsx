@@ -15,7 +15,7 @@ export default function FoodHabits() {
   const handleSprintStart = () => {
     const sprint: Sprint = {
       userID: -1,
-      type: 'alcohol',
+      type: 'ALCOHOL',
       startDate: dayjs().toISOString(),
       endDate: dayjs().add(7, 'days').toISOString(),
       isCompleted: false,
