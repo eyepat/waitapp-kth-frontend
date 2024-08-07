@@ -41,7 +41,7 @@ export default function Settings() {
 
   const navigate = useNavigate();
   const { t, language, setLanguage } = useLanguage();
-  const { user, logout, updateUser } = useAuth();
+  const { user, logout } = useAuth();
   const { sprint } = useSprintContext();
 
   const renderCurrentSprint = () => {
@@ -57,10 +57,7 @@ export default function Settings() {
 
   function handleStopSprint() {
     if (user != undefined) {
-      const myUpdatedUser = user;
-      // TODO: impl
-      //myUpdatedUser.currentSprintID = -1;
-      //updateUser(myUpdatedUser);
+      console.log('stop sprint');
     }
   }
 
