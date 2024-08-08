@@ -36,7 +36,7 @@ const Home: React.FC = () => {
       setSteps(2472);
       setPulse(74);
     }
-  }, [user]);
+  }, [user, weight]);
 
   const maxWeight = 100;
   const maxSteps = 2500;
