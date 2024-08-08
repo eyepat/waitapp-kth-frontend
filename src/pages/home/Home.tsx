@@ -4,23 +4,39 @@ import { Pulse, Scale, Steps } from '../../utils/Icons';
 import ChartMeter from './ChartMeter';
 import { useLanguage } from '../../contexts/LanguageContext';
 import theme from '../../components/Theme';
+import dayjs from 'dayjs';
+import { useAuth } from '../../contexts/AuthContext';
+import { useMetrics } from '../../contexts/MetricsContext';
 
 const Home: React.FC = () => {
-  const [daysLeft, setDaysLeft] = useState<number>(142);
-  const [weight, setWeight] = useState<number>(84);
-  const [steps, setSteps] = useState<number>(2472);
-  const [pulse, setPulse] = useState<number>(74);
+  const [daysLeft, setDaysLeft] = useState<number>(0);
+  const [weightDisp, setWeight] = useState<number>(0);
+  const [stepsDisp, setSteps] = useState<number>(0);
+  const [pulse, setPulse] = useState<number>(0);
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const { weight } = useMetrics();
 
   // Added the useEffect below to prevent ts checking from failing since the
   // set functions arn´t used
   // TODO: Remove once they are used
   useEffect(() => {
-    setDaysLeft(142);
-    setWeight(84);
-    setSteps(2472);
-    setPulse(74);
-  }, []);
+    if (user != undefined) {
+      setDaysLeft(
+        dayjs(user ? (user.ablationDate ?? '') : '').diff(dayjs(), 'days')
+      );
+      if (weight !== undefined && weight.length > 0) {
+        setWeight(
+          weight.sort(
+            (a, b) =>
+              new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+          )[0].value
+        );
+      }
+      setSteps(2472);
+      setPulse(74);
+    }
+  }, [user]);
 
   const maxWeight = 100;
   const maxSteps = 2500;
@@ -61,7 +77,7 @@ const Home: React.FC = () => {
             <Stack direction="row" spacing={2} alignItems="center">
               <Scale />
               <Stack direction="column">
-                <Typography sx={{ lineHeight: '1' }}>{weight}</Typography>
+                <Typography sx={{ lineHeight: '1' }}>{weightDisp}</Typography>
                 <Typography sx={{ lineHeight: '1' }}>
                   {t('weight-unit')}
                 </Typography>
@@ -70,7 +86,7 @@ const Home: React.FC = () => {
             <Stack direction="row" spacing={2} alignItems="center">
               <Steps />
               <Stack direction="column">
-                <Typography sx={{ lineHeight: '1' }}>{steps}</Typography>
+                <Typography sx={{ lineHeight: '1' }}>{stepsDisp}</Typography>
                 <Typography sx={{ lineHeight: '1' }}>{t('steps')}</Typography>
               </Stack>
             </Stack>
@@ -102,14 +118,14 @@ const Home: React.FC = () => {
               maxValue={maxPulse}
             />
             <ChartMeter
-              value={steps}
+              value={stepsDisp}
               label={<Steps />}
               barColor="hsla(200, 100%, 26%)"
               lighterColor="hsla(200, 100%, 26%, 0.4)"
               maxValue={maxSteps}
             />
             <ChartMeter
-              value={weight}
+              value={weightDisp}
               label={<Scale />}
               barColor="hsla(196, 100%, 44%)"
               lighterColor="hsla(196, 100%, 44%, 0.4)"
