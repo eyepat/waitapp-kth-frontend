@@ -24,18 +24,9 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = ({ mode }) => {
   const { t } = useLanguage();
-  const { bloodPressure, weight, addMeasurement } = useMetrics();
+  const { bloodPressure, weight } = useMetrics();
   let data: Metric[] | undefined;
   const key = mode === GraphMode.Weight ? 'value' : mode === GraphMode.Systolic ? 'systolic' : 'diastolic';
-
-  const met: Metric = {
-    userID: 1,
-    sprintID: null,
-    value: `${Math.floor(Math.random() * 11) + 120}/${Math.floor(Math.random() * 11) + 80}`,
-    timeStamp: dayjs().toISOString(),
-  };
-
-  // addMeasurement && addMeasurement('blood-pressure', met);
 
   data = mode === GraphMode.Weight ? weight : bloodPressure;
 
