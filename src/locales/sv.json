@@ -165,5 +165,7 @@
   "today": "Idag",
   "days-until-ablation": "dagar kvar till ablation",
   "full-name": "Namn",
-  "enter-name": "Skriv in för- och efternamn"
+  "enter-name": "Skriv in för- och efternamn",
+  "training-sprint-placeholder-title": "Promenera",
+  "training-sprint-placeholder-desc": "Promenera enkelt på stället."
 }

@@ -164,5 +164,7 @@
   "today": "Today",
   "days-until-ablation": "days left until ablation",
   "full-name": "Name",
-  "enter-name": "Enter your first and last name"
+  "enter-name": "Enter your first and last name",
+  "training-sprint-placeholder-title": "Take a walk",
+  "training-sprint-placeholder-desc": "Walk easily in place."
 }

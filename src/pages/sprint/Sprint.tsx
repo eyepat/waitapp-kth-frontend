@@ -33,15 +33,28 @@ export default function Sprint() {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
+  const getSprintTypeText: (input: string) => string = (input) => {
+    switch (input) {
+      case 'PHYSICAL':
+        return t('physical-activity');
+      case 'FOOD':
+        return t('food-habits');
+      case 'ALCOHOL':
+        return t('alcohol-habits');
+      default:
+        return t('unknown-sprint-type');
+    }
+  };
+
   const renderActiveSprint = () => {
     return (
       <Stack marginTop="1vh" alignItems="center">
         <Typography variant="h5" fontWeight="bold">
-          {t(`${sprint ? sprint.type : 'undefined'}`).toUpperCase()}
+          {`${sprint ? getSprintTypeText(sprint.type).toUpperCase() : 'undefined'}`}
         </Typography>
         <Typography variant="h2" fontWeight="bold" textAlign="center">
           {t('day')}{' '}
-          {dayjs().diff(dayjs(sprint ? sprint.startDate ?? '' : ''), 'days') +
+          {dayjs().diff(dayjs(sprint ? (sprint.startDate ?? '') : ''), 'days') +
             1}
         </Typography>
         <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
@@ -50,7 +63,10 @@ export default function Sprint() {
               {t('today')}
             </Typography>
             <Typography marginBottom="1vh" textAlign="center">
-              {dayjs(user ? user.ablationDate ?? '' : '').diff(dayjs(), 'days')}{' '}
+              {dayjs(user ? (user.ablationDate ?? '') : '').diff(
+                dayjs(),
+                'days'
+              )}{' '}
               {t('days-until-ablation')}
             </Typography>
             <Stack direction="column">
