@@ -66,13 +66,9 @@ export default function Recipes() {
             </Typography>
             {recipes.map((recipe) => (
               <RecipeCard
-                img={recipe.image}
+                img={recipe.imageURL}
                 title={recipe.title}
-                onClick={() =>
-                  (window.location.href =
-                    'https://www.hjart-lungfonden.se/halsa/recept/' +
-                    recipe.URLPath)
-                }
+                onClick={() => (window.location.href = recipe.url)}
               />
             ))}
           </Stack>

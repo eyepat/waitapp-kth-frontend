@@ -1,9 +1,8 @@
 export type Recipe = {
-  ID: number;
-  baseURL: string;
-  URLPath: string;
+  id: number;
+  url: string;
   title: string;
   description: string;
-  image: string;
-  cookingTimeMinutes: number;
+  imageURL: string;
+  cookingTime: number;
 };
