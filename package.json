@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "docker-build": "bash ./build-docker.sh"
+    "docker-build": "bash ./build-docker.sh",
+    "setup": "bun scripts/setup.ts",
+    "types": "bun scripts/gen-types.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
