@@ -46,43 +46,43 @@ export default function App() {
     <BrowserRouter>
       <LanguageProvider>
         <LoadingProvider>
-          <AuthProvider>
-            <SprintProvider>
-              <MetricsProvider>
-                <LocalizationProvider
-                  adapterLocale="en-gb"
-                  dateAdapter={AdapterDayjs}
-                >
-                  <DeviceContextProvider>
-                    <SnackbarProvider
-                      maxSnack={5}
-                      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                      autoHideDuration={3000}
-                      dense
-                      preventDuplicate
-                      Components={{
-                        error: StackNotification,
-                        info: StackNotification,
-                        success: StackNotification,
-                        warning: StackNotification,
-                        default: StackNotification,
-                      }}
-                      action={(snack) => (
-                        <IconButton
-                          color="inherit"
-                          onClick={() => closeSnackbar(snack)}
-                        >
-                          <CloseIcon fontSize="medium" />
-                        </IconButton>
-                      )}
-                    >
+          <LocalizationProvider
+            adapterLocale="en-gb"
+            dateAdapter={AdapterDayjs}
+          >
+            <DeviceContextProvider>
+              <SnackbarProvider
+                maxSnack={5}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={3000}
+                dense
+                preventDuplicate
+                Components={{
+                  error: StackNotification,
+                  info: StackNotification,
+                  success: StackNotification,
+                  warning: StackNotification,
+                  default: StackNotification,
+                }}
+                action={(snack) => (
+                  <IconButton
+                    color="inherit"
+                    onClick={() => closeSnackbar(snack)}
+                  >
+                    <CloseIcon fontSize="medium" />
+                  </IconButton>
+                )}
+              >
+                <AuthProvider>
+                  <SprintProvider>
+                    <MetricsProvider>
                       <Routes />
-                    </SnackbarProvider>
-                  </DeviceContextProvider>
-                </LocalizationProvider>
-              </MetricsProvider>
-            </SprintProvider>
-          </AuthProvider>
+                    </MetricsProvider>
+                  </SprintProvider>
+                </AuthProvider>
+              </SnackbarProvider>
+            </DeviceContextProvider>
+          </LocalizationProvider>
         </LoadingProvider>
       </LanguageProvider>
     </BrowserRouter>

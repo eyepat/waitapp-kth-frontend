@@ -39,15 +39,9 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('LowPhysicalItemOne')}
-          </li>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('LowPhysicalItemTwo')}
-          </li>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('LowPhysicalItemThree')}
-          </li>
+          <li style={{ marginBottom: '4px' }}>{t('LowPhysicalItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowPhysicalItemTwo')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowPhysicalItemThree')}</li>
         </ul>
       </Stack>
     );
@@ -57,12 +51,8 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('HighPhysicalItemOne')}
-          </li>
-          <li style={{ marginBottom: '4px', color: 'white' }}>
-            {t('HighPhysicalItemTwo')}
-          </li>
+          <li style={{ marginBottom: '4px' }}>{t('HighPhysicalItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('HighPhysicalItemTwo')}</li>
         </ul>
       </Stack>
     );
@@ -120,27 +110,10 @@ export default function FoodHabits() {
           </Stack>
         </Stack>
         <Stack width={'90%'} paddingTop={'5vh'}>
-          <Typography color="white">{t('goal-level')}</Typography>
+          <Typography marginTop="3vh">{t('goal-level')}</Typography>
           <NavTabs value={value} onChange={handleChange} centered>
-            <NavTab
-              label={t('normal')}
-              sx={{
-                '&.Mui-selected': {
-                  color: 'hsla(196, 100%, 44%, 1)',
-                },
-              }}
-            />
-            <NavTab
-              label={t('intensive')}
-              sx={{
-                '&.Mui-selected': {
-                  color: 'hsla(196, 100%, 44%, 1)',
-                },
-                '&:not(.Mui-selected)': {
-                  backgroundColor: 'hsla(196, 100%, 44%, 1)',
-                },
-              }}
-            />
+            <NavTab label={t('normal')} />
+            <NavTab label={t('intensive')} />
           </NavTabs>
         </Stack>
         <Stack
@@ -148,12 +121,7 @@ export default function FoodHabits() {
           padding="0vh 3vh 0vh 3vh"
           sx={{ flexGrow: 1 }}
         >
-          <Typography
-            color="white"
-            variant="body1"
-            fontSize="18px"
-            marginTop="3vh"
-          >
+          <Typography variant="body1" fontSize="18px" marginTop="3vh">
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
           <div style={{ minHeight: '150px' }}>{renderTabContent()}</div>
@@ -168,17 +136,17 @@ export default function FoodHabits() {
             variant="contained"
             color="primary"
             sx={{
-              backgroundColor: 'hsl(0, 100%, 100%)',
+              backgroundColor: 'hsla(210, 2%, 60%, 1)',
               color: 'black',
               marginBottom: '20px',
               borderRadius: '10px',
               width: '30vh',
               height: '40px',
               '&:active, &:focus': {
-                backgroundColor: 'hsl(0, 100%, 90%)',
+                backgroundColor: 'hsla(210, 2%, 40%, 1)',
               },
               '&:hover': {
-                backgroundColor: 'hsl(0, 100%, 90%)',
+                backgroundColor: 'hsla(210, 2%, 40%, 1)',
               },
             }}
             onClick={() => {
@@ -187,12 +155,7 @@ export default function FoodHabits() {
           >
             <Typography>{t('change-sprint')}</Typography>
           </Button>
-          <Typography
-            color="white"
-            marginBottom="2vh"
-            textAlign="center"
-            width="32vh"
-          >
+          <Typography marginBottom="2vh" textAlign="center" width="32vh">
             {t('start-sprint-when-you-are-ready')}
           </Typography>
           <Button
@@ -201,7 +164,7 @@ export default function FoodHabits() {
             onClick={handleSprintStart}
             sx={{
               backgroundColor: 'black',
-              marginBottom: '20px',
+              marginBottom: '13vh',
               borderRadius: '10px',
               width: '30vh',
               height: '40px',

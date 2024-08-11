@@ -3,6 +3,7 @@ import { useSnackbar } from 'notistack';
 import { useLoading } from './LoadContext';
 import { getMetricsByType, addMesurement as addMetric } from '../api/metrics';
 import { useAuth } from './AuthContext';
+import { useLanguage } from './LanguageContext';
 
 interface MetricsContextType {
   height?: Height[];
@@ -50,6 +51,7 @@ export const MetricsProvider = ({
   const { enqueueSnackbar } = useSnackbar();
   const { loading, setLoading } = useLoading();
   const { token } = useAuth();
+  const { t } = useLanguage();
 
   const [height, setHeight] = useState<Height[] | undefined>(undefined);
   const [weight, setWeight] = useState<Weight[] | undefined>(undefined);
@@ -109,7 +111,7 @@ export const MetricsProvider = ({
           setWeight(historicData);
           break;
         case 'blood-pressure':
-          setBloodPressure((historicData as BloodPressure[]));
+          setBloodPressure(historicData as BloodPressure[]);
           break;
         case 'waist-size':
           setWaistSize(historicData);
@@ -123,7 +125,6 @@ export const MetricsProvider = ({
         default:
           throw new Error('invalid-metric-type');
       }
-
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {
@@ -150,7 +151,34 @@ export const MetricsProvider = ({
     try {
       setLoading(true);
       await addMetric(type, token, metric);
-      getMetricsByType(type, token);
+      const newData = await getMetricsByType(type, token);
+
+      switch (type) {
+        case 'height':
+          setHeight(newData as Height[]);
+          break;
+        case 'weight':
+          setWeight(newData as Weight[]);
+          break;
+        case 'blood-pressure':
+          setBloodPressure(newData as BloodPressure[]);
+          break;
+        case 'waist-size':
+          setWaistSize(newData as WaistSize[]);
+          break;
+        case 'rapa':
+          setRAPA(newData as RAPA[]);
+          break;
+        case 'steps':
+          setSteps(newData as Steps[]);
+          break;
+        default:
+          throw new Error('invalid-metric-type');
+      }
+
+      enqueueSnackbar(t('success-post'), {
+        variant: 'success',
+      });
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {

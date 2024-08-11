@@ -285,12 +285,12 @@ export default function HealthData() {
             endIcon={randomTest.icon}
             onClick={randomTest.onClick}
             sx={{
-              backgroundColor: 'hsla(198, 26%, 92%, 1)',
+              backgroundColor: 'hsla(198, 29%, 84%, 1)',
               '&:hover': {
-                backgroundColor: 'hsla(198, 26%, 92%, 1)',
+                backgroundColor: 'hsla(198, 29%, 74%, 1)',
               },
               '&:active': {
-                backgroundColor: 'hsla(198, 26%, 92%, 1)',
+                backgroundColor: 'hsla(198, 29%, 74%, 1)',
               },
             }}
           >
@@ -307,6 +307,15 @@ export default function HealthData() {
               variant="contained"
               endIcon={test.icon}
               onClick={test.onClick}
+              sx={{
+                backgroundColor: 'hsla(198, 10%, 89%, 1)',
+                '&:hover': {
+                  backgroundColor: 'hsla(198, 10%, 79%, 1)',
+                },
+                '&:active': {
+                  backgroundColor: 'hsla(198, 10%, 79%, 1)',
+                },
+              }}
             >
               {test.name}
             </MenuButton>

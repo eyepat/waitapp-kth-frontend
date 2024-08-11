@@ -166,5 +166,18 @@
   "full-name": "Name",
   "enter-name": "Enter your first and last name",
   "training-sprint-placeholder-title": "Take a walk",
-  "training-sprint-placeholder-desc": "Walk easily in place."
+  "training-sprint-placeholder-desc": "Walk easily in place.",
+  "invalid-type-error": "Invalid type",
+  "invalid-dob-error": "Date of birth cannot be in the future",
+  "invalid-ablation-error": "Ablation date cannot be in the past",
+  "required-error": "Required field",
+  "invalid-blood-pressure-error": "Invalid blood pressure (systolic/diastolic)",
+  "invalid-waist-size-error": "Invalid waist size",
+  "invalid-height-error": "Invalid height",
+  "invalid-weight-error": "Invalid weight",
+  "error-adding-metric": "Unable to add metric",
+  "success-post": "Successfully created",
+  "success-put": "Successfully updated",
+  "success-register": "Successfully registered",
+  "success-delete": "Successfully deleted"
 }

@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       setToken(user.token);
       setUser(user);
+
       return user;
     } catch (error) {
       if (error instanceof Error) {
@@ -97,6 +98,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       const registeredUser: UserWithToken = await register(userToRegister);
       setUser(registeredUser);
+
+      enqueueSnackbar('success-post', {
+        variant: 'success',
+      });
       return registeredUser;
     } catch (error) {
       if (error instanceof Error) {
@@ -122,6 +127,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         token
       );
       setUser(registeredUser);
+
+      enqueueSnackbar('success-register', {
+        variant: 'success',
+      });
       return registeredUser;
     } catch (error) {
       if (error instanceof Error)
@@ -144,9 +153,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       updatedUser.id = user?.id;
       const updatedUserData: UserWithToken = await putUser(updatedUser, token);
-      console.log('setting user');
       setUser(updatedUserData);
-      console.log('user updated');
+
+      enqueueSnackbar('success-put', {
+        variant: 'success',
+      });
+
       return updatedUserData;
     } catch (error) {
       if (error instanceof Error) {
