@@ -74,7 +74,6 @@ export default function FoodHabits() {
           sx={{ flexGrow: 1 }}
         >
           <Typography
-            color="white"
             variant="body1"
             fontSize="18px"
             marginTop="9vh"
@@ -84,10 +83,10 @@ export default function FoodHabits() {
           <div style={{ minHeight: '150px' }}>
             <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
               <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-                <li style={{ marginBottom: '4px', color: 'white' }}>
+                <li style={{ marginBottom: '4px'}}>
                   {t('AlcoholItemOne')}
                 </li>
-                <li style={{ marginBottom: '4px', color: 'white' }}>
+                <li style={{ marginBottom: '4px' }}>
                   {t('AlcoholItemTwo')}
                 </li>
               </ul>
@@ -106,17 +105,17 @@ export default function FoodHabits() {
             variant="contained"
             color="primary"
             sx={{
-              backgroundColor: 'hsl(0, 100%, 100%)',
+              backgroundColor: 'hsla(210, 2%, 60%, 1)',
               color: 'black',
               marginBottom: '20px',
               borderRadius: '10px',
               width: '30vh',
               height: '40px',
               '&:active, &:focus': {
-                backgroundColor: 'hsl(0, 100%, 90%)',
+                backgroundColor: 'hsla(210, 2%, 40%, 1)',
               },
               '&:hover': {
-                backgroundColor: 'hsl(0, 100%, 90%)',
+                backgroundColor: 'hsla(210, 2%, 40%, 1)',
               },
             }}
             onClick={() => {
@@ -126,7 +125,7 @@ export default function FoodHabits() {
             <Typography>{t('change-sprint')}</Typography>
           </Button>
           <Typography
-            color="white"
+            
             marginBottom="2vh"
             textAlign="center"
             width="32vh"
@@ -139,7 +138,7 @@ export default function FoodHabits() {
             onClick={handleSprintStart}
             sx={{
               backgroundColor: 'black',
-              marginBottom: '20px',
+              marginBottom: '7vh',
               borderRadius: '10px',
               width: '30vh',
               height: '40px',

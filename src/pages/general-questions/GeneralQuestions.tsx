@@ -21,8 +21,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { AuthenticationLevels } from '../../Pages';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { RegisterInfo } from '../../types/registerInfo';
+import { z, ZodError } from 'zod';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
@@ -57,6 +58,7 @@ export default function GeneralQuestions() {
   const [selectedAblationDate, setSelectedAblationDate] =
     useState<Dayjs | null>(null);
 
+
   const handleNameChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
@@ -77,7 +79,6 @@ export default function GeneralQuestions() {
       setSelectedHeight(Number(value));
     }
   };
-
   const handleWeightChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
@@ -107,35 +108,81 @@ export default function GeneralQuestions() {
     setSelectedAblationDate(value);
   };
 
+  const invalid_type_error = 'invalid-type-error';
+  const invalid_dob_error = 'invalid-dob-error';
+  const invalid_ablation_error = 'invalid-ablation-error';
+  const required_error = 'required-error';
+  const invalid_blood_pressure_error = 'invalid-blood-pressure-error';
+  const invalid_waist_size_error = 'invalid-waist-size-error';
+  const invalid_height_error = 'invalid-height-error';
+  const invalid_weight_error = 'invalid-weight-error';
+
+  const SignUpSchema = z.object({
+    fullName: z
+      .string({ invalid_type_error, required_error })
+      .min(1, { message: required_error }),
+    gender: z
+      .string({ invalid_type_error, required_error })
+      .min(1, { message: required_error }),
+    birthDate: z
+      .string({ invalid_type_error, required_error })
+      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), { message: invalid_type_error })
+      .refine((date) => dayjs(date).isBefore(dayjs()), { message: invalid_dob_error }),
+    height: z
+      .number({ invalid_type_error, required_error })
+      .min(1, { message: required_error })
+      .min(50, { message: invalid_height_error })
+      .max(250, { message: invalid_height_error }),
+    weight: z
+      .number({ invalid_type_error, required_error })
+      .min(1, { message: required_error })
+      .min(25, { message: invalid_weight_error })
+      .max(300, { message: invalid_weight_error }),
+    waistSize: z
+      .number({ invalid_type_error, required_error })
+      .min(1, { message: required_error })
+      .min(40, { message: invalid_waist_size_error })
+      .max(200, { message: invalid_waist_size_error }),
+    bloodPressure: z
+      .string({ invalid_type_error, required_error })
+      .min(1, { message: required_error })
+      .refine((bp) => /^\d{1,3}\/\d{1,3}$/.test(bp), { message: invalid_blood_pressure_error }),
+    ablationDate: z
+      .string({ invalid_type_error, required_error })
+      .optional()
+      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), { message: invalid_type_error })
+      .refine((date) => dayjs(date).isAfter(dayjs()), { message: invalid_ablation_error }),
+  })
+
   const validateUserProvidedData: () => boolean = () => {
-    const bloodPressureRegex = /^\d+\/\d+$/;
+    try {
+      SignUpSchema.parse({
+        fullName: selectedName,
+        gender: selectedGender,
+        birthDate: selectedDOB?.toISOString(),
+        height: selectedHeight,
+        weight: selectedWeight,
+        waistSize: selectedWaistSize,
+        bloodPressure: selectedBloodPressure,
+        ablationDate: selectedAblationDate?.toISOString(),
+      });
 
-    if (Number(selectedWaistSize) < 30 || Number(selectedWaistSize) > 170)
+      return true;
+
+    } catch (error) {
+      if (error instanceof ZodError) {
+        error.errors.forEach((e) => {
+          const errorMessage = e.message;
+          // Enqueue each error message
+          enqueueSnackbar(t(errorMessage), { variant: 'error' });
+        });
+      } else {
+        // Handle other types of errors if necessary
+        enqueueSnackbar("An unexpected error occurred.", { variant: 'error' });
+      }
+
       return false;
-
-    if (Number(selectedWeight) < 30 || Number(selectedWeight) > 600)
-      return false;
-
-    if (Number(selectedHeight) < 50 || Number(selectedHeight) > 250)
-      return false;
-
-    if (
-      !(
-        selectedBloodPressure !== undefined &&
-        bloodPressureRegex.test(selectedBloodPressure)
-      )
-    )
-      return false;
-
-    return (
-      selectedGender !== null &&
-      selectedDOB != undefined &&
-      selectedHeight != undefined &&
-      selectedWeight != undefined &&
-      selectedWaistSize != undefined &&
-      selectedBloodPressure != undefined &&
-      selectedAblationDate != undefined
-    );
+    }
   };
 
   useEffect(() => {
@@ -295,9 +342,6 @@ export default function GeneralQuestions() {
                 return;
               }
               if (!validateUserProvidedData()) {
-                enqueueSnackbar('error-bad-user-data', {
-                  variant: 'error',
-                });
                 return;
               }
               const registerUser: RegisterInfo = {

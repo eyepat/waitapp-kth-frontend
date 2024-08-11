@@ -128,7 +128,7 @@ export default function FoodHabits() {
           </Stack>
         </Stack>
         <Stack width={'90%'} paddingTop={'5vh'}>
-          <Typography>{t('goal-level')}</Typography>
+          <Typography marginTop="5vh">{t('goal-level')}</Typography>
           <NavTabs value={value} onChange={handleChange} centered>
             <NavTab label={t('low')} />
             <NavTab label={t('medium')} />
@@ -181,7 +181,7 @@ export default function FoodHabits() {
             color="primary"
             sx={{
               backgroundColor: 'black',
-              marginBottom: '20px',
+              marginBottom: '5vh',
               borderRadius: '10px',
               width: '30vh',
               height: '40px',
