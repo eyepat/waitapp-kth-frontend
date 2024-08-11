@@ -175,5 +175,10 @@
   "invalid-blood-pressure-error": "Ogiltigt blodtryck (systoliskt/diastoliskt)",
   "invalid-waist-size-error": "Ogiltigt midjemått",
   "invalid-height-error": "Ogiltig längd",
-  "invalid-weight-error": "Ogiltig vikt"
+  "invalid-weight-error": "Ogiltig vikt",
+  "error-adding-metric": "Lyckades inte lägga till mätning",
+  "success-post": "Lyckades skapa",
+  "success-put": "Lyckades uppdatera",
+  "success-register": "Lyckades registrera",
+  "success-delete": "Lyckades ta bort"
 }

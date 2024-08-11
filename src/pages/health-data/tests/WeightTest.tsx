@@ -8,41 +8,45 @@ import {
   Typography,
   styled,
 } from '@mui/material';
-import { ChangeEvent } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import theme from '../../../components/Theme';
+import { useMetrics } from '../../../contexts/MetricsContext';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useSnackbar } from 'notistack';
+import { useSprintContext } from '../../../contexts/SprintContext';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+
+const CustomInputField = styled(TextField)({
+  width: '60%',
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderWidth: '2px',
+      borderColor: 'rgba(7, 65, 109, 1)',
+      borderRadius: '10px',
+      boxShadow: '0px 0px 10px 1px rgba(7, 65, 109, 0.2)',
+    },
+    '&:hover fieldset': {
+      borderColor: 'rgba(7, 65, 109, 0.8)',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'rgba(7, 65, 109, 1)',
+    },
+    '& input': {
+      textAlign: 'center',
+      fontSize: '24px',
+      fontWeight: 'bold',
+      color: 'rgba(0, 0, 0, 0.87)',
+    },
+  },
+});
 
 export default function WeightTest() {
-  const CustomInputField = styled(TextField)({
-    width: '60%',
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderWidth: '2px',
-        borderColor: 'rgba(7, 65, 109, 1)',
-        borderRadius: '10px',
-        boxShadow: '0px 0px 10px 1px rgba(7, 65, 109, 0.2)',
-      },
-      '&:hover fieldset': {
-        borderColor: 'rgba(7, 65, 109, 0.8)',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'rgba(7, 65, 109, 1)',
-      },
-      '& input': {
-        textAlign: 'center',
-        fontSize: '24px',
-        fontWeight: 'bold',
-        color: 'rgba(0, 0, 0, 0.87)',
-      },
-    },
-  });
-
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value.length > 4) {
-      e.target.value = value.slice(0, 4);
-    }
-  };
+  const { user } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
+  const { sprint } = useSprintContext();
+  const { addMeasurement } = useMetrics();
+  const [weight, setWeight] = useState<string>('');
 
   const { t } = useLanguage();
 
@@ -67,7 +71,12 @@ export default function WeightTest() {
           <CustomInputField
             type="number"
             variant="outlined"
-            onInput={handleInput}
+            value={weight}
+            onChange={(e) => {
+              if (e.target.value.length <= 3) {
+                setWeight(e.target.value);
+              }
+            }}
             inputProps={{ maxLength: 4 }}
             InputProps={{
               endAdornment: (
@@ -98,6 +107,33 @@ export default function WeightTest() {
               '&:hover': {
                 backgroundColor: '#333',
               },
+            }}
+            onClick={() => {
+              if (user === undefined || user.id === undefined) {
+                enqueueSnackbar('error-no-user', { variant: 'error' });
+                return;
+              }
+              if (!/^\d+$/.test(weight)) {
+                enqueueSnackbar('invalid-weight-error', { variant: 'error' });
+                return;
+              }
+              const weightNumber = Number(weight);
+              if (isNaN(weightNumber) || weightNumber < 25 || weightNumber > 300) {
+                enqueueSnackbar('invalid-weight-error', { variant: 'error' });
+                return;
+              }
+
+              const metric: Metric = {
+                userID: user?.id,
+                sprintID: sprint ? sprint.ID ? sprint.ID : null : null,
+                timeStamp: dayjs().toISOString(),
+                value: weightNumber,
+              }
+
+              if (addMeasurement)
+                addMeasurement('weight', metric);
+              else
+                enqueueSnackbar('error-adding-metric', { variant: 'error' });
             }}
           >
             <Typography>{t('save')}</Typography>

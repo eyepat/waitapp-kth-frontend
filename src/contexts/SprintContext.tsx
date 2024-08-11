@@ -4,6 +4,7 @@ import { useLoading } from './LoadContext';
 import { createNewSprint, putSprint, getSprint } from '../api/sprint';
 import { useAuth } from './AuthContext';
 import { AuthenticationLevels } from '../Pages';
+import { useLanguage } from './LanguageContext';
 
 interface SprintContextType {
   sprint?: Sprint;
@@ -28,6 +29,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
   const { loading, setLoading } = useLoading();
   const { enqueueSnackbar } = useSnackbar();
   const { user, token } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (
@@ -47,6 +49,10 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       const newSprint: Sprint = await createNewSprint(sprint, token);
       setCurrentSprint(newSprint);
+
+      enqueueSnackbar(t("success-post"), {
+        variant: 'success',
+      });
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {
@@ -63,6 +69,10 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       const newSprint: Sprint = await putSprint(sprint);
       setCurrentSprint(newSprint);
+
+      enqueueSnackbar(t("success-put"), {
+        variant: 'success',
+      });
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {

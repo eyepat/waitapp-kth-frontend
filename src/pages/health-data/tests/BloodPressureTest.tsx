@@ -15,6 +15,11 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { useState } from 'react';
 import { Svg } from '../../../utils/Icons';
 import theme from '../../../components/Theme';
+import { useMetrics } from '../../../contexts/MetricsContext';
+import { useAuth } from '../../../contexts/AuthContext';
+import { enqueueSnackbar } from 'notistack';
+import { useSprintContext } from '../../../contexts/SprintContext';
+import dayjs from 'dayjs';
 
 const CustomTextField = styled(TextField)({
   width: '60%',
@@ -58,6 +63,9 @@ export default function BloodPressureTest() {
   const [diastolic, setDiastolic] = useState('');
   const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const { addMeasurement } = useMetrics();
+  const { sprint } = useSprintContext();
 
   function handleHowToMeasure(): void {
     setOpen(true);
@@ -174,6 +182,35 @@ export default function BloodPressureTest() {
                   backgroundColor: '#333',
                 },
               }}
+              onClick={() => {
+                if (user === undefined || user.id === undefined) {
+                  enqueueSnackbar('error-no-user', { variant: 'error' });
+                  return;
+                }
+                if (!/^\d+$/.test(systolic) || !/^\d+$/.test(diastolic)) {
+                  enqueueSnackbar('invalid-blood-pressure-error', { variant: 'error' });
+                  return;
+                }
+                const systolicNumber = Number(systolic);
+                const diastolicNumber = Number(diastolic);
+                if (isNaN(systolicNumber) || systolicNumber < 1 || systolicNumber > 220 ||
+                  isNaN(diastolicNumber) || diastolicNumber < 1 || diastolicNumber > 160) {
+                  enqueueSnackbar('invalid-blood-pressure-error', { variant: 'error' });
+                  return;
+                }
+
+                const metric: Metric = {
+                  userID: user?.id,
+                  sprintID: sprint ? sprint.ID ? sprint.ID : null : null,
+                  timeStamp: dayjs().toISOString(),
+                  value: systolic + "/" + diastolic,
+                }
+
+                if (addMeasurement)
+                  addMeasurement('blood-pressure', metric);
+                else
+                  enqueueSnackbar('error-adding-metric', { variant: 'error' });
+              }}
             >
               <Typography> {t('save')}</Typography>
             </Button>
@@ -204,6 +241,6 @@ export default function BloodPressureTest() {
           </DialogContent>
         </Dialog>
       </Stack>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
