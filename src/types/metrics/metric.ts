@@ -1,6 +1,6 @@
 interface Metric {
   userID: number;
-  sprintID: number;
-  timestamp: string;
+  sprintID: number | null;
+  timeStamp: string;
   value: any;
 }

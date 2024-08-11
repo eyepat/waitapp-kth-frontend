@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   LineChart,
   Line,
@@ -10,168 +10,51 @@ import {
 } from 'recharts';
 import { useLanguage } from '../../contexts/LanguageContext';
 import dayjs from 'dayjs';
+import { useMetrics } from '../../contexts/MetricsContext';
 
 export enum GraphMode {
-  BloodPressure,
+  Systolic,
+  Diastolic,
   Weight,
-}
-
-interface BloodPressure {
-  date: string;
-  systolic: number;
-  diastolic: number;
-}
-
-interface Weight {
-  date: string;
-  weight: number;
 }
 
 interface GraphProps {
   mode: GraphMode;
-  data?: BloodPressure[] | Weight[];
 }
 
-const Graph: React.FC<GraphProps> = ({ mode, data }) => {
+const Graph: React.FC<GraphProps> = ({ mode }) => {
   const { t } = useLanguage();
-  const [sampleData] = useState<any>(() => {
-    // Check if mode is BloodPressure or Weight and generate sample data accordingly
-    return mode === GraphMode.BloodPressure
-      ? [
-          {
-            date: dayjs().subtract(6, 'month').subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(6, 'month').subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(6, 'month'),
-            systolic: 130,
-            diastolic: 91,
-          },
-          {
-            date: dayjs().subtract(5, 'month').subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(5, 'month').subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(5, 'month'),
-            systolic: 120,
-            diastolic: 89,
-          },
-          {
-            date: dayjs().subtract(4, 'month').subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(4, 'month').subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(4, 'month'),
-            systolic: 127,
-            diastolic: 83,
-          },
-          {
-            date: dayjs().subtract(3, 'month').subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(3, 'month').subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(3, 'month'),
-            systolic: 150,
-            diastolic: 80,
-          },
-          {
-            date: dayjs().subtract(2, 'month').subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(2, 'month').subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(2, 'month'),
-            systolic: 140,
-            diastolic: 94,
-          },
-          {
-            date: dayjs().subtract(1, 'month').subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(1, 'month').subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(1, 'month'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(13, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          {
-            date: dayjs().subtract(5, 'days'),
-            systolic: 135,
-            diastolic: 86,
-          },
-          { date: dayjs(), systolic: 150, diastolic: 80 },
-        ]
-      : [
-          { date: dayjs().subtract(10, 'month'), weight: 30 },
-          { date: dayjs().subtract(10, 'month'), weight: 100 },
-          { date: dayjs().subtract(6, 'month'), weight: 50 },
-          { date: dayjs().subtract(5, 'month'), weight: 68 },
-          { date: dayjs().subtract(4, 'month'), weight: 72 },
-          { date: dayjs().subtract(3, 'month'), weight: 45 },
-          { date: dayjs().subtract(2, 'month'), weight: 73 },
-          { date: dayjs().subtract(1, 'month'), weight: 90 },
-          { date: dayjs().subtract(5, 'days'), weight: 76 },
-          { date: dayjs(), weight: 76 },
-        ];
-  });
+  const { bloodPressure, weight } = useMetrics();
+  let data: Metric[] | undefined;
+  const key = mode === GraphMode.Weight ? 'value' : mode === GraphMode.Systolic ? 'systolic' : 'diastolic';
 
-  // Use sample data if no data is provided (TEMPORARY)
-  if (!data) {
-    data = sampleData;
+  data = mode === GraphMode.Weight ? weight : bloodPressure;
+
+  // Extracts systolic and diastolic values from blood pressure data
+  if (mode !== GraphMode.Weight) {
+    data?.map((entry: Metric) => {
+      const sys_diast = entry.value.split('/');
+      const systolic = Number(sys_diast[0]);
+      const diastolic = Number(sys_diast[1]);
+      (entry as BloodPressure).systolic = systolic;
+      (entry as BloodPressure).diastolic = diastolic;
+    });
   }
 
   // Filters data points older than 7 months and formats date
   data = data
     ? data
-        .filter((entry: any) =>
-          dayjs(entry.date).isAfter(dayjs().subtract(7, 'month'))
-        )
-        .map((entry: any) => {
-          return {
-            ...entry,
-            date: dayjs(entry.date).format('MM/DD'),
-          };
-        })
+      .filter((entry: Metric) =>
+        dayjs(entry.timeStamp).isAfter(dayjs().subtract(7, 'month'))
+      )
+      .map((entry: Metric) => {
+        return {
+          ...entry,
+          date: dayjs(entry.timeStamp).format('MM/DD'),
+        };
+      })
     : [];
+
 
   // Generate domain for y-axis (STATIC FOR NOW!)
   const calculateDomain = (): [string | number, string | number] => {
@@ -179,7 +62,17 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
       return [0, 'auto'];
     }
 
-    return mode === GraphMode.BloodPressure ? [60, 170] : [30, 100];
+    switch (mode) {
+      case GraphMode.Systolic:
+        const systolicValues = data.map((entry: Metric) => (entry as BloodPressure).systolic);
+        return [Math.min(...systolicValues), Math.max(...systolicValues)];
+      case GraphMode.Diastolic:
+        const diastolicValues = data.map((entry: Metric) => (entry as BloodPressure).diastolic);
+        return [Math.min(...diastolicValues), Math.max(...diastolicValues)];
+      case GraphMode.Weight:
+        const weightValues = data.map((entry: Metric) => entry.value);
+        return [Math.min(...weightValues), Math.max(...weightValues)];
+    }
   };
 
   // Generate monthly ticks for x-axis
@@ -217,8 +110,11 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     let text: string;
 
     switch (mode) {
-      case GraphMode.BloodPressure:
-        text = `${t('systolic')}\n${t('high')} 140\nNormal 120\n${t('diastolic')}\n${t('high')} 90\nNormal 80`;
+      case GraphMode.Systolic:
+        text = `${t('systolic')}\n\n${t('high')}\n140 mmHg\nNormal\n120 mmHg`;
+        break;
+      case GraphMode.Diastolic:
+        text = `${t('diastolic')}\n\n${t('high')}\n90 mmHg\nNormal\n80 mmHg`;
         break;
       case GraphMode.Weight:
         text = `${t('over')}\n90 kg\nNormal\n65 kg\nUnder\n50 kg`;
@@ -226,7 +122,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
     }
 
     const textParts: string[] = text.split('\n');
-    const highlightEvery = mode == GraphMode.BloodPressure ? 3 : 2;
+    const highlightEvery = 2;
 
     return (
       <svg width="100px">
@@ -235,12 +131,15 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
             <text
               key={`tspan-${part}`}
               textAnchor="start"
-              x={mode === GraphMode.BloodPressure ? 10 : 30}
+              x={mode === GraphMode.Weight ? 30 : index === 0 ? 10 : 20}
               y={25 + index * 16}
               style={{
                 display: 'block',
+                // Make title for systolic/diastolic graphs bigger
                 fontSize: '0.8em',
-                fontWeight: index % highlightEvery === 0 ? '500' : '300',
+                // Hightlight Over/Normal/Under and Title
+                fontWeight: mode !== GraphMode.Weight && index === 0 ? '700' :
+                  index % highlightEvery === 0 ? '500' : '300',
               }}
             >
               {part}
@@ -248,26 +147,6 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
           ))}
         </g>
       </svg>
-    );
-  };
-
-  // Create lines for every given data key (variable name of plotted data)
-  const getLines = (dataKeys: string[]) => {
-    return (
-      <>
-        {dataKeys.map((key, index) => {
-          return (
-            <Line
-              key={'plotted-line-' + index}
-              type="monotone"
-              dataKey={key}
-              stroke="url(#colorGradient)"
-              strokeWidth={3}
-              dot={false}
-            />
-          );
-        })}
-      </>
     );
   };
 
@@ -284,7 +163,7 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
 
       <ResponsiveContainer width="100%" height={130}>
         <LineChart
-          data={data || sampleData}
+          data={data}
           margin={{ top: 0, right: 40, bottom: 0, left: -50 }}
         >
           <defs>
@@ -313,11 +192,14 @@ const Graph: React.FC<GraphProps> = ({ mode, data }) => {
           />
           <CartesianGrid fill="#F6F5F4" horizontal={false} vertical={false} />
           <Tooltip />
-          {getLines(
-            mode === GraphMode.BloodPressure
-              ? ['systolic', 'diastolic']
-              : ['weight']
-          )}
+          <Line
+            key={'plotted-line-' + key}
+            type="monotone"
+            dataKey={key}
+            stroke="url(#colorGradient)"
+            strokeWidth={3}
+            dot={false}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>

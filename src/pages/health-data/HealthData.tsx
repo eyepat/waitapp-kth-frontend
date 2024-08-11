@@ -82,7 +82,8 @@ export default function HealthData() {
             unmountOnExit
           >
             <CardContent style={{ padding: '0' }}>
-              <Graph mode={GraphMode.BloodPressure} />
+              <Graph mode={GraphMode.Systolic} />
+              <Graph mode={GraphMode.Diastolic} />
             </CardContent>
           </Collapse>
 
