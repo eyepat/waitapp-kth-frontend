@@ -138,7 +138,6 @@ export const pages: Page[] = [
     component: PhysicalActivity,
     header: { expanded: false, transparent: true },
     isMenu: false,
-    
   },
   {
     to: '/sprint/choice/alcohol-habits',
@@ -147,7 +146,6 @@ export const pages: Page[] = [
     component: Alcohol,
     header: { expanded: false, transparent: true },
     isMenu: false,
-    
   },
   {
     to: '/knowledge-bank/recipes',

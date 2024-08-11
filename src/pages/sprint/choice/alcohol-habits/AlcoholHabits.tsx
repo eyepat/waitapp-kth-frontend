@@ -73,22 +73,14 @@ export default function FoodHabits() {
           marginTop="4vh"
           sx={{ flexGrow: 1 }}
         >
-          <Typography
-            variant="body1"
-            fontSize="18px"
-            marginTop="9vh"
-          >
+          <Typography variant="body1" fontSize="18px" marginTop="9vh">
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
           <div style={{ minHeight: '150px' }}>
             <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
               <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-                <li style={{ marginBottom: '4px'}}>
-                  {t('AlcoholItemOne')}
-                </li>
-                <li style={{ marginBottom: '4px' }}>
-                  {t('AlcoholItemTwo')}
-                </li>
+                <li style={{ marginBottom: '4px' }}>{t('AlcoholItemOne')}</li>
+                <li style={{ marginBottom: '4px' }}>{t('AlcoholItemTwo')}</li>
               </ul>
             </Stack>
           </div>
@@ -124,12 +116,7 @@ export default function FoodHabits() {
           >
             <Typography>{t('change-sprint')}</Typography>
           </Button>
-          <Typography
-            
-            marginBottom="2vh"
-            textAlign="center"
-            width="32vh"
-          >
+          <Typography marginBottom="2vh" textAlign="center" width="32vh">
             {t('start-sprint-when-you-are-ready')}
           </Typography>
           <Button

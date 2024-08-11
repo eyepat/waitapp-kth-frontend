@@ -172,7 +172,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } finally {
       setLoading(false);
     }
-
   };
 
   useEffect(() => {

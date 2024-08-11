@@ -26,7 +26,12 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
   const { t } = useLanguage();
   const { bloodPressure, weight } = useMetrics();
   let data: Metric[] | undefined;
-  const key = mode === GraphMode.Weight ? 'value' : mode === GraphMode.Systolic ? 'systolic' : 'diastolic';
+  const key =
+    mode === GraphMode.Weight
+      ? 'value'
+      : mode === GraphMode.Systolic
+        ? 'systolic'
+        : 'diastolic';
 
   data = mode === GraphMode.Weight ? weight : bloodPressure;
 
@@ -44,17 +49,16 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
   // Filters data points older than 7 months and formats date
   data = data
     ? data
-      .filter((entry: Metric) =>
-        dayjs(entry.timeStamp).isAfter(dayjs().subtract(7, 'month'))
-      )
-      .map((entry: Metric) => {
-        return {
-          ...entry,
-          date: dayjs(entry.timeStamp).format('MM/DD'),
-        };
-      })
+        .filter((entry: Metric) =>
+          dayjs(entry.timeStamp).isAfter(dayjs().subtract(7, 'month'))
+        )
+        .map((entry: Metric) => {
+          return {
+            ...entry,
+            date: dayjs(entry.timeStamp).format('MM/DD'),
+          };
+        })
     : [];
-
 
   // Generate domain for y-axis (STATIC FOR NOW!)
   const calculateDomain = (): [string | number, string | number] => {
@@ -64,10 +68,14 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
 
     switch (mode) {
       case GraphMode.Systolic:
-        const systolicValues = data.map((entry: Metric) => (entry as BloodPressure).systolic);
+        const systolicValues = data.map(
+          (entry: Metric) => (entry as BloodPressure).systolic
+        );
         return [Math.min(...systolicValues), Math.max(...systolicValues)];
       case GraphMode.Diastolic:
-        const diastolicValues = data.map((entry: Metric) => (entry as BloodPressure).diastolic);
+        const diastolicValues = data.map(
+          (entry: Metric) => (entry as BloodPressure).diastolic
+        );
         return [Math.min(...diastolicValues), Math.max(...diastolicValues)];
       case GraphMode.Weight:
         const weightValues = data.map((entry: Metric) => entry.value);
@@ -138,8 +146,12 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
                 // Make title for systolic/diastolic graphs bigger
                 fontSize: '0.8em',
                 // Hightlight Over/Normal/Under and Title
-                fontWeight: mode !== GraphMode.Weight && index === 0 ? '700' :
-                  index % highlightEvery === 0 ? '500' : '300',
+                fontWeight:
+                  mode !== GraphMode.Weight && index === 0
+                    ? '700'
+                    : index % highlightEvery === 0
+                      ? '500'
+                      : '300',
               }}
             >
               {part}

@@ -111,7 +111,7 @@ export const MetricsProvider = ({
           setWeight(historicData);
           break;
         case 'blood-pressure':
-          setBloodPressure((historicData as BloodPressure[]));
+          setBloodPressure(historicData as BloodPressure[]);
           break;
         case 'waist-size':
           setWaistSize(historicData);
@@ -125,7 +125,6 @@ export const MetricsProvider = ({
         default:
           throw new Error('invalid-metric-type');
       }
-
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {
@@ -177,7 +176,7 @@ export const MetricsProvider = ({
           throw new Error('invalid-metric-type');
       }
 
-      enqueueSnackbar(t("success-post"), {
+      enqueueSnackbar(t('success-post'), {
         variant: 'success',
       });
     } catch (error) {

@@ -39,15 +39,9 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px'  }}>
-            {t('LowPhysicalItemOne')}
-          </li>
-          <li style={{ marginBottom: '4px'  }}>
-            {t('LowPhysicalItemTwo')}
-          </li>
-          <li style={{ marginBottom: '4px'}}>
-            {t('LowPhysicalItemThree')}
-          </li>
+          <li style={{ marginBottom: '4px' }}>{t('LowPhysicalItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowPhysicalItemTwo')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('LowPhysicalItemThree')}</li>
         </ul>
       </Stack>
     );
@@ -57,12 +51,8 @@ export default function FoodHabits() {
     return (
       <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
         <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '4px' }}>
-            {t('HighPhysicalItemOne')}
-          </li>
-          <li style={{ marginBottom: '4px' }}>
-            {t('HighPhysicalItemTwo')}
-          </li>
+          <li style={{ marginBottom: '4px' }}>{t('HighPhysicalItemOne')}</li>
+          <li style={{ marginBottom: '4px' }}>{t('HighPhysicalItemTwo')}</li>
         </ul>
       </Stack>
     );
@@ -120,15 +110,10 @@ export default function FoodHabits() {
           </Stack>
         </Stack>
         <Stack width={'90%'} paddingTop={'5vh'}>
-          <Typography marginTop="3vh" >{t('goal-level')}</Typography>
+          <Typography marginTop="3vh">{t('goal-level')}</Typography>
           <NavTabs value={value} onChange={handleChange} centered>
-            <NavTab
-              label={t('normal')}
-              
-            />
-            <NavTab
-              label={t('intensive')}
-            />
+            <NavTab label={t('normal')} />
+            <NavTab label={t('intensive')} />
           </NavTabs>
         </Stack>
         <Stack
@@ -136,11 +121,7 @@ export default function FoodHabits() {
           padding="0vh 3vh 0vh 3vh"
           sx={{ flexGrow: 1 }}
         >
-          <Typography
-            variant="body1"
-            fontSize="18px"
-            marginTop="3vh"
-          >
+          <Typography variant="body1" fontSize="18px" marginTop="3vh">
             {t('planned-activities-for-upcoming-sprint')}:
           </Typography>
           <div style={{ minHeight: '150px' }}>{renderTabContent()}</div>
@@ -174,12 +155,7 @@ export default function FoodHabits() {
           >
             <Typography>{t('change-sprint')}</Typography>
           </Button>
-          <Typography
-          
-            marginBottom="2vh"
-            textAlign="center"
-            width="32vh"
-          >
+          <Typography marginBottom="2vh" textAlign="center" width="32vh">
             {t('start-sprint-when-you-are-ready')}
           </Typography>
           <Button

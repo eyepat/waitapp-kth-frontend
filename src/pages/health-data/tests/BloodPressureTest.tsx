@@ -188,26 +188,35 @@ export default function BloodPressureTest() {
                   return;
                 }
                 if (!/^\d+$/.test(systolic) || !/^\d+$/.test(diastolic)) {
-                  enqueueSnackbar('invalid-blood-pressure-error', { variant: 'error' });
+                  enqueueSnackbar('invalid-blood-pressure-error', {
+                    variant: 'error',
+                  });
                   return;
                 }
                 const systolicNumber = Number(systolic);
                 const diastolicNumber = Number(diastolic);
-                if (isNaN(systolicNumber) || systolicNumber < 1 || systolicNumber > 220 ||
-                  isNaN(diastolicNumber) || diastolicNumber < 1 || diastolicNumber > 160) {
-                  enqueueSnackbar('invalid-blood-pressure-error', { variant: 'error' });
+                if (
+                  isNaN(systolicNumber) ||
+                  systolicNumber < 1 ||
+                  systolicNumber > 220 ||
+                  isNaN(diastolicNumber) ||
+                  diastolicNumber < 1 ||
+                  diastolicNumber > 160
+                ) {
+                  enqueueSnackbar('invalid-blood-pressure-error', {
+                    variant: 'error',
+                  });
                   return;
                 }
 
                 const metric: Metric = {
                   userID: user?.id,
-                  sprintID: sprint ? sprint.ID ? sprint.ID : null : null,
+                  sprintID: sprint ? (sprint.ID ? sprint.ID : null) : null,
                   timeStamp: dayjs().toISOString(),
-                  value: systolic + "/" + diastolic,
-                }
+                  value: systolic + '/' + diastolic,
+                };
 
-                if (addMeasurement)
-                  addMeasurement('blood-pressure', metric);
+                if (addMeasurement) addMeasurement('blood-pressure', metric);
                 else
                   enqueueSnackbar('error-adding-metric', { variant: 'error' });
               }}
@@ -241,6 +250,6 @@ export default function BloodPressureTest() {
           </DialogContent>
         </Dialog>
       </Stack>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 }

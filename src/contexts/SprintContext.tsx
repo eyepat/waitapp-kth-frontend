@@ -50,7 +50,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       const newSprint: Sprint = await createNewSprint(sprint, token);
       setCurrentSprint(newSprint);
 
-      enqueueSnackbar(t("success-post"), {
+      enqueueSnackbar(t('success-post'), {
         variant: 'success',
       });
     } catch (error) {
@@ -70,7 +70,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       const newSprint: Sprint = await putSprint(sprint);
       setCurrentSprint(newSprint);
 
-      enqueueSnackbar(t("success-put"), {
+      enqueueSnackbar(t('success-put'), {
         variant: 'success',
       });
     } catch (error) {

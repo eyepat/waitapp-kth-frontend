@@ -58,7 +58,6 @@ export default function GeneralQuestions() {
   const [selectedAblationDate, setSelectedAblationDate] =
     useState<Dayjs | null>(null);
 
-
   const handleNameChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
@@ -126,8 +125,12 @@ export default function GeneralQuestions() {
       .min(1, { message: required_error }),
     birthDate: z
       .string({ invalid_type_error, required_error })
-      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), { message: invalid_type_error })
-      .refine((date) => dayjs(date).isBefore(dayjs()), { message: invalid_dob_error }),
+      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), {
+        message: invalid_type_error,
+      })
+      .refine((date) => dayjs(date).isBefore(dayjs()), {
+        message: invalid_dob_error,
+      }),
     height: z
       .number({ invalid_type_error, required_error })
       .min(1, { message: required_error })
@@ -146,13 +149,19 @@ export default function GeneralQuestions() {
     bloodPressure: z
       .string({ invalid_type_error, required_error })
       .min(1, { message: required_error })
-      .refine((bp) => /^\d{1,3}\/\d{1,3}$/.test(bp), { message: invalid_blood_pressure_error }),
+      .refine((bp) => /^\d{1,3}\/\d{1,3}$/.test(bp), {
+        message: invalid_blood_pressure_error,
+      }),
     ablationDate: z
       .string({ invalid_type_error, required_error })
       .optional()
-      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), { message: invalid_type_error })
-      .refine((date) => dayjs(date).isAfter(dayjs()), { message: invalid_ablation_error }),
-  })
+      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), {
+        message: invalid_type_error,
+      })
+      .refine((date) => dayjs(date).isAfter(dayjs()), {
+        message: invalid_ablation_error,
+      }),
+  });
 
   const validateUserProvidedData: () => boolean = () => {
     try {
@@ -168,7 +177,6 @@ export default function GeneralQuestions() {
       });
 
       return true;
-
     } catch (error) {
       if (error instanceof ZodError) {
         error.errors.forEach((e) => {
@@ -178,7 +186,7 @@ export default function GeneralQuestions() {
         });
       } else {
         // Handle other types of errors if necessary
-        enqueueSnackbar("An unexpected error occurred.", { variant: 'error' });
+        enqueueSnackbar('An unexpected error occurred.', { variant: 'error' });
       }
 
       return false;

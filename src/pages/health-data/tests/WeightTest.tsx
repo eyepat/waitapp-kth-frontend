@@ -118,22 +118,24 @@ export default function WeightTest() {
                 return;
               }
               const weightNumber = Number(weight);
-              if (isNaN(weightNumber) || weightNumber < 25 || weightNumber > 300) {
+              if (
+                isNaN(weightNumber) ||
+                weightNumber < 25 ||
+                weightNumber > 300
+              ) {
                 enqueueSnackbar('invalid-weight-error', { variant: 'error' });
                 return;
               }
 
               const metric: Metric = {
                 userID: user?.id,
-                sprintID: sprint ? sprint.ID ? sprint.ID : null : null,
+                sprintID: sprint ? (sprint.ID ? sprint.ID : null) : null,
                 timeStamp: dayjs().toISOString(),
                 value: weightNumber,
-              }
+              };
 
-              if (addMeasurement)
-                addMeasurement('weight', metric);
-              else
-                enqueueSnackbar('error-adding-metric', { variant: 'error' });
+              if (addMeasurement) addMeasurement('weight', metric);
+              else enqueueSnackbar('error-adding-metric', { variant: 'error' });
             }}
           >
             <Typography>{t('save')}</Typography>
