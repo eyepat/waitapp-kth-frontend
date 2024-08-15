@@ -3,7 +3,7 @@ interface User {
   email: string;
   password?: string;
   fullName?: string;
-  dateOfBirth?: string;
+  birthDate?: string;
   gender?: string;
   ablationDate?: string;
 }
