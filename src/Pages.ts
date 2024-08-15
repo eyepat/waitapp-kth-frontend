@@ -15,6 +15,8 @@ import FoodHabits from './pages/sprint/choice/food-habits/FoodHabits';
 import PhysicalActivity from './pages/sprint/choice/physical-activity/PhysicalActivity';
 import Alcohol from './pages/sprint/choice/alcohol-habits/AlcoholHabits';
 import Recipes from './pages/knowledge-bank/recipes/Recipes';
+import Profile from './pages/settings/Profile';
+import Security from './pages/settings/Security';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -86,6 +88,22 @@ export const pages: Page[] = [
     component: Settings,
     header: { expanded: false },
     showBottomNav: true,
+  },
+  {
+    to: '/settings/profile',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'profile',
+    component: Profile,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: '/settings/security',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'profile',
+    component: Security,
+    header: { expanded: false },
+    isMenu: false,
   },
   {
     to: '/knowledge-bank',

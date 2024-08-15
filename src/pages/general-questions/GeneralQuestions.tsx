@@ -24,6 +24,8 @@ import { AuthenticationLevels } from '../../Pages';
 import dayjs, { Dayjs } from 'dayjs';
 import { RegisterInfo } from '../../types/registerInfo';
 import { z, ZodError } from 'zod';
+import Checkbox from '@mui/material/Checkbox';
+import { useMetrics } from '../../contexts/MetricsContext';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
@@ -106,6 +108,8 @@ export default function GeneralQuestions() {
   const handleAblationDateChange = (value: Dayjs | null) => {
     setSelectedAblationDate(value);
   };
+  const [isAblationDateKnown, setIsAblationDateKnown] = useState(true);
+  const { update } = useMetrics();
 
   const invalid_type_error = 'invalid-type-error';
   const invalid_dob_error = 'invalid-dob-error';
@@ -155,12 +159,22 @@ export default function GeneralQuestions() {
     ablationDate: z
       .string({ invalid_type_error, required_error })
       .optional()
-      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), {
-        message: invalid_type_error,
-      })
-      .refine((date) => dayjs(date).isAfter(dayjs()), {
-        message: invalid_ablation_error,
-      }),
+      .refine(
+        (date) =>
+          date === undefined ||
+          date === null ||
+          dayjs(date, 'YYYY-MM-DD', false).isValid(),
+        {
+          message: invalid_type_error,
+        }
+      )
+      .refine(
+        (date) =>
+          date === undefined || date === null || dayjs(date).isAfter(dayjs()),
+        {
+          message: invalid_ablation_error,
+        }
+      ),
   });
 
   const validateUserProvidedData: () => boolean = () => {
@@ -173,7 +187,9 @@ export default function GeneralQuestions() {
         weight: selectedWeight,
         waistSize: selectedWaistSize,
         bloodPressure: selectedBloodPressure,
-        ablationDate: selectedAblationDate?.toISOString(),
+        ablationDate: isAblationDateKnown
+          ? selectedAblationDate?.toISOString()
+          : undefined,
       });
 
       return true;
@@ -228,27 +244,57 @@ export default function GeneralQuestions() {
         </Typography>
         <Typography fontWeight="bold">{'1. ' + t('full-name')}</Typography>
         <FormControl fullWidth>
-          <InputLabel>{t('enter-name')}</InputLabel>
-          <OutlinedInput label={t('full-name')} onChange={handleNameChange} />
+          <InputLabel
+            shrink={false}
+            sx={{ display: selectedName ? 'none' : 'block' }}
+          >
+            {t('enter-name')}
+          </InputLabel>
+          <OutlinedInput
+            notched={false}
+            label={t('full-name')}
+            onChange={handleNameChange}
+          />
         </FormControl>
+
         <Typography fontWeight="bold" marginTop="2vh">
           {'2. ' + t('gender')}
         </Typography>
         <FormControl fullWidth>
-          <InputLabel>{t('select-gender')}</InputLabel>
+          <InputLabel
+            shrink={false}
+            sx={{ display: selectedGender ? 'none' : 'block' }}
+          >
+            {t('select-gender')}
+          </InputLabel>
           <Select
             value={selectedGender}
             onChange={handleGenderChange}
-            fullWidth={true}
-            title={t('select-gender')}
-            label={t('select-gender')}
+            fullWidth
+            displayEmpty
+            renderValue={(value) => (value ? t(value) : '')}
+            sx={{
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'rgba(0, 0, 0, 0.23)',
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'rgba(0, 0, 0, 0.87)',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'rgba(0, 0, 0, 0.87)',
+              },
+            }}
           >
+            <MenuItem disabled value="">
+              {t('select-gender')}
+            </MenuItem>
             <MenuItem value="male">{t('male')}</MenuItem>
             <MenuItem value="female">{t('female')}</MenuItem>
             <MenuItem value="non-binary">{t('non-binary')}</MenuItem>
             <MenuItem value="other">{t('other')}</MenuItem>
           </Select>
         </FormControl>
+
         <Typography fontWeight="bold" marginTop="2vh">
           {'3. ' + t('birth-date')}
         </Typography>
@@ -261,8 +307,14 @@ export default function GeneralQuestions() {
           <Stack direction="column" width="100%">
             <Typography fontWeight="bold">{'4. ' + t('length')}</Typography>
             <FormControl fullWidth>
-              <InputLabel>...</InputLabel>
+              <InputLabel
+                shrink={false}
+                sx={{ display: selectedDOB ? 'none' : 'block' }}
+              >
+                ...
+              </InputLabel>
               <OutlinedInput
+                notched={false}
                 label={t('select-length')}
                 endAdornment={'cm'}
                 onChange={handleHeightChange}
@@ -272,8 +324,14 @@ export default function GeneralQuestions() {
           <Stack direction="column" width="100%">
             <Typography fontWeight="bold">{'5. ' + t('weight')}</Typography>
             <FormControl fullWidth>
-              <InputLabel>...</InputLabel>
+              <InputLabel
+                shrink={false}
+                sx={{ display: selectedWeight ? 'none' : 'block' }}
+              >
+                ...
+              </InputLabel>
               <OutlinedInput
+                notched={false}
                 label={t('select-weight')}
                 endAdornment={'kg'}
                 onChange={handleWeightChange}
@@ -296,8 +354,14 @@ export default function GeneralQuestions() {
               </Button>
             </Stack>
             <FormControl fullWidth>
-              <InputLabel>...</InputLabel>
+              <InputLabel
+                shrink={false}
+                sx={{ display: selectedWaistSize ? 'none' : 'block' }}
+              >
+                ...
+              </InputLabel>
               <OutlinedInput
+                notched={false}
                 label={t('select-waist-measurement')}
                 endAdornment={'cm'}
                 onChange={handleWaistSizeChange}
@@ -318,8 +382,14 @@ export default function GeneralQuestions() {
                 </Button>
               </Stack>
               <FormControl fullWidth>
-                <InputLabel>...</InputLabel>
+                <InputLabel
+                  shrink={false}
+                  sx={{ display: selectedBloodPressure ? 'none' : 'block' }}
+                >
+                  ...
+                </InputLabel>
                 <OutlinedInput
+                  notched={false}
                   label={t('select-blood-pressure')}
                   endAdornment={'mmHg'}
                   onChange={handleBloodPressureChange}
@@ -333,11 +403,30 @@ export default function GeneralQuestions() {
           <Typography fontWeight="bold" marginTop="3vh">
             {t('ablation')}
           </Typography>
-          <DatePicker
-            sx={{ width: '100%' }}
-            label={t('select-ablation-date')}
-            onChange={handleAblationDateChange}
-          />
+          <Stack direction="row" alignItems="center">
+            <DatePicker
+              sx={{ width: '100%' }}
+              label={t('select-ablation-date') + ' ' + t('optional')}
+              onChange={handleAblationDateChange}
+              disabled={!isAblationDateKnown}
+            />
+
+            <FormControl
+              sx={{
+                padding: 0,
+                margin: 0,
+                paddingLeft: '1.5vh',
+                fontStyle: 'italic',
+              }}
+              component="div"
+            >
+              <Checkbox
+                checked={!isAblationDateKnown}
+                onChange={() => setIsAblationDateKnown(!isAblationDateKnown)}
+              />
+              <Typography>{t('unknown')}</Typography>
+            </FormControl>
+          </Stack>
         </div>
         <Stack marginTop="2vh" marginBottom="4vh" width="100%">
           <Button
@@ -365,10 +454,9 @@ export default function GeneralQuestions() {
                 ablationDate: selectedAblationDate?.toISOString(),
               };
 
-              console.log(registerUser);
-
-              // TODO: fill with actual info
-              registerInfo(registerUser);
+              registerInfo(registerUser).then(() => {
+                if (update) update();
+              });
             }}
             variant="contained"
             sx={{

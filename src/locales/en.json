@@ -66,7 +66,7 @@
   "recent-pressure": "Your most recent measured blood pressure was ",
   "goal-pressure": "Your goal is to get below ",
   "recent-weight": "Your most recent measured weight was ",
-  "goal-weight": "Your goal is to lose ",
+  "goal-weight": "Your goal is to ",
   "new-measurment": "New Measurement",
   "weight-test": "Weight Measurement",
   "about-weight": "Measure your weight regularly to keep track of your health and progress. By noting your weight, you can track changes over time and adjust your health goals to achieve a balanced and sustainable lifestyle.",
@@ -179,5 +179,10 @@
   "success-post": "Successfully created",
   "success-put": "Successfully updated",
   "success-register": "Successfully registered",
-  "success-delete": "Successfully deleted"
+  "success-delete": "Successfully deleted",
+  "optional": "(optional)",
+  "unknown": "Unknown",
+  "personal-information": "Personal information",
+  "lose-weight": "lose",
+  "gain-weight": "gain"
 }
