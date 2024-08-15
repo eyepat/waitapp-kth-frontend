@@ -129,7 +129,7 @@ export default function WeightTest() {
 
               const metric: Metric = {
                 userID: user?.id,
-                sprintID: sprint ? (sprint.ID ? sprint.ID : null) : null,
+                sprintID: sprint ? (sprint.id ? sprint.id : null) : null,
                 timeStamp: dayjs().toISOString(),
                 value: weightNumber,
               };

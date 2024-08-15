@@ -19,7 +19,7 @@ export default function FoodHabits() {
       startDate: dayjs().toISOString(),
       endDate: dayjs().add(7, 'days').toISOString(),
       isCompleted: false,
-      level: 0,
+      level: 'NORMAL',
       score: 0,
     };
 

@@ -211,7 +211,7 @@ export default function BloodPressureTest() {
 
                 const metric: Metric = {
                   userID: user?.id,
-                  sprintID: sprint ? (sprint.ID ? sprint.ID : null) : null,
+                  sprintID: sprint ? (sprint.id ? sprint.id : null) : null,
                   timeStamp: dayjs().toISOString(),
                   value: systolic + '/' + diastolic,
                 };
