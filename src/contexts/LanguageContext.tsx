@@ -5,6 +5,7 @@ interface LanguageContextType {
   t: (key: string) => string;
   language: string;
   setLanguage: (language: string) => void;
+  toggleLanguage: () => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -98,10 +99,17 @@ export const LanguageProvider = ({
     return translations[key] || key;
   };
 
+  const toggleLanguage = () => {
+    const newLanguage = language === 'en' ? 'sv' : 'en';
+    setCookie('language', newLanguage);
+    setLanguage(newLanguage);
+  };
+
   const value: LanguageContextType = {
     t,
     language,
     setLanguage,
+    toggleLanguage,
   };
 
   useEffect(() => {

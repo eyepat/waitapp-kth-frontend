@@ -31,6 +31,16 @@ interface MetricsContextType {
       | 'steps',
     metric: Metric
   ) => void;
+  update?: () => void;
+  getLatestByType?: (
+    type:
+      | 'height'
+      | 'weight'
+      | 'blood-pressure'
+      | 'waist-size'
+      | 'rapa'
+      | 'steps'
+  ) => Metric | undefined;
 }
 
 const MetricsContext = createContext<MetricsContextType | undefined>(undefined);
@@ -73,7 +83,7 @@ export const MetricsProvider = ({
     'steps',
   ];
 
-  useEffect(() => {
+  const updateAll = () => {
     types.map((type) => {
       if (
         type === 'height' ||
@@ -85,6 +95,10 @@ export const MetricsProvider = ({
       )
         updateMetricsDataByType(type);
     });
+  };
+
+  useEffect(() => {
+    updateAll();
   }, [token]);
 
   const updateMetricsDataByType = async (
@@ -189,6 +203,39 @@ export const MetricsProvider = ({
     }
   };
 
+  const getLatest = (metric: Metric[] | undefined) => {
+    return metric !== undefined && metric.length > 0
+      ? metric[metric.length - 1]
+      : undefined;
+  };
+
+  const getLatestByType = (
+    type:
+      | 'height'
+      | 'weight'
+      | 'blood-pressure'
+      | 'waist-size'
+      | 'rapa'
+      | 'steps'
+  ) => {
+    switch (type) {
+      case 'height':
+        return getLatest(height);
+      case 'weight':
+        return getLatest(weight);
+      case 'blood-pressure':
+        return getLatest(bloodPressure);
+      case 'waist-size':
+        return getLatest(height);
+      case 'rapa':
+        return getLatest(height);
+      case 'steps':
+        return getLatest(steps);
+    }
+
+    return undefined;
+  };
+
   const value: MetricsContextType = {
     height: height,
     weight: weight,
@@ -198,6 +245,8 @@ export const MetricsProvider = ({
     steps: steps,
     getHistoricalMetricsByType: updateMetricsDataByType,
     addMeasurement: addMeasurment,
+    update: updateAll,
+    getLatestByType: getLatestByType,
   };
 
   return (

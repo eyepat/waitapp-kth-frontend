@@ -53,23 +53,34 @@ const Home: React.FC = () => {
         }}
       >
         <Stack direction="column" style={{ flex: 1, marginLeft: '30px' }}>
-          <div style={{ padding: '2vh' }}></div>
-          <Stack direction="row" sx={{ width: '60%', alignItems: 'center' }}>
-            <Typography
-              variant="h2"
-              className="open-sans-bold"
-              color="#00A3E0"
-              fontWeight="bold"
-            >
-              {daysLeft}
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{ lineHeight: '1', fontWeight: 'bold', marginLeft: '5px' }}
-            >
-              {t('days-left')}
-            </Typography>
-          </Stack>
+          {daysLeft > 0 && (
+            <>
+              <div style={{ padding: '2vh' }}></div>
+              <Stack
+                direction="row"
+                sx={{ width: '60%', alignItems: 'center' }}
+              >
+                <Typography
+                  variant="h2"
+                  className="open-sans-bold"
+                  color="#00A3E0"
+                  fontWeight="bold"
+                >
+                  {daysLeft}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    lineHeight: '1',
+                    fontWeight: 'bold',
+                    marginLeft: '5px',
+                  }}
+                >
+                  {t('days-left')}
+                </Typography>
+              </Stack>
+            </>
+          )}
           <Stack direction="column" spacing={2}>
             <Typography variant="caption" lineHeight={3}>
               {t('latest-result')}

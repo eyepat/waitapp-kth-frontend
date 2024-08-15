@@ -99,9 +99,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const registeredUser: UserWithToken = await register(userToRegister);
       setUser(registeredUser);
 
-      enqueueSnackbar('success-post', {
-        variant: 'success',
-      });
       return registeredUser;
     } catch (error) {
       if (error instanceof Error) {

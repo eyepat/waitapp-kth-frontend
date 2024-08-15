@@ -67,7 +67,7 @@
   "recent-pressure": "Ditt senaste uppmätta blodtryck var ",
   "goal-pressure": "Ditt mål är att nå under ",
   "recent-weight": "Ditt senaste uppmätta vikt var ",
-  "goal-weight": "Ditt mål är att gå ner ",
+  "goal-weight": "Ditt mål är att ",
   "new-measurment": "Ny mätning",
   "weight-test": "Viktmätning",
   "about-weight": "Mät din vikt regelbundet för att hålla koll på din hälsa och framsteg. Genom att notera din vikt kan du följa förändringar över tid och anpass dina hälsomål för att uppnå en balanserad och hållbar livstil.",
@@ -180,5 +180,10 @@
   "success-post": "Lyckades skapa",
   "success-put": "Lyckades uppdatera",
   "success-register": "Lyckades registrera",
-  "success-delete": "Lyckades ta bort"
+  "success-delete": "Lyckades ta bort",
+  "optional": "(valfritt)",
+  "unknown": "Okänd",
+  "personal-information": "Personlig information",
+  "lose-weight": "gå ner",
+  "gain-weight": "gå upp"
 }

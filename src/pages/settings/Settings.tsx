@@ -40,7 +40,7 @@ export default function Settings() {
   const [openWip, setOpenWip] = useState(false);
 
   const navigate = useNavigate();
-  const { t, language, setLanguage } = useLanguage();
+  const { t, language, toggleLanguage } = useLanguage();
   const { user, logout } = useAuth();
   const { sprint } = useSprintContext();
 
@@ -48,12 +48,6 @@ export default function Settings() {
     if (!sprint) return renderNoAvailableSprint();
     return renderAvailableSprint();
   };
-
-  function handleLanguageChange() {
-    const newLanguage = language === 'en' ? 'sv' : 'en';
-    console.log(newLanguage);
-    setLanguage(newLanguage);
-  }
 
   function handleStopSprint() {
     if (user != undefined) {
@@ -168,7 +162,7 @@ export default function Settings() {
           />
           <CardContent>
             <Button
-              onClick={handleOpenWip}
+              onClick={() => navigate('/settings/profile')}
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -327,7 +321,9 @@ export default function Settings() {
             <Button
               fullWidth={true}
               sx={{ display: 'flex', justifyContent: 'space-between' }}
-              onClick={handleLanguageChange}
+              onClick={() => {
+                toggleLanguage();
+              }}
             >
               <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
                 {language === 'en' ? <SwedishFlag /> : <EnglishFlag />}

@@ -10,6 +10,7 @@ import {
   Stack,
   ThemeProvider,
   Typography,
+  Box,
 } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import NavTab from '../../components/TabMenu/NavTab';
@@ -17,6 +18,7 @@ import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
+import { useMetrics } from '../../contexts/MetricsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
@@ -28,6 +30,7 @@ export default function HealthData() {
   const { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
   const [openWip, setOpenWip] = useState(false);
+  const { getLatestByType } = useMetrics();
 
   function handleOpenWip() {
     setOpenWip(true);
@@ -58,6 +61,47 @@ export default function HealthData() {
     }));
   };
 
+  const LatestMetric = ({
+    metric,
+  }: {
+    metric:
+      | 'height'
+      | 'weight'
+      | 'blood-pressure'
+      | 'waist-size'
+      | 'rapa'
+      | 'steps';
+  }) => {
+    return getLatestByType ? (
+      <Box fontWeight="bold" display="inline">
+        {getLatestByType(metric)?.value}
+      </Box>
+    ) : (
+      ''
+    );
+  };
+
+  const goalBloodPressure = '120/80';
+  const goalWeight = 65;
+  const goalWaist = 50;
+
+  const GoalWeight = () => {
+    let dif: number = Number(
+      getLatestByType ? getLatestByType('weight')?.value : 0
+    );
+    dif -= goalWeight;
+
+    return (
+      <>
+        {dif < 0 ? t('gain-weight') : t('lose-weight')}
+        <Box fontWeight="bold" display="inline">
+          {' ' + Math.abs(dif)}
+        </Box>
+        {' kg'}
+      </>
+    );
+  };
+
   const renderOverviewContent = () => {
     return (
       <Stack marginTop={'25px'}>
@@ -72,8 +116,10 @@ export default function HealthData() {
           />
 
           <CardContent sx={{ paddingTop: '0px', paddingBottom: '0px' }}>
-            <Typography>{`${t('recent-pressure')} currnetPulse mmHg. ${t('goal-pressure')} goalPulse mmHg`}</Typography>{' '}
-            {/*Add pressure and goal pressure to render text properly.*/}
+            <Typography component="div">
+              {t('recent-pressure')} <LatestMetric metric={'blood-pressure'} />{' '}
+              {`mmHg. ${t('goal-pressure')} ${goalBloodPressure} mmHg`}
+            </Typography>
           </CardContent>
 
           <Collapse
@@ -130,7 +176,10 @@ export default function HealthData() {
           />
 
           <CardContent sx={{ paddingTop: '0px', paddingBottom: '0px' }}>
-            <Typography>{`${t('recent-weight')} currentWeight kg. ${t('goal-weight')} goalWeight kg`}</Typography>{' '}
+            <Typography component="div">
+              {t('recent-weight')} <LatestMetric metric={'weight'} />{' '}
+              {`kg. ${t('goal-weight')} `} <GoalWeight />
+            </Typography>
             {/*Add weight and goal weight to dispaly information properly*/}
           </CardContent>
 
@@ -183,7 +232,10 @@ export default function HealthData() {
           />
 
           <CardContent sx={{ paddingTop: '0px' }}>
-            <Typography>{`${t('recent-waist')} recentWaist cm. ${t('goal-waist')} goalWaist cm`}</Typography>{' '}
+            <Typography component="div">
+              {t('recent-waist')} <LatestMetric metric={'waist-size'} />{' '}
+              {`cm. ${t('goal-waist')} ${goalWaist} cm`}
+            </Typography>
             {/*Add pressure and goal pressure to render text properly.*/}
           </CardContent>
         </Card>
