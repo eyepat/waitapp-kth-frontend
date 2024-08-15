@@ -44,6 +44,8 @@ interface Dummy {
   height: Height;
 }
 
+const startDate = '2023-08-15T11:26:47.950207';
+
 var peter: Dummy = {
   user: {
     fullName: 'Peter Exempel',
@@ -54,25 +56,25 @@ var peter: Dummy = {
   },
   bp: {
     userID: 0,
-    timeStamp: '2024-08-15T11:26:47.950207',
+    timeStamp: startDate,
     sprintID: null,
     value: '145/95',
   },
   ws: {
     userID: 0,
-    timeStamp: '2024-08-15T11:26:47.950207',
+    timeStamp: startDate,
     sprintID: null,
     value: 102,
   },
   weight: {
     userID: 0,
-    timeStamp: '2024-08-15T11:26:47.950207',
+    timeStamp: startDate,
     sprintID: null,
     value: 122,
   },
   height: {
     userID: 0,
-    timeStamp: '2024-08-15T11:26:47.950207',
+    timeStamp: startDate,
     sprintID: null,
     value: 188,
   },
