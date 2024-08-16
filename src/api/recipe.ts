@@ -8,6 +8,7 @@ export async function getRecipes(): Promise<Recipe[]> {
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);

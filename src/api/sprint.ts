@@ -6,6 +6,7 @@ export async function getSprints(): Promise<Sprint[]> {
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -21,6 +22,7 @@ export async function getAllSprintsByUserID(userID: number): Promise<Sprint[]> {
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -41,6 +43,7 @@ export async function createNewSprint(
     },
     body: JSON.stringify(sprint),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -57,6 +60,7 @@ export async function getSprint(token: string): Promise<Sprint> {
       Authorization: `Bearer ${token}`,
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -73,6 +77,7 @@ export async function postSprint(sprint: Sprint): Promise<Sprint> {
     },
     body: JSON.stringify(sprint),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -90,6 +95,7 @@ export async function putSprint(sprint: Sprint): Promise<Sprint> {
     },
     body: JSON.stringify(sprint),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -106,6 +112,7 @@ export async function deleteSprint(sprint: Sprint): Promise<Sprint> {
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);

@@ -15,6 +15,7 @@ export async function login({
     },
     body: JSON.stringify({ email, password }),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -34,6 +35,7 @@ export async function loginWithToken({
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);

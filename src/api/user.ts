@@ -8,6 +8,7 @@ export async function getUsers(/*token: string*/): Promise<User[]> {
       /*Authorization: `Bearer ${token}`,*/
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -27,6 +28,7 @@ export async function getUser(
       /*Authorization: `Bearer ${token}`,*/
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -44,6 +46,7 @@ export async function postUser(user: User): Promise<User> {
     },
     body: JSON.stringify(user),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -66,6 +69,7 @@ export async function putUser(
     },
     body: JSON.stringify(user),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -82,6 +86,7 @@ export async function deleteUser(user: User): Promise<User> {
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
