@@ -16,6 +16,7 @@ export async function getMetricsByType(
       Authorization: `Bearer ${token}`,
     },
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
@@ -43,6 +44,7 @@ export async function addMesurement(
     },
     body: JSON.stringify(metric),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);

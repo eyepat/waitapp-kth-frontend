@@ -32,6 +32,7 @@ export async function registerInfo(
     },
     body: JSON.stringify(user),
   });
+  if (!response.ok) throw response;
   const data = await response.json();
 
   if (data.message) throw new Error(data.message);
