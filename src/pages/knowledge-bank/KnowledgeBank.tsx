@@ -20,12 +20,18 @@ export default function KnowledgeBank() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Stack marginBottom="20%" alignItems="center">
+      <Stack
+        marginBottom="20%"
+        alignItems="center"
+        maxWidth="1000px"
+        margin="auto"
+        padding="0 8vw 0 8vw"
+      >
         <Typography variant="h4" marginBottom="1rem" alignSelf="center">
           {t('knowledge-bank')}
         </Typography>
 
-        <Stack direction="column" paddingTop="10px" spacing={1}>
+        <Stack direction="column" maxWidth="100%" paddingTop="10px" spacing={1}>
           <Typography
             variant="h6"
             marginBottom="1rem"
@@ -35,6 +41,7 @@ export default function KnowledgeBank() {
             {t('eating-habit')}
           </Typography>
           <MenuButton
+            fullWidth
             onClick={handleOpenWip}
             variant="contained"
             endIcon={<ArrowRight />}
@@ -57,7 +64,7 @@ export default function KnowledgeBank() {
           </MenuButton>
         </Stack>
 
-        <Stack direction="column" paddingTop="30px" spacing={1}>
+        <Stack direction="column" paddingTop="30px" maxWidth="100%" spacing={1}>
           <Typography
             variant="h6"
             marginBottom="1rem"
@@ -89,7 +96,7 @@ export default function KnowledgeBank() {
           </MenuButton>
         </Stack>
 
-        <Stack direction="column" paddingTop="30px" spacing={1}>
+        <Stack direction="column" paddingTop="30px" maxWidth="100%" spacing={1}>
           <Typography
             variant="h6"
             marginBottom="1rem"
