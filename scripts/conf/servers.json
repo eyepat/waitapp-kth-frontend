@@ -1,0 +1,4 @@
+{
+  "production-backend": "https://waback.app.cloud.cbh.kth.se",
+  "local-backend": "http://localhost:8080"
+}
