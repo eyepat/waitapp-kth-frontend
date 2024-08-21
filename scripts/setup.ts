@@ -10,19 +10,25 @@ const dirPath = (() => {
 })();
 const templateSettingsPath = 'scripts/conf/settings.json';
 
-await stat(dirPath).then(async (value: Stats) => {
-  if (!value.isDirectory()) {
-    await mkdir(dirPath, { recursive: true });
-  } else {
-    await stat(vscodeSettingsPath).then((value: Stats) => {
-      if (value.isFile()) {
-        // TODO: check if content includes the vscode settings else append them
-        console.log('vscode configuration already exists');
-        exit(0);
-      }
+await stat(dirPath)
+  .then(async (value: Stats) => {
+    if (!value.isDirectory()) {
+      await mkdir(dirPath, { recursive: true });
+    } else {
+      await stat(vscodeSettingsPath).then((value: Stats) => {
+        if (value.isFile()) {
+          // TODO: check if content includes the vscode settings else append them
+          console.log('vscode configuration already exists');
+          exit(0);
+        }
+      });
+    }
+  })
+  .catch(async (error) => {
+    await mkdir(dirPath, { recursive: true }).catch((error) => {
+      console.log('Error creating directory:', error);
     });
-  }
-});
+  });
 
 // if there are no settings copy the template
 await cp(templateSettingsPath, vscodeSettingsPath)
