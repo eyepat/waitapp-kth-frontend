@@ -19,17 +19,15 @@ import dayjs, { Dayjs } from 'dayjs';
 import Checkbox from '@mui/material/Checkbox';
 import { Cancel, Edit } from '@mui/icons-material';
 
-export default function GeneralQuestions() {
+export default function Profile() {
   const { t } = useLanguage();
   const { user } = useAuth();
 
-  // State for tracking the current values
   const [selectedName, setSelectedName] = useState<string>('');
   const [selectedGender, setSelectedGender] = useState<string>('');
   const [, setSelectedDOB] = useState<Dayjs | null>(null);
   const [isAblationDateKnown, setIsAblationDateKnown] = useState(true);
 
-  // State for tracking the original values
   const [originalName, setOriginalName] = useState<string>('');
   const [originalGender, setOriginalGender] = useState<string>('');
   const [originalDOB, setOriginalDOB] = useState<Dayjs | null>(null);
@@ -38,14 +36,12 @@ export default function GeneralQuestions() {
 
   const [isEditMode, setIsEditMode] = useState(false);
 
-  // Set the original values from the user object when the component mounts
   useEffect(() => {
     setOriginalName(user?.fullName || '');
     setOriginalGender(user?.gender || '');
     setOriginalDOB(user?.birthDate ? dayjs(user.birthDate) : null);
     setOriginalIsAblationDateKnown(user?.ablationDate ? true : false);
 
-    // Set the form fields to the original values as well
     setSelectedName(user?.fullName || '');
     setSelectedGender(user?.gender || '');
     setSelectedDOB(user?.birthDate ? dayjs(user.birthDate) : null);
@@ -68,7 +64,6 @@ export default function GeneralQuestions() {
 
   const handleEditClick = () => {
     if (isEditMode) {
-      // If already in edit mode and cancel is clicked, revert to original values
       setSelectedName(originalName);
       setSelectedGender(originalGender);
       setSelectedDOB(originalDOB);
