@@ -28,6 +28,10 @@
   "female": "Kvinna",
   "non-binary": "Icke-binär",
   "other": "Annat",
+  "MALE": "Man",
+  "FEMALE": "Kvinna",
+  "NON-BINARY": "Icke-binär",
+  "OTHER": "Annat",
   "birth-year": "Födelseår",
   "select-birth-year": "Välj födelseår",
   "length": "Längd",
@@ -185,5 +189,9 @@
   "unknown": "Okänd",
   "personal-information": "Personlig information",
   "lose-weight": "gå ner",
-  "gain-weight": "gå upp"
+  "gain-weight": "gå upp",
+  "about-you": "Om dig",
+  "edit": "Redigera",
+  "cancel": "Avbryt",
+  "editing": "Redigerar.."
 }
