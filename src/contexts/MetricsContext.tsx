@@ -226,7 +226,7 @@ export const MetricsProvider = ({
       case 'blood-pressure':
         return getLatest(bloodPressure);
       case 'waist-size':
-        return getLatest(height);
+        return getLatest(waistSize);
       case 'rapa':
         return getLatest(height);
       case 'steps':
