@@ -7,6 +7,7 @@
   "username": "Användarnamn",
   "password": "Lösenord",
   "or-register-here": "Eller registrera här",
+  "register-here": "Registrera här",
   "days-left": "DAGAR KVAR",
   "weight-unit": "kilogram",
   "steps": "steg",
@@ -193,5 +194,6 @@
   "about-you": "Om dig",
   "edit": "Redigera",
   "cancel": "Avbryt",
-  "editing": "Redigerar.."
+  "editing": "Redigerar..",
+  "or": "eller"
 }
