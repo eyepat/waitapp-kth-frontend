@@ -28,6 +28,10 @@
   "female": "Female",
   "non-binary": "Non-binary",
   "other": "Other",
+  "MALE": "Male",
+  "FEMALE": "Female",
+  "NON-BINARY": "Non-binary",
+  "OTHER": "Other",
   "birth-year": "Birth year",
   "select-birth-year": "Select your birth year",
   "length": "Length",
@@ -184,5 +188,9 @@
   "unknown": "Unknown",
   "personal-information": "Personal information",
   "lose-weight": "lose",
-  "gain-weight": "gain"
+  "gain-weight": "gain",
+  "about-you": "About you",
+  "edit": "Edit",
+  "cancel": "Cancel",
+  "editing": "Editing.."
 }
