@@ -277,6 +277,7 @@ export default function Login() {
                   maxWidth: isOnDesktop ? '20vw' : '50vw',
                 }}
                 onClick={tempLoginDemo}
+                disabled={!passwordValid || !emailValid}
               >
                 {t('log-in')}
               </Button>
