@@ -16,7 +16,6 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useAuth } from '../../contexts/AuthContext';
 import dayjs, { Dayjs } from 'dayjs';
-import { z } from 'zod';
 import Checkbox from '@mui/material/Checkbox';
 import { Cancel, Edit } from '@mui/icons-material';
 
@@ -27,7 +26,7 @@ export default function GeneralQuestions() {
   // State for tracking the current values
   const [selectedName, setSelectedName] = useState<string>('');
   const [selectedGender, setSelectedGender] = useState<string>('');
-  const [selectedDOB, setSelectedDOB] = useState<Dayjs | null>(null);
+  const [, setSelectedDOB] = useState<Dayjs | null>(null);
   const [isAblationDateKnown, setIsAblationDateKnown] = useState(true);
 
   // State for tracking the original values
@@ -63,10 +62,6 @@ export default function GeneralQuestions() {
     setSelectedGender(event.target.value);
   };
 
-  const handleDOBChange = (value: Dayjs | null) => {
-    setSelectedDOB(value);
-  };
-
   const handleAblationDateChange = (value: Dayjs | null) => {
     setSelectedAblationDate(value);
   };
@@ -81,38 +76,6 @@ export default function GeneralQuestions() {
     }
     setIsEditMode((prevMode) => !prevMode);
   };
-
-  const SignUpSchema = z.object({
-    fullName: z.string().min(1, { message: 'required-error' }),
-    gender: z.string().min(1, { message: 'required-error' }),
-    birthDate: z
-      .string()
-      .refine((date) => dayjs(date, 'YYYY-MM-DD', false).isValid(), {
-        message: 'invalid-type-error',
-      })
-      .refine((date) => dayjs(date).isBefore(dayjs()), {
-        message: 'invalid-dob-error',
-      }),
-    ablationDate: z
-      .string()
-      .optional()
-      .refine(
-        (date) =>
-          date === undefined ||
-          date === null ||
-          dayjs(date, 'YYYY-MM-DD', false).isValid(),
-        {
-          message: 'invalid-type-error',
-        }
-      )
-      .refine(
-        (date) =>
-          date === undefined || date === null || dayjs(date).isAfter(dayjs()),
-        {
-          message: 'invalid-ablation-error',
-        }
-      ),
-  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -288,6 +251,6 @@ export default function GeneralQuestions() {
   );
 }
 
-function setSelectedAblationDate(value: dayjs.Dayjs | null) {
+function setSelectedAblationDate(_value: dayjs.Dayjs | null) {
   throw new Error('Function not implemented.');
 }
