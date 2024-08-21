@@ -281,7 +281,9 @@ export default function Login() {
                 {t('log-in')}
               </Button>
             </Stack>
-            <Divider color="black" sx={{ mt: '5vh' }} />
+            <Divider color="black" sx={{ mt: '5vh' }}>
+              {t('or')}
+            </Divider>
             <Stack direction="column">
               <Button
                 sx={{ mt: '1vh' }}
@@ -289,7 +291,7 @@ export default function Login() {
                   navigate('/register');
                 }}
               >
-                <Typography>{t('or-register-here')}</Typography>
+                <Typography>{t('register-here')}</Typography>
               </Button>
             </Stack>
           </Stack>

@@ -7,6 +7,7 @@
   "username": "Username",
   "password": "Password",
   "or-register-here": "Or register here",
+  "register-here": "Register here",
   "days-left": "DAYS LEFT",
   "weight-unit": "kilogram",
   "steps": "steps",
@@ -192,5 +193,6 @@
   "about-you": "About you",
   "edit": "Edit",
   "cancel": "Cancel",
-  "editing": "Editing.."
+  "editing": "Editing..",
+  "or": "or"
 }
