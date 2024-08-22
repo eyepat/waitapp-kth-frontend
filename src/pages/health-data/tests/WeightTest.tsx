@@ -14,7 +14,6 @@ import { useMetrics } from '../../../contexts/MetricsContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
-import dayjs from 'dayjs';
 import { useState } from 'react';
 
 const CustomInputField = styled(TextField)({

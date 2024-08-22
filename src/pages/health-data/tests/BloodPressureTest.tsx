@@ -19,7 +19,6 @@ import { useMetrics } from '../../../contexts/MetricsContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
-import dayjs from 'dayjs';
 
 const CustomTextField = styled(TextField)({
   width: '60%',
