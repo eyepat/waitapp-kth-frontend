@@ -195,5 +195,15 @@
   "edit": "Redigera",
   "cancel": "Avbryt",
   "editing": "Redigerar..",
-  "or": "eller"
+  "or": "eller",
+  "you-have-completed-this-sprint": "Du har klarat din sprint!",
+  "this-sprint-has-passed": "Denna sprint har passerat.",
+  "click-here-to-see-results": "Klicka här för att se dina resultat",
+  "rapa": "Snabb bedömning av fysisk aktivitet",
+  "why-rapa": "Används för att hjälpa oss att bedöma din fysiska aktivitetsnivå.",
+  "complete-these-for-more-accurate-experience": "Desto fler formulär du fyller i desto bättre blir din upplevelse.",
+  "forms": "Formulär",
+  "previous-sprints": "Föregående sprints",
+  "measure-rapa": "Mät din RAPA",
+  "find-out-your-rapa": "Ta reda på din Rapid Assessment of Physical Activity genom att fylla i ett formulär"
 }

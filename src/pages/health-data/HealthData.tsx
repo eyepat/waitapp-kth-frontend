@@ -23,6 +23,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import Graph, { GraphMode } from './Graph';
+import Sprints from './Sprints';
 
 export default function HealthData() {
   const { t } = useLanguage();
@@ -255,37 +256,6 @@ export default function HealthData() {
     );
   };
 
-  //Very rough implementation at this point, in the future we need to check
-  //if on going sprints exist, right now everything is hardcoded to look like figma.
-  const renderSprintsContent = () => {
-    return (
-      <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
-        <Typography marginTop={'20%'} width={'80%'} fontStyle={'italic'}>
-          {t('sprint-text')}
-        </Typography>
-        <Button
-          onClick={() => navigate('/sprint/choice')}
-          sx={{
-            marginTop: '25px',
-            width: '60%',
-            borderRadius: '10px',
-            backgroundColor: 'hsla(200, 100%, 26%, 1)',
-            '&:hover': {
-              backgroundColor: 'hsla(200, 100%, 26%, 1)',
-            },
-            '&:active': {
-              backgroundColor: 'hsla(200, 100%, 26%, 1)',
-            },
-          }}
-          variant="contained"
-          TouchRippleProps={{ style: { color: 'hsla(200, 100%, 6%, 1)' } }}
-        >
-          <Typography>{t('pick-new-sprint')}</Typography>
-        </Button>
-      </Stack>
-    );
-  };
-
   const renderTestsContent = () => {
     const tests = [
       {
@@ -382,7 +352,7 @@ export default function HealthData() {
       case 'overview':
         return renderOverviewContent();
       case 'sprints':
-        return renderSprintsContent();
+        return <Sprints />;
       case 'tests':
         return renderTestsContent();
       default:

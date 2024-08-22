@@ -8,6 +8,7 @@ interface TextCardProps {
   title: string;
   text: string;
   onClick?: () => void;
+  sx?: any;
 }
 
 const TextCardButton = styled(Button)({
@@ -47,10 +48,10 @@ const TextCardText = styled(Typography)({
   fontSize: '16px',
 });
 
-const TextCard: React.FC<TextCardProps> = ({ title, text, onClick }) => {
+const TextCard: React.FC<TextCardProps> = ({ title, text, onClick, sx }) => {
   const { t } = useLanguage();
   return (
-    <TextCardButton onClick={onClick}>
+    <TextCardButton onClick={onClick} sx={sx}>
       <TextCardContent>
         <TextCardTitle variant="body1">{t(title)}</TextCardTitle>
         <TextCardText variant="subtitle1">{t(text)}</TextCardText>

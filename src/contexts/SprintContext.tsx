@@ -1,13 +1,19 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useLoading } from './LoadContext';
-import { createNewSprint, putSprint, getSprint } from '../api/sprint';
+import {
+  createNewSprint,
+  putSprint,
+  getSprint,
+  getAllSprintsByUserID,
+} from '../api/sprint';
 import { useAuth } from './AuthContext';
 import { AuthenticationLevels } from '../Pages';
 import { useLanguage } from './LanguageContext';
 
 interface SprintContextType {
   sprint?: Sprint;
+  sprints?: Sprint[];
   createSprintAndUpdateUser: (sprint: Sprint) => void;
   updateSprint: (sprint: Sprint) => void;
 }
@@ -26,6 +32,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentSprint, setCurrentSprint] = useState<Sprint | undefined>(
     undefined
   );
+  const [sprints, setSprints] = useState<Sprint[] | undefined>(undefined);
   const { loading, setLoading } = useLoading();
   const { enqueueSnackbar } = useSnackbar();
   const { user, token } = useAuth();
@@ -33,15 +40,20 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (
-      user?.token != undefined &&
+      token != undefined &&
       user?.authLevel != undefined &&
-      user?.authLevel >= AuthenticationLevels.LOGGED_IN
+      user?.authLevel >= AuthenticationLevels.LOGGED_IN &&
+      user?.id != undefined
     ) {
-      getSprint(user.token).then((sprint) => {
+      getSprint(token).then((sprint) => {
         setCurrentSprint(sprint);
       });
+      getAllSprintsByUserID(user.id).then((sprints) => {
+        console.log('fetched sprints');
+        setSprints(sprints);
+      });
     }
-  }, [user]);
+  }, [user, token]);
 
   const createSprintAndUpdateUser = async (sprint: Sprint) => {
     if (loading || sprint?.userID == undefined || token == undefined) return;
@@ -85,6 +97,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
 
   const value: SprintContextType = {
     sprint: currentSprint,
+    sprints: sprints,
     updateSprint: updateSprintFunc,
     createSprintAndUpdateUser: createSprintAndUpdateUser,
   };
