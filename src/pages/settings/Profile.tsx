@@ -21,11 +21,13 @@ import { Cancel, Edit } from '@mui/icons-material';
 
 export default function Profile() {
   const { t } = useLanguage();
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const [selectedName, setSelectedName] = useState<string>('');
   const [selectedGender, setSelectedGender] = useState<string>('');
-  const [, setSelectedDOB] = useState<Dayjs | null>(null);
+  const [selectedDOB, setSelectedDOB] = useState<Dayjs | null>(null);
+  const [selectedAblationDate, setSelectedAblationDate] =
+    useState<Dayjs | null>(null);
   const [isAblationDateKnown, setIsAblationDateKnown] = useState(true);
 
   const [originalName, setOriginalName] = useState<string>('');
@@ -58,6 +60,10 @@ export default function Profile() {
     setSelectedGender(event.target.value);
   };
 
+  const handleDOBChange = (value: Dayjs | null) => {
+    setSelectedDOB(value);
+  };
+
   const handleAblationDateChange = (value: Dayjs | null) => {
     setSelectedAblationDate(value);
   };
@@ -70,6 +76,18 @@ export default function Profile() {
       setIsAblationDateKnown(originalIsAblationDateKnown);
     }
     setIsEditMode((prevMode) => !prevMode);
+  };
+
+  const saveChanges = async () => {
+    await updateUser({
+      ...(user as User),
+      fullName: selectedName,
+      gender: selectedGender.toUpperCase(),
+      birthDate: selectedDOB?.toISOString(),
+      ablationDate: selectedAblationDate?.toISOString(),
+    });
+
+    setIsEditMode(false);
   };
 
   return (
@@ -180,7 +198,7 @@ export default function Profile() {
               ? t('select-birth-date')
               : user.birthDate
           }
-          onChange={handleAblationDateChange}
+          onChange={handleDOBChange}
           disabled={!isEditMode || !isAblationDateKnown}
         />
 
@@ -225,6 +243,7 @@ export default function Profile() {
           <Stack marginTop="2vh" marginBottom="4vh" width="100%">
             <Button
               variant="contained"
+              onClick={saveChanges}
               sx={{
                 fontSize: '1.3rem',
                 width: '90%',
@@ -244,8 +263,4 @@ export default function Profile() {
       </Stack>
     </ThemeProvider>
   );
-}
-
-function setSelectedAblationDate(_value: dayjs.Dayjs | null) {
-  throw new Error('Function not implemented.');
 }
