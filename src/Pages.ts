@@ -17,6 +17,7 @@ import Alcohol from './pages/sprint/choice/alcohol-habits/AlcoholHabits';
 import Recipes from './pages/knowledge-bank/recipes/Recipes';
 import Profile from './pages/settings/Profile';
 import Security from './pages/settings/Security';
+import Forms from './pages/settings/Forms';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -170,6 +171,14 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'recipes',
     component: Recipes,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'forms',
+    component: Forms,
     header: { expanded: false },
     isMenu: false,
   },

@@ -194,5 +194,15 @@
   "edit": "Edit",
   "cancel": "Cancel",
   "editing": "Editing..",
-  "or": "or"
+  "or": "or",
+  "you-have-completed-this-sprint": "You have completed this sprint!",
+  "this-sprint-has-passed": "This sprint has passed.",
+  "click-here-to-see-results": "Click here to see your results",
+  "rapa": "Rapid Assessment of Physical Activity",
+  "why-rapa": "Used to help us assess your level of physical activity.",
+  "complete-these-for-more-accurate-experience": "The more forms you fill out, the better your experience will be.",
+  "forms": "Forms",
+  "previous-sprints": "Previous sprints",
+  "measure-rapa": "Measure RAPA",
+  "find-out-your-rapa": "Find out your Rapid Assessment of Physical Activity by filling out a form"
 }

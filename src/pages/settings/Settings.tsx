@@ -14,6 +14,7 @@ import {
   ChangeSprint,
   Contact,
   EnglishFlag,
+  Forms,
   Help,
   Information,
   Integrity,
@@ -184,6 +185,18 @@ export default function Settings() {
                 <Typography marginLeft={'10px'}>
                   {t('password-and-security')}
                 </Typography>
+              </div>
+              <ArrowRight />
+            </Button>
+            <Button
+              onClick={() => navigate('/settings/forms')}
+              fullWidth={true}
+              sx={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+                <Forms />
+
+                <Typography marginLeft={'10px'}>{t('forms')}</Typography>
               </div>
               <ArrowRight />
             </Button>
