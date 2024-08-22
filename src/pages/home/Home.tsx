@@ -30,7 +30,8 @@ const Home: React.FC = () => {
         setWeight(
           weight.sort(
             (a, b) =>
-              new Date(b.timeStamp).getTime() - new Date(a.timeStamp).getTime()
+              new Date(b.timeStamp !== null ? b.timeStamp : Date()).getTime() -
+              new Date(a.timeStamp !== null ? a.timeStamp : Date()).getTime()
           )[0].value
         );
       }
