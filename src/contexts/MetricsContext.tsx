@@ -172,7 +172,7 @@ export const MetricsProvider = ({
           setHeight(newData as Height[]);
           break;
         case 'weight':
-          setWeight(newData as Weight[]);
+          setWeight((newData as Weight[]).reverse());
           break;
         case 'blood-pressure':
           setBloodPressure(newData as BloodPressure[]);

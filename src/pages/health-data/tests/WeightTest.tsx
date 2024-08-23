@@ -72,7 +72,7 @@ export default function WeightTest() {
             variant="outlined"
             value={weight}
             onChange={(e) => {
-              if (e.target.value.length <= 3) {
+              if (e.target.value.length <= 5) {
                 setWeight(e.target.value);
               }
             }}
@@ -112,7 +112,7 @@ export default function WeightTest() {
                 enqueueSnackbar('error-no-user', { variant: 'error' });
                 return;
               }
-              if (!/^\d+$/.test(weight)) {
+              if (!/^\d+(\.\d+)?$/.test(weight)) {
                 enqueueSnackbar('invalid-weight-error', { variant: 'error' });
                 return;
               }

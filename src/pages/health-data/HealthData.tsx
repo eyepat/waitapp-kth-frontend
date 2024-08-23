@@ -91,6 +91,7 @@ export default function HealthData() {
       getLatestByType ? getLatestByType('weight')?.value : 0
     );
     dif -= goalWeight;
+    dif = Math.round(dif * 10) / 10;
 
     return (
       <>
@@ -129,7 +130,13 @@ export default function HealthData() {
             unmountOnExit
           >
             <CardContent style={{ padding: '0' }}>
+              <Typography marginTop={'1vh'} marginLeft={'2vh'} fontWeight={700}>
+                {t('systolic')}
+              </Typography>
               <Graph mode={GraphMode.Systolic} />
+              <Typography marginLeft={'2vh'} fontWeight={700}>
+                {t('diastolic')}
+              </Typography>
               <Graph mode={GraphMode.Diastolic} />
             </CardContent>
           </Collapse>
