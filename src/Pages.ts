@@ -18,6 +18,7 @@ import Recipes from './pages/knowledge-bank/recipes/Recipes';
 import Profile from './pages/settings/Profile';
 import Security from './pages/settings/Security';
 import Forms from './pages/settings/Forms';
+import Rapa from './pages/forms/Rapa';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -179,6 +180,14 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'forms',
     component: Forms,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms/rapa',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'RAPA',
+    component: Rapa,
     header: { expanded: false },
     isMenu: false,
   },
