@@ -441,17 +441,20 @@ export default function GeneralQuestions() {
               if (!validateUserProvidedData()) {
                 return;
               }
+
               const registerUser: RegisterInfo = {
                 id: user.id,
                 gender: selectedGender.toUpperCase(),
                 fullName: selectedName,
                 email: user.email,
-                birthDate: selectedDOB?.toISOString(),
+                birthDate: selectedDOB?.add(1, 'day')?.toISOString(),
                 height: selectedHeight,
                 weight: selectedWeight,
                 waistSize: selectedWaistSize,
                 bloodPressure: selectedBloodPressure,
-                ablationDate: selectedAblationDate?.toISOString(),
+                ablationDate: selectedAblationDate
+                  ?.add(1, 'day')
+                  ?.toISOString(),
               };
 
               registerInfo(registerUser).then(() => {

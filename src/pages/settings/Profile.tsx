@@ -83,8 +83,8 @@ export default function Profile() {
       ...(user as User),
       fullName: selectedName,
       gender: selectedGender.toUpperCase(),
-      birthDate: selectedDOB?.toISOString(),
-      ablationDate: selectedAblationDate?.toISOString(),
+      birthDate: selectedDOB?.add(1, 'day')?.toISOString(),
+      ablationDate: selectedAblationDate?.add(1, 'day')?.toISOString(),
     });
 
     setIsEditMode(false);
