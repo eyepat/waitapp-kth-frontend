@@ -68,18 +68,11 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
 
     switch (mode) {
       case GraphMode.Systolic:
-        const systolicValues = data.map(
-          (entry: Metric) => (entry as BloodPressure).systolic
-        );
-        return [Math.min(...systolicValues), Math.max(...systolicValues)];
+        return [90, 160];
       case GraphMode.Diastolic:
-        const diastolicValues = data.map(
-          (entry: Metric) => (entry as BloodPressure).diastolic
-        );
-        return [Math.min(...diastolicValues), Math.max(...diastolicValues)];
+        return [60, 110];
       case GraphMode.Weight:
-        const weightValues = data.map((entry: Metric) => entry.value);
-        return [Math.min(...weightValues), Math.max(...weightValues)];
+        return [40, 120];
     }
   };
 
@@ -119,10 +112,12 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
 
     switch (mode) {
       case GraphMode.Systolic:
-        text = `${t('systolic')}\n\n${t('high')}\n140 mmHg\nNormal\n120 mmHg`;
+        // ${t('systolic')}\n\n
+        text = `${t('high')}\n140 mmHg\nNormal\n120 mmHg`;
         break;
       case GraphMode.Diastolic:
-        text = `${t('diastolic')}\n\n${t('high')}\n90 mmHg\nNormal\n80 mmHg`;
+        // ${t('diastolic')}\n\n
+        text = `${t('high')}\n90 mmHg\nNormal\n80 mmHg`;
         break;
       case GraphMode.Weight:
         text = `${t('over')}\n90 kg\nNormal\n65 kg\nUnder\n50 kg`;
@@ -132,6 +127,8 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
     const textParts: string[] = text.split('\n');
     const highlightEvery = 2;
 
+    const startingY = mode === GraphMode.Weight ? 25 : 40;
+
     return (
       <svg width="100px">
         <g>
@@ -139,8 +136,8 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
             <text
               key={`tspan-${part}`}
               textAnchor="start"
-              x={mode === GraphMode.Weight ? 30 : index === 0 ? 10 : 20}
-              y={25 + index * 16}
+              x={mode === GraphMode.Weight ? 30 : 20}
+              y={startingY + index * 16}
               style={{
                 display: 'block',
                 // Make title for systolic/diastolic graphs bigger
@@ -198,6 +195,7 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
           />
           <YAxis
             domain={calculateDomain()}
+            allowDataOverflow={false}
             stroke="#000"
             strokeWidth={6}
             tick={false}

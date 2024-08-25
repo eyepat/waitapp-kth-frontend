@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   const [pulse, setPulse] = useState<number>(0);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { weight } = useMetrics();
+  const { getLatestByType } = useMetrics();
 
   // Added the useEffect below to prevent ts checking from failing since the
   // set functions arn´t used
@@ -26,19 +26,11 @@ const Home: React.FC = () => {
       setDaysLeft(
         dayjs(user ? (user.ablationDate ?? '') : '').diff(dayjs(), 'days')
       );
-      if (weight !== undefined && weight.length > 0) {
-        setWeight(
-          weight.sort(
-            (a, b) =>
-              new Date(b.timeStamp !== null ? b.timeStamp : Date()).getTime() -
-              new Date(a.timeStamp !== null ? a.timeStamp : Date()).getTime()
-          )[0].value
-        );
-      }
+      setWeight(getLatestByType ? (getLatestByType('weight')?.value ?? 0) : 0);
       setSteps(2472);
       setPulse(74);
     }
-  }, [user, weight]);
+  }, [user]);
 
   const maxWeight = 100;
   const maxSteps = 2500;
