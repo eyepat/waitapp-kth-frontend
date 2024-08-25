@@ -22,7 +22,11 @@ export default function Todo() {
               message: t('this-function-is-wip'),
             });
           }}
-          sx={{ background: '#00a3e050' }}
+          sx={{
+            background: '#00a3e050',
+            maxWidth: '800px',
+            '&:hover': { background: '#00a3e090' },
+          }}
         />
       )}
     </Stack>
