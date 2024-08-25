@@ -26,7 +26,11 @@ const Home: React.FC = () => {
       setDaysLeft(
         dayjs(user ? (user.ablationDate ?? '') : '').diff(dayjs(), 'days')
       );
-      setWeight(getLatestByType ? (getLatestByType('weight')?.value ?? 0) : 0);
+      setWeight(
+        getLatestByType
+          ? (getLatestByType('weight')?.value?.toFixed(2) ?? 0)
+          : 0
+      );
       setSteps(2472);
       setPulse(74);
     }

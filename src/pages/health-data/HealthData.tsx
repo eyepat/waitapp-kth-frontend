@@ -75,7 +75,9 @@ export default function HealthData() {
   }) => {
     return getLatestByType ? (
       <Box fontWeight="bold" display="inline">
-        {getLatestByType(metric)?.value}
+        {metric === 'weight'
+          ? (getLatestByType(metric)?.value?.toFixed(2) ?? 0)
+          : (getLatestByType(metric)?.value ?? 0)}
       </Box>
     ) : (
       ''
@@ -93,11 +95,13 @@ export default function HealthData() {
     dif -= goalWeight;
     dif = Math.round(dif * 10) / 10;
 
+    const isNAN = Number.isNaN(dif);
+
     return (
       <>
         {dif < 0 ? t('gain-weight') : t('lose-weight')}
         <Box fontWeight="bold" display="inline">
-          {' ' + Math.abs(dif)}
+          {' ' + (isNAN ? '0' : Math.abs(dif))}
         </Box>
         {' kg'}
       </>
