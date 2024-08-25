@@ -3,7 +3,6 @@ import { useMetrics } from '../../contexts/MetricsContext';
 import TextCard from '../../components/Cards/TextCard';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import { enqueueSnackbar } from 'notistack';
 
 export default function Todo() {
   const { RAPA } = useMetrics();
@@ -16,11 +15,7 @@ export default function Todo() {
           title={t('measure-rapa')}
           text={t('find-out-your-rapa')}
           onClick={() => {
-            navigate('/settings/forms');
-            enqueueSnackbar({
-              variant: 'warning',
-              message: t('this-function-is-wip'),
-            });
+            navigate('/settings/forms/rapa');
           }}
           sx={{
             background: '#00a3e050',
