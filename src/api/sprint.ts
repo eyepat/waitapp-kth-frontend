@@ -51,8 +51,16 @@ export async function createNewSprint(
   return data;
 }
 
-export async function getSprint(token: string): Promise<Sprint> {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/latest`;
+export async function getSprint({
+  token,
+  active,
+}: {
+  token: string;
+  active?: boolean;
+}): Promise<Sprint> {
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/latest${
+    active ? '/true' : ''
+  }`;
   const response: Response = await fetch(url, {
     method: 'GET',
     headers: {

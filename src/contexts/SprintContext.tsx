@@ -45,11 +45,12 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       user?.authLevel >= AuthenticationLevels.LOGGED_IN &&
       user?.id != undefined
     ) {
-      getSprint(token).then((sprint) => {
-        setCurrentSprint(sprint);
-      });
+      getSprint({ token, active: true })
+        .then((sprint) => {
+          setCurrentSprint(sprint);
+        })
+        .catch((error) => {});
       getAllSprintsByUserID(user.id).then((sprints) => {
-        console.log('fetched sprints');
         setSprints(sprints);
       });
     }
