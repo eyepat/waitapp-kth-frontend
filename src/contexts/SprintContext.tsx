@@ -49,7 +49,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
         .then((sprint) => {
           setCurrentSprint(sprint);
         })
-        .catch((error) => {});
+        .catch((_) => {});
       getAllSprintsByUserID(user.id).then((sprints) => {
         setSprints(sprints);
       });
