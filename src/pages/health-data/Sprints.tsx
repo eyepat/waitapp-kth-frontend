@@ -4,6 +4,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 import TextCard from '../../components/Cards/TextCard';
 import { enqueueSnackbar } from 'notistack';
+import { useEffect } from 'react';
 
 const getSprintTypeText: (input: string) => string = (input) => {
   const { t } = useLanguage();
@@ -23,6 +24,10 @@ export default function Sprints() {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { sprint, sprints } = useSprintContext();
+
+  useEffect(() => {
+    console.log(sprints);
+  }, [sprints]);
 
   return (
     <Stack
@@ -64,8 +69,8 @@ export default function Sprints() {
       {sprints !== undefined &&
         sprints?.map(
           (sprint_) =>
-            sprint !== undefined &&
-            sprint_.id !== sprint.id && (
+            sprint_ !== undefined &&
+            sprint_.id !== sprint?.id && (
               <TextCard
                 title={
                   getSprintTypeText(sprint_.type) +
