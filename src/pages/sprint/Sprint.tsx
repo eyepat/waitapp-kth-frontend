@@ -19,8 +19,8 @@ import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 import SprintCard from '../../components/Cards/sprintCard';
-import { Measure, Chat } from '../../utils/Icons';
 import dayjs from 'dayjs';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
 export default function Sprint() {
   const { user } = useAuth();
@@ -32,6 +32,18 @@ export default function Sprint() {
 
   const { t } = useLanguage();
   const navigate = useNavigate();
+
+  // State to track the current day and week being viewed
+  const [currentDay, setCurrentDay] = useState(
+    dayjs().diff(dayjs(sprint ? sprint.startDate : ''), 'days') + 1
+  );
+  const [isWeeklyView, setIsWeeklyView] = useState(false);
+
+  const totalDays = sprint
+    ? dayjs().diff(dayjs(sprint.startDate), 'days') + 1
+    : 0;
+
+  const currentWeek = Math.ceil(currentDay / 7);
 
   const getSprintTypeText: (input: string) => string = (input) => {
     switch (input) {
@@ -46,67 +58,160 @@ export default function Sprint() {
     }
   };
 
+  const handleNext = () => {
+    if (isWeeklyView) {
+      if (currentDay < totalDays) {
+        setCurrentDay(currentDay + 1);
+        setIsWeeklyView(false);
+      }
+    } else if (currentDay % 7 === 0 && currentDay < totalDays) {
+      setIsWeeklyView(true);
+    } else {
+      setCurrentDay(currentDay + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (isWeeklyView) {
+      setIsWeeklyView(false);
+    } else if ((currentDay - 1) % 7 === 0 && currentDay > 1) {
+      setIsWeeklyView(true);
+      setCurrentDay(currentDay - 1);
+    } else {
+      setCurrentDay(currentDay - 1);
+    }
+  };
+
+  const renderWeeklySummary = () => {
+    return (
+      <Card
+        sx={{
+          width: '90%',
+          maxWidth: '500px',
+          borderRadius: '1vh',
+          marginTop: '3vh',
+        }}
+      >
+        <CardContent sx={{ padding: '2vh' }}>
+          <Typography variant="h6" fontWeight="bold" textAlign="center">
+            {t('week')} {currentWeek} - {t('summary')}
+          </Typography>
+          <Typography textAlign="center" sx={{ marginTop: '2vh' }}>
+            {t('congratulations-on-completing-week')} {currentWeek}!
+          </Typography>
+          <Typography textAlign="center" sx={{ marginTop: '2vh' }}>
+            {t('sprint-recap')}
+          </Typography>
+          <Typography textAlign="center" sx={{ marginTop: '2vh' }}>
+            {t('you-achieved')} x {t('goals-this-week')}!
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  };
+
   const renderActiveSprint = () => {
     return (
-      <Stack marginTop="1vh" alignItems="center">
-        <Typography variant="h5" fontWeight="bold">
+      <Stack
+        marginTop="1vh"
+        alignItems="center"
+        sx={{ position: 'relative', width: '100%' }}
+      >
+        <Typography variant="h5" fontWeight="bold" sx={{ textAlign: 'center' }}>
           {`${sprint ? getSprintTypeText(sprint.type).toUpperCase() : 'undefined'}`}
         </Typography>
-        <Typography variant="h2" fontWeight="bold" textAlign="center">
-          {t('day')}{' '}
-          {dayjs().diff(dayjs(sprint ? (sprint.startDate ?? '') : ''), 'days') +
-            1}
-        </Typography>
-        <Card sx={{ width: '40vh', borderRadius: '1vh', marginTop: '3vh' }}>
-          <CardContent sx={{ position: 'relative' }}>
-            <Typography variant="h6" fontWeight="bold" textAlign="center">
-              {t('today')}
-            </Typography>
-            <Typography marginBottom="1vh" textAlign="center">
-              {dayjs(user ? (user.ablationDate ?? '') : '').diff(
-                dayjs(),
-                'days'
-              )}{' '}
-              {t('days-until-ablation')}
-            </Typography>
-            <Stack direction="column">
-              <SprintCard day={1} rapa={1} week={1} />'
-            </Stack>
-
-            <Button
-              variant="contained"
-              sx={{
-                position: 'absolute',
-                bottom: 0,
-                width: '6vw',
-                height: '5vh',
-                left: 0,
-                backgroundColor: 'hsla(200, 100%, 26%, 1)',
-                color: 'white',
-                borderRadius: '0px 8px 0px 0px',
-              }}
-            >
-              <Typography marginRight="5px">{t('measure')}</Typography>
-              <Measure />
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                position: 'absolute',
-                bottom: 0,
-                width: '6vw',
-                height: '5vh',
-                right: 0,
-                backgroundColor: 'hsla(196, 100%, 44%, 1)',
-                color: 'white',
-                borderRadius: '8px 0px 0px 0px',
-              }}
-            >
-              <Typography marginRight="10px">{t('chat')}</Typography>
-              <Chat />
-            </Button>
-          </CardContent>
-        </Card>
+        <Box
+          sx={{
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            padding: '0 8%',
+          }}
+        >
+          <ArrowBack
+            sx={{
+              fontSize: '5vh',
+              cursor: 'pointer',
+              position: 'absolute',
+              left: '5%',
+              visibility: currentDay > 1 ? 'visible' : 'hidden',
+              zIndex: 1,
+            }}
+            onClick={handleBack}
+          />
+          <Typography
+            variant="h2"
+            fontWeight="bold"
+            textAlign="center"
+            sx={{
+              flexGrow: 1,
+              textAlign: 'center',
+              overflow: 'hidden',
+              whiteSpace: 'normal',
+              wordBreak: 'break-word',
+              fontSize: {
+                xs: '1.5rem',
+                sm: '1.75rem',
+                md: '2rem',
+                lg: '2.25rem',
+              },
+              paddingLeft: '6vh',
+              paddingRight: '6vh',
+            }}
+          >
+            {isWeeklyView
+              ? `${t('week')} ${currentWeek} - ${t('summary')}`
+              : `${t('day')} ${currentDay}`}
+          </Typography>
+          <ArrowForward
+            sx={{
+              fontSize: '5vh',
+              cursor: 'pointer',
+              position: 'absolute',
+              right: '5%',
+              visibility: currentDay < totalDays ? 'visible' : 'hidden',
+              zIndex: 1,
+            }}
+            onClick={handleNext}
+          />
+        </Box>
+        {isWeeklyView ? (
+          renderWeeklySummary()
+        ) : (
+          <Card
+            sx={{
+              width: '90%',
+              maxWidth: '500px',
+              borderRadius: '1vh',
+              marginTop: '3vh',
+            }}
+          >
+            <CardContent sx={{ position: 'relative' }}>
+              <Typography variant="h6" fontWeight="bold" textAlign="center">
+                {currentDay === totalDays
+                  ? t('today')
+                  : dayjs(sprint?.startDate)
+                      .add(currentDay - 1, 'day')
+                      .format('DD/MM/YYYY')}
+              </Typography>
+              {user?.ablationDate && (
+                <Typography marginBottom="1vh" textAlign="center">
+                  {dayjs(user.ablationDate).diff(dayjs(), 'days')}{' '}
+                  {t('days-until-ablation')}
+                </Typography>
+              )}
+              <Stack direction="column">
+                <SprintCard
+                  day={currentDay % 7 === 0 ? 7 : currentDay % 7}
+                  rapa={1}
+                  week={currentWeek}
+                />
+              </Stack>
+            </CardContent>
+          </Card>
+        )}
       </Stack>
     );
   };
@@ -182,7 +287,7 @@ export default function Sprint() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack marginBottom="20vh" alignItems="center">
+      <Stack marginBottom="20vh" alignItems="center" padding={3.5}>
         {sprint ? renderActiveSprint() : noActiveSprint()}
       </Stack>
 
