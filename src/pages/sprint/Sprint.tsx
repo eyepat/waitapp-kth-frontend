@@ -14,7 +14,7 @@ import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
@@ -37,13 +37,27 @@ export default function Sprint() {
   const [currentDay, setCurrentDay] = useState(
     dayjs().diff(dayjs(sprint ? sprint.startDate : ''), 'days') + 1
   );
-  const [isWeeklyView, setIsWeeklyView] = useState(false);
+  const [isWeeklyView, setIsWeeklyView] = useState<boolean>(false);
 
-  const totalDays = sprint
-    ? dayjs().diff(dayjs(sprint.startDate), 'days') + 1
-    : 0;
+  const [totalDays, setTotalDays] = useState<number>(
+    sprint ? dayjs().diff(dayjs(sprint.startDate), 'days') + 1 : 0
+  );
 
-  const currentWeek = Math.ceil(currentDay / 7);
+  const [currentWeek, setCurrentWeek] = useState<number>(
+    Math.ceil(currentDay / 7)
+  );
+
+  useEffect(() => {
+    if (sprint !== undefined) {
+      const newCurrentDay =
+        dayjs().diff(dayjs(sprint ? sprint.startDate : ''), 'days') + 1;
+      setCurrentDay(newCurrentDay);
+      setTotalDays(
+        sprint ? dayjs().diff(dayjs(sprint.startDate), 'days') + 1 : 0
+      );
+      setCurrentWeek(Math.ceil(newCurrentDay / 7));
+    }
+  }, [sprint]);
 
   const getSprintTypeText: (input: string) => string = (input) => {
     switch (input) {
