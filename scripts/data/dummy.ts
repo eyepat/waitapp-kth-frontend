@@ -30,7 +30,7 @@ export interface Sprint {
   type: string;
   startDate: string;
   endDate: string;
-  isCompleted: boolean;
+  completed: boolean;
   level: string;
   score: number | null;
   userID: number;

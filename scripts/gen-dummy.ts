@@ -95,7 +95,7 @@ const createSprint = (
       type,
       level,
       score: Math.floor(Math.random() * 10) + 1, // TODO: check how we want it
-      isCompleted: true,
+      completed: true,
       startDate: formatDate(startDate),
       endDate: formatDate(addDays(startDate, 6)),
       userID,

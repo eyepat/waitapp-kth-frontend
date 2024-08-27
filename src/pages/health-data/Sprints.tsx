@@ -82,7 +82,7 @@ export default function Sprints() {
                   new Date(sprint_.endDate).getDate()
                 }
                 text={
-                  (sprint_.isCompleted
+                  (sprint_.completed
                     ? t('you-have-completed-this-sprint')
                     : t('this-sprint-has-passed')) +
                   ' ' +
