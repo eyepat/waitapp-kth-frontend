@@ -10,12 +10,14 @@ import {
 import { useAuth } from './AuthContext';
 import { AuthenticationLevels } from '../Pages';
 import { useLanguage } from './LanguageContext';
+import dayjs from 'dayjs';
 
 interface SprintContextType {
   sprint?: Sprint;
   sprints?: Sprint[];
   createSprintAndUpdateUser: (sprint: Sprint) => void;
   updateSprint: (sprint: Sprint) => void;
+  completeSprint: () => void;
 }
 
 const SprintContext = createContext<SprintContextType | undefined>(undefined);
@@ -80,10 +82,35 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     if (loading || sprint?.userID == undefined) return;
     try {
       setLoading(true);
-      const newSprint: Sprint = await putSprint(sprint);
+      const newSprint: Sprint = await putSprint(sprint, token ?? '');
       setCurrentSprint(newSprint);
 
       enqueueSnackbar(t('success-put'), {
+        variant: 'success',
+      });
+    } catch (error) {
+      if (error instanceof Error)
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const completeSprintFunc = async () => {
+    if (loading || currentSprint?.userID == undefined) return;
+    try {
+      setLoading(true);
+      const newSprint: Sprint = {
+        ...currentSprint,
+        completed: true,
+        endDate: dayjs().toISOString(),
+      };
+      await putSprint(newSprint, token ?? '');
+      setCurrentSprint(undefined);
+
+      enqueueSnackbar(t('success-completed-sprint'), {
         variant: 'success',
       });
     } catch (error) {
@@ -101,6 +128,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     sprints: sprints,
     updateSprint: updateSprintFunc,
     createSprintAndUpdateUser: createSprintAndUpdateUser,
+    completeSprint: completeSprintFunc,
   };
 
   return (

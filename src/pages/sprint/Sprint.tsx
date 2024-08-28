@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import moon from '../../assets/sprint/moon.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Information } from '../../utils/Icons';
+import { Chat, Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
@@ -19,14 +19,16 @@ import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 import SprintCard from '../../components/Cards/sprintCard';
+import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import dayjs from 'dayjs';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { ArrowBack, ArrowForward, Straighten } from '@mui/icons-material';
 
 export default function Sprint() {
   const { user } = useAuth();
-  const { sprint } = useSprintContext();
+  const { sprint, completeSprint } = useSprintContext();
 
   const [openSprintInfo, setOpenSprintInfo] = useState(false);
+  const [openWip, setOpenWip] = useState(false);
   const handleOpenSprintInfo = () => setOpenSprintInfo(true);
   const handleCloseSprintInfo = () => setOpenSprintInfo(false);
 
@@ -38,6 +40,7 @@ export default function Sprint() {
     dayjs().diff(dayjs(sprint ? sprint.startDate : ''), 'days') + 1
   );
   const [isWeeklyView, setIsWeeklyView] = useState<boolean>(false);
+  const [isCompleteView, setIsCompleteView] = useState<boolean>(false);
 
   const [totalDays, setTotalDays] = useState<number>(
     sprint ? dayjs().diff(dayjs(sprint.startDate), 'days') + 1 : 0
@@ -46,6 +49,14 @@ export default function Sprint() {
   const [currentWeek, setCurrentWeek] = useState<number>(
     Math.ceil(currentDay / 7)
   );
+
+  function handleOpenWip() {
+    setOpenWip(true);
+  }
+
+  function handleCloseWip() {
+    setOpenWip(false);
+  }
 
   useEffect(() => {
     if (sprint !== undefined) {
@@ -86,14 +97,52 @@ export default function Sprint() {
   };
 
   const handleBack = () => {
-    if (isWeeklyView) {
+    if (isWeeklyView || isCompleteView) {
       setIsWeeklyView(false);
+      setIsCompleteView(false);
+    } else if (currentDay > 28 || currentWeek >= 5) {
+      // Hard coded 28 days
+      setIsCompleteView(true);
+      setCurrentDay(28);
     } else if ((currentDay - 1) % 7 === 0 && currentDay > 1) {
       setIsWeeklyView(true);
       setCurrentDay(currentDay - 1);
     } else {
       setCurrentDay(currentDay - 1);
     }
+  };
+
+  const renderCompleteView = () => {
+    return (
+      <Card
+        sx={{
+          width: '90%',
+          maxWidth: '500px',
+          borderRadius: '1vh',
+          marginTop: '3vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <CardContent sx={{ padding: '2vh' }}>
+          <Typography variant="h6" fontWeight="bold" textAlign="center">
+            {t('sprint-completion-header')}
+          </Typography>
+          <Typography textAlign="center" sx={{ marginTop: '2vh' }}>
+            {t('congratulations-on-completing-sprint')}
+          </Typography>
+          <Typography
+            textAlign="center"
+            sx={{ marginTop: '2vh', fontStyle: 'italic' }}
+          >
+            {t('sprint-results')}
+          </Typography>
+        </CardContent>
+        <Button variant="contained" onClick={completeSprint}>
+          <Typography> {t('end-sprint')} </Typography>
+        </Button>
+      </Card>
+    );
   };
 
   const renderWeeklySummary = () => {
@@ -125,6 +174,12 @@ export default function Sprint() {
   };
 
   const renderActiveSprint = () => {
+    // Hard coded so that after 28 days, only the completion view is shown
+    if (currentDay > 28) {
+      setIsCompleteView(true);
+      setCurrentDay(28);
+    }
+
     return (
       <Stack
         marginTop="1vh"
@@ -175,9 +230,11 @@ export default function Sprint() {
               paddingRight: '6vh',
             }}
           >
-            {isWeeklyView
-              ? `${t('week')} ${currentWeek} - ${t('summary')}`
-              : `${t('day')} ${currentDay}`}
+            {isCompleteView
+              ? `${t('sprint-completion-header')}`
+              : isWeeklyView
+                ? `${t('week')} ${currentWeek} - ${t('summary')}`
+                : `${t('day')} ${currentDay}`}
           </Typography>
           <ArrowForward
             sx={{
@@ -191,7 +248,9 @@ export default function Sprint() {
             onClick={handleNext}
           />
         </Box>
-        {isWeeklyView ? (
+        {isCompleteView ? (
+          renderCompleteView()
+        ) : isWeeklyView ? (
           renderWeeklySummary()
         ) : (
           <Card
@@ -222,6 +281,28 @@ export default function Sprint() {
                   rapa={1}
                   week={currentWeek}
                 />
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{ marginTop: '2vh' }}
+              >
+                <Button
+                  variant="contained"
+                  sx={{ width: '15vh' }}
+                  endIcon={<Straighten />}
+                  onClick={() => navigate('/health-data/tests')}
+                >
+                  <Typography> {t('measure-card-button')} </Typography>
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ width: '15vh' }}
+                  endIcon={<Chat />}
+                  onClick={handleOpenWip}
+                >
+                  <Typography> {t('chat-card-button')} </Typography>
+                </Button>
               </Stack>
             </CardContent>
           </Card>
@@ -311,6 +392,7 @@ export default function Sprint() {
         title="what-is-a-sprint"
         content="what-is-a-sprint-text"
       />
+      <WipPopUp open={openWip} onClose={handleCloseWip} />
     </ThemeProvider>
   );
 }

@@ -17,29 +17,43 @@ const ChartMeter: React.FC<ChartMeterProps> = ({
   lighterColor,
   maxValue,
 }) => {
-  const height = `${(value / maxValue) * 300}px`;
+  const height = `${(value / maxValue) * 100}%`;
 
   return (
     <ThemeProvider theme={theme}>
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Typography variant="body1" color="textSecondary">
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        sx={{ width: '100%', maxWidth: '50px' }}
+      >
+        <Typography
+          variant="body1"
+          color="textSecondary"
+          sx={{ fontSize: 'clamp(0.8rem, 2vw, 1rem)' }}
+        >
           {label}
         </Typography>
         <Box
-          width="15px"
-          height="400px"
-          bgcolor={lighterColor}
-          borderRadius="15px"
-          position="relative"
-          marginTop="10px"
+          sx={{
+            width: '1.5vh',
+            height: '40vh',
+            bgcolor: lighterColor,
+            borderRadius: '15px',
+            position: 'relative',
+            marginTop: '10px',
+            maxWidth: '20px',
+          }}
         >
           <Box
-            position="absolute"
-            bottom="0"
-            width="100%"
-            height={height}
-            bgcolor={barColor}
-            borderRadius="inherit"
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              width: '100%',
+              height: height,
+              bgcolor: barColor,
+              borderRadius: 'inherit',
+            }}
           />
         </Box>
       </Box>

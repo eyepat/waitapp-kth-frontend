@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         }}
       >
         <Stack direction="row">
-          <Stack direction="column" style={{ flex: 1, marginLeft: '30px' }}>
+          <Stack direction="column" style={{ flex: 1, marginLeft: '6vw' }}>
             {daysLeft > 0 && (
               <>
                 <div style={{ padding: '2vh' }}></div>

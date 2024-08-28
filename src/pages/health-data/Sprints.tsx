@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 import TextCard from '../../components/Cards/TextCard';
+import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import { enqueueSnackbar } from 'notistack';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 
 const getSprintTypeText: (input: string) => string = (input) => {
   const { t } = useLanguage();
@@ -23,7 +25,16 @@ const getSprintTypeText: (input: string) => string = (input) => {
 export default function Sprints() {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [openWip, setOpenWip] = useState(false);
   const { sprint, sprints } = useSprintContext();
+
+  function handleOpenWip() {
+    setOpenWip(true);
+  }
+
+  function handleCloseWip() {
+    setOpenWip(false);
+  }
 
   useEffect(() => {
     console.log(sprints);
@@ -49,17 +60,16 @@ export default function Sprints() {
               ' ' +
               t('sprint') +
               ' ' +
-              new Date(sprint.startDate).getDate() +
-              '-' +
-              new Date(sprint.endDate).getDate()
+              dayjs(sprint?.startDate).format('DD/MM/YYYY')
             }
             text={t('ongoing-sprint')}
-            onClick={() =>
+            onClick={() => {
               enqueueSnackbar({
                 variant: 'warning',
                 message: t('this-function-is-wip'),
-              })
-            }
+              });
+              handleOpenWip();
+            }}
           />
           <Divider color="black" sx={{ mt: '5vh' }} variant="fullWidth">
             {t('previous-sprints')}
@@ -77,9 +87,7 @@ export default function Sprints() {
                   ' ' +
                   t('sprint') +
                   ' ' +
-                  new Date(sprint_.startDate).getDate() +
-                  '-' +
-                  new Date(sprint_.endDate).getDate()
+                  dayjs(sprint_.startDate).format('DD/MM/YYYY')
                 }
                 text={
                   (sprint_.completed
@@ -88,12 +96,13 @@ export default function Sprints() {
                   ' ' +
                   t('click-here-to-see-results')
                 }
-                onClick={() =>
+                onClick={() => {
                   enqueueSnackbar({
                     variant: 'warning',
                     message: t('this-function-is-wip'),
-                  })
-                }
+                  });
+                  handleOpenWip();
+                }}
               />
             )
         )}
@@ -117,6 +126,7 @@ export default function Sprints() {
       >
         <Typography>{t('pick-new-sprint')}</Typography>
       </Button>
+      <WipPopUp open={openWip} onClose={handleCloseWip} />
     </Stack>
   );
 }

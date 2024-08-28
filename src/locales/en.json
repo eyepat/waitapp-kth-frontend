@@ -265,5 +265,14 @@
   "heart-endurance-training": "Heart endurance training",
   "heart-endurance-training-desc": "follow the video below to get your heart pumping",
   "intensive-four-workouts": "Four intese workouts",
-  "intensive-four-workouts-desc": "follow the intese workout video below"
+  "intensive-four-workouts-desc": "follow the intese workout video below",
+  "good-job-on-new-rapa-score": "Your RAPA socre has been updated!",
+  "measure-card-button": "MEASURE",
+  "chat-card-button": "CHAT",
+  "measurements": "Measurements",
+  "sprint-completion-header": "Sprint complete!",
+  "congratulations-on-completing-sprint": "Congratulations on completing the sprint!",
+  "sprint-results": "Here are your results",
+  "end-sprint": "Click here to end your sprint",
+  "success-completed-sprint": "You have successfully completed the sprint"
 }

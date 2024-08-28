@@ -50,12 +50,6 @@ export default function Settings() {
     return renderAvailableSprint();
   };
 
-  function handleStopSprint() {
-    if (user != undefined) {
-      console.log('stop sprint');
-    }
-  }
-
   function handleOpenWip() {
     setOpenWip(true);
   }
@@ -79,10 +73,11 @@ export default function Settings() {
   }
 
   const renderAvailableSprint = () => {
+    const { completeSprint } = useSprintContext();
     return (
       <CardContent>
         <Button
-          onClick={handleStopSprint}
+          onClick={completeSprint}
           fullWidth={true}
           sx={{ display: 'flex', justifyContent: 'space-between' }}
         >

@@ -266,5 +266,14 @@
   "heart-endurance-training": "hjärtgympa",
   "heart-endurance-training-desc": "följ videon nedan för att få ditt hjärta att pumpa",
   "intensive-four-workouts": "Fyra intensiva träningspass",
-  "intensive-four-workouts-desc": "följ det intensiva träningsvideon nedan"
+  "intensive-four-workouts-desc": "följ det intensiva träningsvideon nedan",
+  "good-job-on-new-rapa-score": "Din RAPA har uppdaterats!",
+  "measure-card-button": "MÄTA",
+  "chat-card-button": "CHATT",
+  "measurements": "Mätningar",
+  "sprint-completion-header": "Sprint avklarad!",
+  "congratulations-on-completing-sprint": "Bra jobbat under denna sprint!",
+  "sprint-results": "Här är dina resultat",
+  "end-sprint": "Klicka här för att avsluta sprinten",
+  "success-completed-sprint": "Sprinten har avklarats!"
 }
