@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 interface Question {
   id: number;
@@ -34,6 +35,7 @@ export default function RapaForm() {
   ];
 
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
@@ -71,6 +73,10 @@ export default function RapaForm() {
   const handleSubmit = () => {
     if (validateForm()) {
       console.log('Submitted answers:', answers);
+      enqueueSnackbar('good-job-on-new-rapa-score', {
+        variant: 'success',
+      });
+      navigate('/');
       // add to db
     } else {
       enqueueSnackbar('missed-questions-error', {

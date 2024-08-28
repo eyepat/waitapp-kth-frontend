@@ -76,30 +76,17 @@ export async function getSprint({
   return data;
 }
 
-export async function postSprint(sprint: Sprint): Promise<Sprint> {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints`;
-  const response: Response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(sprint),
-  });
-  if (!response.ok) throw response;
-  const data = await response.json();
-
-  if (data.message) throw new Error(data.message);
-
-  return data;
-}
-
-export async function putSprint(sprint: Sprint): Promise<Sprint> {
+export async function putSprint(
+  sprint: Sprint,
+  token: string
+): Promise<Sprint> {
   if (sprint.id === undefined) throw new Error('sprint is missing ID');
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprint.id}`;
   const response: Response = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(sprint),
   });
@@ -111,13 +98,17 @@ export async function putSprint(sprint: Sprint): Promise<Sprint> {
   return data;
 }
 
-export async function deleteSprint(sprint: Sprint): Promise<Sprint> {
+export async function deleteSprint(
+  sprint: Sprint,
+  token: string
+): Promise<Sprint> {
   if (sprint.id === undefined) throw new Error('sprint is missing ID');
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/sprints/${sprint.id}`;
   const response: Response = await fetch(url, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   });
   if (!response.ok) throw response;

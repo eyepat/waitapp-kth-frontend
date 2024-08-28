@@ -17,7 +17,7 @@ const TextCardButton = styled(Button)({
   borderRadius: '12px',
   width: '90vw',
   maxWidth: '100%',
-  height: '100px',
+  minHeight: '100px',
   color: 'black',
   backgroundColor: 'white',
   justifyContent: 'space-between',
@@ -36,25 +36,44 @@ const TextCardContent = styled('div')({
   flexGrow: 1,
   marginLeft: '10px',
   textAlign: 'left',
+  maxHeight: '80vh',
+  overflowY: 'auto',
 });
 
 const TextCardTitle = styled(Typography)({
   fontSize: '18px',
-  marginTop: '-2vh',
   fontWeight: 'bold',
+  margin: 0,
+  paddingTop: '5px',
+  paddingBottom: '5px',
+  whiteSpace: 'normal',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 });
 
-const TextCardText = styled(Typography)({
-  fontSize: '16px',
-});
+const TextCardText = styled(Typography)(
+  ({ textLength }: { textLength: number }) => ({
+    fontSize: textLength > 100 ? '14px' : '16px',
+    lineHeight: 1.4,
+    whiteSpace: 'normal',
+    overflow: 'visible',
+    textOverflow: 'clip',
+    display: 'block',
+  })
+);
 
 const TextCard: React.FC<TextCardProps> = ({ title, text, onClick, sx }) => {
   const { t } = useLanguage();
+
+  const textLength = text.length;
+
   return (
-    <TextCardButton onClick={onClick} sx={sx}>
+    <TextCardButton onClick={onClick} sx={sx} style={{ height: 'auto' }}>
       <TextCardContent>
         <TextCardTitle variant="body1">{t(title)}</TextCardTitle>
-        <TextCardText variant="subtitle1">{t(text)}</TextCardText>
+        <TextCardText variant="subtitle1" textLength={textLength}>
+          {t(text)}
+        </TextCardText>
       </TextCardContent>
       <BigArrow />
     </TextCardButton>

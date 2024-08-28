@@ -381,7 +381,7 @@ export default function HealthData() {
           <NavTabs value={selectedTab} onChange={handleChange} centered>
             <NavTab value="overview" label={t('overview')} />
             <NavTab value="sprints" label={t('sprints')} />
-            <NavTab value="tests" label={t('tests')} />
+            <NavTab value="tests" label={t('measurements')} />
           </NavTabs>
           {renderTabContent()}
         </Stack>
