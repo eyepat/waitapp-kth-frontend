@@ -42,7 +42,7 @@ export default function Settings() {
 
   const navigate = useNavigate();
   const { t, language, toggleLanguage } = useLanguage();
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const { sprint } = useSprintContext();
 
   const renderCurrentSprint = () => {
