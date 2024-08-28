@@ -12,32 +12,39 @@ import {
 import { useLanguage } from '../../contexts/LanguageContext';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
+import { useMetrics } from '../../contexts/MetricsContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { useSprintContext } from '../../contexts/SprintContext';
 
 interface Question {
   id: number;
+  score: number;
   key: string;
 }
 
 export default function RapaForm() {
   const rapa1Questions: Question[] = [
-    { id: 1, key: 'rapa1_question1' },
-    { id: 2, key: 'rapa1_question2' },
-    { id: 3, key: 'rapa1_question3' },
-    { id: 4, key: 'rapa1_question4' },
-    { id: 5, key: 'rapa1_question5' },
-    { id: 6, key: 'rapa1_question6' },
-    { id: 7, key: 'rapa1_question7' },
+    { id: 1, score: 1, key: 'rapa1_question1' },
+    { id: 2, score: 2, key: 'rapa1_question2' },
+    { id: 3, score: 3, key: 'rapa1_question3' },
+    { id: 4, score: 4, key: 'rapa1_question4' },
+    { id: 5, score: 4, key: 'rapa1_question5' },
+    { id: 6, score: 5, key: 'rapa1_question6' },
+    { id: 7, score: 5, key: 'rapa1_question7' },
   ];
 
   const rapa2Questions: Question[] = [
-    { id: 1, key: 'rapa2_question1' },
-    { id: 2, key: 'rapa2_question2' },
+    { id: 1, score: 1, key: 'rapa2_question1' },
+    { id: 2, score: 2, key: 'rapa2_question2' },
   ];
 
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const { addMeasurement } = useMetrics();
+  const { user } = useAuth();
+  const { sprint } = useSprintContext();
 
   const handleAnswerChange = (questionId: string, value: string) => {
     setAnswers((prevAnswers) => ({
@@ -70,14 +77,47 @@ export default function RapaForm() {
     return formIsValid;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      console.log('Submitted answers:', answers);
+  // Temporary frontend implementation to calculate rapa
+  const calculateAndSubmitRapaValue = () => {
+    let score = 0;
+    let max = 0;
+    rapa1Questions.forEach((question) => {
+      if (answers[`rapa1-${question.id}`] === 'yes') {
+        if (max < question.score) {
+          max = question.score;
+        }
+      }
+    });
+    score += max;
+    rapa2Questions.forEach((question) => {
+      if (answers[`rapa2-${question.id}`] === 'yes') {
+        score += question.score;
+      }
+    });
+    if (user?.id !== undefined && addMeasurement !== undefined) {
+      addMeasurement('rapa', {
+        value: score,
+        userID: user?.id ?? 0,
+        sprintID: sprint?.id ?? null,
+        timeStamp: null,
+      });
       enqueueSnackbar('good-job-on-new-rapa-score', {
         variant: 'success',
       });
-      navigate('/');
-      // add to db
+      return 0;
+    } else {
+      enqueueSnackbar('could-not-submit-rapa-score', {
+        variant: 'error',
+      });
+    }
+    return 1;
+  };
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      if (!calculateAndSubmitRapaValue()) {
+        navigate('/');
+      }
     } else {
       enqueueSnackbar('missed-questions-error', {
         variant: 'error',
