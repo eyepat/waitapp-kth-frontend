@@ -31,46 +31,50 @@ const YouTubeFrame = styled('iframe')({
   marginTop: '16px',
 });
 
-const getActivity = (
+const getActivities = (
   day: number,
   rapa: number,
   week: number
-): TrainingActivity => {
+): TrainingActivity[] => {
   const key = `${day}-${rapa}-${week}`;
-  return (
-    trainingActivities[key] || {
+  return trainingActivities[key] || [
+    {
       title: 'Rest Day',
       description: 'Take a break and relax.',
       videoUrl: '',
-    }
-  );
+    },
+  ];
 };
 
 const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
   const { t } = useLanguage();
-  const [activity, setActivity] = useState<TrainingActivity | null>(null);
+  const [activities, setActivities] = useState<TrainingActivity[]>([]);
 
   useEffect(() => {
-    const fetchedActivity = getActivity(day, rapa, week);
-    setActivity(fetchedActivity);
+    const fetchedActivities = getActivities(day, rapa, week);
+    setActivities(fetchedActivities);
   }, [day, rapa, week]);
 
   return (
     <SprintCardContainer>
-      <Typography variant="h5" fontWeight="bold">
-        {t(activity?.title || 'Rest Day')}
-      </Typography>
-      <Typography variant="body1" marginTop="8px">
-        {t(activity?.description || 'Take a break and relax.')}
-      </Typography>
-      {activity?.videoUrl && (
-        <YouTubeFrame
-          src={activity.videoUrl}
-          title={activity.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      )}
+      {activities.map((activity, index) => (
+        <div key={index}>
+          <Typography variant="h5" fontWeight="bold">
+            {t(activity.title)}
+          </Typography>
+          <Typography variant="body1" marginTop="8px">
+            {t(activity.description)}
+          </Typography>
+          {activity.videoUrl && (
+            <YouTubeFrame
+              src={activity.videoUrl}
+              title={activity.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          )}
+        </div>
+      ))}
     </SprintCardContainer>
   );
 };
