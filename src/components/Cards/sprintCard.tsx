@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Card } from '@mui/material';
+import { Typography, Card, Checkbox, FormControlLabel } from '@mui/material';
 import { styled } from '@mui/system';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { trainingActivities } from '../../data/trainingActivities';
@@ -50,16 +50,32 @@ const getActivities = (
 const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
   const { t } = useLanguage();
   const [activities, setActivities] = useState<TrainingActivity[]>([]);
+  const [checkedStates, setCheckedStates] = useState<boolean[]>([]);
 
   useEffect(() => {
     const fetchedActivities = getActivities(day, rapa, week);
     setActivities(fetchedActivities);
+
+    // Initialize checked states for each activity
+    setCheckedStates(new Array(fetchedActivities.length).fill(false));
   }, [day, rapa, week]);
+
+  // Update progress bar based on checked activities
+  const progress = Math.round(
+    (checkedStates.filter((state) => state).length / activities.length) * 100
+  );
+
+  // Handle checkbox changes
+  const handleCheckboxChange = (index: number) => {
+    const updatedStates = [...checkedStates];
+    updatedStates[index] = !updatedStates[index];
+    setCheckedStates(updatedStates);
+  };
 
   return (
     <SprintCardContainer>
       {activities.map((activity, index) => (
-        <div key={index}>
+        <div key={index} style={{ marginBottom: '16px' }}>
           <Typography variant="h5" fontWeight="bold">
             {t(activity.title)}
           </Typography>
@@ -74,10 +90,18 @@ const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
               allowFullScreen
             />
           )}
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checkedStates[index]}
+                onChange={() => handleCheckboxChange(index)}
+              />
+            }
+            label={t('Mark as Completed')}
+          />
         </div>
-
       ))}
-       <ProgressBar value={50} />
+      <ProgressBar value={progress} label={`${progress}% Completed`} />
     </SprintCardContainer>
   );
 };

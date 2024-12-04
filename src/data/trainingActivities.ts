@@ -7,6 +7,11 @@ export const trainingActivities: { [key: string]: TrainingActivity[] } = {
     title: 'walking-cycling-swimming-30min-workout',
     description: 'walking-cycling-swimming-30min-workout-desc',
     videoUrl: 'https://www.youtube.com/embed/Mol0lrRBy3g',
+  },
+  {
+    title: 'walking-cycling-swimming-30min-workout',
+    description: 'walking-cycling-swimming-30min-workout-desc',
+    videoUrl: 'https://www.youtube.com/embed/Mol0lrRBy3g',
   },],
 
 
