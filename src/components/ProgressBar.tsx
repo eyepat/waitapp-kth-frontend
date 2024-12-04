@@ -1,41 +1,50 @@
-import React from "react";
+import React from 'react';
+import { Box, LinearProgress, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
-type ProgressBarProps = {
-  percentage: number; // Represents the percentage the bar is filled
-};
+interface ProgressBarProps {
+  value: number; // Progress value (0-100)
+  label?: string; // Optional label for the progress bar
+  color?: string; // Optional color for the progress bar
+}
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ percentage }) => {
-  // Ensure percentage is clamped between 0 and 100
-  const clampedPercentage = Math.min(100, Math.max(0, percentage));
+const ProgressBarContainer = styled(Box)({
+  display: 'flex',
+  flexDirection: 'row', // Horizontal layout
+  alignItems: 'center',
+  width: '100%',
+});
 
-  // Define inline styles
-  const containerStyle: React.CSSProperties = {
-    width: "30px", // Width of the progress bar
-    height: "300px", // Height of the progress bar
-    display: "flex",
-    flexDirection: "column-reverse", // Fills the bar from bottom to top
-    backgroundColor: "lightgray",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    overflow: "hidden",
-  };
+const ProgressLabel = styled(Typography)(({ theme }) => ({
+  marginRight: theme.spacing(2),
+  fontWeight: 'bold',
+}));
 
-  const filledStyle: React.CSSProperties = {
-    backgroundColor: "lightblue",
-    height: `${clampedPercentage}%`,
-    transition: "height 0.3s ease", // Smooth transition for filling the bar
-  };
+const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  flexGrow: 1,
+  height: '10px',
+  borderRadius: '5px',
+  backgroundColor: theme.palette.grey[300],
+}));
 
-  const emptyStyle: React.CSSProperties = {
-    backgroundColor: "gray",
-    height: `${100 - clampedPercentage}%`,
-  };
-
+const ProgressBar: React.FC<ProgressBarProps> = ({ value, label, color }) => {
   return (
-    <div style={containerStyle}>
-      <div style={filledStyle}></div>
-      <div style={emptyStyle}></div>
-    </div>
+    <ProgressBarContainer>
+      {label && (
+        <ProgressLabel variant="body2">
+          {label}
+        </ProgressLabel>
+      )}
+      <StyledLinearProgress
+        variant="determinate"
+        value={value}
+        sx={{
+          '& .MuiLinearProgress-bar': {
+            backgroundColor: color || 'primary.main',
+          },
+        }}
+      />
+    </ProgressBarContainer>
   );
 };
 

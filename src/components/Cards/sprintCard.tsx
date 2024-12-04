@@ -77,7 +77,7 @@ const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
         </div>
 
       ))}
-      <ProgressBar percentage={65} />
+       <ProgressBar value={50} />
     </SprintCardContainer>
   );
 };
