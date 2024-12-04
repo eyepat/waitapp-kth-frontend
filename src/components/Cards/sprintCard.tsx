@@ -53,7 +53,7 @@ const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
   const [checkedStates, setCheckedStates] = useState<boolean[]>([]);
 
   useEffect(() => {
-    const fetchedActivities = getActivities(day, rapa, week);
+    const fetchedActivities = getActivities(3, rapa, week);
     setActivities(fetchedActivities);
 
     // Initialize checked states for each activity

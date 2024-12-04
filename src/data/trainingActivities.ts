@@ -7,11 +7,6 @@ export const trainingActivities: { [key: string]: TrainingActivity[] } = {
     title: 'walking-cycling-swimming-30min-workout',
     description: 'walking-cycling-swimming-30min-workout-desc',
     videoUrl: 'https://www.youtube.com/embed/Mol0lrRBy3g',
-  },
-  {
-    title: 'walking-cycling-swimming-30min-workout',
-    description: 'walking-cycling-swimming-30min-workout-desc',
-    videoUrl: 'https://www.youtube.com/embed/Mol0lrRBy3g',
   },],
 
 
@@ -21,7 +16,22 @@ export const trainingActivities: { [key: string]: TrainingActivity[] } = {
     videoUrl: 'https://www.youtube.com/embed/TcDo4kXLDtQ',
   }],
   '3-1-1': [{
-    title: 'simple-three-workouts',
+    title: 'exercise-1',
+    description: 'simple-three-workouts-desc',
+    videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
+  },
+  {
+    title: 'exercise-2',
+    description: 'simple-three-workouts-desc',
+    videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
+  },
+  {
+    title: 'exercise-3',
+    description: 'simple-three-workouts-desc',
+    videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
+  },
+  {
+    title: 'exercise-4',
     description: 'simple-three-workouts-desc',
     videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
   }],

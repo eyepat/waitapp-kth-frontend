@@ -254,7 +254,7 @@
   "resting-workout": "Vilodag",
   "resting-workout-desc": "bra jobbat! Du förtjänar en vilodag",
   "simple-three-workouts": "Tre enkla träningspass",
-  "simple-three-workouts-desc": "följ den enkla träningsvideon nedan",
+  "simple-three-workouts-desc": "följ övningen på videon, utför 2 set med 12 prepetitioner per set ",
   "strength-workout": "Styrketräning",
   "strength-workout-desc": "följ styrketräningsvideon nedan",
   "walk-into-fast-walking-workout": "Gå sedan raskare gång",
@@ -275,5 +275,8 @@
   "congratulations-on-completing-sprint": "Bra jobbat under denna sprint!",
   "sprint-results": "Här är dina resultat",
   "end-sprint": "Klicka här för att avsluta sprinten",
-  "success-completed-sprint": "Sprinten har avklarats!"
+  "success-completed-sprint": "Sprinten har avklarats!",
+  "exercise-1": "Övning 1",
+  "exercise-2": "Övning 2",
+  "exercise-3": "Övning 3"
 }
