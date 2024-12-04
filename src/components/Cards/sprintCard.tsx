@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { trainingActivities } from '../../data/trainingActivities';
 import { TrainingActivity } from '../../types';
+import ProgressBar from '../ProgressBar';
 
 interface SprintCardProps {
   day: number;
@@ -74,7 +75,9 @@ const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
             />
           )}
         </div>
+
       ))}
+      <ProgressBar percentage={65} />
     </SprintCardContainer>
   );
 };
