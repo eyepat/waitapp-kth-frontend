@@ -274,5 +274,8 @@
   "congratulations-on-completing-sprint": "Congratulations on completing the sprint!",
   "sprint-results": "Here are your results",
   "end-sprint": "Click here to end your sprint",
-  "success-completed-sprint": "You have successfully completed the sprint"
+  "success-completed-sprint": "You have successfully completed the sprint",
+  "exercise-1": "Exercise 1",
+  "exercise-2": "Exercise 2",
+  "exercise-3": "Exercise 3"
 }
