@@ -77,17 +77,17 @@ export const trainingActivities: { [key: string]: TrainingActivity[] } = {
   '3-1-2': [{
     title: 'exercise-1',
     description: 'simple-three-workouts-desc',
-    videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
+    videoUrl: 'https://youtube.com/shorts/G0N4Cv7XB1c',
   },
   {
     title: 'exercise-2',
     description: 'simple-three-workouts-desc',
-    videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
+    videoUrl: 'https://youtube.com/shorts/qW3Zr1VAJYE',
   },
   {
     title: 'exercise-3',
     description: 'simple-three-workouts-desc',
-    videoUrl: 'https://www.youtube.com/embed/JlyTM_hhMkw',
+    videoUrl: 'https://youtube.com/shorts/-1qQjeHZEfY',
   },],
 
   '4-1-2': [{
