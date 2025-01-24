@@ -279,7 +279,7 @@ export default function Sprint() {
                 <SprintCard
                   day={currentDay % 7 === 0 ? 7 : currentDay % 7}
                   rapa={1}
-                  week={currentWeek}
+                  week={1}
                 />
               </Stack>
               <Stack
