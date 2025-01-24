@@ -278,8 +278,10 @@ export default function Sprint() {
               <Stack direction="column">
                 <SprintCard
                   day={currentDay % 7 === 0 ? 7 : currentDay % 7}
-                  rapa={1}
+                  //day={3}   //for testing
+                  rapa={1}    //for testing
                   week={currentWeek}
+                  //week={5}  //for testing
                 />
               </Stack>
               <Stack

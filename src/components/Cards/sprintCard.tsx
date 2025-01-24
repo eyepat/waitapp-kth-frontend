@@ -38,14 +38,18 @@ const getActivities = (
   week: number
 ): TrainingActivity[] => {
   const key = `${day}-${rapa}-${week}`;
-  return trainingActivities[key] || [
-    {
-      title: 'Rest Day',
-      description: 'Take a break and relax.',
-      videoUrl: '',
-    },
-  ];
+  console.log(trainingActivities[key]);
+  return (
+    trainingActivities[key] || [
+      {
+        title: 'Rest Day',
+        description: 'Take a break and relax.',
+        videoUrl: '',
+      },
+    ]
+  );
 };
+
 
 const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
   const { t } = useLanguage();
@@ -53,7 +57,7 @@ const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
   const [checkedStates, setCheckedStates] = useState<boolean[]>([]);
 
   useEffect(() => {
-    const fetchedActivities = getActivities(3, rapa, week);
+    const fetchedActivities = getActivities(day, rapa, week);
     setActivities(fetchedActivities);
 
     // Initialize checked states for each activity
