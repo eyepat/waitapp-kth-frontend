@@ -104,7 +104,17 @@ const generateTrainingActivities = () => {
           } else if (day === 3 || day === 6) {
             activities[key] = [...templates.exercises4];
           }
-      }
+      } else if (week >= 17) {
+        if (day == 1 || day === 4){
+          activities[key] = [templates.cardioAndStrength];
+        } else if (day === 5 || day === 7) {
+          activities[key] = [templates.walkingCyclingSwimming];
+        } else if (day === 2) {
+          activities[key] = [templates.resting];
+        } else if (day === 3) {
+          activities[key] = [...templates.exercises4];
+        }
+      } 
     }
   }
 }
