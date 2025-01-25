@@ -65,7 +65,7 @@ const templates = {
 const generateTrainingActivities = () => {
   const activities: { [key: string]: TrainingActivity[] } = {};
 
-  for (let week = 1; week <= 8; week++) {
+  for (let week = 1; week <= 26; week++) {
     for (let day = 1; day <= 7; day++) {
       for (let rapa = 1; rapa <= 4; rapa++) {
         const key = `${day}-${rapa}-${week}`;
