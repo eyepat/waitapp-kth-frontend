@@ -10,9 +10,9 @@ const templates = {
   resting: {
     title: 'resting-workout',
     description: 'resting-workout-desc',
-    videoUrl: 'https://www.youtube.com/embed/TcDo4kXLDtQ',
+    videoUrl: '',
   },
-  exercisesV1To4: [
+  exercises3: [
     {
       title: 'exercise-1',
       description: 'simple-three-workouts-desc',
@@ -29,7 +29,7 @@ const templates = {
       videoUrl: 'https://www.youtube.com/embed/179xw7lGbPc',
     },
   ],
-  exercisesV5To8: [
+  exercises4: [
     {
       title: 'exercise-1',
       description: 'simple-three-workouts-desc',
@@ -51,7 +51,15 @@ const templates = {
       videoUrl: 'https://www.youtube.com/embed/179xw7lGbPc',
     },
   ],
+  cardioAndStrength: 
+    {
+      title: 'exercise-1',
+      description: 'cardio-and-strength',
+      videoUrl: '',
+    },
+  
 };
+
 
 // Utility function to generate the object
 const generateTrainingActivities = () => {
@@ -68,7 +76,7 @@ const generateTrainingActivities = () => {
           } else if (day === 2 || day === 5) {
             activities[key] = [templates.resting];
           } else if (day === 3 || day === 6) {
-            activities[key] = [...templates.exercisesV1To4];
+            activities[key] = [...templates.exercises3];
           }
         } else if (week >= 5 && week <= 8) {
           if (day === 1 || day === 4) {
@@ -76,12 +84,30 @@ const generateTrainingActivities = () => {
           } else if (day === 2 || day === 5 || day === 7) {
             activities[key] = [templates.resting];
           } else if (day === 3 || day === 6) {
-            activities[key] = [...templates.exercisesV5To8];
+            activities[key] = [...templates.exercises4];
           }
-        }
+        } else if (week >= 9 && week <= 12) {
+          if (day === 1 || day === 4 || day === 7) {
+            activities[key] = [templates.walkingCyclingSwimming];
+          } else if (day === 2 || day === 5) {
+            activities[key] = [templates.resting];
+          } else if (day === 3 || day === 6) {
+            activities[key] = [...templates.exercises4];
+          }
+        } else if (week >= 12 && week <= 16) {
+          if (day == 1){
+            activities[key] = [templates.cardioAndStrength];
+          } else if (day === 4 || day === 7) {
+            activities[key] = [templates.walkingCyclingSwimming];
+          } else if (day === 2 || day === 5) {
+            activities[key] = [templates.resting];
+          } else if (day === 3 || day === 6) {
+            activities[key] = [...templates.exercises4];
+          }
       }
     }
   }
+}
 
   return activities;
 };
