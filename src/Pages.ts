@@ -1,7 +1,6 @@
 import GeneralQuestions from './pages/general-questions/GeneralQuestions';
 import HealthData from './pages/health-data/HealthData';
 import Home from './pages/home/Home';
-import Login from './pages/login/Login';
 import Sprint from './pages/sprint/Sprint';
 import Register from './pages/register/Register';
 import { Page } from './types/page';
@@ -20,6 +19,7 @@ import Security from './pages/settings/Security';
 import Forms from './pages/settings/Forms';
 import Rapa from './pages/forms/Rapa';
 import RapaForm from './pages/forms/RapaForm';
+import KCLogin from './pages/login/KCLogin';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -66,7 +66,7 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.NOT_LOGGED_IN,
     label: 'login',
     isMenu: false,
-    component: Login,
+    component: KCLogin,
   },
   {
     to: '/register',

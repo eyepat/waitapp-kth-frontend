@@ -1,4 +1,9 @@
-import { Navigate, Routes as RRoutes, Route } from 'react-router-dom';
+import {
+  Navigate,
+  Routes as RRoutes,
+  Route,
+  useNavigate,
+} from 'react-router-dom';
 import { AuthenticationLevels, pages } from '../Pages';
 import { Page } from '../types/page';
 import NotFound from '../pages/NotFound';
@@ -6,22 +11,27 @@ import Header from '../components/Headers/Header';
 import { Navigation } from '../components/Navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadContext';
+import { useKeycloak } from '@react-keycloak/web';
+import { useEffect } from 'react';
 
 export function Routes() {
-  const { user, token } = useAuth();
-  const authLevel = () => {
-    return user?.authLevel != undefined
-      ? user.authLevel
-      : AuthenticationLevels.NOT_LOGGED_IN;
-  };
+  const { authLevel, user } = useAuth();
+  const { keycloak, initialized } = useKeycloak();
   const { loading } = useLoading();
-  const isLoadingIn = (user === undefined && token !== undefined) || loading;
+  const navigate = useNavigate();
+  const isLoadingIn =
+    !initialized ||
+    (user === undefined &&
+      authLevel === AuthenticationLevels.NOT_LOGGED_IN &&
+      keycloak.authenticated) ||
+    loading;
+
   return (
     <RRoutes>
       {pages.map((page: Page) =>
         (Array.isArray(page.to) ? page.to : [page.to]).map((to) =>
           page.component &&
-          (page.permissionLevel <= authLevel() || isLoadingIn) ? (
+          (page.permissionLevel <= authLevel || isLoadingIn) ? (
             <Route
               key={to}
               path={page.path ? page.path : to + (page.tabs ? '/:tab?' : '')}

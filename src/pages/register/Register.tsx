@@ -16,10 +16,11 @@ import { ClosedEye, Mail, OpenEye } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { enqueueSnackbar } from 'notistack';
 import { useAuth } from '../../contexts/AuthContext';
+import { AuthenticationLevels } from '../../Pages';
 
 export default function Register() {
   const { t } = useLanguage();
-  const { user, register } = useAuth();
+  const { authLevel } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
@@ -38,10 +39,10 @@ export default function Register() {
     setShowConfirmPassword(!showConfirmPassword);
 
   useEffect(() => {
-    if (user?.authLevel) {
+    if (authLevel === AuthenticationLevels.NO_DATA_PROVIDED) {
       navigate('/general-questions');
     }
-  }, [user]);
+  }, [authLevel]);
 
   const checkEmail = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -75,10 +76,10 @@ export default function Register() {
       //alert('Invalid registration details, please correct the errors.');
       return;
     }
-    register({
+    /*register({
       email: email,
       password: password,
-    });
+    });*/
     //navigate('/general-questions');
   };
 

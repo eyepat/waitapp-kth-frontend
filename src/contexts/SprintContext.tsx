@@ -1,22 +1,18 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useLoading } from './LoadContext';
-import {
-  createNewSprint,
-  putSprint,
-  getSprint,
-  getAllSprintsByUserID,
-} from '../api/sprint';
 import { useAuth } from './AuthContext';
 import { AuthenticationLevels } from '../Pages';
 import { useLanguage } from './LanguageContext';
 import dayjs from 'dayjs';
+import { useResource } from './ResourceContext';
+import { SprintDTO } from '../api/BaseClient';
 
 interface SprintContextType {
-  sprint?: Sprint;
-  sprints?: Sprint[];
-  createSprintAndUpdateUser: (sprint: Sprint) => void;
-  updateSprint: (sprint: Sprint) => void;
+  sprint?: SprintDTO;
+  sprints?: SprintDTO[];
+  createSprintAndUpdateUser: (sprint: SprintDTO) => void;
+  updateSprint: (sprint: SprintDTO) => void;
   completeSprint: () => void;
 }
 
@@ -31,43 +27,47 @@ export const useSprintContext = () => {
 };
 
 export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currentSprint, setCurrentSprint] = useState<Sprint | undefined>(
+  const [currentSprint, setCurrentSprint] = useState<SprintDTO | undefined>(
     undefined
   );
-  const [sprints, setSprints] = useState<Sprint[] | undefined>(undefined);
+  const [sprints, setSprints] = useState<SprintDTO[] | undefined>(undefined);
   const { loading, setLoading } = useLoading();
   const { enqueueSnackbar } = useSnackbar();
-  const { user, token } = useAuth();
+  const { authLevel } = useAuth();
   const { t } = useLanguage();
+  const {
+    ready,
+    getLatestActiveSprint,
+    getSprints,
+    createSprint,
+    updateSprint,
+  } = useResource();
 
   useEffect(() => {
-    if (
-      token != undefined &&
-      user?.authLevel != undefined &&
-      user?.authLevel >= AuthenticationLevels.LOGGED_IN &&
-      user?.id != undefined
-    ) {
-      getSprint({ token, active: true })
+    if (authLevel >= AuthenticationLevels.LOGGED_IN && ready) {
+      getLatestActiveSprint()
         .then((sprint) => {
           setCurrentSprint(sprint);
         })
         .catch((_) => {});
-      getAllSprintsByUserID(user.id).then((sprints) => {
+      getSprints().then((sprints) => {
         setSprints(sprints);
       });
     }
-  }, [user, token]);
+  }, [authLevel, ready]);
 
-  const createSprintAndUpdateUser = async (sprint: Sprint) => {
-    if (loading || sprint?.userID == undefined || token == undefined) return;
+  const createSprintAndUpdateUser = async (sprint: SprintDTO) => {
+    if (loading || sprint?.userID == undefined) return;
     try {
       setLoading(true);
-      const newSprint: Sprint = await createNewSprint(sprint, token);
-      setCurrentSprint(newSprint);
+      const newSprint = await createSprint(sprint);
+      if (newSprint !== undefined) {
+        setCurrentSprint(newSprint);
 
-      enqueueSnackbar(t('success-post'), {
-        variant: 'success',
-      });
+        enqueueSnackbar(t('success-post'), {
+          variant: 'success',
+        });
+      }
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {
@@ -78,16 +78,19 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const updateSprintFunc = async (sprint: Sprint) => {
-    if (loading || sprint?.userID == undefined) return;
+  const updateSprintFunc = async (sprint: SprintDTO) => {
+    if ((loading || sprint?.userID == undefined, sprint.id === undefined))
+      return;
     try {
       setLoading(true);
-      const newSprint: Sprint = await putSprint(sprint, token ?? '');
-      setCurrentSprint(newSprint);
+      const newSprint = await updateSprint(sprint.id!, sprint);
+      if (newSprint !== undefined) {
+        setCurrentSprint(newSprint);
 
-      enqueueSnackbar(t('success-put'), {
-        variant: 'success',
-      });
+        enqueueSnackbar(t('success-put'), {
+          variant: 'success',
+        });
+      }
     } catch (error) {
       if (error instanceof Error)
         enqueueSnackbar(error.message, {
@@ -102,12 +105,12 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     if (loading || currentSprint?.userID == undefined) return;
     try {
       setLoading(true);
-      const newSprint: Sprint = {
+      const newSprint: SprintDTO = {
         ...currentSprint,
         completed: true,
         endDate: dayjs().toISOString(),
       };
-      await putSprint(newSprint, token ?? '');
+      await updateSprint(newSprint.id!, newSprint);
       setCurrentSprint(undefined);
 
       enqueueSnackbar(t('success-completed-sprint'), {

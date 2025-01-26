@@ -27,6 +27,8 @@ import underConstruction from './assets/popup/under-construction.svg';
 import { LoadingProvider } from './contexts/LoadContext';
 import BloodPressureTest from './assets/tests/bloodpressure.svg';
 import 'dayjs/locale/en-gb';
+import { ResourceProvider } from './contexts/ResourceContext';
+import { BaseAPIContextProvider } from './contexts/BaseAPIContext';
 
 export default function App() {
   preloadImages([
@@ -73,13 +75,17 @@ export default function App() {
                   </IconButton>
                 )}
               >
-                <AuthProvider>
-                  <SprintProvider>
-                    <MetricsProvider>
-                      <Routes />
-                    </MetricsProvider>
-                  </SprintProvider>
-                </AuthProvider>
+                <BaseAPIContextProvider>
+                  <ResourceProvider>
+                    <AuthProvider>
+                      <SprintProvider>
+                        <MetricsProvider>
+                          <Routes />
+                        </MetricsProvider>
+                      </SprintProvider>
+                    </AuthProvider>
+                  </ResourceProvider>
+                </BaseAPIContextProvider>
               </SnackbarProvider>
             </DeviceContextProvider>
           </LocalizationProvider>
