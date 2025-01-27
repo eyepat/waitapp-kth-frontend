@@ -4,9 +4,10 @@ import App from './App.tsx';
 import './index.css';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import { keycloak } from './config/keycloak.ts';
+import { AuthContextWrapperProvider } from './contexts/KeycloakContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
-  <ReactKeycloakProvider
+  <AuthContextWrapperProvider
     authClient={keycloak}
     initOptions={{
       checkLoginIframe: true,
@@ -16,5 +17,5 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <App />
     </StrictMode>
-  </ReactKeycloakProvider>
+  </AuthContextWrapperProvider>
 );

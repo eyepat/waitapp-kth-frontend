@@ -7,11 +7,14 @@ import { Navigation } from '../components/Navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadContext';
 import { useKeycloak } from '@react-keycloak/web';
+import { useKeycloakStatus } from '../contexts/KeycloakContext';
+import Error from '../pages/Error';
 
 export function Routes() {
   const { authLevel, user } = useAuth();
   const { keycloak, initialized } = useKeycloak();
   const { loading } = useLoading();
+  const { error } = useKeycloakStatus();
   const isLoadingIn =
     !initialized ||
     (user === undefined &&
@@ -71,6 +74,7 @@ export function Routes() {
           )
         )
       )}
+      {error && <Route path="*" Component={() => <Error error={error} />} />}
       {!loading && <Route path={'*'} Component={NotFound} />}
     </RRoutes>
   );

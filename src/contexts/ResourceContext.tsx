@@ -10,6 +10,8 @@ import { OnboardingDTO, SprintDTO, UserDTO } from '../api/BaseClient';
 
 interface ResourceContextType {
   ready: boolean;
+  self: UserDTO | undefined;
+  clearSelf: () => void;
   getSelf: () => Promise<UserDTO | undefined>;
   onboard: (onboarding: OnboardingDTO) => Promise<UserDTO | undefined>;
   getSprints: () => Promise<SprintDTO[]>;
@@ -51,6 +53,7 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
 }) => {
   const { api, apiToken } = useBaseAPIContext();
   const [ready, setReady] = useState<boolean>(false);
+  const [self, setSelf] = useState<UserDTO | undefined>(undefined);
   const [userCache, setUserCache] = useState<Map<string, Cached<UserDTO>>>(
     new Map()
   );
@@ -86,6 +89,7 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     const expiry = new Date();
     expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
 
+    setSelf(user);
     setUserCache((prev) => {
       const updated = new Map(prev);
       updated.set('__self__', { data: user, expiry });
@@ -112,6 +116,7 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     const expiry = new Date();
     expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
 
+    setSelf(user);
     setUserCache((prev) => {
       const updated = new Map(prev);
       updated.set('__self__', { data: user, expiry });
@@ -293,6 +298,8 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     <ResourceContext.Provider
       value={{
         ready,
+        self,
+        clearSelf: () => setSelf(undefined),
         getSelf,
         onboard,
         getSprints,

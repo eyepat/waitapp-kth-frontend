@@ -17,8 +17,8 @@ export default function FoodHabits() {
     const sprint: SprintDTO = {
       userID: -1,
       sprintType: 'ALCOHOL' as SprintType,
-      startDate: dayjs().toISOString(),
-      endDate: dayjs().add(7, 'days').toISOString(),
+      startDate: dayjs().format('YYYY-MM-DD'),
+      endDate: dayjs().add(7, 'days').format('YYYY-MM-DD'),
       completed: false,
       level: 'NORMAL' as Level,
       score: 0,

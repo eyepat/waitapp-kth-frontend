@@ -27,14 +27,13 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { keycloak, initialized } = useKeycloak();
   const { loading, setLoading } = useLoading();
-  const { ready, getSelf, onboard } = useResource();
-  const [user, setUser] = useState<UserDTO | undefined>(undefined);
+  const { ready, getSelf, onboard, self, clearSelf } = useResource();
   const [authLevel, setAuthLevel] = useState<AuthenticationLevels>(
     AuthenticationLevels.NOT_LOGGED_IN
   );
 
   const logoutFunc = () => {
-    setUser(undefined);
+    clearSelf();
     keycloak?.logout();
   };
 
@@ -61,13 +60,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    if (initialized && keycloak.authenticated && user === undefined && ready) {
+    if (initialized && keycloak.authenticated && self === undefined && ready) {
       getSelf()
         .then((e) => {
           if (e === undefined) {
             setAuthLevel(AuthenticationLevels.NO_DATA_PROVIDED);
           } else {
-            setUser(e);
             setAuthLevel(
               e.onboarded === true
                 ? AuthenticationLevels.LOGGED_IN
@@ -79,11 +77,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setAuthLevel(AuthenticationLevels.NO_DATA_PROVIDED);
         });
     }
-  }, [keycloak, initialized, user, ready]);
+  }, [keycloak, initialized, ready]);
 
   useEffect(() => {
-    if (user) {
-      if (user.onboarded) {
+    if (self) {
+      if (self.onboarded) {
         setAuthLevel(AuthenticationLevels.LOGGED_IN);
       } else {
         setAuthLevel(AuthenticationLevels.NO_DATA_PROVIDED);
@@ -93,11 +91,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } else {
       setAuthLevel(AuthenticationLevels.NOT_LOGGED_IN);
     }
-  }, [user]);
+  }, [self]);
 
   const value: AuthContextType = {
     authLevel,
-    user,
+    user: self,
     logout: logoutFunc,
     onboarding,
   };
