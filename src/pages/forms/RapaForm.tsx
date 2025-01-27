@@ -12,7 +12,6 @@ import {
 import { useLanguage } from '../../contexts/LanguageContext';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { useMetrics } from '../../contexts/MetricsContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 
@@ -42,9 +41,12 @@ export default function RapaForm() {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-  const { addMeasurement } = useMetrics();
   const { user } = useAuth();
   const { sprint } = useSprintContext();
+
+  const addMeasurement = (type: string, obj: any) => {
+    console.log('todo', type, obj);
+  };
 
   const handleAnswerChange = (questionId: string, value: string) => {
     setAnswers((prevAnswers) => ({

@@ -1,9 +1,4 @@
-import {
-  Navigate,
-  Routes as RRoutes,
-  Route,
-  useNavigate,
-} from 'react-router-dom';
+import { Navigate, Routes as RRoutes, Route } from 'react-router-dom';
 import { AuthenticationLevels, pages } from '../Pages';
 import { Page } from '../types/page';
 import NotFound from '../pages/NotFound';
@@ -12,13 +7,11 @@ import { Navigation } from '../components/Navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadContext';
 import { useKeycloak } from '@react-keycloak/web';
-import { useEffect } from 'react';
 
 export function Routes() {
   const { authLevel, user } = useAuth();
   const { keycloak, initialized } = useKeycloak();
   const { loading } = useLoading();
-  const navigate = useNavigate();
   const isLoadingIn =
     !initialized ||
     (user === undefined &&

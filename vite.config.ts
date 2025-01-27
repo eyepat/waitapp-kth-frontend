@@ -4,5 +4,11 @@ import react from '@vitejs/plugin-react';
 /** @type {import('vite').UserConfig} */
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', { target: '18' }]],
+      },
+    }),
+  ],
 });

@@ -187,7 +187,7 @@ export default function Sprint() {
         sx={{ position: 'relative', width: '100%' }}
       >
         <Typography variant="h5" fontWeight="bold" sx={{ textAlign: 'center' }}>
-          {`${sprint ? getSprintTypeText(sprint.type).toUpperCase() : 'undefined'}`}
+          {`${sprint ? getSprintTypeText(sprint.sprintType).toUpperCase() : 'undefined'}`}
         </Typography>
         <Box
           sx={{
@@ -279,7 +279,7 @@ export default function Sprint() {
                 <SprintCard
                   day={currentDay % 7 === 0 ? 7 : currentDay % 7}
                   //day={3}   //for testing
-                  rapa={1}    //for testing
+                  rapa={1} //for testing
                   week={currentWeek}
                   //week={18}  //for testing
                 />

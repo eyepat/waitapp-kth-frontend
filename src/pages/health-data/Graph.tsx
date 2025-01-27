@@ -10,7 +10,6 @@ import {
 } from 'recharts';
 import { useLanguage } from '../../contexts/LanguageContext';
 import dayjs from 'dayjs';
-import { useMetrics } from '../../contexts/MetricsContext';
 
 export enum GraphMode {
   Systolic,
@@ -24,7 +23,7 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = ({ mode }) => {
   const { t } = useLanguage();
-  const { bloodPressure, weight } = useMetrics();
+  const { bloodPressure, weight } = { bloodPressure: [], weight: [] };
   let data: Metric[] | undefined;
   const key =
     mode === GraphMode.Weight

@@ -18,7 +18,6 @@ import NavTabs from '../../components/TabMenu/NavTabs';
 import { ArrowRight } from '../../utils/Icons';
 import MenuButton from '../../components/MenuButton';
 import { AddCircleOutline, ExpandMore } from '@mui/icons-material';
-import { useMetrics } from '../../contexts/MetricsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import theme from '../../components/Theme';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
@@ -31,7 +30,11 @@ export default function HealthData() {
   const { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
   const [openWip, setOpenWip] = useState(false);
-  const { getLatestByType } = useMetrics();
+
+  const getLatestByType = (type: string): undefined | { value: any } => {
+    console.log('todo', type);
+    return undefined;
+  };
 
   function handleOpenWip() {
     setOpenWip(true);

@@ -12,9 +12,10 @@ RUN ./docker-envs.ts .env.production && \
     ./nginx-entrypoint.ts && \
     rm .env.development
 
-COPY .eslintrc.cjs index.html tsconfig*.json vite.config.ts ./
+COPY .eslintrc.cjs prod.index.html tsconfig*.json vite.config.ts ./
 COPY src src
 COPY public public
+RUN mv prod.index.html index.html
 
 RUN bun run build
 

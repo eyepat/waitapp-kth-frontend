@@ -6,7 +6,6 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import theme from '../../components/Theme';
 import dayjs from 'dayjs';
 import { useAuth } from '../../contexts/AuthContext';
-import { useMetrics } from '../../contexts/MetricsContext';
 import Todo from './Todo';
 
 const Home: React.FC = () => {
@@ -16,7 +15,11 @@ const Home: React.FC = () => {
   const [pulse, setPulse] = useState<number>(0);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { getLatestByType } = useMetrics();
+
+  const getLatestByType = (type: string): undefined | { value: any } => {
+    console.log('todo', type);
+    return undefined;
+  };
 
   // Added the useEffect below to prevent ts checking from failing since the
   // set functions arn´t used

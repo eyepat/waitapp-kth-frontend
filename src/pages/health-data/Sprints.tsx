@@ -56,7 +56,7 @@ export default function Sprints() {
         <>
           <TextCard
             title={
-              getSprintTypeText(sprint.type) +
+              getSprintTypeText(sprint.sprintType) +
               ' ' +
               t('sprint') +
               ' ' +
@@ -83,7 +83,7 @@ export default function Sprints() {
             sprint_.id !== sprint?.id && (
               <TextCard
                 title={
-                  getSprintTypeText(sprint_.type) +
+                  getSprintTypeText(sprint_.sprintType) +
                   ' ' +
                   t('sprint') +
                   ' ' +

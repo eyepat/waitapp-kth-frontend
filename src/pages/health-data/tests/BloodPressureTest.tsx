@@ -15,7 +15,6 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { useState } from 'react';
 import { Svg } from '../../../utils/Icons';
 import theme from '../../../components/Theme';
-import { useMetrics } from '../../../contexts/MetricsContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
@@ -63,8 +62,11 @@ export default function BloodPressureTest() {
   const [open, setOpen] = useState(false);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { addMeasurement } = useMetrics();
   const { sprint } = useSprintContext();
+
+  const addMeasurement = (type: string, obj: any) => {
+    console.log('todo', type, obj);
+  };
 
   function handleHowToMeasure(): void {
     setOpen(true);

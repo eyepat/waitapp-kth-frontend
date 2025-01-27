@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { useLoading } from './LoadContext';
-import { RegisterInfo } from '../types/registerInfo';
 import { useKeycloak } from '@react-keycloak/web';
 import { useResource } from './ResourceContext';
 import { OnboardingDTO, UserDTO } from '../api/BaseClient';

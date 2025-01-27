@@ -50,7 +50,6 @@ const getActivities = (
   );
 };
 
-
 const SprintCard: React.FC<SprintCardProps> = ({ day, rapa, week }) => {
   const { t } = useLanguage();
   const [activities, setActivities] = useState<TrainingActivity[]>([]);

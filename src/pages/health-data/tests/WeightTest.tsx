@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import theme from '../../../components/Theme';
-import { useMetrics } from '../../../contexts/MetricsContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
@@ -44,8 +43,11 @@ export default function WeightTest() {
   const { user } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const { sprint } = useSprintContext();
-  const { addMeasurement } = useMetrics();
   const [weight, setWeight] = useState<string>('');
+
+  const addMeasurement = (type: string, obj: any) => {
+    console.log('todo', type, obj);
+  };
 
   const { t } = useLanguage();
 

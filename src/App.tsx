@@ -3,7 +3,6 @@ import { Routes } from './auth/Routes';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { SprintProvider } from './contexts/SprintContext';
-import { MetricsProvider } from './contexts/MetricsContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DeviceContextProvider } from './contexts/DeviceContext';
@@ -79,9 +78,7 @@ export default function App() {
                   <ResourceProvider>
                     <AuthProvider>
                       <SprintProvider>
-                        <MetricsProvider>
-                          <Routes />
-                        </MetricsProvider>
+                        <Routes />
                       </SprintProvider>
                     </AuthProvider>
                   </ResourceProvider>

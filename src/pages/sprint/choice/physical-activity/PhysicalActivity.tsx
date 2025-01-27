@@ -9,6 +9,7 @@ import theme from '../../../../components/Theme';
 import { ImageHeader } from '../../../../components/Headers/ImageHeader';
 import { useSprintContext } from '../../../../contexts/SprintContext';
 import dayjs from 'dayjs';
+import { Level, SprintDTO, SprintType } from '../../../../api/BaseClient';
 
 export default function FoodHabits() {
   const { t } = useLanguage();
@@ -17,13 +18,13 @@ export default function FoodHabits() {
   const { createSprintAndUpdateUser } = useSprintContext();
 
   const handleSprintStart = () => {
-    const sprint: Sprint = {
+    const sprint: SprintDTO = {
       userID: -1,
-      type: 'PHYSICAL',
+      sprintType: 'PHYSICAL' as SprintType,
       startDate: dayjs().toISOString(),
       endDate: dayjs().add(7, 'days').toISOString(),
       completed: false,
-      level: 'NORMAL',
+      level: 'NORMAL' as Level,
       score: 0,
     };
 

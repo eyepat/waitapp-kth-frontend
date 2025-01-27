@@ -24,7 +24,6 @@ import { AuthenticationLevels } from '../../Pages';
 import dayjs, { Dayjs } from 'dayjs';
 import { z, ZodError } from 'zod';
 import Checkbox from '@mui/material/Checkbox';
-import { useMetrics } from '../../contexts/MetricsContext';
 import { Gender, OnboardingDTO } from '../../api/BaseClient';
 import { useKeycloak } from '@react-keycloak/web';
 
@@ -111,7 +110,10 @@ export default function GeneralQuestions() {
     setSelectedAblationDate(value);
   };
   const [isAblationDateKnown, setIsAblationDateKnown] = useState(true);
-  const { update } = useMetrics();
+
+  const update = () => {
+    console.log('todo');
+  };
 
   useEffect(() => {
     if (

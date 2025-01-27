@@ -30,11 +30,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
 const ProgressBar: React.FC<ProgressBarProps> = ({ value, label, color }) => {
   return (
     <ProgressBarContainer>
-      {label && (
-        <ProgressLabel variant="body2">
-          {label}
-        </ProgressLabel>
-      )}
+      {label && <ProgressLabel variant="body2">{label}</ProgressLabel>}
       <StyledLinearProgress
         variant="determinate"
         value={value}
