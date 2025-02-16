@@ -29,4 +29,12 @@ COPY --from=builder --chmod=777 --link /app/entrypoint.sh .
 
 EXPOSE 8080
 
+# default env values
+ENV API_BASE_URL=http://localhost:8080
+ENV API_BASE_OPENAPI_PATH="/q/openapi?format=json"
+ENV KEYCLOAK_URL="http://localhost:9090"
+ENV KEYCLOAK_REALM="waitapp"
+ENV KEYCLOAK_CLIENT_ID="frontend"
+ENV FETCH_LANG_JSON="false"
+
 ENTRYPOINT ["/entrypoint.sh"]

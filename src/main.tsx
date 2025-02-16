@@ -2,7 +2,6 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import { ReactKeycloakProvider } from '@react-keycloak/web';
 import { keycloak } from './config/keycloak.ts';
 import { AuthContextWrapperProvider } from './contexts/KeycloakContext.tsx';
 
