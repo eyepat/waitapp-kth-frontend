@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import moon from '../../assets/sprint/moon.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Chat, Information } from '../../utils/Icons';
+import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
@@ -20,8 +20,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import dayjs from 'dayjs';
-import { ArrowBack, ArrowForward, Straighten } from '@mui/icons-material';
-import SprintCard from '../../components/Cards/SprintCardV2';
 import SprintView from '../../components/OngoingSprintView';
 
 export default function Sprint() {
@@ -40,7 +38,7 @@ export default function Sprint() {
   const [currentDay, setCurrentDay] = useState(
     dayjs().diff(dayjs(sprint ? sprint.startDate : ''), 'days') + 1
   );
-  const [isWeeklyView, setIsWeeklyView] = useState<boolean>(false);
+  const [isWeeklyView, _] = useState<boolean>(false);
   const [isCompleteView, setIsCompleteView] = useState<boolean>(false);
 
   const [totalDays, setTotalDays] = useState<number>(
@@ -84,7 +82,7 @@ export default function Sprint() {
     }
   };
 
-  const handleNext = () => {
+  /*const handleNext = () => {
     if (isWeeklyView) {
       if (currentDay < totalDays) {
         setCurrentDay(currentDay + 1);
@@ -111,7 +109,7 @@ export default function Sprint() {
     } else {
       setCurrentDay(currentDay - 1);
     }
-  };
+  };*/
 
   const renderCompleteView = () => {
     return (

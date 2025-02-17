@@ -32,7 +32,7 @@ const YouTubeFrame = styled('iframe')({
   marginTop: '16px',
 });
 
-export default function SprintCard({ index, sprint, today }: SprintCardProps) {
+export default function SprintCard({ index, sprint }: SprintCardProps) {
   const { t } = useLanguage();
   const [checked, setChecked] = useState<boolean>(false);
 
