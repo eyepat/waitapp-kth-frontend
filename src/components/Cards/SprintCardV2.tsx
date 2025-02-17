@@ -53,7 +53,11 @@ export default function SprintCard({ index, sprint }: SprintCardProps) {
 
   return (
     <SprintCardContainer>
-      {checked && <ConfettiExplosion />}
+      {
+        checked && (
+          <ConfettiExplosion />
+        ) /* fix future bug here when initial state is checked */
+      }
       <div style={{ marginBottom: '16px' }}>
         <Typography variant="h6" fontWeight="bold">
           {t(activity?.task?.title || '')}
