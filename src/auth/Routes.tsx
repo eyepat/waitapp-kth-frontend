@@ -9,18 +9,48 @@ import { useLoading } from '../contexts/LoadContext';
 import { useKeycloak } from '@react-keycloak/web';
 import { useKeycloakStatus } from '../contexts/KeycloakContext';
 import Error from '../pages/Error';
+import { useBaseAPIContext } from '../contexts/BaseAPIContext';
+import { Alert, Button, Container } from '@mui/material';
 
 export function Routes() {
   const { authLevel, user } = useAuth();
   const { keycloak, initialized } = useKeycloak();
   const { loading } = useLoading();
   const { error } = useKeycloakStatus();
+  const { backendUp, handleBackendHealthCheckRetry } = useBaseAPIContext();
   const isLoadingIn =
     !initialized ||
     (user === undefined &&
       authLevel === AuthenticationLevels.NOT_LOGGED_IN &&
       keycloak.authenticated) ||
     loading;
+
+  if (backendUp === false) {
+    return (
+      <Container
+        maxWidth="sm"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignSelf: 'center',
+          mt: 4,
+          textAlign: 'center',
+        }}
+      >
+        <Alert severity="error" sx={{ mb: 2 }}>
+          The backend is currently unavailable. Please try again later.
+        </Alert>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleBackendHealthCheckRetry}
+        >
+          Retry
+        </Button>
+      </Container>
+    );
+  }
 
   return (
     <RRoutes>

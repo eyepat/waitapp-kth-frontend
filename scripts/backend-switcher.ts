@@ -20,9 +20,12 @@ export const setBackend = async (mode: mode) => {
       mode === 'PROD'
         ? serversConfig['production-backend']
         : serversConfig['local-backend'];
-
-    if (!backendURL) {
-      console.error('backend value not found in servers.json');
+    const keycloakURL =
+      mode === 'PROD'
+        ? serversConfig['production-keycloak']
+        : serversConfig['local-keycloak'];
+    if (!backendURL || !keycloakURL) {
+      console.error('value not found in servers.json');
       exit(1);
     }
     if (apiUrl === backendURL) {
@@ -51,15 +54,19 @@ export const setBackend = async (mode: mode) => {
       /^VITE_API_BASE_URL=.*/m,
       `VITE_API_BASE_URL=${backendURL}`
     );
+    envLocalDevContent = envLocalDevContent.replace(
+      /^VITE_KEYCLOAK_URL=.*/m,
+      `VITE_KEYCLOAK_URL=${keycloakURL}`
+    );
 
     await writeFile(envLocalDevelopmentPath, envLocalDevContent, 'utf-8');
     if (mode === 'PROD') {
       console.log(
-        'VITE_API_BASE_URL set to production-backend value in .env.development.local'
+        'VITE_API_BASE_URL and VITE_KEYCLOAK_URL set to production-backend value in .env.development.local'
       );
     } else {
       console.log(
-        'VITE_API_BASE_URL set to local-backend value in .env.development.local'
+        'VITE_API_BASE_URL and VITE_KEYCLOAK_URL set to local-backend value in .env.development.local'
       );
     }
   } catch (error) {

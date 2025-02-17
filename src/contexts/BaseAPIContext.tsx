@@ -13,6 +13,8 @@ interface BaseAPIContextType {
   setApi: React.Dispatch<React.SetStateAction<Api<any> | null>>;
   apiToken: string | undefined;
   setApiToken: React.Dispatch<React.SetStateAction<string | undefined>>;
+  backendUp: boolean | undefined;
+  handleBackendHealthCheckRetry: () => void;
 }
 
 const BaseAPIContext = createContext<BaseAPIContextType | undefined>(undefined);
@@ -37,6 +39,37 @@ export const BaseAPIContextProvider: React.FC<BaseAPIContextProviderProps> = ({
   const [api, setApi] = useState<Api<any> | null>(null);
   const [token, setToken] = useState<string | undefined>(undefined);
   const { keycloak, initialized } = useKeycloak();
+  const [backendUp, setBackendUp] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    if (!api) return;
+    if (backendUp) return;
+
+    const checkHealth = () => {
+      api.healthz
+        .healthzList()
+        .then((e) => {
+          setBackendUp(e.ok);
+        })
+        .catch(() => {
+          setBackendUp(false);
+        });
+    };
+
+    checkHealth(); // Initial check
+
+    const interval = setInterval(checkHealth, 5000); // Run every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [api]);
+
+  const handleBackendHealthCheckRetry = () => {
+    setBackendUp(undefined); // Show loading state
+    api?.healthz
+      .healthzList()
+      .then((e) => setBackendUp(e.ok))
+      .catch(() => setBackendUp(false));
+  };
 
   useEffect(() => {
     const api = new Api({
@@ -63,7 +96,14 @@ export const BaseAPIContextProvider: React.FC<BaseAPIContextProviderProps> = ({
 
   return (
     <BaseAPIContext.Provider
-      value={{ api, setApi, apiToken: token, setApiToken: setToken }}
+      value={{
+        api,
+        setApi,
+        apiToken: token,
+        setApiToken: setToken,
+        backendUp,
+        handleBackendHealthCheckRetry,
+      }}
     >
       {children}
     </BaseAPIContext.Provider>

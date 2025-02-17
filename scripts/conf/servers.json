@@ -1,4 +1,6 @@
 {
-  "production-backend": "https://waback.app.cloud.cbh.kth.se",
-  "local-backend": "http://localhost:8080"
+  "production-backend": "https://wait-back.app.cloud.cbh.kth.se",
+  "local-backend": "http://localhost:8080",
+  "production-keycloak": "https://iamwait.app.cloud.cbh.kth.se",
+  "local-keycloak": "http://localhost:9090"
 }
