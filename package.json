@@ -24,6 +24,7 @@
     "@mui/material": "^5.16.14",
     "@mui/x-date-pickers": "^7.24.1",
     "@react-keycloak/web": "^3.4.0",
+    "@types/react-slick": "^0.23.13",
     "chart.js": "^4.4.7",
     "dayjs": "^1.11.13",
     "keycloak-ts": "^1.0.0",
@@ -35,7 +36,9 @@
     "react-cookie": "^7.2.2",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.2",
+    "react-slick": "^0.30.3",
     "recharts": "^2.15.0",
+    "slick-carousel": "^1.8.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {

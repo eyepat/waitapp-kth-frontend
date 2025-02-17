@@ -29,6 +29,9 @@ import 'dayjs/locale/en-gb';
 import { ResourceProvider } from './contexts/ResourceContext';
 import { BaseAPIContextProvider } from './contexts/BaseAPIContext';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 export default function App() {
   preloadImages([
     alcoholImage,

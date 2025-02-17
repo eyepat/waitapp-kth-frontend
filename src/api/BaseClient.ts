@@ -5734,6 +5734,15 @@ export enum SpecimenStatus {
   NULL = 'NULL',
 }
 
+export interface SprintActivityDTO {
+  /** @format int64 */
+  id?: number;
+  owner?: UUID;
+  task?: TaskDTO;
+  completed?: boolean;
+  assignedDate?: LocalDate;
+}
+
 export interface SprintDTO {
   /** @format int64 */
   id?: number;
@@ -5747,6 +5756,7 @@ export interface SprintDTO {
   score?: number;
   /** @format int64 */
   userID: number;
+  activities?: SprintActivityDTO[];
 }
 
 export enum SprintType {
@@ -5906,6 +5916,23 @@ export interface SubstanceInstanceComponent {
   quantity?: Quantity;
   expiryElement?: DateTimeType;
   empty?: boolean;
+}
+
+export interface TaskDTO {
+  /** @format int64 */
+  id?: number;
+  type: SprintType;
+  level?: Level;
+  variant?: TaskVariant;
+  title?: string;
+  description?: string;
+  videoURL?: string;
+  active?: boolean;
+}
+
+export enum TaskVariant {
+  REST = 'REST',
+  ACTIVE = 'ACTIVE',
 }
 
 export enum TemporalPrecisionEnum {
@@ -6697,6 +6724,40 @@ export class Api<
      * No description
      *
      * @tags Blood Pressure Controller
+     * @name BloodpressurePaginatedList
+     * @summary Get Paginated
+     * @request GET:/metrics/bloodpressure/paginated
+     * @secure
+     */
+    bloodpressurePaginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/metrics/bloodpressure/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Blood Pressure Controller
      * @name BloodpressureUpdate
      * @summary Update
      * @request PUT:/metrics/bloodpressure/{id}
@@ -6803,6 +6864,40 @@ export class Api<
       this.request<IBaseDTO, ErrorResponse>({
         path: `/metrics/height/latest`,
         method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Height Controller
+     * @name HeightPaginatedList
+     * @summary Get Paginated
+     * @request GET:/metrics/height/paginated
+     * @secure
+     */
+    heightPaginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/metrics/height/paginated`,
+        method: 'GET',
+        query: query,
         secure: true,
         format: 'json',
         ...params,
@@ -6923,6 +7018,40 @@ export class Api<
      * No description
      *
      * @tags RAPA Controller
+     * @name RapaPaginatedList
+     * @summary Get Paginated
+     * @request GET:/metrics/rapa/paginated
+     * @secure
+     */
+    rapaPaginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/metrics/rapa/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags RAPA Controller
      * @name RapaUpdate
      * @summary Update
      * @request PUT:/metrics/rapa/{id}
@@ -7034,6 +7163,40 @@ export class Api<
      * No description
      *
      * @tags Steps Controller
+     * @name StepsPaginatedList
+     * @summary Get Paginated
+     * @request GET:/metrics/steps/paginated
+     * @secure
+     */
+    stepsPaginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/metrics/steps/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Steps Controller
      * @name StepsUpdate
      * @summary Update
      * @request PUT:/metrics/steps/{id}
@@ -7119,6 +7282,40 @@ export class Api<
       this.request<IBaseDTO, ErrorResponse>({
         path: `/questionaire/byId/${id}`,
         method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionaire Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/questionaire/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/questionaire/paginated`,
+        method: 'GET',
+        query: query,
         secure: true,
         format: 'json',
         ...params,
@@ -7220,6 +7417,40 @@ export class Api<
       this.request<IBaseDTO, ErrorResponse>({
         path: `/questionaireResponse/byId/${id}`,
         method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionaire Response Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/questionaireResponse/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/questionaireResponse/paginated`,
+        method: 'GET',
+        query: query,
         secure: true,
         format: 'json',
         ...params,
@@ -7339,8 +7570,42 @@ export class Api<
       },
       params: RequestParams = {}
     ) =>
-      this.request<void, void>({
+      this.request<void, any>({
         path: `/sprint/latest`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/sprint/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/sprint/paginated`,
         method: 'GET',
         query: query,
         secure: true,
@@ -7380,6 +7645,134 @@ export class Api<
     sprintDelete: (id: number, params: RequestParams = {}) =>
       this.request<void, ErrorResponse>({
         path: `/sprint/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+  };
+  task = {
+    /**
+     * No description
+     *
+     * @tags Task Controller
+     * @name TaskList
+     * @summary Get All
+     * @request GET:/task
+     * @secure
+     */
+    taskList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/task`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Task Controller
+     * @name TaskCreate
+     * @summary Create
+     * @request POST:/task
+     * @secure
+     */
+    taskCreate: (data: TaskDTO, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/task`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Task Controller
+     * @name ByIdDetail
+     * @summary Get By Id
+     * @request GET:/task/byId/{id}
+     * @secure
+     */
+    byIdDetail: (id: number, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/task/byId/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Task Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/task/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/task/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Task Controller
+     * @name TaskUpdate
+     * @summary Update
+     * @request PUT:/task/{id}
+     * @secure
+     */
+    taskUpdate: (id: number, data: TaskDTO, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/task/${id}`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Task Controller
+     * @name TaskDelete
+     * @summary Delete
+     * @request DELETE:/task/{id}
+     * @secure
+     */
+    taskDelete: (id: number, params: RequestParams = {}) =>
+      this.request<void, ErrorResponse>({
+        path: `/task/${id}`,
         method: 'DELETE',
         secure: true,
         ...params,
@@ -7458,6 +7851,40 @@ export class Api<
         body: data,
         secure: true,
         type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/user/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/user/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
         format: 'json',
         ...params,
       }),
@@ -7587,6 +8014,40 @@ export class Api<
       this.request<IBaseDTO, ErrorResponse>({
         path: `/waistsize/latest`,
         method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Waist Size Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/waistsize/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/waistsize/paginated`,
+        method: 'GET',
+        query: query,
         secure: true,
         format: 'json',
         ...params,
