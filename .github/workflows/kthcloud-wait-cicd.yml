@@ -20,3 +20,5 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
+          build-args: |
+            COMMIT_HASH=${{ github.sha }}

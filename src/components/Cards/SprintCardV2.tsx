@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import { useLanguage } from '../../contexts/LanguageContext';
 import ProgressBar from '../ProgressBar';
 import { SprintDTO } from '../../api/BaseClient';
+import ConfettiExplosion from 'react-confetti-explosion';
 
 interface SprintCardProps {
   index: number;
@@ -52,6 +53,7 @@ export default function SprintCard({ index, sprint }: SprintCardProps) {
 
   return (
     <SprintCardContainer>
+      {checked && <ConfettiExplosion />}
       <div style={{ marginBottom: '16px' }}>
         <Typography variant="h6" fontWeight="bold">
           {t(activity?.task?.title || '')}

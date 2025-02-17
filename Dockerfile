@@ -1,3 +1,5 @@
+ARG COMMIT_HASH
+
 FROM --platform=$BUILDPLATFORM oven/bun:latest AS builder
 
 WORKDIR /app
@@ -36,5 +38,6 @@ ENV KEYCLOAK_URL="http://localhost:9090"
 ENV KEYCLOAK_REALM="waitapp"
 ENV KEYCLOAK_CLIENT_ID="frontend"
 ENV FETCH_LANG_JSON="false"
+ENV COMMIT_HASH=${COMMIT_HASH}
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -108,7 +108,7 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       const newSprint: SprintDTO = {
         ...currentSprint,
         completed: true,
-        endDate: dayjs().toISOString(),
+        endDate: dayjs().format('YYYY-MM-DD'),
       };
       await updateSprint(newSprint.id!, newSprint);
       setCurrentSprint(undefined);
