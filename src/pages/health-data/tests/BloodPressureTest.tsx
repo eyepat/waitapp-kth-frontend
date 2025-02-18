@@ -76,6 +76,34 @@ export default function BloodPressureTest() {
     setOpen(false);
   }
 
+  const isValidNumber = (value: string) => /^\d+$/.test(value);
+
+  const isValidBloodPressure = (systolic: any, diastolic: any) => {
+    const systolicNumber = Number(systolic);
+    const diastolicNumber = Number(diastolic);
+    
+    return !(
+      isNaN(systolicNumber) ||
+      systolicNumber < 1 ||
+      systolicNumber > 220 ||
+      isNaN(diastolicNumber) ||
+      diastolicNumber < 1 ||
+      diastolicNumber > 160
+    );
+  };
+
+  const bloodPressureWarning = (systolic: any, diastolic: any) => {
+    const systolicNumber = Number(systolic);
+    const diastolicNumber = Number(diastolic);
+
+    return (
+      isNaN(systolicNumber) ||
+      systolicNumber > 180 ||
+      isNaN(diastolicNumber) ||
+      diastolicNumber > 110
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Stack alignItems="center">
@@ -183,32 +211,24 @@ export default function BloodPressureTest() {
                   backgroundColor: '#333',
                 },
               }}
+
               onClick={() => {
                 if (user === undefined || user.id === undefined) {
                   enqueueSnackbar('error-no-user', { variant: 'error' });
                   return;
                 }
-                if (!/^\d+$/.test(systolic) || !/^\d+$/.test(diastolic)) {
+                if (!isValidNumber(systolic) || !isValidNumber(diastolic) || !isValidBloodPressure(systolic, diastolic)) {
                   enqueueSnackbar('invalid-blood-pressure-error', {
                     variant: 'error',
                   });
                   return;
                 }
-                const systolicNumber = Number(systolic);
-                const diastolicNumber = Number(diastolic);
-                if (
-                  isNaN(systolicNumber) ||
-                  systolicNumber < 1 ||
-                  systolicNumber > 220 ||
-                  isNaN(diastolicNumber) ||
-                  diastolicNumber < 1 ||
-                  diastolicNumber > 160
-                ) {
-                  enqueueSnackbar('invalid-blood-pressure-error', {
-                    variant: 'error',
+                else if (bloodPressureWarning(systolic, diastolic)){
+                  enqueueSnackbar(t('Blodtryck är högt, kontrollera mätningen och kontakta 1177 för rådgivning'), {  //ToDo should use t('blood-pressure-warning'), don't know why it's not working... 
+                    variant: 'warning',
                   });
-                  return;
                 }
+                enqueueSnackbar('Blodtryck regristrerat', {variant: 'success'})
 
                 const metric: Metric = {
                   userID: user?.id,
