@@ -178,6 +178,7 @@
   "invalid-ablation-error": "Ablationsdatumet kan inte redan ha passerat",
   "required-error": "Obligatoriskt fält",
   "invalid-blood-pressure-error": "Ogiltigt blodtryck (systoliskt/diastoliskt)",
+  "blood-pressure-warning": "Blodtryck är högt, kontrollera mätningen och kontakta 1177 för rådgivning",
   "invalid-waist-size-error": "Ogiltigt midjemått",
   "invalid-height-error": "Ogiltig längd",
   "invalid-weight-error": "Ogiltig vikt",
