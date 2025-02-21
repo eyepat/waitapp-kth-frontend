@@ -37,7 +37,7 @@ export default function Forms() {
         <TextCard
           title={' (Lifestyle)'}
           text={''}
-          onClick={() => navigate('/settings/forms/lifstyle')}
+          onClick={() => navigate('/settings/forms/lifestyle')}
         />
         <TextCard title={t('forms') + ' 2'} text={''} />
         <TextCard title={t('forms') + ' 3'} text={''} />
