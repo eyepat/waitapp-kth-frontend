@@ -22,41 +22,116 @@ interface Question {
 }
 
 export default function LifestyleForm() {
+  const { t } = useLanguage();
   const questions: Question[] = [
     {
-      id: 1,
-      key: 'sleep_schedule',
-      options: ['before_10pm', 'between_10pm_12am', 'after_12am']
+        id: 1,
+        key: t('tobacco-question-1'),
+        options: [
+            t('tobocco-question-1-answer1'),
+            t('tobocco-question-1-answer2'),
+            t('tobocco-question-1-answer3'),
+            t('tobocco-question-1-answer4'),
+            t('tobocco-question-1-answer5'),
+            t('tobocco-question-1-answer6'),
+            t('tobocco-question-1-answer7')
+        ]
     },
     {
-      id: 2,
-      key: 'exercise_frequency',
-      options: ['daily', 'three_to_five_weekly', 'one_to_two_weekly', 'rarely']
+        id: 2,
+        key: t('tobacco-question-2'),
+        options: [
+            t('tobocco-question-2-answer1'),
+            t('tobocco-question-2-answer2'),
+            t('tobocco-question-2-answer3'),
+            t('tobocco-question-2-answer4'),
+            t('tobocco-question-2-answer5'),
+            t('tobocco-question-2-answer6'),
+            t('tobocco-question-2-answer7')
+        ]
     },
     {
-      id: 3,
-      key: 'meal_preparation',
-      options: ['cook_most_meals', 'mix_cooking_takeout', 'mostly_takeout']
+        id: 3,
+        key: t('exercise-question-1'),
+        options: [
+            t('exercise-question-1-answer-1'),
+            t('exercise-question-1-answer-2'),
+            t('exercise-question-1-answer-3'),
+            t('exercise-question-1-answer-4'),
+            t('exercise-question-1-answer-5'),
+            t('exercise-question-1-answer-6')
+        ]
     },
     {
-      id: 4,
-      key: 'work_life_balance',
-      options: ['excellent', 'good', 'fair', 'poor']
+        id: 4,
+        key: t('exercise-question-2'),
+        options: [
+            t('exercise-question-2-answer-1'),
+            t('exercise-question-2-answer-2'),
+            t('exercise-question-2-answer-3'),
+            t('exercise-question-2-answer-4'),
+            t('exercise-question-2-answer-5'),
+            t('exercise-question-2-answer-6')
+        ]
     },
     {
-      id: 5,
-      key: 'stress_level',
-      options: ['low', 'moderate', 'high']
+        id: 5,
+        key: t('food-question-1'),
+        options: [
+            t('food-question-1-2-answer-1'),
+            t('food-question-1-2-answer-2'),
+            t('food-question-1-2-answer-3'),
+            t('food-question-1-2-answer-4')
+        ]
+    },
+    {
+        id: 6,
+        key: t('food-question-2'),
+        options: [
+            t('food-question-1-2-answer-1'),
+            t('food-question-1-2-answer-2'),
+            t('food-question-1-2-answer-3'),
+            t('food-question-1-2-answer-4')
+        ]
+    },
+    {
+        id: 7,
+        key: t('food-question-3'),
+        options: [
+            t('food-question-3-answer-1'),
+            t('food-question-3-answer-2'),
+            t('food-question-3-answer-3'),
+            t('food-question-3-answer-4')
+        ]
+    },
+    {
+        id: 8,
+        key: t('food-question-4'),
+        options: [
+            t('food-question-4-answer-1'),
+            t('food-question-4-answer-2'),
+            t('food-question-4-answer-3'),
+            t('food-question-4-answer-4')
+        ]
+    },
+    {
+        id: 9,
+        key: t('food-question-5'),
+        options: [
+            t('food-question-5-answer-1'),
+            t('food-question-5-answer-2'),
+            t('food-question-5-answer-3'),
+            t('food-question-5-answer-4')
+        ]
     }
-  ];
+];
 
-  const { t } = useLanguage();
+
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const { user } = useAuth();
   const { sprint } = useSprintContext();
-
   const addMeasurement = (type: string, obj: any) => {
     console.log('todo', type, obj);
   };
@@ -131,7 +206,6 @@ export default function LifestyleForm() {
               {t(question.key)}
             </Typography>
             <RadioGroup
-              row
               value={answers[`question-${question.id}`] || ''}
               onChange={(e) =>
                 handleAnswerChange(`question-${question.id}`, e.target.value)
