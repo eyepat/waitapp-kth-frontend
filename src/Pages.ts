@@ -20,6 +20,7 @@ import Forms from './pages/settings/Forms';
 import Rapa from './pages/forms/Rapa';
 import RapaForm from './pages/forms/RapaForm';
 import KCLogin from './pages/login/KCLogin';
+import LifestyleForm from './pages/forms/LifestyleForm';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -197,6 +198,14 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'RAPA',
     component: RapaForm,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms/lifestyle/questions',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'LifestyleForm',
+    component: LifestyleForm,
     header: { expanded: false },
     isMenu: false,
   },
