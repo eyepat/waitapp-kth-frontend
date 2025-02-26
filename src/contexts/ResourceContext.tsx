@@ -6,7 +6,12 @@ import React, {
   useEffect,
 } from 'react';
 import { useBaseAPIContext } from './BaseAPIContext';
-import { OnboardingDTO, SprintDTO, UserDTO } from '../api/BaseClient';
+import {
+  OnboardingDTO,
+  SprintDTO,
+  UserDTO,
+  BloodPressureDTO,
+} from '../api/BaseClient';
 
 interface ResourceContextType {
   ready: boolean;
@@ -292,6 +297,61 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     });
 
     return true;
+  };
+
+  // @ts-ignore temp unused
+  const addBloodPressure = async (value: BloodPressureDTO) => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+
+    const resp = await api.metrics.bloodpressureCreate(value);
+    if (resp.status !== 201) {
+      throw new Error('Failed to create bloodpressure');
+    }
+  };
+
+  // @ts-ignore temp unused
+  const getBloodPressurePaginated = async (query: {
+    page?: number;
+    search?: string;
+    size?: number;
+  }) => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+
+    const resp = await api.metrics.bloodpressurePaginatedList(query);
+    if (resp.status !== 200) {
+      throw new Error('Failed to get bloodpressure');
+    }
+    return await resp.json(); // Todo check type
+  };
+
+  // @ts-ignore temp unused
+  const getBloodPressure = async () => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+
+    const resp = await api.metrics.bloodpressureList();
+    if (resp.status !== 200) {
+      throw new Error('Failed to get bloodpressure');
+    }
+    return await resp.json();
+  };
+
+  // @ts-ignore temp unused
+  const getLatestBloodPressure = async () => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+
+    const resp = await api.metrics.bloodpressureLatestList();
+    if (resp.status !== 200) {
+      throw new Error('Failed to get latest bloodpressure');
+    }
+    return await resp.json();
   };
 
   return (

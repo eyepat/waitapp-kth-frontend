@@ -3578,7 +3578,6 @@ export interface IBaseCoding {
 export interface IBaseDTO {
   /** @format int64 */
   id?: number;
-  owner?: UUID;
 }
 
 export interface IBaseDatatype {
@@ -4598,22 +4597,6 @@ export enum QuantityComparator {
   NULL = 'NULL',
 }
 
-export interface QuestionaireDTO {
-  fHIR?: IBaseResource;
-  /** @format int64 */
-  id?: number;
-  owner?: UUID;
-  FHIR?: Questionnaire;
-}
-
-export interface QuestionaireResponseDTO {
-  fHIR?: IBaseResource;
-  /** @format int64 */
-  id?: number;
-  owner?: UUID;
-  FHIR?: QuestionnaireResponse;
-}
-
 export interface Questionnaire {
   formatCommentsPre?: string[];
   formatCommentsPost?: string[];
@@ -4682,6 +4665,13 @@ export interface Questionnaire {
   itemFirstRep?: QuestionnaireItemComponent;
   empty?: boolean;
   resourceType?: ResourceType;
+}
+
+export interface QuestionnaireDTO {
+  fHIR?: IBaseResource;
+  /** @format int64 */
+  id?: number;
+  FHIR?: Questionnaire;
 }
 
 export interface QuestionnaireItemAnswerOptionComponent {
@@ -4921,6 +4911,14 @@ export interface QuestionnaireResponse {
   resourceType?: ResourceType;
 }
 
+export interface QuestionnaireResponseDTO {
+  fHIR?: IBaseResource;
+  /** @format int64 */
+  id?: number;
+  owner?: UUID;
+  FHIR?: QuestionnaireResponse;
+}
+
 export interface QuestionnaireResponseItemAnswerComponent {
   formatCommentsPre?: string[];
   formatCommentsPost?: string[];
@@ -5050,6 +5048,18 @@ export interface Ratio {
   numerator?: Quantity;
   denominator?: Quantity;
   empty?: boolean;
+}
+
+export interface RecipeDTO {
+  /** @format int64 */
+  id?: number;
+  URL?: string;
+  title?: string;
+  description?: string;
+  imageURL?: string;
+  /** @format int32 */
+  cookingTime?: number;
+  uRL?: string;
 }
 
 export interface Reference {
@@ -6352,6 +6362,19 @@ export interface WaistSizeDTO {
   value?: number;
 }
 
+export interface WeightDTO {
+  /** @format int64 */
+  id?: number;
+  owner?: UUID;
+  /** @format int64 */
+  userID: number;
+  /** @format int64 */
+  sprintID: number;
+  timestamp: LocalDateTime;
+  /** @format double */
+  value?: number;
+}
+
 export interface XhtmlNode {
   location?: Location;
   nodeType?: NodeType;
@@ -6629,6 +6652,31 @@ export class HttpClient<SecurityDataType = unknown> {
 export class Api<
   SecurityDataType extends unknown,
 > extends HttpClient<SecurityDataType> {
+  export = {
+    /**
+     * No description
+     *
+     * @tags Export Controller
+     * @name ExportList
+     * @summary Export Data
+     * @request GET:/export
+     * @secure
+     */
+    exportList: (
+      query?: {
+        format?: string;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<void, any>({
+        path: `/export`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+  };
   healthz = {
     /**
      * No description
@@ -7229,20 +7277,19 @@ export class Api<
         secure: true,
         ...params,
       }),
-  };
-  questionaire = {
+
     /**
      * No description
      *
-     * @tags Questionaire Controller
-     * @name QuestionaireList
+     * @tags Waist Size Controller
+     * @name WaistsizeList
      * @summary Get All
-     * @request GET:/questionaire
+     * @request GET:/metrics/waistsize
      * @secure
      */
-    questionaireList: (params: RequestParams = {}) =>
+    waistsizeList: (params: RequestParams = {}) =>
       this.request<IBaseDTO[], ErrorResponse>({
-        path: `/questionaire`,
+        path: `/metrics/waistsize`,
         method: 'GET',
         secure: true,
         format: 'json',
@@ -7252,15 +7299,15 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Controller
-     * @name QuestionaireCreate
+     * @tags Waist Size Controller
+     * @name WaistsizeCreate
      * @summary Create
-     * @request POST:/questionaire
+     * @request POST:/metrics/waistsize
      * @secure
      */
-    questionaireCreate: (data: QuestionaireDTO, params: RequestParams = {}) =>
+    waistsizeCreate: (data: WaistSizeDTO, params: RequestParams = {}) =>
       this.request<IBaseDTO, ErrorResponse>({
-        path: `/questionaire`,
+        path: `/metrics/waistsize`,
         method: 'POST',
         body: data,
         secure: true,
@@ -7272,15 +7319,15 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Controller
-     * @name ByIdDetail
+     * @tags Waist Size Controller
+     * @name WaistsizeByIdDetail
      * @summary Get By Id
-     * @request GET:/questionaire/byId/{id}
+     * @request GET:/metrics/waistsize/byId/{id}
      * @secure
      */
-    byIdDetail: (id: number, params: RequestParams = {}) =>
+    waistsizeByIdDetail: (id: number, params: RequestParams = {}) =>
       this.request<IBaseDTO, ErrorResponse>({
-        path: `/questionaire/byId/${id}`,
+        path: `/metrics/waistsize/byId/${id}`,
         method: 'GET',
         secure: true,
         format: 'json',
@@ -7290,13 +7337,31 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Controller
-     * @name PaginatedList
-     * @summary Get Paginated
-     * @request GET:/questionaire/paginated
+     * @tags Waist Size Controller
+     * @name WaistsizeLatestList
+     * @summary Latest
+     * @request GET:/metrics/waistsize/latest
      * @secure
      */
-    paginatedList: (
+    waistsizeLatestList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/metrics/waistsize/latest`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Waist Size Controller
+     * @name WaistsizePaginatedList
+     * @summary Get Paginated
+     * @request GET:/metrics/waistsize/paginated
+     * @secure
+     */
+    waistsizePaginatedList: (
       query?: {
         /**
          * @format int32
@@ -7313,7 +7378,7 @@ export class Api<
       params: RequestParams = {}
     ) =>
       this.request<IBaseDTO[], ErrorResponse>({
-        path: `/questionaire/paginated`,
+        path: `/metrics/waistsize/paginated`,
         method: 'GET',
         query: query,
         secure: true,
@@ -7324,19 +7389,19 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Controller
-     * @name QuestionaireUpdate
+     * @tags Waist Size Controller
+     * @name WaistsizeUpdate
      * @summary Update
-     * @request PUT:/questionaire/{id}
+     * @request PUT:/metrics/waistsize/{id}
      * @secure
      */
-    questionaireUpdate: (
+    waistsizeUpdate: (
       id: number,
-      data: QuestionaireDTO,
+      data: WaistSizeDTO,
       params: RequestParams = {}
     ) =>
       this.request<IBaseDTO, ErrorResponse>({
-        path: `/questionaire/${id}`,
+        path: `/metrics/waistsize/${id}`,
         method: 'PUT',
         body: data,
         secure: true,
@@ -7348,33 +7413,178 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Controller
-     * @name QuestionaireDelete
+     * @tags Waist Size Controller
+     * @name WaistsizeDelete
      * @summary Delete
-     * @request DELETE:/questionaire/{id}
+     * @request DELETE:/metrics/waistsize/{id}
      * @secure
      */
-    questionaireDelete: (id: number, params: RequestParams = {}) =>
+    waistsizeDelete: (id: number, params: RequestParams = {}) =>
       this.request<void, ErrorResponse>({
-        path: `/questionaire/${id}`,
+        path: `/metrics/waistsize/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightList
+     * @summary Get All
+     * @request GET:/metrics/weight
+     * @secure
+     */
+    weightList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/metrics/weight`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightCreate
+     * @summary Create
+     * @request POST:/metrics/weight
+     * @secure
+     */
+    weightCreate: (data: WeightDTO, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/metrics/weight`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightByIdDetail
+     * @summary Get By Id
+     * @request GET:/metrics/weight/byId/{id}
+     * @secure
+     */
+    weightByIdDetail: (id: number, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/metrics/weight/byId/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightLatestList
+     * @summary Latest
+     * @request GET:/metrics/weight/latest
+     * @secure
+     */
+    weightLatestList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/metrics/weight/latest`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightPaginatedList
+     * @summary Get Paginated
+     * @request GET:/metrics/weight/paginated
+     * @secure
+     */
+    weightPaginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/metrics/weight/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightUpdate
+     * @summary Update
+     * @request PUT:/metrics/weight/{id}
+     * @secure
+     */
+    weightUpdate: (id: number, data: WeightDTO, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/metrics/weight/${id}`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Weight Controller
+     * @name WeightDelete
+     * @summary Delete
+     * @request DELETE:/metrics/weight/{id}
+     * @secure
+     */
+    weightDelete: (id: number, params: RequestParams = {}) =>
+      this.request<void, ErrorResponse>({
+        path: `/metrics/weight/${id}`,
         method: 'DELETE',
         secure: true,
         ...params,
       }),
   };
-  questionaireResponse = {
+  questionnaire = {
     /**
      * No description
      *
-     * @tags Questionaire Response Controller
-     * @name QuestionaireResponseList
+     * @tags Questionnaire Controller
+     * @name QuestionnaireList
      * @summary Get All
-     * @request GET:/questionaireResponse
+     * @request GET:/questionnaire
      * @secure
      */
-    questionaireResponseList: (params: RequestParams = {}) =>
+    questionnaireList: (params: RequestParams = {}) =>
       this.request<IBaseDTO[], ErrorResponse>({
-        path: `/questionaireResponse`,
+        path: `/questionnaire`,
         method: 'GET',
         secure: true,
         format: 'json',
@@ -7384,18 +7594,15 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Response Controller
-     * @name QuestionaireResponseCreate
+     * @tags Questionnaire Controller
+     * @name QuestionnaireCreate
      * @summary Create
-     * @request POST:/questionaireResponse
+     * @request POST:/questionnaire
      * @secure
      */
-    questionaireResponseCreate: (
-      data: QuestionaireResponseDTO,
-      params: RequestParams = {}
-    ) =>
+    questionnaireCreate: (data: QuestionnaireDTO, params: RequestParams = {}) =>
       this.request<IBaseDTO, ErrorResponse>({
-        path: `/questionaireResponse`,
+        path: `/questionnaire`,
         method: 'POST',
         body: data,
         secure: true,
@@ -7407,15 +7614,15 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Response Controller
+     * @tags Questionnaire Controller
      * @name ByIdDetail
      * @summary Get By Id
-     * @request GET:/questionaireResponse/byId/{id}
+     * @request GET:/questionnaire/byId/{id}
      * @secure
      */
     byIdDetail: (id: number, params: RequestParams = {}) =>
       this.request<IBaseDTO, ErrorResponse>({
-        path: `/questionaireResponse/byId/${id}`,
+        path: `/questionnaire/byId/${id}`,
         method: 'GET',
         secure: true,
         format: 'json',
@@ -7425,10 +7632,10 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Response Controller
+     * @tags Questionnaire Controller
      * @name PaginatedList
      * @summary Get Paginated
-     * @request GET:/questionaireResponse/paginated
+     * @request GET:/questionnaire/paginated
      * @secure
      */
     paginatedList: (
@@ -7448,7 +7655,7 @@ export class Api<
       params: RequestParams = {}
     ) =>
       this.request<IBaseDTO[], ErrorResponse>({
-        path: `/questionaireResponse/paginated`,
+        path: `/questionnaire/paginated`,
         method: 'GET',
         query: query,
         secure: true,
@@ -7459,19 +7666,19 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Response Controller
-     * @name QuestionaireResponseUpdate
+     * @tags Questionnaire Controller
+     * @name QuestionnaireUpdate
      * @summary Update
-     * @request PUT:/questionaireResponse/{id}
+     * @request PUT:/questionnaire/{id}
      * @secure
      */
-    questionaireResponseUpdate: (
+    questionnaireUpdate: (
       id: number,
-      data: QuestionaireResponseDTO,
+      data: QuestionnaireDTO,
       params: RequestParams = {}
     ) =>
       this.request<IBaseDTO, ErrorResponse>({
-        path: `/questionaireResponse/${id}`,
+        path: `/questionnaire/${id}`,
         method: 'PUT',
         body: data,
         secure: true,
@@ -7483,15 +7690,278 @@ export class Api<
     /**
      * No description
      *
-     * @tags Questionaire Response Controller
-     * @name QuestionaireResponseDelete
+     * @tags Questionnaire Controller
+     * @name QuestionnaireDelete
      * @summary Delete
-     * @request DELETE:/questionaireResponse/{id}
+     * @request DELETE:/questionnaire/{id}
      * @secure
      */
-    questionaireResponseDelete: (id: number, params: RequestParams = {}) =>
+    questionnaireDelete: (id: number, params: RequestParams = {}) =>
       this.request<void, ErrorResponse>({
-        path: `/questionaireResponse/${id}`,
+        path: `/questionnaire/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+  };
+  questionnaireResponse = {
+    /**
+     * No description
+     *
+     * @tags Questionnaire Response Controller
+     * @name QuestionnaireResponseList
+     * @summary Get All
+     * @request GET:/questionnaireResponse
+     * @secure
+     */
+    questionnaireResponseList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/questionnaireResponse`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionnaire Response Controller
+     * @name QuestionnaireResponseCreate
+     * @summary Create
+     * @request POST:/questionnaireResponse
+     * @secure
+     */
+    questionnaireResponseCreate: (
+      data: QuestionnaireResponseDTO,
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/questionnaireResponse`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionnaire Response Controller
+     * @name ByIdDetail
+     * @summary Get By Id
+     * @request GET:/questionnaireResponse/byId/{id}
+     * @secure
+     */
+    byIdDetail: (id: number, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/questionnaireResponse/byId/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionnaire Response Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/questionnaireResponse/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/questionnaireResponse/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionnaire Response Controller
+     * @name QuestionnaireResponseUpdate
+     * @summary Update
+     * @request PUT:/questionnaireResponse/{id}
+     * @secure
+     */
+    questionnaireResponseUpdate: (
+      id: number,
+      data: QuestionnaireResponseDTO,
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/questionnaireResponse/${id}`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questionnaire Response Controller
+     * @name QuestionnaireResponseDelete
+     * @summary Delete
+     * @request DELETE:/questionnaireResponse/{id}
+     * @secure
+     */
+    questionnaireResponseDelete: (id: number, params: RequestParams = {}) =>
+      this.request<void, ErrorResponse>({
+        path: `/questionnaireResponse/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+  };
+  recipe = {
+    /**
+     * No description
+     *
+     * @tags Recipe Controller
+     * @name RecipeList
+     * @summary Get All
+     * @request GET:/recipe
+     * @secure
+     */
+    recipeList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/recipe`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Recipe Controller
+     * @name RecipeCreate
+     * @summary Create
+     * @request POST:/recipe
+     * @secure
+     */
+    recipeCreate: (data: RecipeDTO, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/recipe`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Recipe Controller
+     * @name ByIdDetail
+     * @summary Get By Id
+     * @request GET:/recipe/byId/{id}
+     * @secure
+     */
+    byIdDetail: (id: number, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/recipe/byId/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Recipe Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/recipe/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/recipe/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Recipe Controller
+     * @name RecipeUpdate
+     * @summary Update
+     * @request PUT:/recipe/{id}
+     * @secure
+     */
+    recipeUpdate: (id: number, data: RecipeDTO, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/recipe/${id}`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Recipe Controller
+     * @name RecipeDelete
+     * @summary Delete
+     * @request DELETE:/recipe/{id}
+     * @secure
+     */
+    recipeDelete: (id: number, params: RequestParams = {}) =>
+      this.request<void, ErrorResponse>({
+        path: `/recipe/${id}`,
         method: 'DELETE',
         secure: true,
         ...params,
@@ -7939,156 +8409,6 @@ export class Api<
     userDelete: (id: number, params: RequestParams = {}) =>
       this.request<void, ErrorResponse>({
         path: `/user/${id}`,
-        method: 'DELETE',
-        secure: true,
-        ...params,
-      }),
-  };
-  waistsize = {
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name WaistsizeList
-     * @summary Get All
-     * @request GET:/waistsize
-     * @secure
-     */
-    waistsizeList: (params: RequestParams = {}) =>
-      this.request<IBaseDTO[], ErrorResponse>({
-        path: `/waistsize`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name WaistsizeCreate
-     * @summary Create
-     * @request POST:/waistsize
-     * @secure
-     */
-    waistsizeCreate: (data: WaistSizeDTO, params: RequestParams = {}) =>
-      this.request<IBaseDTO, ErrorResponse>({
-        path: `/waistsize`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name ByIdDetail
-     * @summary Get By Id
-     * @request GET:/waistsize/byId/{id}
-     * @secure
-     */
-    byIdDetail: (id: number, params: RequestParams = {}) =>
-      this.request<IBaseDTO, ErrorResponse>({
-        path: `/waistsize/byId/${id}`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name LatestList
-     * @summary Latest
-     * @request GET:/waistsize/latest
-     * @secure
-     */
-    latestList: (params: RequestParams = {}) =>
-      this.request<IBaseDTO, ErrorResponse>({
-        path: `/waistsize/latest`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name PaginatedList
-     * @summary Get Paginated
-     * @request GET:/waistsize/paginated
-     * @secure
-     */
-    paginatedList: (
-      query?: {
-        /**
-         * @format int32
-         * @default 0
-         */
-        page?: number;
-        search?: string;
-        /**
-         * @format int32
-         * @default 10
-         */
-        size?: number;
-      },
-      params: RequestParams = {}
-    ) =>
-      this.request<IBaseDTO[], ErrorResponse>({
-        path: `/waistsize/paginated`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name WaistsizeUpdate
-     * @summary Update
-     * @request PUT:/waistsize/{id}
-     * @secure
-     */
-    waistsizeUpdate: (
-      id: number,
-      data: WaistSizeDTO,
-      params: RequestParams = {}
-    ) =>
-      this.request<IBaseDTO, ErrorResponse>({
-        path: `/waistsize/${id}`,
-        method: 'PUT',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Waist Size Controller
-     * @name WaistsizeDelete
-     * @summary Delete
-     * @request DELETE:/waistsize/{id}
-     * @secure
-     */
-    waistsizeDelete: (id: number, params: RequestParams = {}) =>
-      this.request<void, ErrorResponse>({
-        path: `/waistsize/${id}`,
         method: 'DELETE',
         secure: true,
         ...params,

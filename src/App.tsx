@@ -31,6 +31,14 @@ import { BaseAPIContextProvider } from './contexts/BaseAPIContext';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import {
+  BloodPressureProvider,
+  HeightProvider,
+  RAPAProvider,
+  StepsProvider,
+  WaistSizeProvider,
+  WeightProvider,
+} from './contexts/MetricsContext';
 
 export default function App() {
   preloadImages([
@@ -79,11 +87,23 @@ export default function App() {
               >
                 <BaseAPIContextProvider>
                   <ResourceProvider>
-                    <AuthProvider>
-                      <SprintProvider>
-                        <Routes />
-                      </SprintProvider>
-                    </AuthProvider>
+                    <BloodPressureProvider>
+                      <HeightProvider>
+                        <WeightProvider>
+                          <WaistSizeProvider>
+                            <RAPAProvider>
+                              <StepsProvider>
+                                <AuthProvider>
+                                  <SprintProvider>
+                                    <Routes />
+                                  </SprintProvider>
+                                </AuthProvider>
+                              </StepsProvider>
+                            </RAPAProvider>
+                          </WaistSizeProvider>
+                        </WeightProvider>
+                      </HeightProvider>
+                    </BloodPressureProvider>
                   </ResourceProvider>
                 </BaseAPIContextProvider>
               </SnackbarProvider>
