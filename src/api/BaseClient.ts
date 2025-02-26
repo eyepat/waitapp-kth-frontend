@@ -630,8 +630,11 @@ export interface CalendarDate {
   zoneOffset?: number;
   /** @format int32 */
   daylightSaving?: number;
+  forceStandardTime?: boolean;
+  locale?: Locale;
   /** @format int64 */
   timeOfDay?: number;
+  standardTime?: boolean;
   daylightTime?: boolean;
   zone?: TimeZone;
 }
@@ -1553,8 +1556,11 @@ export interface Date1 {
   zoneOffset?: number;
   /** @format int32 */
   daylightSaving?: number;
+  forceStandardTime?: boolean;
+  locale?: Locale;
   /** @format int64 */
   timeOfDay?: number;
+  standardTime?: boolean;
   daylightTime?: boolean;
   zone?: TimeZone;
   /** @format int32 */

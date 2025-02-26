@@ -18,6 +18,9 @@ import theme from '../../../components/Theme';
 import { useAuth } from '../../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
+import { useBloodPressureContext } from '../../../contexts/MetricsContext';
+import { BloodPressureDTO } from '../../../api/BaseClient';
+import dayjs from 'dayjs';
 
 const CustomTextField = styled(TextField)({
   width: '60%',
@@ -63,6 +66,7 @@ export default function BloodPressureTest() {
   const { t } = useLanguage();
   const { user } = useAuth();
   const { sprint } = useSprintContext();
+  const { createResource } = useBloodPressureContext();
 
   const addMeasurement = (type: string, obj: any) => {
     console.log('todo', type, obj);
@@ -81,7 +85,7 @@ export default function BloodPressureTest() {
   const isValidBloodPressure = (systolic: any, diastolic: any) => {
     const systolicNumber = Number(systolic);
     const diastolicNumber = Number(diastolic);
-    
+
     return !(
       isNaN(systolicNumber) ||
       systolicNumber < 1 ||
@@ -102,7 +106,7 @@ export default function BloodPressureTest() {
       isNaN(diastolicNumber) ||
       diastolicNumber > 110
     );
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -211,35 +215,56 @@ export default function BloodPressureTest() {
                   backgroundColor: '#333',
                 },
               }}
-
               onClick={() => {
                 if (user === undefined || user.id === undefined) {
                   enqueueSnackbar('error-no-user', { variant: 'error' });
                   return;
                 }
-                if (!isValidNumber(systolic) || !isValidNumber(diastolic) || !isValidBloodPressure(systolic, diastolic)) {
+                if (
+                  !isValidNumber(systolic) ||
+                  !isValidNumber(diastolic) ||
+                  !isValidBloodPressure(systolic, diastolic)
+                ) {
                   enqueueSnackbar('invalid-blood-pressure-error', {
                     variant: 'error',
                   });
                   return;
+                } else if (bloodPressureWarning(systolic, diastolic)) {
+                  enqueueSnackbar(
+                    t(
+                      'Blodtryck är högt, kontrollera mätningen och kontakta 1177 för rådgivning'
+                    ),
+                    {
+                      //ToDo should use t('blood-pressure-warning'), don't know why it's not working...
+                      variant: 'warning',
+                    }
+                  );
                 }
-                else if (bloodPressureWarning(systolic, diastolic)){
-                  enqueueSnackbar(t('Blodtryck är högt, kontrollera mätningen och kontakta 1177 för rådgivning'), {  //ToDo should use t('blood-pressure-warning'), don't know why it's not working... 
-                    variant: 'warning',
-                  });
-                }
-                enqueueSnackbar('Blodtryck regristrerat', {variant: 'success'})
+                enqueueSnackbar('Blodtryck regristrerat', {
+                  variant: 'success',
+                });
 
-                const metric: Metric = {
-                  userID: user?.id,
-                  sprintID: sprint ? (sprint.id ? sprint.id : null) : null,
-                  timeStamp: null,
+                const metric: BloodPressureDTO = {
+                  userID: undefined!,
+                  sprintID: sprint?.id!,
+                  timestamp: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
                   value: systolic + '/' + diastolic,
                 };
 
-                if (addMeasurement) addMeasurement('blood-pressure', metric);
-                else
-                  enqueueSnackbar('error-adding-metric', { variant: 'error' });
+                createResource(metric)
+                  .then(() => {
+                    enqueueSnackbar(
+                      'success-adding-bloodpressure-measurement',
+                      {
+                        variant: 'success',
+                      }
+                    );
+                  })
+                  .catch(() => {
+                    enqueueSnackbar('error-adding-bloodpressure-measurement', {
+                      variant: 'error',
+                    });
+                  });
               }}
             >
               <Typography> {t('save')}</Typography>

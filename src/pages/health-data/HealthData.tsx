@@ -23,6 +23,14 @@ import theme from '../../components/Theme';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import Graph, { GraphMode } from './Graph';
 import Sprints from './Sprints';
+import {
+  useBloodPressureContext,
+  useHeightContext,
+  useRAPAContext,
+  useStepsContext,
+  useWaistSizeContext,
+  useWeightContext,
+} from '../../contexts/MetricsContext';
 
 export default function HealthData() {
   const { t } = useLanguage();
@@ -30,11 +38,6 @@ export default function HealthData() {
   const { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
   const [openWip, setOpenWip] = useState(false);
-
-  const getLatestByType = (type: string): undefined | { value: any } => {
-    console.log('todo', type);
-    return undefined;
-  };
 
   function handleOpenWip() {
     setOpenWip(true);
@@ -76,14 +79,75 @@ export default function HealthData() {
       | 'rapa'
       | 'steps';
   }) => {
-    return getLatestByType ? (
+    const [value, setValue] = useState<number | string>(0);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const { getLatest: getLatestHeight } = useHeightContext();
+    const { getLatest: getLatestWeight } = useWeightContext();
+    const { getLatest: getLatestBloodPressure } = useBloodPressureContext();
+    const { getLatest: getLatestWaistSize } = useWaistSizeContext();
+    const { getLatest: getLatestSteps } = useStepsContext();
+    const { getLatest: getLatestRAPA } = useRAPAContext();
+
+    useEffect(() => {
+      const fetchData = async () => {
+        setLoading(true);
+        let result: number | string | null = null;
+
+        try {
+          switch (metric) {
+            case 'height': {
+              const latest = await getLatestHeight();
+              result = latest?.value ?? 0;
+              break;
+            }
+            case 'weight': {
+              const latest = await getLatestWeight();
+              result = latest?.value ? parseFloat(latest.value.toFixed(2)) : 0;
+              break;
+            }
+            case 'blood-pressure': {
+              const latest = await getLatestBloodPressure();
+              result = latest?.value ?? 0;
+              break;
+            }
+            case 'waist-size': {
+              const latest = await getLatestWaistSize();
+              result = latest?.value ?? 0;
+              break;
+            }
+            case 'rapa': {
+              const latest = await getLatestRAPA();
+              result = latest?.value ?? 0;
+              break;
+            }
+            case 'steps': {
+              const latest = await getLatestSteps();
+              result = latest?.value ?? 0;
+              break;
+            }
+            default: {
+              result = 0;
+              break;
+            }
+          }
+
+          setValue(result);
+        } catch (error) {
+          console.error(`Error fetching ${metric} data:`, error);
+          setValue(0);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchData();
+    }, [metric]);
+
+    return (
       <Box fontWeight="bold" display="inline">
-        {metric === 'weight'
-          ? (getLatestByType(metric)?.value?.toFixed(2) ?? 0)
-          : (getLatestByType(metric)?.value ?? 0)}
+        {loading ? 'Loading...' : value}
       </Box>
-    ) : (
-      ''
     );
   };
 
@@ -92,19 +156,27 @@ export default function HealthData() {
   const goalWaist = 50;
 
   const GoalWeight = () => {
-    let dif: number = Number(
-      getLatestByType ? getLatestByType('weight')?.value : 0
-    );
-    dif -= goalWeight;
-    dif = Math.round(dif * 10) / 10;
+    const { getLatest, latest } = useWeightContext();
+    const [diff, setDiff] = useState<number | undefined>(undefined);
 
-    const isNAN = Number.isNaN(dif);
+    useEffect(() => {
+      const fetchLatest = async () => {
+        const latestWeight = latest?.value ?? (await getLatest())?.value;
+        if (latestWeight !== undefined) {
+          let calculatedDiff = Number(latestWeight) - goalWeight;
+          calculatedDiff = Math.round(calculatedDiff * 10) / 10;
+          setDiff(Number.isNaN(calculatedDiff) ? undefined : calculatedDiff);
+        }
+      };
+
+      fetchLatest();
+    }, [latest, getLatest, goalWeight]);
 
     return (
       <>
-        {dif < 0 ? t('gain-weight') : t('lose-weight')}
+        {diff !== undefined && diff < 0 ? t('gain-weight') : t('lose-weight')}
         <Box fontWeight="bold" display="inline">
-          {' ' + (isNAN ? '0' : Math.abs(dif))}
+          {' ' + (diff === undefined ? '0' : Math.abs(diff))}
         </Box>
         {' kg'}
       </>

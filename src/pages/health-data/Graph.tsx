@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -10,6 +10,11 @@ import {
 } from 'recharts';
 import { useLanguage } from '../../contexts/LanguageContext';
 import dayjs from 'dayjs';
+import {
+  useBloodPressureContext,
+  useWeightContext,
+} from '../../contexts/MetricsContext';
+import { BloodPressureDTO, WeightDTO } from '../../api/BaseClient';
 
 export enum GraphMode {
   Systolic,
@@ -21,10 +26,19 @@ interface GraphProps {
   mode: GraphMode;
 }
 
+type IGenericMetric = BloodPressureDTO | WeightDTO;
+
+interface ExpandedBloodpressureDTO extends BloodPressureDTO {
+  systolic: number;
+  diastolic: number;
+}
+
 const Graph: React.FC<GraphProps> = ({ mode }) => {
   const { t } = useLanguage();
-  const { bloodPressure, weight } = { bloodPressure: [], weight: [] };
-  let data: Metric[] | undefined;
+  const { getResources: getBPs, resources: bpResources } =
+    useBloodPressureContext();
+  const { getResources: getWs, resources: wResources } = useWeightContext();
+  const [data, setData] = useState<IGenericMetric[] | undefined>();
   const key =
     mode === GraphMode.Weight
       ? 'value'
@@ -32,32 +46,40 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
         ? 'systolic'
         : 'diastolic';
 
-  data = mode === GraphMode.Weight ? weight : bloodPressure;
+  useEffect(() => {
+    if (mode === GraphMode.Weight) {
+      getWs();
+    } else {
+      getBPs();
+    }
+  }, []);
+
+  useEffect(() => {
+    setData(
+      (mode === GraphMode.Weight ? wResources : bpResources)
+        ?.filter((entry: IGenericMetric) =>
+          dayjs(entry.timestamp).isAfter(dayjs().subtract(7, 'month'))
+        )
+        .map((entry: IGenericMetric) => ({
+          ...entry,
+          date: dayjs(entry.timestamp).format('MM/DD'),
+        }))
+    );
+  }, [bpResources, wResources]);
 
   // Extracts systolic and diastolic values from blood pressure data
   if (mode !== GraphMode.Weight) {
-    data?.map((entry: Metric) => {
-      const sys_diast = entry.value.split('/');
-      const systolic = Number(sys_diast[0]);
-      const diastolic = Number(sys_diast[1]);
-      (entry as BloodPressure).systolic = systolic;
-      (entry as BloodPressure).diastolic = diastolic;
+    data?.map((entry: IGenericMetric) => {
+      // @ts-ignore if mode is bloodpressure this will be a string
+      const sys_diast = entry.value?.split('/');
+      const systolic = Number(sys_diast?.[0] || -1);
+      const diastolic = Number(sys_diast?.[1] || -1);
+      (entry as ExpandedBloodpressureDTO).systolic = systolic;
+      (entry as ExpandedBloodpressureDTO).diastolic = diastolic;
     });
   }
 
   // Filters data points older than 7 months and formats date
-  data = data
-    ? data
-        .filter((entry: Metric) =>
-          dayjs(entry.timeStamp).isAfter(dayjs().subtract(7, 'month'))
-        )
-        .map((entry: Metric) => {
-          return {
-            ...entry,
-            date: dayjs(entry.timeStamp).format('MM/DD'),
-          };
-        })
-    : [];
 
   // Generate domain for y-axis (STATIC FOR NOW!)
   const calculateDomain = (): [string | number, string | number] => {

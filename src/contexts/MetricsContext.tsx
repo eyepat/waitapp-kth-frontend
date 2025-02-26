@@ -28,6 +28,7 @@ interface MetricsContextType<T, Tpage> {
   resources: T[] | undefined;
   resource: T | undefined;
   searchResult: Map<string, Cached<T[]>>;
+  latest: T | undefined;
   getResources: () => Promise<T[]>;
   getResource: (id: number) => Promise<T | undefined>;
   getPage: (
@@ -35,6 +36,7 @@ interface MetricsContextType<T, Tpage> {
     size?: number,
     query?: string
   ) => Promise<Tpage | undefined>;
+  getLatest: () => Promise<T | undefined>;
   searchResources: (params: {
     personnummer?: string;
     patientId?: string;
@@ -84,9 +86,13 @@ function createMetricsContext<T, Tpage>() {
       newResource: T,
       query?: string
     ) => Promise<HttpResponse<T, any>> | undefined;
+    latest?: (
+      api: Api<any> | null
+    ) => Promise<HttpResponse<T, any>> | undefined;
   }) => {
     return function MetricsProvider({ children }: { children: ReactNode }) {
       const { api, apiToken } = useBaseAPIContext();
+      const [latest, setLatest] = useState<T | undefined>(undefined);
       const [resources, setResources] = useState<T[] | undefined>(undefined);
       const [resource, setResource] = useState<T | undefined>(undefined);
       const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -309,6 +315,33 @@ function createMetricsContext<T, Tpage>() {
         }
       };
 
+      const getLatest = async (): Promise<T | undefined> => {
+        try {
+          if (!api) throw new Error('API is undefined');
+          if (!keycloak.authenticated) throw new Error('Not signed in');
+          if (!isLoaded) throw new Error('API not loaded yet');
+          if (!apiCall.latest)
+            throw new Error('no latest method specified for resource');
+          if (!latest) {
+            const response = await apiCall.latest(api);
+            const data = await response?.json();
+
+            setLatest(data);
+            return data;
+          } else {
+            return latest;
+          }
+        } catch (error) {
+          if (error instanceof Response) {
+            if (error.status === 401) {
+              keycloak.updateToken();
+            }
+          }
+          console.error('Error fetching resource:', error);
+          return undefined;
+        }
+      };
+
       return (
         <Context.Provider
           value={{
@@ -317,9 +350,11 @@ function createMetricsContext<T, Tpage>() {
             resources,
             resource,
             searchResult,
+            latest,
             getResources,
             getResource,
             getPage,
+            getLatest,
             searchResources,
             createResource,
             dropSearchCache,
@@ -358,6 +393,10 @@ export const BloodPressureProvider = BloodPressure.createMetricsProvider({
     api?.metrics.bloodpressureCreate(newResource) as Promise<
       HttpResponse<BloodPressureDTO, ErrorResponse>
     >,
+  latest: (api) =>
+    api?.metrics.bloodpressureLatestList() as Promise<
+      HttpResponse<BloodPressureDTO, ErrorResponse>
+    >,
 });
 export const useBloodPressureContext = BloodPressure.useMetricsContext;
 
@@ -380,6 +419,10 @@ export const HeightProvider = Height.createMetricsProvider({
     api?.metrics.heightCreate(newResource) as Promise<
       HttpResponse<HeightDTO, ErrorResponse>
     >,
+  latest: (api) =>
+    api?.metrics.heightLatestList() as Promise<
+      HttpResponse<HeightDTO, ErrorResponse>
+    >,
 });
 export const useHeightContext = Height.useMetricsContext;
 
@@ -400,6 +443,10 @@ export const RAPAProvider = RAPA.createMetricsProvider({
     api?.metrics.rapaCreate(newResource) as Promise<
       HttpResponse<RAPADTO, ErrorResponse>
     >,
+  latest: (api) =>
+    api?.metrics.rapaLatestList() as Promise<
+      HttpResponse<RAPADTO, ErrorResponse>
+    >,
 });
 export const useRAPAContext = RAPA.useMetricsContext;
 
@@ -418,6 +465,10 @@ export const StepsProvider = Steps.createMetricsProvider({
     >,
   create: (api, newResource) =>
     api?.metrics.stepsCreate(newResource) as Promise<
+      HttpResponse<StepsDTO, ErrorResponse>
+    >,
+  latest: (api) =>
+    api?.metrics.stepsLatestList() as Promise<
       HttpResponse<StepsDTO, ErrorResponse>
     >,
 });
@@ -442,8 +493,12 @@ export const WaistSizeProvider = WaistSize.createMetricsProvider({
     api?.metrics.waistsizeCreate(newResource) as Promise<
       HttpResponse<WaistSizeDTO, ErrorResponse>
     >,
+  latest: (api) =>
+    api?.metrics.waistsizeLatestList() as Promise<
+      HttpResponse<WaistSizeDTO, ErrorResponse>
+    >,
 });
-export const useWaistSize = WaistSize.useMetricsContext;
+export const useWaistSizeContext = WaistSize.useMetricsContext;
 
 const Weight = createMetricsContext<WeightDTO, Page<WeightDTO>>();
 export const WeightProvider = Weight.createMetricsProvider({
@@ -464,5 +519,9 @@ export const WeightProvider = Weight.createMetricsProvider({
     api?.metrics.weightCreate(newResource) as Promise<
       HttpResponse<WeightDTO, ErrorResponse>
     >,
+  latest: (api) =>
+    api?.metrics.weightLatestList() as Promise<
+      HttpResponse<WeightDTO, ErrorResponse>
+    >,
 });
-export const useWeight = Weight.useMetricsContext;
+export const useWeightContext = Weight.useMetricsContext;
