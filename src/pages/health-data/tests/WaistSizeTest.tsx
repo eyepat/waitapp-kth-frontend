@@ -14,8 +14,8 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
 import { useState } from 'react';
-import { WeightDTO } from '../../../api/BaseClient';
-import { useWeightContext } from '../../../contexts/MetricsContext';
+import { useWaistSizeContext } from '../../../contexts/MetricsContext';
+import { WaistSizeDTO } from '../../../api/BaseClient';
 import dayjs from 'dayjs';
 
 const CustomInputField = styled(TextField)({
@@ -42,12 +42,12 @@ const CustomInputField = styled(TextField)({
   },
 });
 
-export default function WeightTest() {
+export default function WaistSizeTest() {
   const { user } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const { sprint } = useSprintContext();
-  const { createResource } = useWeightContext();
-  const [weight, setWeight] = useState<string>('');
+  const { createResource } = useWaistSizeContext();
+  const [waistSize, setWaistSize] = useState<string>('');
 
   const { t } = useLanguage();
 
@@ -55,10 +55,10 @@ export default function WeightTest() {
     <ThemeProvider theme={theme}>
       <Stack alignItems="center">
         <Typography variant="h4" marginBottom="1rem" alignSelf="center">
-          {t('weight-test')}
+          {t('waist-size-test')}
         </Typography>
         <Typography width={'80%'} textAlign="justify">
-          {t('about-weight')}
+          {t('about-waist-size')}
         </Typography>
 
         <Box
@@ -72,10 +72,10 @@ export default function WeightTest() {
           <CustomInputField
             type="number"
             variant="outlined"
-            value={weight}
+            value={waistSize}
             onChange={(e) => {
               if (e.target.value.length <= 5) {
-                setWeight(e.target.value);
+                setWaistSize(e.target.value);
               }
             }}
             inputProps={{ maxLength: 4 }}
@@ -87,7 +87,7 @@ export default function WeightTest() {
                     fontSize="large"
                     color="hsla(0, 0%, 20%, 1)"
                   >
-                    kg
+                    cm
                   </Typography>
                 </InputAdornment>
               ),
@@ -114,34 +114,37 @@ export default function WeightTest() {
                 enqueueSnackbar('error-no-user', { variant: 'error' });
                 return;
               }
-              if (!/^\d+(\.\d+)?$/.test(weight)) {
-                enqueueSnackbar('invalid-weight-error', { variant: 'error' });
+              if (!/^\d+(\.\d+)?$/.test(waistSize)) {
+                enqueueSnackbar('invalid-waist-size-error', {
+                  variant: 'error',
+                });
                 return;
               }
-              const weightNumber = Number(weight);
-              if (
-                isNaN(weightNumber) ||
-                weightNumber < 25 ||
-                weightNumber > 300
-              ) {
-                enqueueSnackbar('invalid-weight-error', { variant: 'error' });
+              const waistNumber = Number(waistSize);
+              if (isNaN(waistNumber) || waistNumber < 40 || waistNumber > 200) {
+                enqueueSnackbar('invalid-waist-size-error', {
+                  variant: 'error',
+                });
                 return;
               }
 
-              const metric: WeightDTO = {
+              const metric: WaistSizeDTO = {
                 userID: user?.id,
                 sprintID: sprint?.id!,
                 timestamp: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
-                value: weightNumber,
+                value: waistNumber,
               };
+
               createResource(metric)
                 .then(() => {
-                  enqueueSnackbar('success-adding-metric', {
+                  enqueueSnackbar('success-adding-waist-size', {
                     variant: 'success',
                   });
                 })
                 .catch(() => {
-                  enqueueSnackbar('error-adding-metric', { variant: 'error' });
+                  enqueueSnackbar('error-adding-waist-size', {
+                    variant: 'error',
+                  });
                 });
             }}
           >

@@ -9,6 +9,7 @@ import Settings from './pages/settings/Settings';
 import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
 import BloodPressureTest from './pages/health-data/tests/BloodPressureTest';
 import WeightTest from './pages/health-data/tests/WeightTest';
+import WaistSizeTest from './pages/health-data/tests/WaistSizeTest';
 import SprintChoice from './pages/sprint/choice/SprintChoice';
 import FoodHabits from './pages/sprint/choice/food-habits/FoodHabits';
 import PhysicalActivity from './pages/sprint/choice/physical-activity/PhysicalActivity';
@@ -135,6 +136,17 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'weight-test',
     component: WeightTest,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: [
+      '/health-data/tests/waist-size-test',
+      '/health-data/overview/waist-size-test',
+    ],
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'waist-size-test',
+    component: WaistSizeTest,
     header: { expanded: false },
     isMenu: false,
   },

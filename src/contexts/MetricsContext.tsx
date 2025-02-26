@@ -13,6 +13,7 @@ import {
   HeightDTO,
   HttpResponse,
   RAPADTO,
+  RecipeDTO,
   StepsDTO,
   WaistSizeDTO,
   WeightDTO,
@@ -77,6 +78,7 @@ function createMetricsContext<T, Tpage>() {
       page?: number,
       query?: string
     ) => Promise<HttpResponse<Tpage, any>> | undefined;
+    // TODO: impl
     search?: (
       api: Api<any> | null,
       params: { personnummer?: string; patientId?: string }
@@ -256,6 +258,21 @@ function createMetricsContext<T, Tpage>() {
                 expiry: new Date(Date.now() + 1000 * 60), // cache expires in 1m
               })
             );
+
+            if (latest) {
+              // Compare timestamps and update `latest` if the new resource is newer
+              const createdTimestamp = new Date(created.timestamp).getTime();
+              const latestTimestamp = latest
+                ? // @ts-ignore latest should have timestamp
+                  new Date(latest?.timestamp).getTime()
+                : 0;
+
+              if (createdTimestamp > latestTimestamp) {
+                setLatest(created);
+              }
+            } else {
+              setLatest(created);
+            }
           }
           return created;
         } catch (error) {
@@ -525,3 +542,18 @@ export const WeightProvider = Weight.createMetricsProvider({
     >,
 });
 export const useWeightContext = Weight.useMetricsContext;
+
+const Recipe = createMetricsContext<RecipeDTO, Page<RecipeDTO>>();
+export const RecipeProvider = Recipe.createMetricsProvider({
+  list: (api) =>
+    api?.recipe.recipeList() as Promise<
+      HttpResponse<WeightDTO[], ErrorResponse>
+    >,
+  detail: (__api, __id: number) => undefined,
+  paginated: (api, size?: number, page?: number, search?: string) =>
+    // @ts-ignore i dont orka med typer, dehär e rätt
+    api?.recipe.paginatedList({ page, search, size }) as Promise<
+      HttpResponse<Page<RecipeDTO>, ErrorResponse>
+    >,
+});
+export const useRecipeContext = Recipe.useMetricsContext;

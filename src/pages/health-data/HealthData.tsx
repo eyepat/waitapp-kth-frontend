@@ -59,6 +59,7 @@ export default function HealthData() {
   const [expandedCards, setExpandedCards] = React.useState({
     bloodPressure: false,
     weight: false,
+    waistSize: false,
   });
 
   const handleExpandClick = (card: keyof typeof expandedCards) => {
@@ -325,6 +326,43 @@ export default function HealthData() {
             </Typography>
             {/*Add pressure and goal pressure to render text properly.*/}
           </CardContent>
+
+          <Collapse in={expandedCards.waistSize} timeout="auto" unmountOnExit>
+            <CardContent style={{ padding: '0' }}>
+              <Graph mode={GraphMode.WaistSize} />
+            </CardContent>
+          </Collapse>
+
+          <CardActions disableSpacing>
+            <Grid container direction="row" justifyContent="space-between">
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  sx={{ borderRadius: '10px' }}
+                  endIcon={<AddCircleOutline />}
+                  onClick={() => {
+                    navigate('/health-data/overview/waist-size-test');
+                  }}
+                >
+                  <Typography>{t('new-measurment')}</Typography>
+                </Button>
+              </Grid>
+              <Grid item>
+                <ExpandMore
+                  onClick={() => handleExpandClick('waistSize')}
+                  aria-expanded={expandedCards.waistSize}
+                  aria-label="show more"
+                  style={{
+                    transform: expandedCards.waistSize
+                      ? 'rotate(180deg)'
+                      : 'rotate(0deg)',
+                    transition: 'transform 0.3s',
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </CardActions>
         </Card>
 
         <Typography
@@ -357,7 +395,7 @@ export default function HealthData() {
       {
         name: t('waist-measurement'),
         icon: <ArrowRight />,
-        onClick: handleOpenWip,
+        onClick: () => navigate('/health-data/tests/waist-size-test'),
       },
       {
         name: t('test-for-physical-activity'),

@@ -68,10 +68,6 @@ export default function BloodPressureTest() {
   const { sprint } = useSprintContext();
   const { createResource } = useBloodPressureContext();
 
-  const addMeasurement = (type: string, obj: any) => {
-    console.log('todo', type, obj);
-  };
-
   function handleHowToMeasure(): void {
     setOpen(true);
   }

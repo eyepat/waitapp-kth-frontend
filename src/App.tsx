@@ -35,6 +35,7 @@ import {
   BloodPressureProvider,
   HeightProvider,
   RAPAProvider,
+  RecipeProvider,
   StepsProvider,
   WaistSizeProvider,
   WeightProvider,
@@ -95,7 +96,9 @@ export default function App() {
                               <StepsProvider>
                                 <AuthProvider>
                                   <SprintProvider>
-                                    <Routes />
+                                    <RecipeProvider>
+                                      <Routes />
+                                    </RecipeProvider>
                                   </SprintProvider>
                                 </AuthProvider>
                               </StepsProvider>
