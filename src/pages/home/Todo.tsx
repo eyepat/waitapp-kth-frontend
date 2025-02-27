@@ -25,7 +25,7 @@ export default function Todo() {
     useState<boolean | undefined>(undefined);
   useEffect(() => {
     getLatest().then((r) => {
-      if (r !== undefined) {
+      if (r != undefined) {
         setUserHasNotMeasuredRAPA(false);
       } else {
         setUserHasNotMeasuredRAPA(true);
@@ -33,7 +33,7 @@ export default function Todo() {
     });
   }, []);
   useEffect(() => {
-    if (sprint !== undefined) {
+    if (sprint != undefined) {
       setUserDoesNotHaveAnActiveSprint(false);
     } else {
       setUserDoesNotHaveAnActiveSprint(true);
