@@ -415,5 +415,9 @@
   "AFEQT-part-7-answer-5": "Ganska missnöjd",
   "AFEQT-part-7-answer-6": "Mycket missnöjd",
   "AFEQT-part-7-answer-7": "Oerhört missnöjd",
-  "AFEQT-part-7-question-2": "I vilken grad har din behandling lindrat dina symtom från förmaksflimmer?"
+  "AFEQT-part-7-question-2": "I vilken grad har din behandling lindrat dina symtom från förmaksflimmer?",
+  "motivation-text-pre-day": "Bra jobbat! Du är ",
+  "motivation-text-post-day": "dagar in i din sprint, fortsätt kämpa för att nå dina mål.",
+  "go-to-sprint": "Tryck för att gå till aktiv sprint.",
+  "no-active-sprint-home": "Du har ingen aktiv sprint, tryck här för att komma igång."
 }

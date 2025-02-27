@@ -4,7 +4,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import theme from '../../components/Theme';
 import { useAuth } from '../../contexts/AuthContext';
 import Todo from './Todo';
-import ActiveSprintCard from '../../components/Cards/ActiveSprintCard';
+import ActiveSprintCard from '../../components/Cards/MotivationCard';
 
 
 const Home: React.FC = () => {
