@@ -130,7 +130,6 @@ const Home: React.FC = () => {
   <Typography sx={{ lineHeight: '1' }}>
     {latestBloodPressure !== null ? latestBloodPressure : '-'}
   </Typography>
-  
 </Stack>
 
 {/* Waist Size Display */}
@@ -143,8 +142,6 @@ const Home: React.FC = () => {
   </Typography>
   
 </Stack>
-
-              
               <ActiveSprintCard />
             </Stack>
           </Stack>
