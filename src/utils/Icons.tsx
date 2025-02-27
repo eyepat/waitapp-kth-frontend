@@ -937,3 +937,86 @@ export function Forms() {
     </svg>
   );
 }
+
+export function BloodPressure() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="32"
+      viewBox="0 0 24 24"
+    >
+      <defs></defs>
+
+      <g id="tensimeter">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          d="M1.52,1.5h8.4A2.1,2.1,0,0,1,12,3.6V9.9A2.1,2.1,0,0,1,9.92,12H1.52a0,0,0,0,1,0,0V1.5A0,0,0,0,1,1.52,1.5Z"
+        />
+
+        <circle
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          cx="18.7"
+          cy="6.27"
+          r="3.82"
+        />
+
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          d="M8.16,11.05V12A3.82,3.82,0,0,0,12,15.82h2.91A3.81,3.81,0,0,0,18.7,12V6.27"
+        />
+
+        <rect
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          x="14.89"
+          y="18.68"
+          width="6.68"
+          height="3.82"
+          rx="1.91"
+        />
+
+        <line
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          x1="23.48"
+          y1="20.59"
+          x2="21.57"
+          y2="20.59"
+        />
+
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          d="M3.43,11.05V13a7.64,7.64,0,0,0,7.64,7.64h3.82"
+        />
+
+        <line
+          fill="none"
+          stroke="currentColor"
+          stroke-miterlimit="10"
+          stroke-width="1.91px"
+          x1="5.34"
+          y1="1.5"
+          x2="5.34"
+          y2="9.14"
+        />
+      </g>
+    </svg>
+  );
+}

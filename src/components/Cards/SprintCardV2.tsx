@@ -77,7 +77,7 @@ export default function SprintCard({ index, sprint }: SprintCardProps) {
           control={
             <Checkbox checked={checked} onChange={handleCheckboxChange} />
           }
-          label={t('Mark as Completed')}
+          label={t('mark-as-completed')}
         />
       </div>
       <ProgressBar

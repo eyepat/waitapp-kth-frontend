@@ -5,6 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { useSprintContext } from '../../contexts/SprintContext';
 import { useRAPAContext } from '../../contexts/MetricsContext';
 import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
+
+const getSprintMotivationText = (startDate: string, t: Function): string => {
+  const dayOfSprint = dayjs().diff(dayjs(startDate, 'DD/MM/YYYY'), 'day') + 1;
+
+  return `${t('motivation-text-pre-day')} ${dayOfSprint} ${(dayOfSprint === 1 ? t('day') : t('days')) + ' ' + t('motivation-text-post-day')}`;
+};
 
 export default function Todo() {
   const { t } = useLanguage();
@@ -38,6 +45,7 @@ export default function Todo() {
       justifyContent="center"
       alignSelf="center"
       gap="3"
+      spacing={2}
     >
       {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
         <TextCard
@@ -54,16 +62,11 @@ export default function Todo() {
         />
       )}
       {userDoesNotHaveAnActiveSprint !== undefined &&
-        !userDoesNotHaveAnActiveSprint && (
+        !userDoesNotHaveAnActiveSprint &&
+        sprint != undefined && (
           <TextCard
-            title={
-              t('user-has-active-sprint-of-type') +
-              ' ' +
-              sprint?.sprintType +
-              ' ' +
-              t('user-has-active-sprint-of-type')
-            }
-            text={t('desc')}
+            title={t('sprint')}
+            text={`${getSprintMotivationText(dayjs(sprint.startDate).format('DD/MM/YYYY'), t)}`}
             onClick={() => {
               navigate('/sprint');
             }}

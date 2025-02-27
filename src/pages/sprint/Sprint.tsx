@@ -82,35 +82,6 @@ export default function Sprint() {
     }
   };
 
-  /*const handleNext = () => {
-    if (isWeeklyView) {
-      if (currentDay < totalDays) {
-        setCurrentDay(currentDay + 1);
-        setIsWeeklyView(false);
-      }
-    } else if (currentDay % 7 === 0 && currentDay < totalDays) {
-      setIsWeeklyView(true);
-    } else {
-      setCurrentDay(currentDay + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (isWeeklyView || isCompleteView) {
-      setIsWeeklyView(false);
-      setIsCompleteView(false);
-    } else if (currentDay > 28 || currentWeek >= 5) {
-      // Hard coded 28 days
-      setIsCompleteView(true);
-      setCurrentDay(28);
-    } else if ((currentDay - 1) % 7 === 0 && currentDay > 1) {
-      setIsWeeklyView(true);
-      setCurrentDay(currentDay - 1);
-    } else {
-      setCurrentDay(currentDay - 1);
-    }
-  };*/
-
   const renderCompleteView = () => {
     return (
       <Card

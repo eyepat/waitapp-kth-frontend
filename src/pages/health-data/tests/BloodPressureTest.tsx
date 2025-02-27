@@ -236,9 +236,6 @@ export default function BloodPressureTest() {
                     }
                   );
                 }
-                enqueueSnackbar('Blodtryck regristrerat', {
-                  variant: 'success',
-                });
 
                 const metric: BloodPressureDTO = {
                   userID: undefined!,

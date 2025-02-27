@@ -113,28 +113,6 @@ export default function SprintView({
                     />
                   )}
                 </Stack>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  sx={{ marginTop: '2vh' }}
-                >
-                  <Button
-                    variant="contained"
-                    sx={{ width: '15vh' }}
-                    endIcon={<Straighten />}
-                    onClick={() => navigate('/health-data/tests')}
-                  >
-                    <Typography> {t('measure-card-button')} </Typography>
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={{ width: '15vh' }}
-                    endIcon={<Chat />}
-                    onClick={handleOpenWIP}
-                  >
-                    <Typography> {t('chat-card-button')} </Typography>
-                  </Button>
-                </Stack>
               </CardContent>
             </Card>
           ))}
@@ -170,6 +148,29 @@ export default function SprintView({
       >
         <ArrowForwardIos />
       </IconButton>
+
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ marginTop: '5vh' }}
+      >
+        <Button
+          variant="contained"
+          sx={{ width: '15vh' }}
+          endIcon={<Straighten />}
+          onClick={() => navigate('/health-data/tests')}
+        >
+          <Typography> {t('measure-card-button')} </Typography>
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ width: '15vh' }}
+          endIcon={<Chat />}
+          onClick={handleOpenWIP}
+        >
+          <Typography> {t('chat-card-button')} </Typography>
+        </Button>
+      </Stack>
     </Box>
   );
 }

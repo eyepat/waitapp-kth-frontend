@@ -37,12 +37,12 @@ export default function Forms() {
         <TextCard
           title={' (Lifestyle)'}
           text={''}
-          onClick={() => navigate('/settings/forms/lifestyle/questions')}
+          onClick={() => navigate('/settings/forms/lifestyle')}
         />
         <TextCard
           title={' (AFEQT)'}
           text={''}
-          onClick={() => navigate('/settings/forms/afeqt/questions')}
+          onClick={() => navigate('/settings/forms/afeqt')}
         />
       </Stack>
     </ThemeProvider>

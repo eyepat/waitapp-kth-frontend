@@ -80,6 +80,7 @@ export function Routes() {
                       settings={page.header.settings}
                       help={page.header.help}
                       tabsParent={to}
+                      backArrow={page.header.backArrow}
                     />
                   )}
                   {page.component && (

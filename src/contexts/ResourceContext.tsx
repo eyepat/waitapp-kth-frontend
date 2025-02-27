@@ -6,7 +6,12 @@ import React, {
   useEffect,
 } from 'react';
 import { useBaseAPIContext } from './BaseAPIContext';
-import { OnboardingDTO, SprintDTO, UserDTO } from '../api/BaseClient';
+import {
+  ErrorResponse,
+  OnboardingDTO,
+  SprintDTO,
+  UserDTO,
+} from '../api/BaseClient';
 
 interface ResourceContextType {
   ready: boolean;
@@ -14,7 +19,7 @@ interface ResourceContextType {
   clearSelf: () => void;
   getSelf: () => Promise<UserDTO | undefined>;
   onboard: (onboarding: OnboardingDTO) => Promise<UserDTO | undefined>;
-  getSprints: () => Promise<SprintDTO[]>;
+  getSprints: () => Promise<SprintDTO[] | undefined>;
   getLatestSprint: () => Promise<SprintDTO | undefined>;
   getLatestActiveSprint: () => Promise<SprintDTO | undefined>;
   createSprint: (newSprint: SprintDTO) => Promise<SprintDTO | undefined>;
@@ -22,7 +27,7 @@ interface ResourceContextType {
     id: number,
     updatedSprint: SprintDTO
   ) => Promise<SprintDTO | undefined>;
-  deleteSprint: (id: number) => Promise<boolean>;
+  deleteSprint: (id: number) => Promise<boolean | undefined>;
 }
 
 interface Cached<T> {
@@ -78,25 +83,33 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.user.selfList();
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not get self');
+      }
+      const user = (await resp.json()) as UserDTO | undefined;
 
-    const resp = await api.user.selfList();
-    const user = (await resp.json()) as UserDTO | undefined;
+      if (user === undefined) {
+        return undefined;
+      }
 
-    if (user === undefined) {
-      return undefined;
+      const expiry = new Date();
+      expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
+
+      setSelf(user);
+      setUserCache((prev) => {
+        const updated = new Map(prev);
+        updated.set('__self__', { data: user, expiry });
+        return updated;
+      });
+
+      return user;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not get self');
     }
-
-    const expiry = new Date();
-    expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
-
-    setSelf(user);
-    setUserCache((prev) => {
-      const updated = new Map(prev);
-      updated.set('__self__', { data: user, expiry });
-      return updated;
-    });
-
-    return user;
   };
 
   const onboard = async (
@@ -105,28 +118,36 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.user.onboardingCreate(onboarding);
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not onboard user');
+      }
+      const user = (await resp.json()) as UserDTO | undefined;
 
-    const resp = await api.user.onboardingCreate(onboarding);
-    const user = (await resp.json()) as UserDTO | undefined;
+      if (user === undefined) {
+        return undefined;
+      }
 
-    if (user === undefined) {
-      return undefined;
+      const expiry = new Date();
+      expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
+
+      setSelf(user);
+      setUserCache((prev) => {
+        const updated = new Map(prev);
+        updated.set('__self__', { data: user, expiry });
+        return updated;
+      });
+
+      return user;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not onboard user');
     }
-
-    const expiry = new Date();
-    expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
-
-    setSelf(user);
-    setUserCache((prev) => {
-      const updated = new Map(prev);
-      updated.set('__self__', { data: user, expiry });
-      return updated;
-    });
-
-    return user;
   };
 
-  const getSprints = async (): Promise<SprintDTO[]> => {
+  const getSprints = async (): Promise<SprintDTO[] | undefined> => {
     const cached = sprintCache.get('__self__');
     if (cached && cached.expiry > new Date()) {
       return cached.data;
@@ -135,19 +156,27 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.sprint.sprintList();
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not get sprints');
+      }
+      const sprints = (await resp.json()) as SprintDTO[];
+      const expiry = new Date();
+      expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
 
-    const resp = await api.sprint.sprintList();
-    const sprints = (await resp.json()) as SprintDTO[];
-    const expiry = new Date();
-    expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
+      setSprintCache((prev) => {
+        const updated = new Map(prev);
+        updated.set('__self__', { data: sprints, expiry });
+        return updated;
+      });
 
-    setSprintCache((prev) => {
-      const updated = new Map(prev);
-      updated.set('__self__', { data: sprints, expiry });
-      return updated;
-    });
-
-    return sprints;
+      return sprints;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not get sprints');
+    }
   };
 
   const getLatestSprint = async (): Promise<SprintDTO | undefined> => {
@@ -159,24 +188,32 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.sprint.latestList();
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not get latest sprint');
+      }
+      const latest = (await resp.json()) as SprintDTO | undefined;
 
-    const resp = await api.sprint.latestList();
-    const latest = (await resp.json()) as SprintDTO | undefined;
+      if (latest === undefined) {
+        return undefined;
+      }
 
-    if (latest === undefined) {
-      return undefined;
+      const expiry = new Date();
+      expiry.setMinutes(expiry.getMinutes() + 1); // Cache for 1 minute
+
+      setSprintCache((prev) => {
+        const updated = new Map(prev);
+        updated.set('__latest__', { data: [latest], expiry });
+        return updated;
+      });
+
+      return latest;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not get latest sprint');
     }
-
-    const expiry = new Date();
-    expiry.setMinutes(expiry.getMinutes() + 1); // Cache for 1 minute
-
-    setSprintCache((prev) => {
-      const updated = new Map(prev);
-      updated.set('__latest__', { data: [latest], expiry });
-      return updated;
-    });
-
-    return latest;
   };
 
   const getLatestActiveSprint = async (): Promise<SprintDTO | undefined> => {
@@ -188,24 +225,28 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.sprint.latestList({ active: true });
+      const latest = (await resp.json()) as SprintDTO | undefined;
 
-    const resp = await api.sprint.latestList({ active: true });
-    const latest = (await resp.json()) as SprintDTO | undefined;
+      if (latest === undefined) {
+        return undefined;
+      }
 
-    if (latest === undefined) {
-      return undefined;
+      const expiry = new Date();
+      expiry.setMinutes(expiry.getMinutes() + 1); // Cache for 1 minute
+
+      setSprintCache((prev) => {
+        const updated = new Map(prev);
+        updated.set('__latest+active__', { data: [latest], expiry });
+        return updated;
+      });
+
+      return latest;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not get latest active sprint');
     }
-
-    const expiry = new Date();
-    expiry.setMinutes(expiry.getMinutes() + 1); // Cache for 1 minute
-
-    setSprintCache((prev) => {
-      const updated = new Map(prev);
-      updated.set('__latest+active__', { data: [latest], expiry });
-      return updated;
-    });
-
-    return latest;
   };
 
   const createSprint = async (
@@ -214,22 +255,30 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.sprint.sprintCreate(newSprint);
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not create sprint');
+      }
+      const addedSprint = (await resp.json()) as SprintDTO;
 
-    const resp = await api.sprint.sprintCreate(newSprint);
-    const addedSprint = (await resp.json()) as SprintDTO;
+      setSprintCache((prev) => {
+        const updatedCache = new Map(prev);
+        const sprints = updatedCache.get('__self__')?.data ?? [];
+        updatedCache.set('__self__', {
+          data: [...sprints, addedSprint],
+          expiry: new Date(Date.now() + 10 * 60000), // Cache for 10 minutes
+        });
 
-    setSprintCache((prev) => {
-      const updatedCache = new Map(prev);
-      const sprints = updatedCache.get('__self__')?.data ?? [];
-      updatedCache.set('__self__', {
-        data: [...sprints, addedSprint],
-        expiry: new Date(Date.now() + 10 * 60000), // Cache for 10 minutes
+        return updatedCache;
       });
 
-      return updatedCache;
-    });
-
-    return addedSprint;
+      return addedSprint;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not create sprint');
+    }
   };
 
   const updateSprint = async (
@@ -239,59 +288,71 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     if (!api) {
       throw new Error('API client is unavailable');
     }
+    try {
+      const resp = await api.sprint.sprintUpdate(id, updatedSprint);
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not update sprint');
+      }
+      const updated = (await resp.json()) as SprintDTO;
 
-    const resp = await api.sprint.sprintUpdate(id, updatedSprint);
-    const updated = (await resp.json()) as SprintDTO;
+      setSprintCache((prev) => {
+        const updatedCache = new Map(prev);
+        updatedCache.set(id + '', {
+          data: [updated],
+          expiry: new Date(Date.now() + 10 * 60000),
+        }); // Cache for 10 minutes
+        return updatedCache;
+      });
 
-    setSprintCache((prev) => {
-      const updatedCache = new Map(prev);
-      updatedCache.set(id + '', {
-        data: [updated],
-        expiry: new Date(Date.now() + 10 * 60000),
-      }); // Cache for 10 minutes
-      return updatedCache;
-    });
-
-    return updated;
+      return updated;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not update sprint');
+    }
   };
 
-  const deleteSprint = async (id: number): Promise<boolean> => {
+  const deleteSprint = async (id: number): Promise<boolean | undefined> => {
     if (!api) {
       throw new Error('API client is unavailable');
     }
-
-    const resp = await api.sprint.sprintDelete(id);
-    if (resp.status !== 204) {
-      throw new Error('Failed to delete sprint');
-    }
-
-    setSprintCache((prev) => {
-      const updatedCache = new Map(prev);
-
-      const latest = prev.get('__latest__')?.data;
-      if (latest && latest.length === 1 && latest[0].id === id) {
-        updatedCache.delete('__latest__');
+    try {
+      const resp = await api.sprint.sprintDelete(id);
+      if (resp.status !== 204) {
+        throw new Error('Failed to delete sprint');
       }
 
-      const owned = prev.get('__self__')?.data;
-      if (owned) {
-        const updatedOwned = owned.filter((sprint) => sprint.id !== id);
-        if (updatedOwned.length > 0) {
-          updatedCache.set('__self__', {
-            data: updatedOwned,
-            expiry: new Date(Date.now() + 10 * 60000),
-          });
-        } else {
-          updatedCache.delete('__self__');
+      setSprintCache((prev) => {
+        const updatedCache = new Map(prev);
+
+        const latest = prev.get('__latest__')?.data;
+        if (latest && latest.length === 1 && latest[0].id === id) {
+          updatedCache.delete('__latest__');
         }
-      }
 
-      updatedCache.delete(id + '');
+        const owned = prev.get('__self__')?.data;
+        if (owned) {
+          const updatedOwned = owned.filter((sprint) => sprint.id !== id);
+          if (updatedOwned.length > 0) {
+            updatedCache.set('__self__', {
+              data: updatedOwned,
+              expiry: new Date(Date.now() + 10 * 60000),
+            });
+          } else {
+            updatedCache.delete('__self__');
+          }
+        }
 
-      return updatedCache;
-    });
+        updatedCache.delete(id + '');
 
-    return true;
+        return updatedCache;
+      });
+
+      return true;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not delete sprint');
+    }
   };
 
   return (

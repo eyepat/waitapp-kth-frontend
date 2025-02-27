@@ -63,9 +63,12 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
       const newSprint = await createSprint(sprint);
       if (newSprint !== undefined) {
         setCurrentSprint(newSprint);
-
         enqueueSnackbar(t('success-post'), {
           variant: 'success',
+        });
+      } else {
+        enqueueSnackbar('fail-post', {
+          variant: 'error',
         });
       }
     } catch (error) {

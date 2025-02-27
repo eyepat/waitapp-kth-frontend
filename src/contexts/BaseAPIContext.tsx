@@ -79,7 +79,7 @@ export const BaseAPIContextProvider: React.FC<BaseAPIContextProviderProps> = ({
           console.error('Token is missing in securityWorker');
           return undefined;
         }
-        console.log('token in securityworker: ', token);
+        //console.log('token in securityworker: ', token);
         return {
           headers: {
             Authorization: `Bearer ${token}`,

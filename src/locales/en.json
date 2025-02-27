@@ -416,7 +416,9 @@
   "AFEQT-part-7-answer-7": "Extremely dissatisfied",
   "AFEQT-part-7-question-2": "To what extent has your treatment relieved your atrial fibrillation symptoms?",
   "motivation-text-pre-day": "Great job! You are ",
-  "motivation-text-post-day": "days into your sprint, keep pushing to reach your goals.",
+  "motivation-text-post-day": "into your sprint, keep pushing to reach your goals.",
+  "days": "days",
   "go-to-sprint": "Press to go to active sprint.",
-  "no-active-sprint-home": "You do not have an active sprint, click here to get started."
+  "no-active-sprint-home": "You do not have an active sprint, click here to get started.",
+  "mark-as-completed": "Mark as completed"
 }
