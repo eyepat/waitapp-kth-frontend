@@ -21,6 +21,7 @@ import { useSprintContext } from '../../../contexts/SprintContext';
 import { useBloodPressureContext } from '../../../contexts/MetricsContext';
 import { BloodPressureDTO } from '../../../api/BaseClient';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const CustomTextField = styled(TextField)({
   width: '60%',
@@ -67,6 +68,7 @@ export default function BloodPressureTest() {
   const { user } = useAuth();
   const { sprint } = useSprintContext();
   const { createResource } = useBloodPressureContext();
+  const navigate = useNavigate();
 
   function handleHowToMeasure(): void {
     setOpen(true);
@@ -252,6 +254,7 @@ export default function BloodPressureTest() {
                         variant: 'success',
                       }
                     );
+                    navigate('/health-data/tests');
                   })
                   .catch(() => {
                     enqueueSnackbar('error-adding-bloodpressure-measurement', {

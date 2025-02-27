@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { useWaistSizeContext } from '../../../contexts/MetricsContext';
 import { WaistSizeDTO } from '../../../api/BaseClient';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const CustomInputField = styled(TextField)({
   width: '60%',
@@ -50,6 +51,7 @@ export default function WaistSizeTest() {
   const [waistSize, setWaistSize] = useState<string>('');
 
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -140,6 +142,7 @@ export default function WaistSizeTest() {
                   enqueueSnackbar('success-adding-waist-size', {
                     variant: 'success',
                   });
+                  navigate('/health-data/tests');
                 })
                 .catch(() => {
                   enqueueSnackbar('error-adding-waist-size', {

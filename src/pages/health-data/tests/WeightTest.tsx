@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { WeightDTO } from '../../../api/BaseClient';
 import { useWeightContext } from '../../../contexts/MetricsContext';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const CustomInputField = styled(TextField)({
   width: '60%',
@@ -50,6 +51,7 @@ export default function WeightTest() {
   const [weight, setWeight] = useState<string>('');
 
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -139,6 +141,7 @@ export default function WeightTest() {
                   enqueueSnackbar('success-adding-metric', {
                     variant: 'success',
                   });
+                  navigate('/health-data/tests');
                 })
                 .catch(() => {
                   enqueueSnackbar('error-adding-metric', { variant: 'error' });
