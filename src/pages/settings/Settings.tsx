@@ -388,7 +388,9 @@ export default function Settings() {
                 variant="body2"
                 sx={{ color: 'text.secondary', fontWeight: 300 }}
               >
-                {import.meta.env.VITE_COMMIT_HASH}
+                {window.innerWidth <= 800
+                  ? import.meta.env.VITE_COMMIT_HASH.substring(0, 7)
+                  : import.meta.env.VITE_COMMIT_HASH}
               </Typography>
               <Button
                 variant="outlined"
