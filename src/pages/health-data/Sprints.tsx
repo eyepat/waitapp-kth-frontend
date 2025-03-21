@@ -52,11 +52,11 @@ export default function Sprints() {
           {t('sprint-text')}
         </Typography>
       )}
-      {sprint !== undefined && (
+      {sprint != undefined && (
         <>
           <TextCard
             title={
-              getSprintTypeText(sprint.type) +
+              getSprintTypeText(sprint.sprintType || '') +
               ' ' +
               t('sprint') +
               ' ' +
@@ -83,7 +83,7 @@ export default function Sprints() {
             sprint_.id !== sprint?.id && (
               <TextCard
                 title={
-                  getSprintTypeText(sprint_.type) +
+                  getSprintTypeText(sprint_.sprintType || '') +
                   ' ' +
                   t('sprint') +
                   ' ' +

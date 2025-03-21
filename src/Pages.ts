@@ -1,7 +1,6 @@
 import GeneralQuestions from './pages/general-questions/GeneralQuestions';
 import HealthData from './pages/health-data/HealthData';
 import Home from './pages/home/Home';
-import Login from './pages/login/Login';
 import Sprint from './pages/sprint/Sprint';
 import Register from './pages/register/Register';
 import { Page } from './types/page';
@@ -10,6 +9,7 @@ import Settings from './pages/settings/Settings';
 import KnowledgeBank from './pages/knowledge-bank/KnowledgeBank';
 import BloodPressureTest from './pages/health-data/tests/BloodPressureTest';
 import WeightTest from './pages/health-data/tests/WeightTest';
+import WaistSizeTest from './pages/health-data/tests/WaistSizeTest';
 import SprintChoice from './pages/sprint/choice/SprintChoice';
 import FoodHabits from './pages/sprint/choice/food-habits/FoodHabits';
 import PhysicalActivity from './pages/sprint/choice/physical-activity/PhysicalActivity';
@@ -20,6 +20,11 @@ import Security from './pages/settings/Security';
 import Forms from './pages/settings/Forms';
 import Rapa from './pages/forms/Rapa';
 import RapaForm from './pages/forms/RapaForm';
+import KCLogin from './pages/login/KCLogin';
+import LifestyleForm from './pages/forms/LifestyleForm';
+import AfeqtForm from './pages/forms/AfeqtForm';
+import Lifestyle from './pages/forms/Lifestyle';
+import Afeqt from './pages/forms/Afeqt';
 
 export enum AuthenticationLevels {
   NOT_LOGGED_IN,
@@ -48,7 +53,7 @@ export const pages: Page[] = [
     icon: HomeIcon,
     isMenu: true,
     component: Home,
-    header: { expanded: true },
+    header: { expanded: true, backArrow: false },
     showBottomNav: true,
   },
   {
@@ -66,7 +71,7 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.NOT_LOGGED_IN,
     label: 'login',
     isMenu: false,
-    component: Login,
+    component: KCLogin,
   },
   {
     to: '/register',
@@ -137,6 +142,17 @@ export const pages: Page[] = [
     isMenu: false,
   },
   {
+    to: [
+      '/health-data/tests/waist-size-test',
+      '/health-data/overview/waist-size-test',
+    ],
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'waist-size-test',
+    component: WaistSizeTest,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
     to: '/sprint/choice',
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-choice',
@@ -197,6 +213,38 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'RAPA',
     component: RapaForm,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms/lifestyle',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'Lifestyle',
+    component: Lifestyle,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms/lifestyle/questions',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'LifestyleForm',
+    component: LifestyleForm,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms/afeqt',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'AFEQT',
+    component: Afeqt,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: 'settings/forms/afeqt/questions',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'AfeqtForm',
+    component: AfeqtForm,
     header: { expanded: false },
     isMenu: false,
   },

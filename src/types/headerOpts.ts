@@ -3,4 +3,5 @@ export type HeaderOpts = {
   transparent?: boolean;
   settings?: boolean;
   help?: boolean;
+  backArrow?: boolean; // default true
 };

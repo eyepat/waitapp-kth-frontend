@@ -12,9 +12,10 @@ import {
 import { useLanguage } from '../../contexts/LanguageContext';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { useMetrics } from '../../contexts/MetricsContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
+import { useRAPAContext } from '../../contexts/MetricsContext';
+import dayjs from 'dayjs';
 
 interface Question {
   id: number;
@@ -42,9 +43,9 @@ export default function RapaForm() {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-  const { addMeasurement } = useMetrics();
   const { user } = useAuth();
   const { sprint } = useSprintContext();
+  const { createResource } = useRAPAContext();
 
   const handleAnswerChange = (questionId: string, value: string) => {
     setAnswers((prevAnswers) => ({
@@ -94,12 +95,12 @@ export default function RapaForm() {
         score += question.score;
       }
     });
-    if (user?.id !== undefined && addMeasurement !== undefined) {
-      addMeasurement('rapa', {
+    if (user?.id !== undefined) {
+      createResource({
         value: score,
-        userID: user?.id ?? 0,
-        sprintID: sprint?.id ?? null,
-        timeStamp: null,
+        userID: undefined!,
+        sprintID: sprint?.id!,
+        timestamp: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
       });
       enqueueSnackbar('good-job-on-new-rapa-score', {
         variant: 'success',

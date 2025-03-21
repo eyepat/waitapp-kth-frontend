@@ -24,6 +24,7 @@ export default function Header({
   settings,
   help,
   tabsParent,
+  backArrow = true,
 }: HeaderOpts) {
   const navigate = useNavigate();
   const TopBar = styled('div')({
@@ -90,9 +91,11 @@ export default function Header({
     // TODO: Update this condition to also check if the current page is healthdata, home, or sprint. If it is, do nothing.
     <TopBar sx={transparent ? { background: 'none' } : undefined}>
       <LeftSide>
-        <Button onClick={() => navigate(getParent())}>
-          {transparent ? <WhiteBackArrow /> : <BackArrow />}
-        </Button>
+        {backArrow && (
+          <Button onClick={() => navigate(getParent())}>
+            {transparent ? <WhiteBackArrow /> : <BackArrow />}
+          </Button>
+        )}
       </LeftSide>
       <Logo src={transparent ? whiteki : ki} />
       {expanded && (

@@ -22,15 +22,16 @@ import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { AuthenticationLevels } from '../../Pages';
 import dayjs, { Dayjs } from 'dayjs';
-import { RegisterInfo } from '../../types/registerInfo';
 import { z, ZodError } from 'zod';
 import Checkbox from '@mui/material/Checkbox';
-import { useMetrics } from '../../contexts/MetricsContext';
+import { Gender, OnboardingDTO } from '../../api/BaseClient';
+import { useKeycloak } from '@react-keycloak/web';
 
 export default function GeneralQuestions() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { user, registerInfo } = useAuth();
+  const { user, onboarding, authLevel } = useAuth();
+  const { keycloak, initialized } = useKeycloak();
 
   const [openWaistDialog, setOpenWaistDialog] = useState(false);
   const [openBloodPressureDialog, setOpenBloodPressureDialog] = useState(false);
@@ -109,7 +110,31 @@ export default function GeneralQuestions() {
     setSelectedAblationDate(value);
   };
   const [isAblationDateKnown, setIsAblationDateKnown] = useState(true);
-  const { update } = useMetrics();
+
+  const update = () => {
+    console.log('todo');
+  };
+
+  useEffect(() => {
+    if (
+      initialized &&
+      keycloak.authenticated &&
+      keycloak.profile &&
+      selectedName.length === 0
+    ) {
+      const newName =
+        keycloak.profile?.firstName ||
+        keycloak.tokenParsed?.['firstName'] +
+          ' ' +
+          keycloak.profile?.lastName ||
+        keycloak.tokenParsed?.['lastName'];
+      if (newName === ' ') {
+        console.log('couldnt get the keycloak name');
+      } else {
+        setSelectedName(newName);
+      }
+    }
+  }, [keycloak, initialized]);
 
   const invalid_type_error = 'invalid-type-error';
   const invalid_dob_error = 'invalid-dob-error';
@@ -210,18 +235,12 @@ export default function GeneralQuestions() {
   };
 
   useEffect(() => {
-    if (
-      user?.authLevel ? user.authLevel >= AuthenticationLevels.LOGGED_IN : false
-    ) {
+    if (authLevel >= AuthenticationLevels.LOGGED_IN) {
       navigate('/');
-    } else if (
-      user?.authLevel
-        ? user.authLevel < AuthenticationLevels.NO_DATA_PROVIDED
-        : true
-    ) {
+    } else if (authLevel < AuthenticationLevels.NO_DATA_PROVIDED) {
       navigate('/login');
     }
-  }, [user]);
+  }, [authLevel]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -432,32 +451,34 @@ export default function GeneralQuestions() {
           <Button
             onClick={() => {
               // TODO: handle actual registration
-              if (user == undefined) {
+              /*if (user == undefined) {
                 enqueueSnackbar('error-no-user', {
                   variant: 'error',
                 });
                 return;
-              }
+              }*/
               if (!validateUserProvidedData()) {
                 return;
               }
 
-              const registerUser: RegisterInfo = {
-                id: user.id,
-                gender: selectedGender.toUpperCase(),
+              const registerUser: OnboardingDTO = {
+                gender: selectedGender.toUpperCase() as Gender,
                 fullName: selectedName,
-                email: user.email,
-                birthDate: selectedDOB?.add(1, 'day')?.toISOString(),
+                email:
+                  user?.email ||
+                  keycloak.profile?.email ||
+                  keycloak.idTokenParsed?.['email'],
+                birthDate: selectedDOB?.add(1, 'day').format('YYYY-MM-DD'),
                 height: selectedHeight,
                 weight: selectedWeight,
                 waistSize: selectedWaistSize,
                 bloodPressure: selectedBloodPressure,
                 ablationDate: selectedAblationDate
                   ?.add(1, 'day')
-                  ?.toISOString(),
+                  .format('YYYY-MM-DD'),
               };
 
-              registerInfo(registerUser).then(() => {
+              onboarding(registerUser).then(() => {
                 if (update) update();
               });
             }}

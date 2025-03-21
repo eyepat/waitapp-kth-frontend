@@ -3,7 +3,6 @@ import { Routes } from './auth/Routes';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { SprintProvider } from './contexts/SprintContext';
-import { MetricsProvider } from './contexts/MetricsContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DeviceContextProvider } from './contexts/DeviceContext';
@@ -27,6 +26,20 @@ import underConstruction from './assets/popup/under-construction.svg';
 import { LoadingProvider } from './contexts/LoadContext';
 import BloodPressureTest from './assets/tests/bloodpressure.svg';
 import 'dayjs/locale/en-gb';
+import { ResourceProvider } from './contexts/ResourceContext';
+import { BaseAPIContextProvider } from './contexts/BaseAPIContext';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import {
+  BloodPressureProvider,
+  HeightProvider,
+  RAPAProvider,
+  RecipeProvider,
+  StepsProvider,
+  WaistSizeProvider,
+  WeightProvider,
+} from './contexts/MetricsContext';
 
 export default function App() {
   preloadImages([
@@ -73,13 +86,29 @@ export default function App() {
                   </IconButton>
                 )}
               >
-                <AuthProvider>
-                  <SprintProvider>
-                    <MetricsProvider>
-                      <Routes />
-                    </MetricsProvider>
-                  </SprintProvider>
-                </AuthProvider>
+                <BaseAPIContextProvider>
+                  <ResourceProvider>
+                    <BloodPressureProvider>
+                      <HeightProvider>
+                        <WeightProvider>
+                          <WaistSizeProvider>
+                            <RAPAProvider>
+                              <StepsProvider>
+                                <AuthProvider>
+                                  <SprintProvider>
+                                    <RecipeProvider>
+                                      <Routes />
+                                    </RecipeProvider>
+                                  </SprintProvider>
+                                </AuthProvider>
+                              </StepsProvider>
+                            </RAPAProvider>
+                          </WaistSizeProvider>
+                        </WeightProvider>
+                      </HeightProvider>
+                    </BloodPressureProvider>
+                  </ResourceProvider>
+                </BaseAPIContextProvider>
               </SnackbarProvider>
             </DeviceContextProvider>
           </LocalizationProvider>

@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -35,6 +36,7 @@ import Popup from '../../components/PopUps/Popup';
 import { useAuth } from '../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
 import { useSprintContext } from '../../contexts/SprintContext';
+import { GitHub } from '@mui/icons-material';
 
 export default function Settings() {
   const [openInfo, setOpenInfo] = useState(false);
@@ -364,6 +366,54 @@ export default function Settings() {
               </Typography>
               <ArrowRight />
             </Button>
+          </CardContent>
+        </Card>
+
+        <Card
+          sx={{
+            width: '100%',
+            background: 'none',
+            border: 'none',
+            boxShadow: 'none',
+          }}
+        >
+          <CardContent>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              marginTop="1vh"
+            >
+              <Typography
+                variant="body2"
+                sx={{ color: 'text.secondary', fontWeight: 300 }}
+              >
+                {window.innerWidth <= 800
+                  ? import.meta.env.VITE_COMMIT_HASH.substring(0, 7)
+                  : import.meta.env.VITE_COMMIT_HASH}
+              </Typography>
+              <Button
+                variant="outlined"
+                startIcon={<GitHub />}
+                onClick={() =>
+                  window.open(
+                    'https://github.com/wait-app/waitapp-frontend/issues',
+                    '_blank'
+                  )
+                }
+                sx={{
+                  textTransform: 'none',
+                  color: 'text.secondary',
+                  borderColor: 'text.disabled',
+                  '&:hover': {
+                    borderColor: 'text.primary',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  },
+                }}
+              >
+                {t('report-a-bug')}
+              </Button>
+            </Box>
           </CardContent>
         </Card>
 

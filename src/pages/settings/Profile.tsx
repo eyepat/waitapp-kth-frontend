@@ -18,10 +18,15 @@ import { useAuth } from '../../contexts/AuthContext';
 import dayjs, { Dayjs } from 'dayjs';
 import Checkbox from '@mui/material/Checkbox';
 import { Cancel, Edit } from '@mui/icons-material';
+import { Gender, UserDTO } from '../../api/BaseClient';
 
 export default function Profile() {
   const { t } = useLanguage();
-  const { user, updateUser } = useAuth();
+  const { user } = useAuth();
+  // todo impl updateUser
+  const updateUser = (user: UserDTO) => {
+    console.log('todo', user);
+  };
 
   const [selectedName, setSelectedName] = useState<string>('');
   const [selectedGender, setSelectedGender] = useState<string>('');
@@ -80,10 +85,10 @@ export default function Profile() {
 
   const saveChanges = async () => {
     await updateUser({
-      ...(user as User),
+      ...(user as UserDTO),
       fullName: selectedName,
-      gender: selectedGender.toUpperCase(),
-      birthDate: selectedDOB?.add(1, 'day')?.toISOString(),
+      gender: selectedGender.toUpperCase() as Gender,
+      birthDate: selectedDOB?.add(1, 'day')?.toISOString()!, // todo fix not iso string!
       ablationDate: selectedAblationDate?.add(1, 'day')?.toISOString(),
     });
 

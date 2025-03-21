@@ -15,10 +15,13 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { useState } from 'react';
 import { Svg } from '../../../utils/Icons';
 import theme from '../../../components/Theme';
-import { useMetrics } from '../../../contexts/MetricsContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import { enqueueSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
+import { useBloodPressureContext } from '../../../contexts/MetricsContext';
+import { BloodPressureDTO } from '../../../api/BaseClient';
+import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const CustomTextField = styled(TextField)({
   width: '60%',
@@ -63,8 +66,9 @@ export default function BloodPressureTest() {
   const [open, setOpen] = useState(false);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { addMeasurement } = useMetrics();
   const { sprint } = useSprintContext();
+  const { createResource } = useBloodPressureContext();
+  const navigate = useNavigate();
 
   function handleHowToMeasure(): void {
     setOpen(true);
@@ -73,6 +77,34 @@ export default function BloodPressureTest() {
   function handleClose(): void {
     setOpen(false);
   }
+
+  const isValidNumber = (value: string) => /^\d+$/.test(value);
+
+  const isValidBloodPressure = (systolic: any, diastolic: any) => {
+    const systolicNumber = Number(systolic);
+    const diastolicNumber = Number(diastolic);
+
+    return !(
+      isNaN(systolicNumber) ||
+      systolicNumber < 1 ||
+      systolicNumber > 220 ||
+      isNaN(diastolicNumber) ||
+      diastolicNumber < 1 ||
+      diastolicNumber > 160
+    );
+  };
+
+  const bloodPressureWarning = (systolic: any, diastolic: any) => {
+    const systolicNumber = Number(systolic);
+    const diastolicNumber = Number(diastolic);
+
+    return (
+      isNaN(systolicNumber) ||
+      systolicNumber > 180 ||
+      isNaN(diastolicNumber) ||
+      diastolicNumber > 110
+    );
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -186,38 +218,49 @@ export default function BloodPressureTest() {
                   enqueueSnackbar('error-no-user', { variant: 'error' });
                   return;
                 }
-                if (!/^\d+$/.test(systolic) || !/^\d+$/.test(diastolic)) {
-                  enqueueSnackbar('invalid-blood-pressure-error', {
-                    variant: 'error',
-                  });
-                  return;
-                }
-                const systolicNumber = Number(systolic);
-                const diastolicNumber = Number(diastolic);
                 if (
-                  isNaN(systolicNumber) ||
-                  systolicNumber < 1 ||
-                  systolicNumber > 220 ||
-                  isNaN(diastolicNumber) ||
-                  diastolicNumber < 1 ||
-                  diastolicNumber > 160
+                  !isValidNumber(systolic) ||
+                  !isValidNumber(diastolic) ||
+                  !isValidBloodPressure(systolic, diastolic)
                 ) {
                   enqueueSnackbar('invalid-blood-pressure-error', {
                     variant: 'error',
                   });
                   return;
+                } else if (bloodPressureWarning(systolic, diastolic)) {
+                  enqueueSnackbar(
+                    t(
+                      'Blodtryck är högt, kontrollera mätningen och kontakta 1177 för rådgivning'
+                    ),
+                    {
+                      //ToDo should use t('blood-pressure-warning'), don't know why it's not working...
+                      variant: 'warning',
+                    }
+                  );
                 }
 
-                const metric: Metric = {
-                  userID: user?.id,
-                  sprintID: sprint ? (sprint.id ? sprint.id : null) : null,
-                  timeStamp: null,
+                const metric: BloodPressureDTO = {
+                  userID: undefined!,
+                  sprintID: sprint?.id!,
+                  timestamp: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
                   value: systolic + '/' + diastolic,
                 };
 
-                if (addMeasurement) addMeasurement('blood-pressure', metric);
-                else
-                  enqueueSnackbar('error-adding-metric', { variant: 'error' });
+                createResource(metric)
+                  .then(() => {
+                    enqueueSnackbar(
+                      'success-adding-bloodpressure-measurement',
+                      {
+                        variant: 'success',
+                      }
+                    );
+                    navigate('/health-data/tests');
+                  })
+                  .catch(() => {
+                    enqueueSnackbar('error-adding-bloodpressure-measurement', {
+                      variant: 'error',
+                    });
+                  });
               }}
             >
               <Typography> {t('save')}</Typography>

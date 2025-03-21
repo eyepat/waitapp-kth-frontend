@@ -10,11 +10,14 @@ import {
 } from '@mui/material';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import theme from '../../../components/Theme';
-import { useMetrics } from '../../../contexts/MetricsContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useSnackbar } from 'notistack';
 import { useSprintContext } from '../../../contexts/SprintContext';
 import { useState } from 'react';
+import { WeightDTO } from '../../../api/BaseClient';
+import { useWeightContext } from '../../../contexts/MetricsContext';
+import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const CustomInputField = styled(TextField)({
   width: '60%',
@@ -44,10 +47,11 @@ export default function WeightTest() {
   const { user } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const { sprint } = useSprintContext();
-  const { addMeasurement } = useMetrics();
+  const { createResource } = useWeightContext();
   const [weight, setWeight] = useState<string>('');
 
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -126,15 +130,22 @@ export default function WeightTest() {
                 return;
               }
 
-              const metric: Metric = {
+              const metric: WeightDTO = {
                 userID: user?.id,
-                sprintID: sprint ? (sprint.id ? sprint.id : null) : null,
-                timeStamp: null,
+                sprintID: sprint?.id!,
+                timestamp: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
                 value: weightNumber,
               };
-
-              if (addMeasurement) addMeasurement('weight', metric);
-              else enqueueSnackbar('error-adding-metric', { variant: 'error' });
+              createResource(metric)
+                .then(() => {
+                  enqueueSnackbar('success-adding-metric', {
+                    variant: 'success',
+                  });
+                  navigate('/health-data/tests');
+                })
+                .catch(() => {
+                  enqueueSnackbar('error-adding-metric', { variant: 'error' });
+                });
             }}
           >
             <Typography>{t('save')}</Typography>

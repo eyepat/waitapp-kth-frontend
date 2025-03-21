@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -10,55 +10,90 @@ import {
 } from 'recharts';
 import { useLanguage } from '../../contexts/LanguageContext';
 import dayjs from 'dayjs';
-import { useMetrics } from '../../contexts/MetricsContext';
+import {
+  useBloodPressureContext,
+  useWaistSizeContext,
+  useWeightContext,
+} from '../../contexts/MetricsContext';
+import {
+  BloodPressureDTO,
+  WaistSizeDTO,
+  WeightDTO,
+} from '../../api/BaseClient';
 
 export enum GraphMode {
   Systolic,
   Diastolic,
   Weight,
+  WaistSize,
 }
 
 interface GraphProps {
   mode: GraphMode;
 }
 
+type IGenericMetric = BloodPressureDTO | WeightDTO | WaistSizeDTO;
+
+interface ExpandedBloodpressureDTO extends BloodPressureDTO {
+  systolic: number;
+  diastolic: number;
+}
+
 const Graph: React.FC<GraphProps> = ({ mode }) => {
   const { t } = useLanguage();
-  const { bloodPressure, weight } = useMetrics();
-  let data: Metric[] | undefined;
+  const { getResources: getBPs, resources: bpResources } =
+    useBloodPressureContext();
+  const { getResources: getWs, resources: wResources } = useWeightContext();
+  const { getResources: getWSs, resources: wsResouces } = useWaistSizeContext();
+  const [data, setData] = useState<IGenericMetric[] | undefined>();
   const key =
-    mode === GraphMode.Weight
+    mode === GraphMode.Weight || mode === GraphMode.WaistSize
       ? 'value'
       : mode === GraphMode.Systolic
         ? 'systolic'
         : 'diastolic';
 
-  data = mode === GraphMode.Weight ? weight : bloodPressure;
+  useEffect(() => {
+    if (mode === GraphMode.Weight) {
+      getWs();
+    } else if (mode === GraphMode.WaistSize) {
+      getWSs();
+    } else {
+      getBPs();
+    }
+  }, []);
+
+  useEffect(() => {
+    setData(
+      (mode === GraphMode.Weight
+        ? wResources
+        : mode === GraphMode.WaistSize
+          ? wsResouces
+          : bpResources
+      )
+        ?.filter((entry: IGenericMetric) =>
+          dayjs(entry.timestamp).isAfter(dayjs().subtract(7, 'month'))
+        )
+        .map((entry: IGenericMetric) => ({
+          ...entry,
+          date: dayjs(entry.timestamp).format('MM/DD'),
+        }))
+    );
+  }, [bpResources, wResources, wsResouces]);
 
   // Extracts systolic and diastolic values from blood pressure data
-  if (mode !== GraphMode.Weight) {
-    data?.map((entry: Metric) => {
-      const sys_diast = entry.value.split('/');
-      const systolic = Number(sys_diast[0]);
-      const diastolic = Number(sys_diast[1]);
-      (entry as BloodPressure).systolic = systolic;
-      (entry as BloodPressure).diastolic = diastolic;
+  if (mode === GraphMode.Systolic || mode === GraphMode.Diastolic) {
+    data?.map((entry: IGenericMetric) => {
+      // @ts-ignore if mode is bloodpressure this will be a string
+      const sys_diast = entry.value?.split('/');
+      const systolic = Number(sys_diast?.[0] || -1);
+      const diastolic = Number(sys_diast?.[1] || -1);
+      (entry as ExpandedBloodpressureDTO).systolic = systolic;
+      (entry as ExpandedBloodpressureDTO).diastolic = diastolic;
     });
   }
 
   // Filters data points older than 7 months and formats date
-  data = data
-    ? data
-        .filter((entry: Metric) =>
-          dayjs(entry.timeStamp).isAfter(dayjs().subtract(7, 'month'))
-        )
-        .map((entry: Metric) => {
-          return {
-            ...entry,
-            date: dayjs(entry.timeStamp).format('MM/DD'),
-          };
-        })
-    : [];
 
   // Generate domain for y-axis (STATIC FOR NOW!)
   const calculateDomain = (): [string | number, string | number] => {
@@ -73,6 +108,8 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
         return [60, 110];
       case GraphMode.Weight:
         return [40, 120];
+      case GraphMode.WaistSize:
+        return [40, 150];
     }
   };
 
@@ -122,12 +159,16 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
       case GraphMode.Weight:
         text = `${t('over')}\n90 kg\nNormal\n65 kg\nUnder\n50 kg`;
         break;
+      case GraphMode.WaistSize:
+        text = `${t('over')}\n120 cm\nNormal\n90 cm\nUnder\n60 cm`;
+        break;
     }
 
     const textParts: string[] = text.split('\n');
     const highlightEvery = 2;
 
-    const startingY = mode === GraphMode.Weight ? 25 : 40;
+    const startingY =
+      mode === GraphMode.Weight || GraphMode.WaistSize ? 25 : 40;
 
     return (
       <svg width="100px">
@@ -136,7 +177,7 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
             <text
               key={`tspan-${part}`}
               textAnchor="start"
-              x={mode === GraphMode.Weight ? 30 : 20}
+              x={mode === GraphMode.Weight || GraphMode.WaistSize ? 30 : 20}
               y={startingY + index * 16}
               style={{
                 display: 'block',
@@ -144,7 +185,9 @@ const Graph: React.FC<GraphProps> = ({ mode }) => {
                 fontSize: '0.8em',
                 // Hightlight Over/Normal/Under and Title
                 fontWeight:
-                  mode !== GraphMode.Weight && index === 0
+                  (mode === GraphMode.Systolic ||
+                    mode === GraphMode.Diastolic) &&
+                  index === 0
                     ? '700'
                     : index % highlightEvery === 0
                       ? '500'

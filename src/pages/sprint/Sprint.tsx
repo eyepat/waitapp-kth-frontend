@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import moon from '../../assets/sprint/moon.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Chat, Information } from '../../utils/Icons';
+import { Information } from '../../utils/Icons';
 import theme from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/PopUps/Popup';
@@ -18,10 +18,9 @@ import { useEffect, useState } from 'react';
 import { Background } from './MoonBackground';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSprintContext } from '../../contexts/SprintContext';
-import SprintCard from '../../components/Cards/sprintCard';
 import { WipPopUp } from '../../components/PopUps/WipPopUp';
 import dayjs from 'dayjs';
-import { ArrowBack, ArrowForward, Straighten } from '@mui/icons-material';
+import SprintView from '../../components/OngoingSprintView';
 
 export default function Sprint() {
   const { user } = useAuth();
@@ -39,7 +38,7 @@ export default function Sprint() {
   const [currentDay, setCurrentDay] = useState(
     dayjs().diff(dayjs(sprint ? sprint.startDate : ''), 'days') + 1
   );
-  const [isWeeklyView, setIsWeeklyView] = useState<boolean>(false);
+  const [isWeeklyView, _] = useState<boolean>(false);
   const [isCompleteView, setIsCompleteView] = useState<boolean>(false);
 
   const [totalDays, setTotalDays] = useState<number>(
@@ -80,35 +79,6 @@ export default function Sprint() {
         return t('alcohol-habits');
       default:
         return t('unknown-sprint-type');
-    }
-  };
-
-  const handleNext = () => {
-    if (isWeeklyView) {
-      if (currentDay < totalDays) {
-        setCurrentDay(currentDay + 1);
-        setIsWeeklyView(false);
-      }
-    } else if (currentDay % 7 === 0 && currentDay < totalDays) {
-      setIsWeeklyView(true);
-    } else {
-      setCurrentDay(currentDay + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (isWeeklyView || isCompleteView) {
-      setIsWeeklyView(false);
-      setIsCompleteView(false);
-    } else if (currentDay > 28 || currentWeek >= 5) {
-      // Hard coded 28 days
-      setIsCompleteView(true);
-      setCurrentDay(28);
-    } else if ((currentDay - 1) % 7 === 0 && currentDay > 1) {
-      setIsWeeklyView(true);
-      setCurrentDay(currentDay - 1);
-    } else {
-      setCurrentDay(currentDay - 1);
     }
   };
 
@@ -187,127 +157,21 @@ export default function Sprint() {
         sx={{ position: 'relative', width: '100%' }}
       >
         <Typography variant="h5" fontWeight="bold" sx={{ textAlign: 'center' }}>
-          {`${sprint ? getSprintTypeText(sprint.type).toUpperCase() : 'undefined'}`}
+          {`${sprint ? getSprintTypeText(sprint.sprintType).toUpperCase() : 'undefined'}`}
         </Typography>
-        <Box
-          sx={{
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            padding: '0 8%',
-          }}
-        >
-          <ArrowBack
-            sx={{
-              fontSize: '5vh',
-              cursor: 'pointer',
-              position: 'absolute',
-              left: '5%',
-              visibility: currentDay > 1 ? 'visible' : 'hidden',
-              zIndex: 1,
-            }}
-            onClick={handleBack}
-          />
-          <Typography
-            variant="h2"
-            fontWeight="bold"
-            textAlign="center"
-            sx={{
-              flexGrow: 1,
-              textAlign: 'center',
-              overflow: 'hidden',
-              whiteSpace: 'normal',
-              wordBreak: 'break-word',
-              fontSize: {
-                xs: '1.5rem',
-                sm: '1.75rem',
-                md: '2rem',
-                lg: '2.25rem',
-              },
-              paddingLeft: '6vh',
-              paddingRight: '6vh',
-            }}
-          >
-            {isCompleteView
-              ? `${t('sprint-completion-header')}`
-              : isWeeklyView
-                ? `${t('week')} ${currentWeek} - ${t('summary')}`
-                : `${t('day')} ${currentDay}`}
-          </Typography>
-          <ArrowForward
-            sx={{
-              fontSize: '5vh',
-              cursor: 'pointer',
-              position: 'absolute',
-              right: '5%',
-              visibility: currentDay < totalDays ? 'visible' : 'hidden',
-              zIndex: 1,
-            }}
-            onClick={handleNext}
-          />
-        </Box>
+
         {isCompleteView ? (
           renderCompleteView()
         ) : isWeeklyView ? (
           renderWeeklySummary()
         ) : (
-          <Card
-            sx={{
-              width: '90%',
-              maxWidth: '500px',
-              borderRadius: '1vh',
-              marginTop: '3vh',
-            }}
-          >
-            <CardContent sx={{ position: 'relative' }}>
-              <Typography variant="h6" fontWeight="bold" textAlign="center">
-                {currentDay === totalDays
-                  ? t('today')
-                  : dayjs(sprint?.startDate)
-                      .add(currentDay - 1, 'day')
-                      .format('DD/MM/YYYY')}
-              </Typography>
-              {user?.ablationDate && (
-                <Typography marginBottom="1vh" textAlign="center">
-                  {dayjs(user.ablationDate).diff(dayjs(), 'days')}{' '}
-                  {t('days-until-ablation')}
-                </Typography>
-              )}
-              <Stack direction="column">
-                <SprintCard
-                  day={currentDay % 7 === 0 ? 7 : currentDay % 7}
-                  //day={3}   //for testing
-                  rapa={1}    //for testing
-                  week={currentWeek}
-                  //week={18}  //for testing
-                />
-              </Stack>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                sx={{ marginTop: '2vh' }}
-              >
-                <Button
-                  variant="contained"
-                  sx={{ width: '15vh' }}
-                  endIcon={<Straighten />}
-                  onClick={() => navigate('/health-data/tests')}
-                >
-                  <Typography> {t('measure-card-button')} </Typography>
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{ width: '15vh' }}
-                  endIcon={<Chat />}
-                  onClick={handleOpenWip}
-                >
-                  <Typography> {t('chat-card-button')} </Typography>
-                </Button>
-              </Stack>
-            </CardContent>
-          </Card>
+          <SprintView
+            sprint={sprint!}
+            user={user}
+            currentDay={currentDay}
+            totalDays={totalDays}
+            handleOpenWIP={handleOpenWip}
+          />
         )}
       </Stack>
     );

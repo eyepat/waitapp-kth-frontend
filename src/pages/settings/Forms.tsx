@@ -34,9 +34,16 @@ export default function Forms() {
           text={''}
           onClick={() => navigate('/settings/forms/rapa')}
         />
-        <TextCard title={t('forms') + ' 1'} text={''} />
-        <TextCard title={t('forms') + ' 2'} text={''} />
-        <TextCard title={t('forms') + ' 3'} text={''} />
+        <TextCard
+          title={' (Lifestyle)'}
+          text={''}
+          onClick={() => navigate('/settings/forms/lifestyle')}
+        />
+        <TextCard
+          title={' (AFEQT)'}
+          text={''}
+          onClick={() => navigate('/settings/forms/afeqt')}
+        />
       </Stack>
     </ThemeProvider>
   );
