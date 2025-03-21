@@ -186,6 +186,7 @@
   "success-post": "Lyckades skapa",
   "success-put": "Lyckades uppdatera",
   "success-register": "Lyckades registrera",
+  "success-adding-metric": "Lyckades lägga till mätning",
   "success-delete": "Lyckades ta bort",
   "optional": "(valfritt)",
   "unknown": "Okänd",
