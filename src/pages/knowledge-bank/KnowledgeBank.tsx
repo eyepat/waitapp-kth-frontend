@@ -41,26 +41,19 @@ export default function KnowledgeBank() {
             {t('eating-habit')}
           </Typography>
           <MenuButton
-            fullWidth
-            onClick={handleOpenWip}
-            variant="contained"
-            endIcon={<ArrowRight />}
-          >
-            {t('reading-material')}
-          </MenuButton>
-          <MenuButton
-            onClick={handleOpenWip}
-            variant="contained"
-            endIcon={<ArrowRight />}
-          >
-            {t('video-material')}
-          </MenuButton>
-          <MenuButton
             onClick={() => navigate('/knowledge-bank/recipes')}
             variant="contained"
             endIcon={<ArrowRight />}
           >
             {t('recipes')}
+          </MenuButton>
+          <MenuButton
+            fullWidth
+            onClick={() => navigate('/knowledge-bank/food')}
+            variant="contained"
+            endIcon={<ArrowRight />}
+          >
+            {t('healthy-food')}
           </MenuButton>
         </Stack>
 

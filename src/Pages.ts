@@ -16,6 +16,7 @@ import PhysicalActivity from './pages/sprint/choice/physical-activity/PhysicalAc
 import PhysicalActivityPre from './pages/sprint/choice/physical-activity/PhysicalActivityPre';
 import Alcohol from './pages/sprint/choice/alcohol-habits/AlcoholHabits';
 import Recipes from './pages/knowledge-bank/recipes/Recipes';
+import HealthyFood from './pages/knowledge-bank/food/HealthyFood';
 import Profile from './pages/settings/Profile';
 import Security from './pages/settings/Security';
 import Forms from './pages/settings/Forms';
@@ -198,6 +199,14 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'recipes',
     component: Recipes,
+    header: { expanded: false },
+    isMenu: false,
+  },
+  {
+    to: '/knowledge-bank/food',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'food',
+    component: HealthyFood,
     header: { expanded: false },
     isMenu: false,
   },
