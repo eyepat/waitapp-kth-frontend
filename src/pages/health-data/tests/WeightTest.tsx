@@ -141,7 +141,7 @@ export default function WeightTest() {
                   enqueueSnackbar('success-adding-metric', {
                     variant: 'success',
                   });
-                  navigate('/health-data/tests');
+                  navigate('/health-data/overview');
                 })
                 .catch(() => {
                   enqueueSnackbar('error-adding-metric', { variant: 'error' });

@@ -27,15 +27,21 @@ export default function Recipes() {
     setPage(value);
   };
 
+  // Always recommend recipe number 9, Zucchini pasta
+  const reciperec = recipes?.content.at(9);
+
   const RenderOverviewContent = () => (
     <Stack marginTop="25px" spacing={1}>
       <Typography variant="subtitle1">
         {t('title-recommended-today')}
       </Typography>
       <RecipeCard
-        img={placeHolderImg}
-        title={'Place Holder Recipe Name'}
-        onClick={() => console.log('clicked!')}
+        key={reciperec?.id}
+        img={reciperec?.imageURL || ''}
+        title={reciperec?.title || ''}
+        onClick={() => {
+          if (reciperec?.URL) window.location.href = reciperec?.URL;
+        }}
       />
       <Typography variant="subtitle1">
         {t('title-all-saved-recipes')}

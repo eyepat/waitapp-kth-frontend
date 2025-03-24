@@ -254,7 +254,7 @@ export default function BloodPressureTest() {
                         variant: 'success',
                       }
                     );
-                    navigate('/health-data/tests');
+                    navigate('/health-data/overview');
                   })
                   .catch(() => {
                     enqueueSnackbar('error-adding-bloodpressure-measurement', {

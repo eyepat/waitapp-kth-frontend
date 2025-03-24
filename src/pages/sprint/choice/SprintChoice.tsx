@@ -7,6 +7,7 @@ import {
   RadioGroup,
   ThemeProvider,
 } from '@mui/material';
+import smoke from '../../../assets/sprintchoice/smoke.svg';
 import alcohol from '../../../assets/sprintchoice/alcohol.svg';
 import food from '../../../assets/sprintchoice/food.svg';
 import physact from '../../../assets/sprintchoice/physact.svg';
@@ -46,24 +47,36 @@ export default function SprintChoice() {
     setSelectedValue(value);
   };
 
+  const map_color = (dis:boolean) => {if (dis) {return "#bbb"} return "#fff"}
+
   const rectangles = [
     {
       imgSrc: food,
       header: t('eating-habit'),
       info: t('info-text-eat-habit'),
       value: '/sprint/choice/food-habits',
+      disabled: false,
     },
     {
       imgSrc: physact,
       header: t('physical-activity'),
       info: t('info-text-physical-activity'),
-      value: '/sprint/choice/physical-activity',
+      value: '/sprint/choice/physical-activity-pre',
+      disabled: false,
     },
     {
       imgSrc: alcohol,
       header: t('alcohol'),
       info: t('info-text-alcohol'),
       value: '/sprint/choice/alcohol-habits',
+      disabled: true,
+    },
+    {
+      imgSrc: smoke,
+      header: t('stop-smoking'),
+      info: t('info-text-stop-smoking'),
+      value: '/sprint/choice/stop-smoking',
+      disabled: true,
     },
   ];
 
@@ -96,7 +109,8 @@ export default function SprintChoice() {
                 border="0px solid #ccc"
                 margin="5px"
                 boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
-                onClick={() => handleRectangleClick(undefined, rectangle.value)}
+                onClick={() => {if (!rectangle.disabled) handleRectangleClick(undefined, rectangle.value)}}
+                bgcolor={map_color(rectangle.disabled)}
               >
                 <ImageBox image={rectangle.imgSrc} />
                 <Stack flexGrow={1} paddingLeft="1rem">
@@ -114,6 +128,7 @@ export default function SprintChoice() {
                   checked={selectedValue === rectangle.value}
                   onChange={handleRadioChange}
                   checkedIcon={<CheckIcon />}
+                  disabled={rectangle.disabled}
                 />
               </Stack>
             ))}

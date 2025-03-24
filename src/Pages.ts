@@ -13,6 +13,7 @@ import WaistSizeTest from './pages/health-data/tests/WaistSizeTest';
 import SprintChoice from './pages/sprint/choice/SprintChoice';
 import FoodHabits from './pages/sprint/choice/food-habits/FoodHabits';
 import PhysicalActivity from './pages/sprint/choice/physical-activity/PhysicalActivity';
+import PhysicalActivityPre from './pages/sprint/choice/physical-activity/PhysicalActivityPre';
 import Alcohol from './pages/sprint/choice/alcohol-habits/AlcoholHabits';
 import Recipes from './pages/knowledge-bank/recipes/Recipes';
 import Profile from './pages/settings/Profile';
@@ -165,6 +166,14 @@ export const pages: Page[] = [
     permissionLevel: AuthenticationLevels.LOGGED_IN,
     label: 'sprint-food-habits',
     component: FoodHabits,
+    header: { expanded: false, transparent: true },
+    isMenu: false,
+  },
+  {
+    to: '/sprint/choice/physical-activity-pre',
+    permissionLevel: AuthenticationLevels.LOGGED_IN,
+    label: 'sprint-physical-activity-pre',
+    component: PhysicalActivityPre,
     header: { expanded: false, transparent: true },
     isMenu: false,
   },

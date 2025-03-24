@@ -136,6 +136,14 @@ export default function RapaForm() {
       >
         {t('rapa') + ' (RAPA)'}
       </Typography>
+      <Typography
+        variant="body1"
+        marginBottom="1rem"
+        textAlign="center"
+        alignSelf="center"
+      >
+        {t('rapa-instructions')}
+      </Typography>
       <Box padding={2} border={1} borderRadius={2} borderColor="grey.500">
         <Typography variant="h4" textAlign="center" gutterBottom>
           RAPA 1

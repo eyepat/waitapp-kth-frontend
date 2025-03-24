@@ -57,9 +57,9 @@ export default function HealthData() {
   };
 
   const [expandedCards, setExpandedCards] = React.useState({
-    bloodPressure: false,
-    weight: false,
-    waistSize: false,
+    bloodPressure: true,
+    weight: true,
+    waistSize: true,
   });
 
   const handleExpandClick = (card: keyof typeof expandedCards) => {

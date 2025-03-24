@@ -1,37 +1,45 @@
 import { Button, Stack, ThemeProvider, Typography } from '@mui/material';
 import { useLanguage } from '../../../../contexts/LanguageContext';
-import alcoholBackground from '../../../../assets/backgrounds/alcoholBackground.jpg';
+import physicalBackground from '../../../../assets/backgrounds/physicalBackground.jpg';
+import { WarningIconLarge } from '../../../../utils/Icons';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../../../components/Theme';
 import { ImageHeader } from '../../../../components/Headers/ImageHeader';
-import { useSprintContext } from '../../../../contexts/SprintContext';
-import dayjs from 'dayjs';
-import { Level, SprintDTO, SprintType } from '../../../../api/BaseClient';
+import { styled } from '@mui/material/styles';
+
+interface WarnIconProps {
+  src: string;
+}
+
+export const WarnIcon = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'src',
+})<WarnIconProps>`
+  width; 100%;
+  height: 100%;
+  min-width: 70vw;
+  min-height: 70vw;
+  max-width: 800px;
+  max-height: 800px;
+  background-image: ${({ src }) => `url(${src})`};
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media(min-width: 900px) {
+    max-width: 500px;
+    max-height: 500px;
+    min-width: 500px;
+    min-height: 500px;
+  }
+`;
 
 export default function FoodHabits() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { createSprintAndUpdateUser } = useSprintContext();
-
-  const handleSprintStart = () => {
-    const sprint: SprintDTO = {
-      userID: -1,
-      sprintType: 'ALCOHOL' as SprintType,
-      startDate: dayjs().format('YYYY-MM-DD'),
-      endDate: dayjs().add(7, 'days').format('YYYY-MM-DD'),
-      completed: false,
-      level: 'NORMAL' as Level,
-      score: 0,
-    };
-
-    createSprintAndUpdateUser(sprint);
-    navigate('/sprint');
-  };
 
   return (
     <ThemeProvider theme={theme}>
       <Stack alignItems="center" sx={{ height: '92vh' }}>
-        <ImageHeader image={alcoholBackground} />
+        <ImageHeader image={physicalBackground} />
         <Stack
           direction="column"
           justifyContent="flex-end"
@@ -55,7 +63,7 @@ export default function FoodHabits() {
               variant="h4"
               style={{ textTransform: 'uppercase' }}
             >
-              {t('alcohol')}
+              {t('physical-activity')}
             </Typography>
             <Typography
               color="white"
@@ -68,42 +76,23 @@ export default function FoodHabits() {
             </Typography>
           </Stack>
         </Stack>
-        <Stack
-          alignItems="start"
-          padding="0vh 3vh 0vh 3vh"
-          marginTop="4vh"
-          sx={{ flexGrow: 1 }}
-        >
-          <Typography variant="body1" fontSize="18px" marginTop="9vh">
-            {t('planned-activities-for-upcoming-sprint')}:
-          </Typography>
-          <div style={{ minHeight: '150px' }}>
-            <Stack sx={{ textAlign: 'left', alignItems: 'center' }}>
-              <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-                <li style={{ marginBottom: '4px' }}>{t('AlcoholItemOne')}</li>
-                <li style={{ marginBottom: '4px' }}>{t('AlcoholItemTwo')}</li>
-              </ul>
-            </Stack>
-          </div>
-        </Stack>
-        <Stack
-          marginTop="8vh"
+        <Stack paddingTop={'5vh'}
           sx={{
             justifyContent: 'center',
-            height: '35vh',
             alignItems: 'center',
           }}
         >
-          <Typography marginBottom="2vh" textAlign="center" width="32vh">
-            {t('start-sprint-when-you-are-ready')}
+          <WarningIconLarge />
+          <Typography variant="body1" fontSize="18px" marginTop="3vh" marginBottom="3vh">
+            {t('physical-warning-text')}
           </Typography>
           <Button
             variant="contained"
             color="primary"
-            onClick={handleSprintStart}
+            onClick={() => {navigate('/sprint/choice/physical-activity');}}
             sx={{
               backgroundColor: 'black',
-              marginBottom: '7vh',
+              marginBottom: '13vh',
               borderRadius: '10px',
               width: '30vh',
               height: '40px',
@@ -115,7 +104,7 @@ export default function FoodHabits() {
               },
             }}
           >
-            <Typography>{t('start')}</Typography>
+            <Typography>{t('next')}</Typography>
           </Button>
         </Stack>
       </Stack>

@@ -133,29 +133,6 @@ export default function FoodHabits() {
             alignItems: 'center',
           }}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              backgroundColor: 'hsla(210, 2%, 60%, 1)',
-              color: 'black',
-              marginBottom: '20px',
-              borderRadius: '10px',
-              width: '30vh',
-              height: '40px',
-              '&:active, &:focus': {
-                backgroundColor: 'hsla(210, 2%, 40%, 1)',
-              },
-              '&:hover': {
-                backgroundColor: 'hsla(210, 2%, 40%, 1)',
-              },
-            }}
-            onClick={() => {
-              navigate('/sprint/choice');
-            }}
-          >
-            <Typography>{t('change-sprint')}</Typography>
-          </Button>
           <Typography marginBottom="2vh" textAlign="center" width="32vh">
             {t('start-sprint-when-you-are-ready')}
           </Typography>

@@ -142,7 +142,7 @@ export default function WaistSizeTest() {
                   enqueueSnackbar('success-adding-waist-size', {
                     variant: 'success',
                   });
-                  navigate('/health-data/tests');
+                  navigate('/health-data/overview');
                 })
                 .catch(() => {
                   enqueueSnackbar('error-adding-waist-size', {
