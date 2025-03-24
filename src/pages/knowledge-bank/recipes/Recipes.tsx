@@ -4,7 +4,6 @@ import NavTab from '../../../components/TabMenu/NavTab';
 import NavTabs from '../../../components/TabMenu/NavTabs';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
-import placeHolderImg from '../../../assets/reciplePlaceHolderImg/placeHolderFood.png';
 import RecipeCard from '../../../components/Cards/RecipeCard';
 import { useRecipeContext } from '../../../contexts/MetricsContext';
 import { RecipeDTO } from '../../../api/BaseClient';
