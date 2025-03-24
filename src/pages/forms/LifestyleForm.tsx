@@ -25,107 +25,106 @@ export default function LifestyleForm() {
   const { t } = useLanguage();
   const questions: Question[] = [
     {
-        id: 1,
-        key: t('tobacco-question-1'),
-        options: [
-            t('tobocco-question-1-answer1'),
-            t('tobocco-question-1-answer2'),
-            t('tobocco-question-1-answer3'),
-            t('tobocco-question-1-answer4'),
-            t('tobocco-question-1-answer5'),
-            t('tobocco-question-1-answer6'),
-            t('tobocco-question-1-answer7')
-        ]
+      id: 1,
+      key: t('tobacco-question-1'),
+      options: [
+        t('tobocco-question-1-answer1'),
+        t('tobocco-question-1-answer2'),
+        t('tobocco-question-1-answer3'),
+        t('tobocco-question-1-answer4'),
+        t('tobocco-question-1-answer5'),
+        t('tobocco-question-1-answer6'),
+        t('tobocco-question-1-answer7'),
+      ],
     },
     {
-        id: 2,
-        key: t('tobacco-question-2'),
-        options: [
-            t('tobocco-question-2-answer1'),
-            t('tobocco-question-2-answer2'),
-            t('tobocco-question-2-answer3'),
-            t('tobocco-question-2-answer4'),
-            t('tobocco-question-2-answer5'),
-            t('tobocco-question-2-answer6'),
-            t('tobocco-question-2-answer7')
-        ]
+      id: 2,
+      key: t('tobacco-question-2'),
+      options: [
+        t('tobocco-question-2-answer1'),
+        t('tobocco-question-2-answer2'),
+        t('tobocco-question-2-answer3'),
+        t('tobocco-question-2-answer4'),
+        t('tobocco-question-2-answer5'),
+        t('tobocco-question-2-answer6'),
+        t('tobocco-question-2-answer7'),
+      ],
     },
     {
-        id: 3,
-        key: t('exercise-question-1'),
-        options: [
-            t('exercise-question-1-answer-1'),
-            t('exercise-question-1-answer-2'),
-            t('exercise-question-1-answer-3'),
-            t('exercise-question-1-answer-4'),
-            t('exercise-question-1-answer-5'),
-            t('exercise-question-1-answer-6')
-        ]
+      id: 3,
+      key: t('exercise-question-1'),
+      options: [
+        t('exercise-question-1-answer-1'),
+        t('exercise-question-1-answer-2'),
+        t('exercise-question-1-answer-3'),
+        t('exercise-question-1-answer-4'),
+        t('exercise-question-1-answer-5'),
+        t('exercise-question-1-answer-6'),
+      ],
     },
     {
-        id: 4,
-        key: t('exercise-question-2'),
-        options: [
-            t('exercise-question-2-answer-1'),
-            t('exercise-question-2-answer-2'),
-            t('exercise-question-2-answer-3'),
-            t('exercise-question-2-answer-4'),
-            t('exercise-question-2-answer-5'),
-            t('exercise-question-2-answer-6')
-        ]
+      id: 4,
+      key: t('exercise-question-2'),
+      options: [
+        t('exercise-question-2-answer-1'),
+        t('exercise-question-2-answer-2'),
+        t('exercise-question-2-answer-3'),
+        t('exercise-question-2-answer-4'),
+        t('exercise-question-2-answer-5'),
+        t('exercise-question-2-answer-6'),
+      ],
     },
     {
-        id: 5,
-        key: t('food-question-1'),
-        options: [
-            t('food-question-1-2-answer-1'),
-            t('food-question-1-2-answer-2'),
-            t('food-question-1-2-answer-3'),
-            t('food-question-1-2-answer-4')
-        ]
+      id: 5,
+      key: t('food-question-1'),
+      options: [
+        t('food-question-1-2-answer-1'),
+        t('food-question-1-2-answer-2'),
+        t('food-question-1-2-answer-3'),
+        t('food-question-1-2-answer-4'),
+      ],
     },
     {
-        id: 6,
-        key: t('food-question-2'),
-        options: [
-            t('food-question-1-2-answer-1'),
-            t('food-question-1-2-answer-2'),
-            t('food-question-1-2-answer-3'),
-            t('food-question-1-2-answer-4')
-        ]
+      id: 6,
+      key: t('food-question-2'),
+      options: [
+        t('food-question-1-2-answer-1'),
+        t('food-question-1-2-answer-2'),
+        t('food-question-1-2-answer-3'),
+        t('food-question-1-2-answer-4'),
+      ],
     },
     {
-        id: 7,
-        key: t('food-question-3'),
-        options: [
-            t('food-question-3-answer-1'),
-            t('food-question-3-answer-2'),
-            t('food-question-3-answer-3'),
-            t('food-question-3-answer-4')
-        ]
+      id: 7,
+      key: t('food-question-3'),
+      options: [
+        t('food-question-3-answer-1'),
+        t('food-question-3-answer-2'),
+        t('food-question-3-answer-3'),
+        t('food-question-3-answer-4'),
+      ],
     },
     {
-        id: 8,
-        key: t('food-question-4'),
-        options: [
-            t('food-question-4-answer-1'),
-            t('food-question-4-answer-2'),
-            t('food-question-4-answer-3'),
-            t('food-question-4-answer-4')
-        ]
+      id: 8,
+      key: t('food-question-4'),
+      options: [
+        t('food-question-4-answer-1'),
+        t('food-question-4-answer-2'),
+        t('food-question-4-answer-3'),
+        t('food-question-4-answer-4'),
+      ],
     },
     {
-        id: 9,
-        key: t('food-question-5'),
-        options: [
-            t('food-question-5-answer-1'),
-            t('food-question-5-answer-2'),
-            t('food-question-5-answer-3'),
-            t('food-question-5-answer-4')
-        ]
-    }
-];
-
+      id: 9,
+      key: t('food-question-5'),
+      options: [
+        t('food-question-5-answer-1'),
+        t('food-question-5-answer-2'),
+        t('food-question-5-answer-3'),
+        t('food-question-5-answer-4'),
+      ],
+    },
+  ];
 
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
@@ -202,9 +201,7 @@ export default function LifestyleForm() {
             borderBottom={1}
             borderColor="grey.300"
           >
-            <Typography>
-              {t(question.key)}
-            </Typography>
+            <Typography variant="h6">{t(question.key)}</Typography>
             <RadioGroup
               value={answers[`question-${question.id}`] || ''}
               onChange={(e) =>

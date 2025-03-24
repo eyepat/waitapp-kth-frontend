@@ -17,6 +17,8 @@ import { useSprintContext } from '../../contexts/SprintContext';
 
 interface Question {
   id: number;
+  new_section: string | boolean;
+  new_group: string | boolean;
   key: string;
   options: string[];
 }
@@ -25,296 +27,345 @@ export default function AFEQTForm() {
   const { t } = useLanguage();
   const questions: Question[] = [
     {
-        id: 1,
-        key: t('AFEQT-part-1'),
-        options: [t('AFEQT-part-1-question-1-answer-1'), t('AFEQT-part-1-question-1-answer-2')]
+      id: 1,
+      new_section: t('AFEQT-part-1-section-header'),
+      new_group: false,
+      key: t('AFEQT-part-1'),
+      options: [
+        t('AFEQT-part-1-question-1-answer-1'),
+        t('AFEQT-part-1-question-1-answer-2'),
+      ],
     },
     {
-        id: 2,
-        key: t('AFEQT-part-1-question-2'),
-        options: [
-            t('AFEQT-part-1-question-2-answer-1'),
-            t('AFEQT-part-1-question-2-answer-2'),
-            t('AFEQT-part-1-question-2-answer-3'),
-            t('AFEQT-part-1-question-2-answer-4'),
-            t('AFEQT-part-1-question-2-answer-5'),
-            t('AFEQT-part-1-question-2-answer-6')
-        ]
+      id: 2,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-1-question-2'),
+      options: [
+        t('AFEQT-part-1-question-2-answer-1'),
+        t('AFEQT-part-1-question-2-answer-2'),
+        t('AFEQT-part-1-question-2-answer-3'),
+        t('AFEQT-part-1-question-2-answer-4'),
+        t('AFEQT-part-1-question-2-answer-5'),
+        t('AFEQT-part-1-question-2-answer-6'),
+      ],
     },
     {
-        id: 3,
-        key: t('AFEQT-part-2'),
-        options: [
-            t('AFEQT-part-2-answer-1'),
-            t('AFEQT-part-2-answer-2'),
-            t('AFEQT-part-2-answer-3'),
-            t('AFEQT-part-2-answer-4'),
-            t('AFEQT-part-2-answer-5'),
-            t('AFEQT-part-2-answer-6'),
-            t('AFEQT-part-2-answer-7')
-        ]
+      id: 3,
+      new_section: t('AFEQT-part-2-section-header'),
+      new_group: t('AFEQT-part-2-header'),
+      key: t('AFEQT-part-2'),
+      options: [
+        t('AFEQT-part-2-answer-1'),
+        t('AFEQT-part-2-answer-2'),
+        t('AFEQT-part-2-answer-3'),
+        t('AFEQT-part-2-answer-4'),
+        t('AFEQT-part-2-answer-5'),
+        t('AFEQT-part-2-answer-6'),
+        t('AFEQT-part-2-answer-7'),
+      ],
     },
     {
-        id: 4,
-        key: t('AFEQT-part-2-question-2'),
-        options: [
-            t('AFEQT-part-2-answer-1'),
-            t('AFEQT-part-2-answer-2'),
-            t('AFEQT-part-2-answer-3'),
-            t('AFEQT-part-2-answer-4'),
-            t('AFEQT-part-2-answer-5'),
-            t('AFEQT-part-2-answer-6'),
-            t('AFEQT-part-2-answer-7')
-        ]
+      id: 4,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-2-question-2'),
+      options: [
+        t('AFEQT-part-2-answer-1'),
+        t('AFEQT-part-2-answer-2'),
+        t('AFEQT-part-2-answer-3'),
+        t('AFEQT-part-2-answer-4'),
+        t('AFEQT-part-2-answer-5'),
+        t('AFEQT-part-2-answer-6'),
+        t('AFEQT-part-2-answer-7'),
+      ],
     },
     {
-        id: 5,
-        key: t('AFEQT-part-2-question-3'),
-        options: [
-            t('AFEQT-part-2-answer-1'),
-            t('AFEQT-part-2-answer-2'),
-            t('AFEQT-part-2-answer-3'),
-            t('AFEQT-part-2-answer-4'),
-            t('AFEQT-part-2-answer-5'),
-            t('AFEQT-part-2-answer-6'),
-            t('AFEQT-part-2-answer-7')
-        ]
+      id: 5,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-2-question-3'),
+      options: [
+        t('AFEQT-part-2-answer-1'),
+        t('AFEQT-part-2-answer-2'),
+        t('AFEQT-part-2-answer-3'),
+        t('AFEQT-part-2-answer-4'),
+        t('AFEQT-part-2-answer-5'),
+        t('AFEQT-part-2-answer-6'),
+        t('AFEQT-part-2-answer-7'),
+      ],
     },
     {
-        id: 6,
-        key: t('AFEQT-part-2-question-4'),
-        options: [
-            t('AFEQT-part-2-answer-1'),
-            t('AFEQT-part-2-answer-2'),
-            t('AFEQT-part-2-answer-3'),
-            t('AFEQT-part-2-answer-4'),
-            t('AFEQT-part-2-answer-5'),
-            t('AFEQT-part-2-answer-6'),
-            t('AFEQT-part-2-answer-7')
-        ]
+      id: 6,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-2-question-4'),
+      options: [
+        t('AFEQT-part-2-answer-1'),
+        t('AFEQT-part-2-answer-2'),
+        t('AFEQT-part-2-answer-3'),
+        t('AFEQT-part-2-answer-4'),
+        t('AFEQT-part-2-answer-5'),
+        t('AFEQT-part-2-answer-6'),
+        t('AFEQT-part-2-answer-7'),
+      ],
     },
     {
-        id: 7,
-        key: t('AFEQT-part-3'),
-        options: [
-            t('AFEQT-part-3-answer-1'),
-            t('AFEQT-part-3-answer-2'),
-            t('AFEQT-part-3-answer-3'),
-            t('AFEQT-part-3-answer-4'),
-            t('AFEQT-part-3-answer-5'),
-            t('AFEQT-part-3-answer-6'),
-            t('AFEQT-part-3-answer-7')
-        ]
+      id: 7,
+      new_section: false,
+      new_group: t('AFEQT-part-3-header'),
+      key: t('AFEQT-part-3'),
+      options: [
+        t('AFEQT-part-3-answer-1'),
+        t('AFEQT-part-3-answer-2'),
+        t('AFEQT-part-3-answer-3'),
+        t('AFEQT-part-3-answer-4'),
+        t('AFEQT-part-3-answer-5'),
+        t('AFEQT-part-3-answer-6'),
+        t('AFEQT-part-3-answer-7'),
+      ],
     },
     {
-        id: 8,
-        key: t('AFEQT-part-3-question-2'),
-        options: [
-            t('AFEQT-part-3-answer-1'),
-            t('AFEQT-part-3-answer-2'),
-            t('AFEQT-part-3-answer-3'),
-            t('AFEQT-part-3-answer-4'),
-            t('AFEQT-part-3-answer-5'),
-            t('AFEQT-part-3-answer-6'),
-            t('AFEQT-part-3-answer-7')
-        ]
+      id: 8,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-3-question-2'),
+      options: [
+        t('AFEQT-part-3-answer-1'),
+        t('AFEQT-part-3-answer-2'),
+        t('AFEQT-part-3-answer-3'),
+        t('AFEQT-part-3-answer-4'),
+        t('AFEQT-part-3-answer-5'),
+        t('AFEQT-part-3-answer-6'),
+        t('AFEQT-part-3-answer-7'),
+      ],
     },
     {
-        id: 9,
-        key: t('AFEQT-part-4'),
-        options: [
-            t('AFEQT-part-4-answer-1'),
-            t('AFEQT-part-4-answer-2'),
-            t('AFEQT-part-4-answer-3'),
-            t('AFEQT-part-4-answer-4'),
-            t('AFEQT-part-4-answer-5'),
-            t('AFEQT-part-4-answer-6'),
-            t('AFEQT-part-4-answer-7')
-        ]
+      id: 9,
+      new_section: false,
+      new_group: t('AFEQT-part-4-header'),
+      key: t('AFEQT-part-4'),
+      options: [
+        t('AFEQT-part-4-answer-1'),
+        t('AFEQT-part-4-answer-2'),
+        t('AFEQT-part-4-answer-3'),
+        t('AFEQT-part-4-answer-4'),
+        t('AFEQT-part-4-answer-5'),
+        t('AFEQT-part-4-answer-6'),
+        t('AFEQT-part-4-answer-7'),
+      ],
     },
     {
-        id: 10,
-        key: t('AFEQT-part-4-question-2'),
-        options: [
-            t('AFEQT-part-4-answer-1'),
-            t('AFEQT-part-4-answer-2'),
-            t('AFEQT-part-4-answer-3'),
-            t('AFEQT-part-4-answer-4'),
-            t('AFEQT-part-4-answer-5'),
-            t('AFEQT-part-4-answer-6'),
-            t('AFEQT-part-4-answer-7')
-        ]
+      id: 10,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-4-question-2'),
+      options: [
+        t('AFEQT-part-4-answer-1'),
+        t('AFEQT-part-4-answer-2'),
+        t('AFEQT-part-4-answer-3'),
+        t('AFEQT-part-4-answer-4'),
+        t('AFEQT-part-4-answer-5'),
+        t('AFEQT-part-4-answer-6'),
+        t('AFEQT-part-4-answer-7'),
+      ],
     },
     {
-        id: 11,
-        key: t('AFEQT-part-4-question-3'),
-        options: [
-            t('AFEQT-part-4-answer-1'),
-            t('AFEQT-part-4-answer-2'),
-            t('AFEQT-part-4-answer-3'),
-            t('AFEQT-part-4-answer-4'),
-            t('AFEQT-part-4-answer-5'),
-            t('AFEQT-part-4-answer-6'),
-            t('AFEQT-part-4-answer-7')
-        ]
+      id: 11,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-4-question-3'),
+      options: [
+        t('AFEQT-part-4-answer-1'),
+        t('AFEQT-part-4-answer-2'),
+        t('AFEQT-part-4-answer-3'),
+        t('AFEQT-part-4-answer-4'),
+        t('AFEQT-part-4-answer-5'),
+        t('AFEQT-part-4-answer-6'),
+        t('AFEQT-part-4-answer-7'),
+      ],
     },
     {
-        id: 12,
-        key: t('AFEQT-part-4-question-4'),
-        options: [
-            t('AFEQT-part-4-answer-1'),
-            t('AFEQT-part-4-answer-2'),
-            t('AFEQT-part-4-answer-3'),
-            t('AFEQT-part-4-answer-4'),
-            t('AFEQT-part-4-answer-5'),
-            t('AFEQT-part-4-answer-6'),
-            t('AFEQT-part-4-answer-7')
-        ]
+      id: 12,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-4-question-4'),
+      options: [
+        t('AFEQT-part-4-answer-1'),
+        t('AFEQT-part-4-answer-2'),
+        t('AFEQT-part-4-answer-3'),
+        t('AFEQT-part-4-answer-4'),
+        t('AFEQT-part-4-answer-5'),
+        t('AFEQT-part-4-answer-6'),
+        t('AFEQT-part-4-answer-7'),
+      ],
     },
     {
-        id: 13,
-        key: t('AFEQT-part-4-question-5'),
-        options: [
-            t('AFEQT-part-4-answer-1'),
-            t('AFEQT-part-4-answer-2'),
-            t('AFEQT-part-4-answer-3'),
-            t('AFEQT-part-4-answer-4'),
-            t('AFEQT-part-4-answer-5'),
-            t('AFEQT-part-4-answer-6'),
-            t('AFEQT-part-4-answer-7')
-        ]
+      id: 13,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-4-question-5'),
+      options: [
+        t('AFEQT-part-4-answer-1'),
+        t('AFEQT-part-4-answer-2'),
+        t('AFEQT-part-4-answer-3'),
+        t('AFEQT-part-4-answer-4'),
+        t('AFEQT-part-4-answer-5'),
+        t('AFEQT-part-4-answer-6'),
+        t('AFEQT-part-4-answer-7'),
+      ],
     },
     {
-        id: 14,
-        key: t('AFEQT-part-4-question-6'),
-        options: [
-            t('AFEQT-part-4-answer-1'),
-            t('AFEQT-part-4-answer-2'),
-            t('AFEQT-part-4-answer-3'),
-            t('AFEQT-part-4-answer-4'),
-            t('AFEQT-part-4-answer-5'),
-            t('AFEQT-part-4-answer-6'),
-            t('AFEQT-part-4-answer-7')
-        ]
+      id: 14,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-4-question-6'),
+      options: [
+        t('AFEQT-part-4-answer-1'),
+        t('AFEQT-part-4-answer-2'),
+        t('AFEQT-part-4-answer-3'),
+        t('AFEQT-part-4-answer-4'),
+        t('AFEQT-part-4-answer-5'),
+        t('AFEQT-part-4-answer-6'),
+        t('AFEQT-part-4-answer-7'),
+      ],
     },
     {
-        id: 15,
-        key: t('AFEQT-part-5'),
-        options: [
-            t('AFEQT-part-5-answer-1'),
-            t('AFEQT-part-5-answer-2'),
-            t('AFEQT-part-5-answer-3'),
-            t('AFEQT-part-5-answer-4'),
-            t('AFEQT-part-5-answer-5'),
-            t('AFEQT-part-5-answer-6'),
-            t('AFEQT-part-5-answer-7')
-        ]
+      id: 15,
+      new_section: false,
+      new_group: t('AFEQT-part-5-header'),
+      key: t('AFEQT-part-5'),
+      options: [
+        t('AFEQT-part-5-answer-1'),
+        t('AFEQT-part-5-answer-2'),
+        t('AFEQT-part-5-answer-3'),
+        t('AFEQT-part-5-answer-4'),
+        t('AFEQT-part-5-answer-5'),
+        t('AFEQT-part-5-answer-6'),
+        t('AFEQT-part-5-answer-7'),
+      ],
     },
     {
-        id: 16,
-        key: t('AFEQT-part-5-question-2'),
-        options: [
-            t('AFEQT-part-5-answer-1'),
-            t('AFEQT-part-5-answer-2'),
-            t('AFEQT-part-5-answer-3'),
-            t('AFEQT-part-5-answer-4'),
-            t('AFEQT-part-5-answer-5'),
-            t('AFEQT-part-5-answer-6'),
-            t('AFEQT-part-5-answer-7')
-        ]
+      id: 16,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-5-question-2'),
+      options: [
+        t('AFEQT-part-5-answer-1'),
+        t('AFEQT-part-5-answer-2'),
+        t('AFEQT-part-5-answer-3'),
+        t('AFEQT-part-5-answer-4'),
+        t('AFEQT-part-5-answer-5'),
+        t('AFEQT-part-5-answer-6'),
+        t('AFEQT-part-5-answer-7'),
+      ],
     },
     {
-        id: 17,
-        key: t('AFEQT-part-6'),
-        options: [
-            t('AFEQT-part-6-answer-1'),
-            t('AFEQT-part-6-answer-2'),
-            t('AFEQT-part-6-answer-3'),
-            t('AFEQT-part-6-answer-4'),
-            t('AFEQT-part-6-answer-5'),
-            t('AFEQT-part-6-answer-6'),
-            t('AFEQT-part-6-answer-7')
-        ]
+      id: 17,
+      new_section: false,
+      new_group: t('AFEQT-part-6-header'),
+      key: t('AFEQT-part-6'),
+      options: [
+        t('AFEQT-part-6-answer-1'),
+        t('AFEQT-part-6-answer-2'),
+        t('AFEQT-part-6-answer-3'),
+        t('AFEQT-part-6-answer-4'),
+        t('AFEQT-part-6-answer-5'),
+        t('AFEQT-part-6-answer-6'),
+        t('AFEQT-part-6-answer-7'),
+      ],
     },
     {
-        id: 18,
-        key: t('AFEQT-part-6-question-2'),
-        options: [
-            t('AFEQT-part-6-answer-1'),
-            t('AFEQT-part-6-answer-2'),
-            t('AFEQT-part-6-answer-3'),
-            t('AFEQT-part-6-answer-4'),
-            t('AFEQT-part-6-answer-5'),
-            t('AFEQT-part-6-answer-6'),
-            t('AFEQT-part-6-answer-7')
-        ]
+      id: 18,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-6-question-2'),
+      options: [
+        t('AFEQT-part-6-answer-1'),
+        t('AFEQT-part-6-answer-2'),
+        t('AFEQT-part-6-answer-3'),
+        t('AFEQT-part-6-answer-4'),
+        t('AFEQT-part-6-answer-5'),
+        t('AFEQT-part-6-answer-6'),
+        t('AFEQT-part-6-answer-7'),
+      ],
     },
     {
-        id: 19,
-        key: t('AFEQT-part-6-question-3'),
-        options: [
-            t('AFEQT-part-6-answer-1'),
-            t('AFEQT-part-6-answer-2'),
-            t('AFEQT-part-6-answer-3'),
-            t('AFEQT-part-6-answer-4'),
-            t('AFEQT-part-6-answer-5'),
-            t('AFEQT-part-6-answer-6'),
-            t('AFEQT-part-6-answer-7')
-        ]
+      id: 19,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-6-question-3'),
+      options: [
+        t('AFEQT-part-6-answer-1'),
+        t('AFEQT-part-6-answer-2'),
+        t('AFEQT-part-6-answer-3'),
+        t('AFEQT-part-6-answer-4'),
+        t('AFEQT-part-6-answer-5'),
+        t('AFEQT-part-6-answer-6'),
+        t('AFEQT-part-6-answer-7'),
+      ],
     },
     {
-        id: 20,
-        key: t('AFEQT-part-6-question-3'),
-        options: [
-            t('AFEQT-part-6-answer-1'),
-            t('AFEQT-part-6-answer-2'),
-            t('AFEQT-part-6-answer-3'),
-            t('AFEQT-part-6-answer-4'),
-            t('AFEQT-part-6-answer-5'),
-            t('AFEQT-part-6-answer-6'),
-            t('AFEQT-part-6-answer-7')
-        ]
+      id: 20,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-6-question-3'),
+      options: [
+        t('AFEQT-part-6-answer-1'),
+        t('AFEQT-part-6-answer-2'),
+        t('AFEQT-part-6-answer-3'),
+        t('AFEQT-part-6-answer-4'),
+        t('AFEQT-part-6-answer-5'),
+        t('AFEQT-part-6-answer-6'),
+        t('AFEQT-part-6-answer-7'),
+      ],
     },
     {
-        id: 21,
-        key: t('AFEQT-part-6-question-4'),
-        options: [
-            t('AFEQT-part-6-answer-1'),
-            t('AFEQT-part-6-answer-2'),
-            t('AFEQT-part-6-answer-3'),
-            t('AFEQT-part-6-answer-4'),
-            t('AFEQT-part-6-answer-5'),
-            t('AFEQT-part-6-answer-6'),
-            t('AFEQT-part-6-answer-7')
-        ]
+      id: 21,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-6-question-4'),
+      options: [
+        t('AFEQT-part-6-answer-1'),
+        t('AFEQT-part-6-answer-2'),
+        t('AFEQT-part-6-answer-3'),
+        t('AFEQT-part-6-answer-4'),
+        t('AFEQT-part-6-answer-5'),
+        t('AFEQT-part-6-answer-6'),
+        t('AFEQT-part-6-answer-7'),
+      ],
     },
     {
-        id: 22,
-        key: t('AFEQT-part-7-question-1'),
-        options: [
-            t('AFEQT-part-7-answer-1'),
-            t('AFEQT-part-7-answer-2'),
-            t('AFEQT-part-7-answer-3'),
-            t('AFEQT-part-7-answer-4'),
-            t('AFEQT-part-7-answer-5'),
-            t('AFEQT-part-7-answer-6'),
-            t('AFEQT-part-7-answer-7')
-        ]
+      id: 22,
+      new_section: false,
+      new_group: t('AFEQT-part-7-header'),
+      key: t('AFEQT-part-7-question-1'),
+      options: [
+        t('AFEQT-part-7-answer-1'),
+        t('AFEQT-part-7-answer-2'),
+        t('AFEQT-part-7-answer-3'),
+        t('AFEQT-part-7-answer-4'),
+        t('AFEQT-part-7-answer-5'),
+        t('AFEQT-part-7-answer-6'),
+        t('AFEQT-part-7-answer-7'),
+      ],
     },
     {
-        id: 23,
-        key: t('AFEQT-part-7-question-2'),
-        options: [
-            t('AFEQT-part-7-answer-1'),
-            t('AFEQT-part-7-answer-2'),
-            t('AFEQT-part-7-answer-3'),
-            t('AFEQT-part-7-answer-4'),
-            t('AFEQT-part-7-answer-5'),
-            t('AFEQT-part-7-answer-6'),
-            t('AFEQT-part-7-answer-7')
-        ]
-    }
-];
+      id: 23,
+      new_section: false,
+      new_group: false,
+      key: t('AFEQT-part-7-question-2'),
+      options: [
+        t('AFEQT-part-7-answer-1'),
+        t('AFEQT-part-7-answer-2'),
+        t('AFEQT-part-7-answer-3'),
+        t('AFEQT-part-7-answer-4'),
+        t('AFEQT-part-7-answer-5'),
+        t('AFEQT-part-7-answer-6'),
+        t('AFEQT-part-7-answer-7'),
+      ],
+    },
+  ];
 
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
@@ -373,14 +424,46 @@ export default function AFEQTForm() {
       </Typography>
       <Box padding={2} border={1} borderRadius={2} borderColor="grey.500">
         {questions.map((question) => (
-          <Box key={question.id} padding={2} borderBottom={1} borderColor="grey.300">
+          <Box
+            key={question.id}
+            padding={2}
+            borderBottom={1}
+            borderColor="grey.300"
+          >
+            {question.new_section && (
+              <Typography
+                variant="h5"
+                bgcolor="#b0d8eb"
+                padding="2vh"
+                marginBottom="2vh"
+              >
+                {question.new_section}
+              </Typography>
+            )}
+            {question.new_group && (
+              <Typography
+                variant="h6"
+                bgcolor="#ccc"
+                padding="2vh"
+                marginBottom="2vh"
+              >
+                {question.new_group}
+              </Typography>
+            )}
             <Typography>{t(question.key)}</Typography>
             <RadioGroup
               value={answers[`question-${question.id}`] || ''}
-              onChange={(e) => handleAnswerChange(`question-${question.id}`, e.target.value)}
+              onChange={(e) =>
+                handleAnswerChange(`question-${question.id}`, e.target.value)
+              }
             >
               {question.options.map((option) => (
-                <FormControlLabel key={option} value={option} control={<Radio />} label={t(option)} />
+                <FormControlLabel
+                  key={option}
+                  value={option}
+                  control={<Radio />}
+                  label={t(option)}
+                />
               ))}
             </RadioGroup>
             {errors[`question-${question.id}`] && (

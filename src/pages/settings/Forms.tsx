@@ -35,12 +35,12 @@ export default function Forms() {
           onClick={() => navigate('/settings/forms/rapa')}
         />
         <TextCard
-          title={' (Lifestyle)'}
+          title={t('lifestyle')}
           text={''}
           onClick={() => navigate('/settings/forms/lifestyle')}
         />
         <TextCard
-          title={' (AFEQT)'}
+          title={t('afeqt')}
           text={''}
           onClick={() => navigate('/settings/forms/afeqt')}
         />

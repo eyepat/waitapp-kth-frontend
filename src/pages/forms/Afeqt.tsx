@@ -40,7 +40,7 @@ export default function Afeqt() {
           textAlign="center"
           alignSelf="center"
         >
-          {t('afeqt') + ' (AFEQT)'}
+          {t('afeqt')}
         </Typography>
         <Typography
           variant="subtitle1"
