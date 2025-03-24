@@ -61,6 +61,34 @@ export default function Todo() {
           }}
         />
       )}
+      {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
+        <TextCard
+          title={t('measure-afeqt')}
+          text={t('find-out-your-afeqt')}
+          onClick={() => {
+            navigate('/settings/forms/afeqt');
+          }}
+          sx={{
+            background: '#00a3e050',
+            maxWidth: '800px',
+            '&:hover': { background: '#00a3e090' },
+          }}
+        />
+      )}
+      {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
+        <TextCard
+          title={t('measure-lifestyle')}
+          text={t('find-out-your-lifestyle')}
+          onClick={() => {
+            navigate('/settings/forms/lifestyle');
+          }}
+          sx={{
+            background: '#00a3e050',
+            maxWidth: '800px',
+            '&:hover': { background: '#00a3e090' },
+          }}
+        />
+      )}
       {userDoesNotHaveAnActiveSprint !== undefined &&
         !userDoesNotHaveAnActiveSprint &&
         sprint != undefined && (
