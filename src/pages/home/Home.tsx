@@ -1,4 +1,4 @@
-import { Stack, ThemeProvider } from '@mui/material';
+import { Stack, Box, ThemeProvider } from '@mui/material';
 import theme from '../../components/Theme';
 import Todo from './Todo';
 import MeasurementCard from '../../components/Cards/MesurementsCard';
@@ -25,6 +25,7 @@ export default function Home() {
           </Stack>
           <Todo />
         </Stack>
+        <Box height="10rem"></Box>
       </div>
     </ThemeProvider>
   );

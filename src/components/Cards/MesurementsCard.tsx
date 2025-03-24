@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Stack } from '@mui/material';
 import StraightenIcon from '@mui/icons-material/Straighten';
 import {
   useBloodPressureContext,
@@ -31,37 +31,49 @@ const MeasurementCard = () => {
       }}
     >
       <CardContent>
-        <Typography variant="caption" lineHeight={3} gutterBottom>
+        <Typography variant="h5" lineHeight={2} gutterBottom>
           {t('latest-result')}
         </Typography>
         <Grid container spacing={2} alignItems="center">
           {bpLatest && (
             <Grid item xs={12} display="flex" alignItems="center" gap={2}>
               <BloodPressure />
-              <Typography variant="caption">
-                {t('blood-pressure')}: {bpLatest.value} mmHg
-              </Typography>
+              <Stack>
+                <Typography variant="body1">
+                  {t('blood-pressure')}: {bpLatest.value} mmHg
+                </Typography>
+                <Typography variant="caption">
+                  {t('target')}: 130/85 mmHg
+                </Typography>
+              </Stack>
             </Grid>
           )}
           {weightLatest && (
             <Grid item xs={12} display="flex" alignItems="center" gap={2}>
               <Scale />
-              <Typography variant="caption">
-                {t('weight')}: {weightLatest.value} kg
-              </Typography>
+              <Stack>
+                <Typography variant="body1">
+                  {t('weight')}: {weightLatest.value} kg
+                </Typography>
+                <Typography variant="caption">{t('target')}: 60 kg</Typography>
+              </Stack>
             </Grid>
           )}
           {waistSizeLatest && (
             <Grid item xs={12} display="flex" alignItems="center" gap={2}>
-              <StraightenIcon sx={{ width: 30, height: 32 }} />
-
-              <Typography variant="caption">
-                {t('waist-measurement')}: {waistSizeLatest.value} cm
-              </Typography>
+              <StraightenIcon sx={{ width: 60, height: 64 }} />
+              <Stack>
+                <Typography variant="body1">
+                  {t('waist-measurement')}: {waistSizeLatest.value} cm
+                </Typography>
+                <Typography variant="caption">
+                  {t('target')}: 88/102 cm
+                </Typography>
+              </Stack>
             </Grid>
           )}
           {!bpLatest && !weightLatest && !waistSizeLatest && (
-            <Typography variant="caption" color="textSecondary">
+            <Typography variant="body1" color="textSecondary">
               {t('no-measurements-available')}
             </Typography>
           )}
