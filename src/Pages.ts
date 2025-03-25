@@ -1,3 +1,4 @@
+import GeneralQuestionsPre from './pages/general-questions/GeneralQuestionsPre';
 import GeneralQuestions from './pages/general-questions/GeneralQuestions';
 import HealthData from './pages/health-data/HealthData';
 import Home from './pages/home/Home';
@@ -81,6 +82,14 @@ export const pages: Page[] = [
     label: 'register',
     isMenu: false,
     component: Register,
+  },
+  {
+    to: '/general-questions-pre',
+    permissionLevel: AuthenticationLevels.NO_DATA_PROVIDED,
+    label: 'general-questions',
+    isMenu: false,
+    component: GeneralQuestionsPre,
+    header: { help: false },
   },
   {
     to: '/general-questions',

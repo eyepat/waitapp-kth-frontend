@@ -19,7 +19,7 @@ export default function KCLogin() {
           navigate('/');
           break;
         case AuthenticationLevels.NO_DATA_PROVIDED:
-          navigate('/general-questions');
+          navigate('/general-questions-pre');
           break;
         default:
           break;

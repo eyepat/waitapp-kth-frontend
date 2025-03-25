@@ -1,4 +1,12 @@
 {
+  "important-information": "Viktig information",
+  "how-to-use-the-app": "Så här använder du Appen",
+  "important-information-content-1": "Den här Appen är speciellt framtagen till dig som har förmaksflimmer och är planerad för en ablation på Karolinska Universitetssjukhuset, och som vill förbättra din hälsa före ditt ingrepp.",
+  "important-information-content-2": "Denna App är under utveckling och får inte användas med riktig hälsodata.",
+  "important-information-content-3": "Start – Du kommer att få mata in din egen hälsodata, för att vi ska kunna ge dig förslag på olika möjligheter att förbättra din hälsa. Du kommer själv att få välja vilka mål du helst vill satsa på.",
+  "important-information-content-4": "Sprintar – En sprint är 7 dagar där du arbetar aktivt med att uppnå dina individuella mål. Vid slutet av sprinten får du en summering, fyller i nya värden, och kan välja samma eller nya mål inför nästa sprint.",
+  "important-information-content-5": "Sista sprinten inför ablation – Du får rekommenderade mål anpassade för tiden före ablation. För första sprinten efter ablation får du rekommenderade mål anpassade för tiden efter ablation.",
+  "important-information-content-6": "Kunskapsbanken – Här finns en samling av information, tips och länkar uppdelat i information om förmaksflimmer, fysisk aktivitet, hälsosamma matvanor.",
   "health-data": "Hälsodata",
   "home": "Hem",
   "sprint": "Sprint",
