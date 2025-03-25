@@ -8,9 +8,9 @@ import {
   useWeightContext,
   useHeightContext,
 } from '../../contexts/MetricsContext';
-import { Gender } from '../../api/BaseClient';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { BloodPressure, Scale } from '../../utils/Icons';
+import { calcTargetWeight, calcTargetWaist } from '../../data/logic.ts';
 
 const MeasurementCard = () => {
   const { t } = useLanguage();
@@ -29,22 +29,6 @@ const MeasurementCard = () => {
     if (!height) getHeight();
     if (!waistSizeLatest) getWaistSize();
   }, [bpLatest, weightLatest, weights, height, waistSizeLatest]);
-
-  const calcTargetWeight = (
-    firstWeight: number | undefined,
-    height: number | undefined
-  ): number | undefined => {
-    if (!firstWeight || !height) return undefined;
-    const target_weight = (27 * height * height) / 10000;
-    if (target_weight < firstWeight * 0.9) return Math.round(firstWeight * 0.9);
-    return Math.round(target_weight);
-  };
-
-  const calcTargetWaist = (gender: Gender | undefined): number | undefined => {
-    if (!gender) return undefined;
-    if (gender == 'MALE') return 102;
-    return 88;
-  };
 
   return (
     <Card

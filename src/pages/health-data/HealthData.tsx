@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import {
   Button,
   Card,
@@ -31,9 +32,15 @@ import {
   useWaistSizeContext,
   useWeightContext,
 } from '../../contexts/MetricsContext';
+import {
+  calcTargetWeight,
+  calcTargetWaist,
+  calcTargetBloodPressure,
+} from '../../data/logic.ts';
 
 export default function HealthData() {
   const { t } = useLanguage();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { tab = 'overview' } = useParams();
   const [selectedTab, setSelectedTab] = useState(tab);
@@ -152,39 +159,15 @@ export default function HealthData() {
     );
   };
 
-  const goalBloodPressure = '120/80';
-  const goalWeight = 65;
-  const goalWaist = 50;
-
-  const GoalWeight = () => {
-    const { getLatest, latest } = useWeightContext();
-    const [diff, setDiff] = useState<number | undefined>(undefined);
+  const renderOverviewContent = () => {
+    const { getResources: getWeights, resources: weights } = useWeightContext();
+    const { getLatest: getHeight, latest: height } = useHeightContext();
 
     useEffect(() => {
-      const fetchLatest = async () => {
-        const latestWeight = latest?.value ?? (await getLatest())?.value;
-        if (latestWeight !== undefined) {
-          let calculatedDiff = Number(latestWeight) - goalWeight;
-          calculatedDiff = Math.round(calculatedDiff * 10) / 10;
-          setDiff(Number.isNaN(calculatedDiff) ? undefined : calculatedDiff);
-        }
-      };
+      if (!weights) getWeights();
+      if (!height) getHeight();
+    }, [weights, height]);
 
-      fetchLatest();
-    }, [latest, getLatest, goalWeight]);
-
-    return (
-      <>
-        {diff !== undefined && diff < 0 ? t('gain-weight') : t('lose-weight')}
-        <Box fontWeight="bold" display="inline">
-          {' ' + (diff === undefined ? '0' : Math.abs(diff))}
-        </Box>
-        {' kg'}
-      </>
-    );
-  };
-
-  const renderOverviewContent = () => {
     return (
       <Stack marginTop={'25px'}>
         <Card sx={{ borderRadius: '12px' }}>
@@ -200,7 +183,7 @@ export default function HealthData() {
           <CardContent sx={{ paddingTop: '0px', paddingBottom: '0px' }}>
             <Typography component="div">
               {t('recent-pressure')} <LatestMetric metric={'blood-pressure'} />{' '}
-              {`mmHg. ${t('goal-pressure')} ${goalBloodPressure} mmHg`}
+              {`mmHg. ${t('goal-pressure')} ${calcTargetBloodPressure()} mmHg.`}
             </Typography>
           </CardContent>
 
@@ -265,10 +248,10 @@ export default function HealthData() {
 
           <CardContent sx={{ paddingTop: '0px', paddingBottom: '0px' }}>
             <Typography component="div">
-              {t('recent-weight')} <LatestMetric metric={'weight'} />{' '}
-              {`kg. ${t('goal-weight')} `} <GoalWeight />
+              {t('recent-weight')} <LatestMetric metric={'weight'} /> kg{' '}
+              {t('goal-weight')}{' '}
+              {calcTargetWeight(weights?.at(0)?.value, height?.value)} kg.
             </Typography>
-            {/*Add weight and goal weight to dispaly information properly*/}
           </CardContent>
 
           <Collapse in={expandedCards.weight} timeout="auto" unmountOnExit>
@@ -322,7 +305,7 @@ export default function HealthData() {
           <CardContent sx={{ paddingTop: '0px' }}>
             <Typography component="div">
               {t('recent-waist')} <LatestMetric metric={'waist-size'} />{' '}
-              {`cm. ${t('goal-waist')} ${goalWaist} cm`}
+              {`cm. ${t('goal-waist')} ${calcTargetWaist(user?.gender)} cm.`}
             </Typography>
             {/*Add pressure and goal pressure to render text properly.*/}
           </CardContent>
