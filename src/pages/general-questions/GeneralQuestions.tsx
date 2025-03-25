@@ -116,23 +116,15 @@ export default function GeneralQuestions() {
   };
 
   useEffect(() => {
-    if (
-      initialized &&
-      keycloak.authenticated &&
-      keycloak.profile &&
-      selectedName.length === 0
-    ) {
-      const newName =
-        keycloak.profile?.firstName ||
-        keycloak.tokenParsed?.['firstName'] +
-          ' ' +
-          keycloak.profile?.lastName ||
-        keycloak.tokenParsed?.['lastName'];
-      if (newName === ' ') {
-        console.log('couldnt get the keycloak name');
-      } else {
-        setSelectedName(newName);
-      }
+    if (initialized && keycloak.authenticated && selectedName.length === 0) {
+      keycloak.loadUserProfile().then((profile) => {
+        const newName = profile.firstName + ' ' + profile.lastName;
+        if (newName === ' ') {
+          console.log('couldnt get the keycloak name');
+        } else {
+          setSelectedName(newName);
+        }
+      });
     }
   }, [keycloak, initialized]);
 
@@ -273,6 +265,7 @@ export default function GeneralQuestions() {
             notched={false}
             label={t('full-name')}
             onChange={handleNameChange}
+            value={selectedName}
           />
         </FormControl>
 
