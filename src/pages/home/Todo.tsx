@@ -48,20 +48,7 @@ export default function Todo() {
       spacing={2}
     >
       {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
-        <TextCard
-          title={t('measure-rapa')}
-          text={t('find-out-your-rapa')}
-          onClick={() => {
-            navigate('/settings/forms/rapa');
-          }}
-          sx={{
-            background: '#00a3e050',
-            maxWidth: '800px',
-            '&:hover': { background: '#00a3e090' },
-          }}
-        />
-      )}
-      {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
+        // TODO: Don't check RAPA score for showing this reminder.
         <TextCard
           title={t('measure-afeqt')}
           text={t('find-out-your-afeqt')}
@@ -76,11 +63,26 @@ export default function Todo() {
         />
       )}
       {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
+        // TODO: Don't check RAPA score for showing this reminder.
         <TextCard
           title={t('measure-lifestyle')}
           text={t('find-out-your-lifestyle')}
           onClick={() => {
             navigate('/settings/forms/lifestyle');
+          }}
+          sx={{
+            background: '#00a3e050',
+            maxWidth: '800px',
+            '&:hover': { background: '#00a3e090' },
+          }}
+        />
+      )}
+      {userHasNotMeasuredRAPA !== undefined && userHasNotMeasuredRAPA && (
+        <TextCard
+          title={t('measure-rapa')}
+          text={t('find-out-your-rapa')}
+          onClick={() => {
+            navigate('/settings/forms/rapa');
           }}
           sx={{
             background: '#00a3e050',
