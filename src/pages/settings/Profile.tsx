@@ -19,14 +19,12 @@ import dayjs, { Dayjs } from 'dayjs';
 import Checkbox from '@mui/material/Checkbox';
 import { Cancel, Edit } from '@mui/icons-material';
 import { Gender, UserDTO } from '../../api/BaseClient';
+import { useResource } from '../../contexts/ResourceContext';
 
 export default function Profile() {
   const { t } = useLanguage();
   const { user } = useAuth();
-  // todo impl updateUser
-  const updateUser = (user: UserDTO) => {
-    console.log('todo', user);
-  };
+  const { updateUser } = useResource();
 
   const [selectedName, setSelectedName] = useState<string>('');
   const [selectedGender, setSelectedGender] = useState<string>('');
@@ -88,8 +86,8 @@ export default function Profile() {
       ...(user as UserDTO),
       fullName: selectedName,
       gender: selectedGender.toUpperCase() as Gender,
-      birthDate: selectedDOB?.add(1, 'day')?.toISOString()!, // todo fix not iso string!
-      ablationDate: selectedAblationDate?.add(1, 'day')?.toISOString(),
+      birthDate: selectedDOB?.add(1, 'day')?.format('YYYY-MM-DD')!,
+      ablationDate: selectedAblationDate?.add(1, 'day')?.format('YYYY-MM-DD'),
     });
 
     setIsEditMode(false);

@@ -19,6 +19,7 @@ interface ResourceContextType {
   clearSelf: () => void;
   getSelf: () => Promise<UserDTO | undefined>;
   onboard: (onboarding: OnboardingDTO) => Promise<UserDTO | undefined>;
+  updateUser: (user: UserDTO) => Promise<UserDTO | undefined>;
   getSprints: () => Promise<SprintDTO[] | undefined>;
   getLatestSprint: () => Promise<SprintDTO | undefined>;
   getLatestActiveSprint: () => Promise<SprintDTO | undefined>;
@@ -145,6 +146,45 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
       if (error instanceof Error)
         throw new Error(error.message || 'Could not onboard user');
     }
+  };
+
+  const updateUser = async (user: UserDTO): Promise<UserDTO | undefined> => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+    if (!user.id) {
+      throw new Error('User ID missing');
+    }
+
+    try {
+      const resp = await api.user.userUpdate(user.id, user);
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not onboard user');
+      }
+      const user2 = (await resp.json()) as UserDTO | undefined;
+
+      if (user2 === undefined) {
+        return undefined;
+      }
+
+      const expiry = new Date();
+      expiry.setMinutes(expiry.getMinutes() + 10); // Cache for 10 minutes
+
+      setSelf(user2);
+      setUserCache((prev) => {
+        const updated = new Map(prev);
+        updated.set('__self__', { data: user2, expiry });
+        return updated;
+      });
+
+      return user2;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not update user');
+    }
+
+    return user;
   };
 
   const getSprints = async (): Promise<SprintDTO[] | undefined> => {
@@ -363,6 +403,7 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
         clearSelf: () => setSelf(undefined),
         getSelf,
         onboard,
+        updateUser,
         getSprints,
         getLatestSprint,
         getLatestActiveSprint,
