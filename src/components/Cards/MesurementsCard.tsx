@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Card, CardContent, Typography, Grid, Stack } from '@mui/material';
 import StraightenIcon from '@mui/icons-material/Straighten';
+import AblationIcon from '@mui/icons-material/CalendarMonth';
+import dayjs from 'dayjs';
 import {
   useBloodPressureContext,
   useWaistSizeContext,
@@ -79,6 +81,17 @@ const MeasurementCard = () => {
                 </Typography>
                 <Typography variant="caption">
                   {t('target')}: {calcTargetWaist(user?.gender)} cm
+                </Typography>
+              </Stack>
+            </Grid>
+          )}
+          {user?.ablationDate && (
+            <Grid item xs={12} display="flex" alignItems="center" gap={2}>
+              <AblationIcon sx={{ width: 60, height: 64 }} />
+              <Stack>
+                <Typography variant="body1">
+                  {dayjs(user?.ablationDate).diff(dayjs(), 'days')}{' '}
+                  {t('days-until-ablation')}
                 </Typography>
               </Stack>
             </Grid>
