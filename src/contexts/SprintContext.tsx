@@ -4,16 +4,21 @@ import { useLoading } from './LoadContext';
 import { useAuth } from './AuthContext';
 import { AuthenticationLevels } from '../Pages';
 import { useLanguage } from './LanguageContext';
-import dayjs from 'dayjs';
+
 import { useResource } from './ResourceContext';
 import { SprintDTO } from '../api/BaseClient';
 
 interface SprintContextType {
   sprint?: SprintDTO;
   sprints?: SprintDTO[];
-  createSprintAndUpdateUser: (sprint: SprintDTO) => void;
-  updateSprint: (sprint: SprintDTO) => void;
-  completeSprint: () => void;
+  createSprintAndUpdateUser: (sprint: SprintDTO) => Promise<void>;
+  updateSprint: (sprint: SprintDTO) => Promise<void>;
+  completeSprint: () => Promise<void>;
+  completeSprintActivity: (id: number, value?: boolean) => Promise<void>;
+  completeSprintActivityWithoutUpdatingCacheFunc: (
+    id: number,
+    value?: boolean
+  ) => Promise<void>;
 }
 
 const SprintContext = createContext<SprintContextType | undefined>(undefined);
@@ -41,6 +46,9 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     getSprints,
     createSprint,
     updateSprint,
+    stopSprint,
+    completeSprintActivity,
+    completeSprintActivityWithoutUpdatingCache,
   } = useResource();
 
   useEffect(() => {
@@ -108,16 +116,50 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     if (loading || currentSprint?.userID == undefined) return;
     try {
       setLoading(true);
-      const newSprint: SprintDTO = {
-        ...currentSprint,
-        completed: true,
-        endDate: dayjs().format('YYYY-MM-DD'),
-      };
-      await updateSprint(newSprint.id!, newSprint);
+      await stopSprint(currentSprint.id!).catch((e) => {
+        throw e;
+      });
       setCurrentSprint(undefined);
 
       enqueueSnackbar(t('success-completed-sprint'), {
         variant: 'success',
+      });
+    } catch (error) {
+      if (error instanceof Error)
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const completeSprintActivityFunc = async (id: number, value?: boolean) => {
+    if (loading || currentSprint?.userID == undefined) return;
+    try {
+      setLoading(true);
+      await completeSprintActivity(id, currentSprint.id!, value).catch((e) => {
+        throw e;
+      });
+    } catch (error) {
+      if (error instanceof Error)
+        enqueueSnackbar(error.message, {
+          variant: 'error',
+        });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const completeSprintActivityWithoutUpdatingCacheFunc = async (
+    id: number,
+    value?: boolean
+  ) => {
+    if (loading || currentSprint?.userID == undefined) return;
+    try {
+      setLoading(true);
+      await completeSprintActivityWithoutUpdatingCache(id, value).catch((e) => {
+        throw e;
       });
     } catch (error) {
       if (error instanceof Error)
@@ -135,6 +177,8 @@ export const SprintProvider = ({ children }: { children: React.ReactNode }) => {
     updateSprint: updateSprintFunc,
     createSprintAndUpdateUser: createSprintAndUpdateUser,
     completeSprint: completeSprintFunc,
+    completeSprintActivity: completeSprintActivityFunc,
+    completeSprintActivityWithoutUpdatingCacheFunc,
   };
 
   return (

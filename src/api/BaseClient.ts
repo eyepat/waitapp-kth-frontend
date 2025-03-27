@@ -5940,6 +5940,10 @@ export interface TaskDTO {
   type: SprintType;
   level?: Level;
   variant?: TaskVariant;
+  /** @format int32 */
+  sprintNr?: number;
+  /** @format int32 */
+  dateOffset?: number;
   title?: string;
   description?: string;
   videoURL?: string;
@@ -8093,6 +8097,24 @@ export class Api<
      * No description
      *
      * @tags Sprint Controller
+     * @name StopUpdate
+     * @summary Stop
+     * @request PUT:/sprint/stop/{id}
+     * @secure
+     */
+    stopUpdate: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/sprint/stop/${id}`,
+        method: 'PUT',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Controller
      * @name SprintUpdate
      * @summary Update
      * @request PUT:/sprint/{id}
@@ -8121,6 +8143,166 @@ export class Api<
     sprintDelete: (id: number, params: RequestParams = {}) =>
       this.request<void, ErrorResponse>({
         path: `/sprint/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+  };
+  sprintActivity = {
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name SprintActivityList
+     * @summary Get All
+     * @request GET:/sprintActivity
+     * @secure
+     */
+    sprintActivityList: (params: RequestParams = {}) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/sprintActivity`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name SprintActivityCreate
+     * @summary Create
+     * @request POST:/sprintActivity
+     * @secure
+     */
+    sprintActivityCreate: (
+      data: SprintActivityDTO,
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/sprintActivity`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name ByIdDetail
+     * @summary Get By Id
+     * @request GET:/sprintActivity/byId/{id}
+     * @secure
+     */
+    byIdDetail: (id: number, params: RequestParams = {}) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/sprintActivity/byId/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name DoneUpdate
+     * @summary Mark Completed
+     * @request PUT:/sprintActivity/done/{id}
+     * @secure
+     */
+    doneUpdate: (
+      id: number,
+      query?: {
+        value?: boolean;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<void, any>({
+        path: `/sprintActivity/done/${id}`,
+        method: 'PUT',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name PaginatedList
+     * @summary Get Paginated
+     * @request GET:/sprintActivity/paginated
+     * @secure
+     */
+    paginatedList: (
+      query?: {
+        /**
+         * @format int32
+         * @default 0
+         */
+        page?: number;
+        search?: string;
+        /**
+         * @format int32
+         * @default 10
+         */
+        size?: number;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO[], ErrorResponse>({
+        path: `/sprintActivity/paginated`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name SprintActivityUpdate
+     * @summary Update
+     * @request PUT:/sprintActivity/{id}
+     * @secure
+     */
+    sprintActivityUpdate: (
+      id: number,
+      data: SprintActivityDTO,
+      params: RequestParams = {}
+    ) =>
+      this.request<IBaseDTO, ErrorResponse>({
+        path: `/sprintActivity/${id}`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Sprint Activity Controller
+     * @name SprintActivityDelete
+     * @summary Delete
+     * @request DELETE:/sprintActivity/{id}
+     * @secure
+     */
+    sprintActivityDelete: (id: number, params: RequestParams = {}) =>
+      this.request<void, ErrorResponse>({
+        path: `/sprintActivity/${id}`,
         method: 'DELETE',
         secure: true,
         ...params,

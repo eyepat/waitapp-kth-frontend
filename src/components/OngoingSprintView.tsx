@@ -27,7 +27,6 @@ interface SprintViewProps {
 
 export default function SprintView({
   sprint,
-  currentDay,
   totalDays,
   user,
   handleOpenWIP,
@@ -65,57 +64,66 @@ export default function SprintView({
             setSlider(slider);
           }}
         >
-          {sprint.activities?.map((_: SprintActivityDTO, index: number) => (
-            <Card
-              key={index}
-              sx={{
-                width: '90%',
-                height: '100%',
-                minHeight: '60vh',
-                justifyContent: 'center',
-                alignContent: 'center',
-                borderRadius: '1vh',
-                marginTop: '3vh',
-                margin: 'auto',
-                alignSelf: 'center',
-                background: 'none',
-                border: 'none',
-                boxShadow: 'none',
-              }}
-            >
-              <CardContent sx={{ justifyContent: 'center' }}>
-                <Typography variant="h6" fontWeight="bold" textAlign="center">
-                  {currentDay + (todayOffset + index) === totalDays
+          {sprint.activities?.map(
+            (activity: SprintActivityDTO, index: number) => (
+              <Card
+                key={index}
+                sx={{
+                  width: '90%',
+                  height: '100%',
+                  minHeight: '60vh',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  borderRadius: '1vh',
+                  marginTop: '3vh',
+                  margin: 'auto',
+                  alignSelf: 'center',
+                  background: 'none',
+                  border: 'none',
+                  boxShadow: 'none',
+                }}
+              >
+                <CardContent sx={{ justifyContent: 'center' }}>
+                  <Typography variant="h6" fontWeight="bold" textAlign="center">
+                    {
+                      // TODO: Check if it is today
+                      // TODO: Map to day of week (day name)
+                      dayjs(activity.assignedDate).format('DD/MM/YYYY')
+                      /*currentDay + (todayOffset + index) === totalDays
                     ? t('today')
                     : dayjs(sprint?.startDate)
                         .add(currentDay + (todayOffset + index) - 1, 'day')
-                        .format('DD/MM/YYYY')}
-                </Typography>
-                {user?.ablationDate && (
-                  <Typography marginBottom="1vh" textAlign="center">
-                    {dayjs(user.ablationDate).diff(dayjs(), 'days')}{' '}
-                    {t('days-until-ablation')}
+                        .format('DD/MM/YYYY')*/
+                    }
                   </Typography>
-                )}
-                <Stack
-                  direction="column"
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                  }}
-                >
-                  {sprint && (
-                    <SprintCard
-                      sprint={sprint}
-                      index={index}
-                      today={todayOffset + (todayOffset + index) === totalDays}
-                    />
+                  {user?.ablationDate && (
+                    <Typography marginBottom="1vh" textAlign="center">
+                      {dayjs(user.ablationDate).diff(dayjs(), 'days')}{' '}
+                      {t('days-until-ablation')}
+                    </Typography>
                   )}
-                </Stack>
-              </CardContent>
-            </Card>
-          ))}
+                  <Stack
+                    direction="column"
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                    }}
+                  >
+                    {sprint && (
+                      <SprintCard
+                        sprint={sprint}
+                        index={index}
+                        today={
+                          todayOffset + (todayOffset + index) === totalDays
+                        }
+                      />
+                    )}
+                  </Stack>
+                </CardContent>
+              </Card>
+            )
+          )}
         </Slider>
       }
 

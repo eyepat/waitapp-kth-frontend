@@ -3,8 +3,9 @@ import { Typography, Card, Checkbox, FormControlLabel } from '@mui/material';
 import { styled } from '@mui/system';
 import { useLanguage } from '../../contexts/LanguageContext';
 import ProgressBar from '../ProgressBar';
-import { SprintDTO } from '../../api/BaseClient';
+import { SprintActivityDTO, SprintDTO } from '../../api/BaseClient';
 import ConfettiExplosion from 'react-confetti-explosion';
+import { useResource } from '../../contexts/ResourceContext';
 
 interface SprintCardProps {
   index: number;
@@ -35,16 +36,30 @@ const YouTubeFrame = styled('iframe')({
 
 export default function SprintCard({ index, sprint }: SprintCardProps) {
   const { t } = useLanguage();
+  const { completeSprintActivityWithoutUpdatingCache: completeSprintActivity } =
+    useResource();
   const [checked, setChecked] = useState<boolean>(false);
+  const [initial, setInitial] = useState<SprintActivityDTO | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    if (sprint.activities && sprint.activities[index]) {
+    if (sprint.activities && sprint.activities[index] && initial == undefined) {
+      setInitial(sprint.activities[index]);
       setChecked(sprint.activities[index]?.completed || false);
     }
   }, [sprint, index]);
 
   const handleCheckboxChange = () => {
-    setChecked((prev) => !prev);
+    if (sprint.activities?.[index].id == undefined) return;
+    const preCheckState = checked;
+    completeSprintActivity(sprint.activities[index].id, !preCheckState).catch(
+      (_) => {
+        // on error revert back to previous state
+        setChecked(preCheckState);
+      }
+    );
+    setChecked(!preCheckState);
   };
 
   const activity = sprint.activities?.[index];
@@ -53,11 +68,7 @@ export default function SprintCard({ index, sprint }: SprintCardProps) {
 
   return (
     <SprintCardContainer>
-      {
-        checked && (
-          <ConfettiExplosion />
-        ) /* fix future bug here when initial state is checked */
-      }
+      {checked && !initial?.completed && <ConfettiExplosion />}
       <div style={{ marginBottom: '16px' }}>
         <Typography variant="h6" fontWeight="bold">
           {t(activity?.task?.title || '')}

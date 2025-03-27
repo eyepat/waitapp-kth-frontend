@@ -28,6 +28,16 @@ interface ResourceContextType {
     id: number,
     updatedSprint: SprintDTO
   ) => Promise<SprintDTO | undefined>;
+  stopSprint: (id: number) => Promise<boolean | undefined>;
+  completeSprintActivity: (
+    id: number,
+    parentSprintID: number,
+    value?: boolean
+  ) => Promise<boolean | undefined>;
+  completeSprintActivityWithoutUpdatingCache: (
+    id: number,
+    value?: boolean
+  ) => Promise<boolean | undefined>;
   deleteSprint: (id: number) => Promise<boolean | undefined>;
 }
 
@@ -352,6 +362,83 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
     }
   };
 
+  const stopSprint = async (id: number): Promise<boolean | undefined> => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+    try {
+      const resp = await api.sprint.stopUpdate(id);
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not stop sprint');
+      }
+
+      setSprintCache((prev) => {
+        const updatedCache = new Map(prev);
+        updatedCache.delete(id + '');
+        return updatedCache;
+      });
+
+      return true;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || 'Could not stop sprint');
+    }
+  };
+
+  const completeSprintActivity = async (
+    id: number,
+    parentSprintID: number,
+    value?: boolean
+  ): Promise<boolean | undefined> => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+    try {
+      const resp = await api.sprintActivity.doneUpdate(id, { value });
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not set sprintActivity as done');
+      }
+
+      setSprintCache((prev) => {
+        const updatedCache = new Map(prev);
+        updatedCache.delete(parentSprintID + '');
+        return updatedCache;
+      });
+
+      return true;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(
+          error.message || 'Could not set sprintActivity as done'
+        );
+    }
+  };
+
+  const completeSprintActivityWithoutUpdatingCache = async (
+    id: number,
+    value?: boolean
+  ): Promise<boolean | undefined> => {
+    if (!api) {
+      throw new Error('API client is unavailable');
+    }
+    try {
+      const resp = await api.sprintActivity.doneUpdate(id, { value });
+      if (!resp.ok) {
+        const msg = (await resp.json()) as ErrorResponse;
+        throw new Error(msg.message || 'Could not set sprintActivity as done');
+      }
+
+      return true;
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(
+          error.message || 'Could not set sprintActivity as done'
+        );
+    }
+  };
+
   const deleteSprint = async (id: number): Promise<boolean | undefined> => {
     if (!api) {
       throw new Error('API client is unavailable');
@@ -409,6 +496,9 @@ export const ResourceProvider: React.FC<ResourceContextProviderProps> = ({
         getLatestActiveSprint,
         createSprint,
         updateSprint,
+        stopSprint,
+        completeSprintActivity,
+        completeSprintActivityWithoutUpdatingCache,
         deleteSprint,
       }}
     >
